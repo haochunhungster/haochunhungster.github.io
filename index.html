@@ -3,164 +3,519 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Haochun｜作品與筆記</title>
-<meta name="description" content="個人作品、研究筆記與 AI 實驗集。">
+<title>Haochun｜Scrapbook of Works</title>
+<meta name="description" content="Haochun 的作品、筆記、AI 實驗。像一本手帳，記錄在做的事。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Kalam:wght@400;700&family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #faf8f5;
-    --ink: #1a1a1a;
-    --muted: #6b6b6b;
-    --accent: #2c5f5d;
-    --accent-alt: #b56a55;
-    --line: #e5e1da;
-    --hover-bg: #f5f1ea;
+    --paper: #f5f1e8;
+    --paper-dark: #ebe5d6;
+    --ink: #2a2520;
+    --muted: #7a6f62;
+    --villa: #2c5f5d;
+    --villa-soft: #c8d8d6;
+    --persona: #b56a55;
+    --persona-soft: #e8cfc4;
+    --tape: rgba(220, 200, 120, 0.55);
+    --tape-edge: rgba(180, 160, 80, 0.3);
+    --sticky: #f4e4a1;
+    --line: #d9d0bd;
+    --shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05);
+    --shadow-lift: 0 8px 24px rgba(0,0,0,0.12), 0 2px 6px rgba(0,0,0,0.08);
+    --hand: 'Caveat', 'Kalam', cursive;
+    --serif: 'Noto Serif TC', 'PingFang TC', serif;
+    --sans: 'Noto Sans TC', -apple-system, 'PingFang TC', sans-serif;
   }
+
   * { box-sizing: border-box; margin: 0; padding: 0; }
+
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Microsoft JhengHei", sans-serif;
-    background: var(--bg);
+    background: var(--paper);
+    background-image:
+      /* 紙質紋理：多層 noise */
+      radial-gradient(ellipse at 20% 30%, rgba(180,155,100,0.04) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 70%, rgba(120,100,70,0.03) 0%, transparent 60%),
+      /* 淺格線 */
+      linear-gradient(to right, rgba(160,140,110,0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(160,140,110,0.05) 1px, transparent 1px);
+    background-size: auto, auto, 32px 32px, 32px 32px;
     color: var(--ink);
-    line-height: 1.7;
-    padding: 4rem 1.5rem;
-    max-width: 760px;
+    font-family: var(--sans);
+    line-height: 1.75;
+    min-height: 100vh;
+    padding: 3rem 1.5rem 6rem;
+    overflow-x: hidden;
+  }
+
+  .container {
+    max-width: 880px;
     margin: 0 auto;
+    position: relative;
   }
+
+  /* ========== Header ========== */
   header {
-    margin-bottom: 3.5rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid var(--line);
+    position: relative;
+    padding: 3rem 1rem 2rem;
+    margin-bottom: 3rem;
+    text-align: center;
   }
-  h1 { font-size: 2.2rem; margin-bottom: 0.4rem; letter-spacing: -0.02em; }
-  .tagline { color: var(--muted); font-size: 1.05rem; }
 
-  .category {
-    margin-bottom: 3.5rem;
+  .masthead-tape {
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-2deg);
+    width: 140px;
+    height: 28px;
+    background: linear-gradient(180deg, var(--tape) 0%, rgba(220,200,120,0.75) 50%, var(--tape) 100%);
+    border-left: 1px dashed var(--tape-edge);
+    border-right: 1px dashed var(--tape-edge);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+    opacity: 0.8;
   }
-  .category-label {
-    display: inline-block;
-    font-size: 0.7rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
+
+  .eyebrow {
+    font-family: var(--hand);
+    font-size: 1.4rem;
     color: var(--muted);
-    margin-bottom: 0.4rem;
-    font-weight: 500;
-  }
-  .category h2 {
-    font-size: 1.3rem;
+    letter-spacing: 0.02em;
     margin-bottom: 0.3rem;
+    transform: rotate(-1deg);
+  }
+
+  h1.site-title {
+    font-family: var(--serif);
+    font-size: clamp(2.4rem, 6vw, 3.6rem);
+    font-weight: 700;
     letter-spacing: -0.01em;
+    line-height: 1.1;
+    margin-bottom: 0.8rem;
   }
-  .category .cat-desc {
-    color: var(--muted);
-    font-size: 0.92rem;
-    margin-bottom: 1.2rem;
-  }
-  .cat-villa h2 { color: var(--accent); }
-  .cat-persona h2 { color: var(--accent-alt); }
 
-  ul {
-    list-style: none;
-    border-top: 1px solid var(--line);
+  .site-title .accent {
+    font-family: var(--hand);
+    font-weight: 400;
+    font-size: 0.7em;
+    color: var(--villa);
+    display: inline-block;
+    transform: rotate(-2deg) translateY(-4px);
+    margin-left: 0.3em;
   }
-  li {
-    padding: 0.9rem 0;
-    border-bottom: 1px solid var(--line);
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 1rem;
-    transition: background 0.15s;
+
+  .tagline {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 520px;
+    margin: 0 auto;
+    font-style: italic;
   }
-  li:hover { background: var(--hover-bg); padding-left: 0.5rem; padding-right: 0.5rem; }
-  a {
+
+  .meta-line {
+    margin-top: 1.5rem;
+    font-family: var(--hand);
+    font-size: 1.1rem;
+    color: var(--muted);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    transform: rotate(0.5deg);
+  }
+
+  .meta-line .dot {
+    width: 4px;
+    height: 4px;
+    background: var(--muted);
+    border-radius: 50%;
+    opacity: 0.5;
+  }
+
+  /* ========== Section ========== */
+  .scrapbook-page {
+    position: relative;
+    margin-bottom: 4rem;
+    padding: 2.5rem 2rem 2rem;
+    background: rgba(255, 253, 247, 0.6);
+    border-radius: 2px;
+    box-shadow: var(--shadow);
+  }
+
+  .scrapbook-page.villa {
+    background: rgba(255, 253, 247, 0.85);
+    border-top: 3px solid var(--villa-soft);
+    transform: rotate(-0.3deg);
+  }
+
+  .scrapbook-page.persona {
+    background: rgba(255, 251, 244, 0.85);
+    border-top: 3px solid var(--persona-soft);
+    transform: rotate(0.3deg);
+  }
+
+  /* 便利貼 tag */
+  .section-sticky {
+    position: absolute;
+    top: -18px;
+    left: 2.5rem;
+    padding: 0.45rem 1rem 0.4rem;
+    background: var(--sticky);
+    font-family: var(--hand);
+    font-size: 1rem;
     color: var(--ink);
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.2s;
-    flex: 1;
-  }
-  a:hover { border-bottom-color: currentColor; }
-  .date {
-    color: var(--muted);
-    font-size: 0.82rem;
-    font-family: ui-monospace, "Cascadia Mono", Menlo, monospace;
-    flex-shrink: 0;
-  }
-  .item-sub {
-    display: block;
-    color: var(--muted);
-    font-size: 0.82rem;
-    margin-top: 0.2rem;
-    font-weight: normal;
+    transform: rotate(-3deg);
+    box-shadow: 2px 3px 6px rgba(0,0,0,0.12);
+    letter-spacing: 0.03em;
   }
 
+  .scrapbook-page.persona .section-sticky {
+    background: #f9d5c7;
+    transform: rotate(2deg);
+    left: auto;
+    right: 2.5rem;
+  }
+
+  /* 區塊標題 */
+  .section-header {
+    display: flex;
+    align-items: flex-end;
+    gap: 1rem;
+    margin-bottom: 0.6rem;
+    padding-top: 1rem;
+  }
+  .section-emoji {
+    font-size: 2.4rem;
+    line-height: 1;
+  }
+  .section-title-block h2 {
+    font-family: var(--serif);
+    font-size: 1.7rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+  .villa .section-title-block h2 { color: var(--villa); }
+  .persona .section-title-block h2 { color: var(--persona); }
+
+  .section-handle {
+    font-family: var(--hand);
+    font-size: 1.1rem;
+    color: var(--muted);
+    margin-left: 0.5rem;
+  }
+
+  .section-desc {
+    font-family: var(--serif);
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin: 0.6rem 0 2rem;
+    padding-left: 3.4rem;
+    font-style: italic;
+    border-left: 2px solid var(--line);
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+    margin-left: 0.3rem;
+  }
+
+  /* ========== Card ========== */
+  .cards {
+    display: grid;
+    gap: 1.4rem;
+  }
+
+  .card {
+    position: relative;
+    padding: 1.6rem 1.5rem 1.3rem;
+    background: #fefcf7;
+    border-radius: 3px;
+    box-shadow: var(--shadow);
+    transition: all 0.25s ease;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .card:nth-child(odd) { transform: rotate(-0.4deg); }
+  .card:nth-child(even) { transform: rotate(0.3deg); }
+
+  .card:hover {
+    transform: rotate(0) translateY(-3px);
+    box-shadow: var(--shadow-lift);
+  }
+
+  /* 膠帶角落 */
+  .card::before {
+    content: "";
+    position: absolute;
+    top: -6px;
+    left: 1.5rem;
+    width: 70px;
+    height: 18px;
+    background: linear-gradient(180deg, var(--tape) 0%, rgba(220,200,120,0.7) 50%, var(--tape) 100%);
+    border-left: 1px dashed var(--tape-edge);
+    border-right: 1px dashed var(--tape-edge);
+    transform: rotate(-3deg);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+    opacity: 0.7;
+    transition: opacity 0.25s;
+  }
+
+  .card:hover::before { opacity: 1; }
+
+  .card:nth-child(even)::before {
+    left: auto;
+    right: 1.5rem;
+    transform: rotate(3deg);
+  }
+
+  .card-head {
+    display: flex;
+    align-items: baseline;
+    gap: 0.7rem;
+    margin-bottom: 0.4rem;
+    flex-wrap: wrap;
+  }
+
+  .card-emoji {
+    font-size: 1.4rem;
+    line-height: 1;
+  }
+
+  .card-title {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    line-height: 1.3;
+    flex: 1;
+    min-width: 200px;
+  }
+
+  .card-date {
+    font-family: var(--hand);
+    font-size: 1rem;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .card-desc {
+    font-family: var(--sans);
+    font-size: 0.92rem;
+    color: var(--muted);
+    margin: 0.5rem 0 0.9rem;
+    line-height: 1.7;
+  }
+
+  .card-tags {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    font-family: var(--hand);
+    font-size: 0.95rem;
+    padding: 0.1rem 0.55rem;
+    background: var(--paper-dark);
+    color: var(--muted);
+    border-radius: 12px;
+    line-height: 1.4;
+  }
+
+  .villa .tag { background: var(--villa-soft); color: var(--villa); }
+  .persona .tag { background: var(--persona-soft); color: var(--persona); }
+
+  /* ========== Footer ========== */
   footer {
+    text-align: center;
     margin-top: 5rem;
     padding-top: 2rem;
-    border-top: 1px solid var(--line);
+    position: relative;
+  }
+  footer .stamp {
+    display: inline-block;
+    font-family: var(--hand);
+    font-size: 1.2rem;
+    color: var(--villa);
+    border: 2px solid var(--villa);
+    padding: 0.4rem 1.2rem;
+    transform: rotate(-4deg);
+    opacity: 0.7;
+    letter-spacing: 0.05em;
+  }
+  footer p {
+    margin-top: 1.2rem;
+    font-family: var(--serif);
+    font-size: 0.9rem;
     color: var(--muted);
-    font-size: 0.85rem;
-    text-align: center;
   }
   footer a {
     color: var(--muted);
-    border: none;
+    text-decoration: none;
+    border-bottom: 1px dotted var(--muted);
   }
-  footer a:hover { color: var(--accent); }
+  footer a:hover { color: var(--villa); }
 
-  @media (max-width: 600px) {
-    body { padding: 2.5rem 1.2rem; }
-    h1 { font-size: 1.7rem; }
-    li { flex-direction: column; gap: 0.2rem; }
-    .date { align-self: flex-start; }
+  /* ========== Scroll reveal ========== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .scrapbook-page.villa.reveal.in { transform: translateY(0) rotate(-0.3deg); }
+  .scrapbook-page.persona.reveal.in { transform: translateY(0) rotate(0.3deg); }
+
+  /* ========== Mobile ========== */
+  @media (max-width: 640px) {
+    body { padding: 2rem 1rem 4rem; background-size: auto, auto, 24px 24px, 24px 24px; }
+    header { padding: 2rem 0.5rem 1.5rem; margin-bottom: 2rem; }
+    .scrapbook-page {
+      padding: 2rem 1.2rem 1.5rem;
+      transform: rotate(0) !important;
+    }
+    .scrapbook-page.villa.reveal.in,
+    .scrapbook-page.persona.reveal.in { transform: rotate(0) !important; }
+    .section-sticky { left: 1rem !important; right: auto !important; }
+    .section-desc { padding-left: 0; border-left: none; border-top: 2px solid var(--line); padding-top: 0.6rem; margin-left: 0; }
+    .section-header { padding-top: 0.6rem; }
+    .card { padding: 1.3rem 1.1rem 1rem; transform: rotate(0) !important; }
+    .card::before { left: 1rem !important; right: auto !important; transform: rotate(-3deg); }
   }
 </style>
 </head>
 <body>
+<div class="container">
+
 <header>
-  <h1>Haochun</h1>
-  <p class="tagline">作品、筆記、AI 實驗。持續更新中。</p>
+  <div class="masthead-tape"></div>
+  <div class="eyebrow">a scrapbook of</div>
+  <h1 class="site-title">Haochun<span class="accent">&rsquo;s works</span></h1>
+  <p class="tagline">作品、筆記、AI 實驗。不是履歷，是一本持續生長的手帳。</p>
+  <div class="meta-line">
+    <span>Since 2026</span>
+    <span class="dot"></span>
+    <span>Taipei / Yilan</span>
+    <span class="dot"></span>
+    <span>持續更新</span>
+  </div>
 </header>
 
-<section class="category cat-villa">
-  <div class="category-label">Project · Hospitality</div>
-  <h2>詠夏 Villa</h2>
-  <p class="cat-desc">宜蘭礁溪・7 房包棟精品民宿 + 玻璃屋恆溫泳池｜2027Q1 開幕籌備</p>
-  <ul>
-    <li>
-      <a href="熱能方案評估_詠夏Villa_v2_2026-04-23.html">
-        熱能方案評估（完整報告 v2）
-        <span class="item-sub">泳池 + 暖氣 + 熱水三合一，含 A/B/C 方案能耗與回本分析</span>
-      </a>
-      <span class="date">2026-04-23</span>
-    </li>
-    <li>
-      <a href="熱能方案摘要_手帳風_詠夏Villa.html">
-        熱能方案摘要（手帳風）
-        <span class="item-sub">一頁看懂的對外敘事版本</span>
-      </a>
-      <span class="date">2026-04-23</span>
-    </li>
-  </ul>
+<!-- ========= 詠夏 Villa ========= -->
+<section class="scrapbook-page villa reveal">
+  <div class="section-sticky">Project · 民宿</div>
+
+  <div class="section-header">
+    <div class="section-emoji">🏡</div>
+    <div class="section-title-block">
+      <h2>詠夏 Villa</h2>
+      <span class="section-handle">Yongxia Villa</span>
+    </div>
+  </div>
+  <p class="section-desc">
+    宜蘭礁溪・7 房包棟精品民宿・玻璃屋恆溫泳池・2027 Q1 開幕籌備中。
+  </p>
+
+  <div class="cards">
+
+    <a class="card" href="熱能方案評估_詠夏Villa_v2_2026-04-23.html">
+      <div class="card-head">
+        <span class="card-emoji">🔥</span>
+        <span class="card-title">熱能方案評估（完整報告 v2）</span>
+        <span class="card-date">04 / 23</span>
+      </div>
+      <p class="card-desc">
+        泳池 + 暖氣 + 熱水三合一，A / B / C 方案能耗與回本完整分析，含礁溪氣候數據與鄰近民宿對標。
+      </p>
+      <div class="card-tags">
+        <span class="tag">工程選型</span>
+        <span class="tag">能耗分析</span>
+        <span class="tag">45 KB</span>
+      </div>
+    </a>
+
+    <a class="card" href="熱能方案摘要_手帳風_詠夏Villa.html">
+      <div class="card-head">
+        <span class="card-emoji">📝</span>
+        <span class="card-title">熱能方案摘要（手帳風）</span>
+        <span class="card-date">04 / 23</span>
+      </div>
+      <p class="card-desc">
+        一頁看懂的對外敘事版本：「不靠溫泉 bonus，靠自家玻璃屋 28°C 泳池，一整年都是夏天。」
+      </p>
+      <div class="card-tags">
+        <span class="tag">品牌敘事</span>
+        <span class="tag">視覺</span>
+      </div>
+    </a>
+
+  </div>
 </section>
 
-<section class="category cat-persona">
-  <div class="category-label">Experiment · AI Persona</div>
-  <h2>林詠夏 <span style="font-family:ui-monospace,monospace;font-size:0.85rem;color:var(--muted);font-weight:normal;">@yonxia.summer</span></h2>
-  <p class="cat-desc">AI 虛擬網紅養成實驗｜Instagram・純實驗專案</p>
-  <ul>
-    <li>
-      <a href="林詠夏_AI虛擬網紅_策略書.html">
-        完整策略書（10 份文件串聯）
-        <span class="item-sub">90 天作戰計劃 + 人設 + 工具鏈 + 貼文 + 種子圖 + 養成路線</span>
-      </a>
-      <span class="date">2026-04-23</span>
-    </li>
-  </ul>
+<!-- ========= 林詠夏 AI 虛擬網紅 ========= -->
+<section class="scrapbook-page persona reveal">
+  <div class="section-sticky">Experiment · AI Persona</div>
+
+  <div class="section-header">
+    <div class="section-emoji">🌸</div>
+    <div class="section-title-block">
+      <h2>林詠夏</h2>
+      <span class="section-handle">@yonxia.summer</span>
+    </div>
+  </div>
+  <p class="section-desc">
+    AI 虛擬網紅養成實驗・純實驗專案・Instagram 為主・與 Villa 品牌脫鉤。
+  </p>
+
+  <div class="cards">
+
+    <a class="card" href="林詠夏_AI虛擬網紅_策略書.html">
+      <div class="card-head">
+        <span class="card-emoji">📓</span>
+        <span class="card-title">完整策略書（10 份文件串聯）</span>
+        <span class="card-date">04 / 23</span>
+      </div>
+      <p class="card-desc">
+        90 天作戰計劃 + 角色人設 Character Bible + 工具鏈 + 30 則貼文文案 + 種子圖 Prompt + 養成路線圖。
+      </p>
+      <div class="card-tags">
+        <span class="tag">IG 養成</span>
+        <span class="tag">人設</span>
+        <span class="tag">工具鏈</span>
+        <span class="tag">148 KB</span>
+      </div>
+    </a>
+
+  </div>
 </section>
 
 <footer>
-  &copy; 2026 Haochun · <a href="https://github.com/haochunhungster">https://github.com/haochunhungster</a>
+  <div class="stamp">Handmade · 2026</div>
+  <p>
+    &copy; 2026 Haochun ·
+    <a href="https://github.com/haochunhungster" style="margin-left:0.4rem;">github.com/haochunhungster</a>
+  </p>
 </footer>
+
+</div>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
