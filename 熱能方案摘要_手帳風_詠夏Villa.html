@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>詠夏 Villa · 熱能方案懶人包</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kurenaido&family=Shippori+Mincho:wght@500;700&family=Caveat:wght@500;700&family=Patrick+Hand&display=swap" rel="stylesheet">
+<style>
+  @font-face {
+    font-family: 'Huninn';
+    src: local('Huninn'), local('jf-openhuninn-2.1'), local('jf-openhuninn-1.1');
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'ChenYuluoyan';
+    src: local('ChenYuluoyan-Thin'), local('辰宇落雁體');
+    font-display: swap;
+  }
+
+  :root {
+    --cream:       #FEF9F2;
+    --cream-deep:  #F7EDD9;
+    --pink:        #F7C8C8;
+    --pink-deep:   #E89A9A;
+    --yellow:      #FFE8A8;
+    --mint:        #C8E4D1;
+    --mint-deep:   #8EC3A5;
+    --lavender:    #D9C9E8;
+    --blue:        #B7D4E6;
+    --blue-deep:   #85B5CF;
+    --ink:         #3E3228;
+    --ink-soft:    #6E5B4A;
+    --tape:        #FFDAB9cc;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    font-family: 'Huninn', 'Zen Kurenaido', 'Shippori Mincho',
+                 'Patrick Hand', 'Noto Sans TC', 'Microsoft JhengHei',
+                 sans-serif;
+    color: var(--ink);
+    background: var(--cream);
+    margin: 0;
+    padding: 40px 20px 80px;
+    line-height: 1.9;
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: 0.02em;
+  }
+
+  body {
+    background-image:
+      radial-gradient(circle at 15% 20%, #FFE1E1 0 2px, transparent 3px),
+      radial-gradient(circle at 88% 15%, #D4E8DC 0 2px, transparent 3px),
+      radial-gradient(circle at 72% 82%, #F8E0B0 0 2px, transparent 3px),
+      radial-gradient(circle at 22% 78%, #DCC9ED 0 2px, transparent 3px),
+      linear-gradient(var(--cream), var(--cream));
+    background-size: 220px 220px, 280px 280px, 320px 320px, 260px 260px, 100% 100%;
+  }
+
+  .page {
+    max-width: 780px;
+    margin: 0 auto;
+    background: #FFFDF8;
+    padding: 64px 48px 80px;
+    border-radius: 14px;
+    box-shadow: 0 12px 40px rgba(62, 50, 40, 0.12),
+                0 2px 6px rgba(62, 50, 40, 0.06);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .page::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 6px;
+    background: repeating-linear-gradient(90deg,
+      var(--pink) 0 40px,
+      var(--yellow) 40px 80px,
+      var(--mint) 80px 120px,
+      var(--lavender) 120px 160px,
+      var(--blue) 160px 200px);
+    opacity: 0.6;
+  }
+
+  /* ---- 封面 ---- */
+
+  .cover {
+    text-align: center;
+    margin-bottom: 48px;
+    padding: 20px 0 32px;
+    border-bottom: 2px dashed var(--pink-deep);
+    position: relative;
+  }
+
+  .brand {
+    font-family: 'Shippori Mincho', 'Huninn', serif;
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: 0.08em;
+    margin: 0 0 6px;
+  }
+  .brand .mark {
+    display: inline-block;
+    padding: 0 10px;
+    background: linear-gradient(transparent 65%, var(--yellow) 65%);
+  }
+
+  .subtitle {
+    font-family: 'Caveat', 'Patrick Hand', 'Huninn', cursive;
+    font-size: 22px;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+  }
+
+  .date-badge {
+    display: inline-block;
+    padding: 4px 18px;
+    background: var(--tape);
+    font-family: 'Caveat', cursive;
+    font-size: 18px;
+    color: var(--ink);
+    transform: rotate(-2deg);
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.08);
+  }
+
+  .cover-decor {
+    position: absolute;
+    font-size: 24px;
+    opacity: 0.85;
+  }
+  .cover-decor.d1 { top: 8px; left: 12px; transform: rotate(-15deg); }
+  .cover-decor.d2 { top: 16px; right: 20px; transform: rotate(12deg); }
+  .cover-decor.d3 { bottom: 36px; left: 30px; }
+  .cover-decor.d4 { bottom: 40px; right: 40px; transform: rotate(-10deg); }
+
+  /* ---- Section 通用 ---- */
+
+  section {
+    margin: 36px 0;
+    position: relative;
+  }
+
+  h2 {
+    font-family: 'Shippori Mincho', 'Huninn', serif;
+    font-size: 24px;
+    color: var(--ink);
+    margin: 0 0 16px;
+    padding-left: 14px;
+    border-left: 6px solid var(--pink-deep);
+    line-height: 1.4;
+  }
+  h2 .num {
+    display: inline-block;
+    min-width: 34px;
+    height: 34px;
+    line-height: 34px;
+    text-align: center;
+    background: var(--pink);
+    border-radius: 50%;
+    margin-right: 10px;
+    font-family: 'Caveat', cursive;
+    font-size: 22px;
+    color: var(--ink);
+    transform: rotate(-4deg);
+  }
+
+  /* ---- 推薦方案卡 ---- */
+
+  .reco-card {
+    background: linear-gradient(135deg, #FFF5E4 0%, #FFE8D6 100%);
+    border: 2.5px solid var(--yellow);
+    border-radius: 14px;
+    padding: 24px 28px;
+    margin: 12px 0;
+    position: relative;
+    box-shadow: 3px 3px 0 var(--cream-deep);
+  }
+  .reco-card::before {
+    content: '★ 推 薦';
+    position: absolute;
+    top: -14px; left: 20px;
+    background: var(--pink-deep);
+    color: white;
+    font-family: 'Caveat', 'Huninn', cursive;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 2px 14px;
+    border-radius: 20px;
+    letter-spacing: 0.1em;
+  }
+  .reco-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 4px 0 10px;
+  }
+  .reco-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .reco-items li {
+    padding: 4px 0 4px 26px;
+    position: relative;
+    font-size: 15.5px;
+  }
+  .reco-items li::before {
+    content: '♡';
+    position: absolute;
+    left: 4px;
+    color: var(--pink-deep);
+  }
+
+  /* ---- 三大數字 ---- */
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin: 16px 0;
+  }
+  .stat {
+    background: var(--mint);
+    border-radius: 14px;
+    padding: 20px 14px;
+    text-align: center;
+    box-shadow: 3px 3px 0 var(--cream-deep);
+    position: relative;
+  }
+  .stat:nth-child(2) { background: var(--blue); }
+  .stat:nth-child(3) { background: var(--lavender); }
+
+  .stat .label {
+    font-size: 13px;
+    color: var(--ink-soft);
+    font-family: 'Caveat', 'Huninn', cursive;
+    letter-spacing: 0.05em;
+  }
+  .stat .num-big {
+    font-family: 'Shippori Mincho', 'Huninn', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 4px 0;
+    line-height: 1.2;
+  }
+  .stat .unit {
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+
+  /* ---- Warning 警示 ---- */
+
+  .warn-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .warn-list li {
+    background: #FFF0F0;
+    border-left: 5px solid var(--pink-deep);
+    padding: 14px 18px 14px 22px;
+    margin: 10px 0;
+    border-radius: 0 10px 10px 0;
+    font-size: 15px;
+    position: relative;
+  }
+  .warn-list li::before {
+    content: '⚠';
+    color: var(--pink-deep);
+    font-weight: bold;
+    margin-right: 8px;
+  }
+  .warn-list li strong {
+    color: var(--pink-deep);
+    display: block;
+    margin-bottom: 4px;
+    font-size: 16px;
+  }
+
+  /* ---- 要跟澳石談 ---- */
+
+  .talk-list {
+    list-style: none;
+    padding: 0;
+    counter-reset: t;
+  }
+  .talk-list li {
+    counter-increment: t;
+    padding: 12px 18px 12px 48px;
+    margin: 8px 0;
+    background: var(--cream-deep);
+    border-radius: 10px;
+    position: relative;
+    font-size: 15px;
+  }
+  .talk-list li::before {
+    content: counter(t);
+    position: absolute;
+    left: 12px; top: 12px;
+    width: 28px; height: 28px;
+    line-height: 28px;
+    text-align: center;
+    background: var(--mint-deep);
+    color: white;
+    border-radius: 50%;
+    font-family: 'Caveat', cursive;
+    font-weight: 700;
+    font-size: 18px;
+  }
+
+  /* ---- 對照表 ---- */
+
+  .compare {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 12px 0;
+    font-size: 14.5px;
+  }
+  .compare th, .compare td {
+    padding: 10px 12px;
+    text-align: center;
+  }
+  .compare th {
+    background: var(--cream-deep);
+    color: var(--ink);
+    font-family: 'Shippori Mincho', 'Huninn', serif;
+    font-weight: 500;
+    border-bottom: 2px dashed var(--pink-deep);
+  }
+  .compare td {
+    border-bottom: 1px dotted var(--cream-deep);
+  }
+  .compare td.good { background: #F0F7F1; color: var(--mint-deep); font-weight: 600; }
+  .compare td.mid  { background: #FFF8E8; }
+  .compare td.bad  { background: #FFF0F0; color: var(--pink-deep); }
+  .compare td.label { background: #FFFDF6; font-weight: 600; text-align: left; }
+
+  /* ---- Tape / Quote ---- */
+
+  .quote {
+    background: #FFFDF6;
+    border: 1px dashed var(--ink-soft);
+    padding: 14px 18px;
+    margin: 16px 0;
+    font-size: 15px;
+    font-family: 'Shippori Mincho', 'Huninn', serif;
+    color: var(--ink-soft);
+    position: relative;
+    border-radius: 6px;
+  }
+  .quote::before {
+    content: '';
+    position: absolute;
+    top: -10px; left: 20px;
+    width: 60px; height: 18px;
+    background: var(--tape);
+    transform: rotate(-4deg);
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.08);
+  }
+
+  /* ---- Footer ---- */
+
+  footer {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 2px dashed var(--mint-deep);
+    text-align: center;
+    font-family: 'Caveat', 'Huninn', cursive;
+    font-size: 18px;
+    color: var(--ink-soft);
+  }
+  footer .hearts {
+    font-size: 22px;
+    color: var(--pink-deep);
+    margin: 0 6px;
+  }
+
+  .side-note {
+    font-size: 13px;
+    color: var(--ink-soft);
+    font-family: 'Caveat', 'Huninn', cursive;
+    display: block;
+    margin-top: 6px;
+  }
+
+  @media print {
+    body { padding: 0; background: white; }
+    body { background-image: none; }
+    .page { box-shadow: none; padding: 32px; }
+  }
+
+  @media (max-width: 640px) {
+    body { padding: 16px 4px 40px; }
+    .page { padding: 36px 20px 56px; }
+    .brand { font-size: 32px; }
+    .stats { grid-template-columns: 1fr; }
+    h2 { font-size: 20px; }
+    .stat .num-big { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- 封面 -->
+  <div class="cover">
+    <span class="cover-decor d1">✿</span>
+    <span class="cover-decor d2">♡</span>
+    <span class="cover-decor d3">✦</span>
+    <span class="cover-decor d4">☁</span>
+
+    <h1 class="brand"><span class="mark">詠夏 Villa</span></h1>
+    <p class="subtitle">Heat &amp; Energy Plan · 熱能方案懶人包</p>
+    <span class="date-badge">2026 · 04 · 23　v2 已核查</span>
+  </div>
+
+  <!-- 1. 推薦方案 -->
+  <section>
+    <h2><span class="num">1</span>我們要選哪個方案？</h2>
+    <div class="reco-card">
+      <div class="reco-title">方案 1 · 全熱泵 + 太陽能輔助 + 電熱備援</div>
+      <ul class="reco-items">
+        <li>泳池熱泵 40 kW（鑫威利 RB-36KX 鈦管）</li>
+        <li>商用熱水熱泵 25 kW + 2,500 L 儲熱桶</li>
+        <li>VRF 冷暖氣（7 房 + 公區 + 玻璃屋）</li>
+        <li>熱回收除濕機（進口 POOLPAK 或台灣在地方案）</li>
+        <li>太陽能熱水 15–20 m²（加分不主力）</li>
+        <li>50 加侖電熱水器備援（熱泵維修時撐著）</li>
+        <li>✦ 自動泳池保溫蓋（最關鍵，2 年回本）</li>
+      </ul>
+    </div>
+    <div class="quote">「不靠礁溪溫泉 bonus，靠自家玻璃屋 28°C 泳池，一整年都是夏天。」</div>
+  </section>
+
+  <!-- 2. 三大數字 -->
+  <section>
+    <h2><span class="num">2</span>三個要記住的數字</h2>
+    <div class="stats">
+      <div class="stat">
+        <div class="label">初裝 CAPEX</div>
+        <div class="num-big">225 – 320</div>
+        <div class="unit">萬 NTD</div>
+      </div>
+      <div class="stat">
+        <div class="label">年運轉 OPEX</div>
+        <div class="num-big">34 – 48</div>
+        <div class="unit">萬 NTD / 年</div>
+      </div>
+      <div class="stat">
+        <div class="label">5 年 TCO</div>
+        <div class="num-big">395 – 560</div>
+        <div class="unit">萬 NTD</div>
+      </div>
+    </div>
+    <span class="side-note">比「全瓦斯方案」5 年省 225–425 萬，碳排減 77%　♡</span>
+  </section>
+
+  <!-- 3. 方案對照 -->
+  <section>
+    <h2><span class="num">3</span>三方案快速比一比</h2>
+    <table class="compare">
+      <thead>
+        <tr>
+          <th>項目</th>
+          <th>方案 1<br>全熱泵+☀</th>
+          <th>方案 2<br>熱泵+LPG</th>
+          <th>方案 3<br>瓦斯為主</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="label">CAPEX</td>
+          <td class="good">225–320 萬</td>
+          <td class="mid">215–305 萬</td>
+          <td class="mid">150–200 萬</td>
+        </tr>
+        <tr>
+          <td class="label">OPEX / 年</td>
+          <td class="good">34–48 萬</td>
+          <td class="mid">40–55 萬</td>
+          <td class="bad">110–140 萬</td>
+        </tr>
+        <tr>
+          <td class="label">5 年總支出</td>
+          <td class="good">395–560 萬</td>
+          <td class="mid">415–580 萬</td>
+          <td class="bad">700–900 萬</td>
+        </tr>
+        <tr>
+          <td class="label">ESG 行銷</td>
+          <td class="good">✿ 強</td>
+          <td class="mid">中</td>
+          <td class="bad">弱</td>
+        </tr>
+        <tr>
+          <td class="label">推薦指數</td>
+          <td class="good">♡ ♡ ♡ ♡ ♡</td>
+          <td class="mid">♡ ♡ ♡</td>
+          <td class="bad">✗</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 4. 三大警示 -->
+  <section>
+    <h2><span class="num">4</span>這三件事做錯就翻車</h2>
+    <ul class="warn-list">
+      <li>
+        <strong>泳池保溫蓋千萬不能省</strong>
+        沒蓋多耗 50–70% 熱損，一年多付 5–8 萬電費。買個自動捲蓋 15–25 萬，兩年就回本。
+      </li>
+      <li>
+        <strong>台電三相動力電要早送件</strong>
+        尖峰 35–40 kW，家用 5 kVA 直接跳電。申請 50 kVA 審查 7–10 天，加外線工程 4–8 週，澳石圖一定案就送。
+      </li>
+      <li>
+        <strong>機房位置要在圖定案前鎖死</strong>
+        需要 3 × 4 m × 淨高 2.5 m，通風、排水、近電源。現在不定，施工後塞不下設備就慘了。
+      </li>
+    </ul>
+  </section>
+
+  <!-- 5. 跟澳石談的三件事 -->
+  <section>
+    <h2><span class="num">5</span>下次跟澳石要談的三件事</h2>
+    <ol class="talk-list">
+      <li><strong>機房位置與尺寸</strong>：3×4 m × 淨高 2.5 m，建物北側或西側外推區</li>
+      <li><strong>泳池深度</strong>：1.2 m 還是 1.4 m？差 15% 熱損 + 5–8 萬 CAPEX</li>
+      <li><strong>電力管路預留</strong>：變電箱→機房→7 房分電盤，線徑扛 VRF 峰值；熱泵要 3 相 4 線 + 接地</li>
+    </ol>
+  </section>
+
+  <!-- 6. Footer -->
+  <footer>
+    <span class="hearts">♡</span> 詠夏 Villa × 永遠是夏天 <span class="hearts">♡</span><br>
+    <span class="side-note">v2 · 2026-04-23 · 已通過 fact-auditor 稽查 12 條修正</span>
+  </footer>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>熱能方案評估_詠夏Villa_2026-04-23</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --color-text: #1d2433;
+  --color-muted: #7a869a;
+  --color-heading: #0b1e3a;
+  --color-accent: #1b4b91;
+  --color-border: #d6dde8;
+  --color-bg: #ffffff;
+  --color-bg-soft: #f7f9fc;
+  --color-code-bg: #f3f5f9;
+  --color-table-head: #1b4b91;
+  --color-table-row-alt: #f5f8fc;
+  --color-quote-border: #f0a500;
+  --color-quote-bg: #fff8e7;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  font-family: "Noto Sans TC", "Noto Sans JP", "Microsoft JhengHei",
+               "PingFang TC", "Hiragino Sans", "Helvetica Neue", Arial,
+               "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+               sans-serif;
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--color-text);
+  background: #eef2f7;
+  margin: 0;
+  padding: 40px 20px 80px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  max-width: 880px;
+  margin: 0 auto;
+  background: var(--color-bg);
+  padding: 56px 64px;
+  border-radius: 10px;
+  box-shadow: 0 4px 24px rgba(11, 30, 58, 0.08);
+}
+
+.meta {
+  color: var(--color-muted);
+  font-size: 13px;
+  margin-bottom: 28px;
+  padding-bottom: 14px;
+  border-bottom: 1px dashed var(--color-border);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-heading);
+  line-height: 1.35;
+  margin: 1.6em 0 0.6em;
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 30px;
+  border-bottom: 3px solid var(--color-accent);
+  padding-bottom: 0.35em;
+  margin-top: 0;
+}
+
+h2 {
+  font-size: 23px;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 0.3em;
+}
+
+h3 { font-size: 19px; color: var(--color-accent); }
+h4 { font-size: 17px; color: #2b5aa0; }
+h5 { font-size: 15px; color: #2b5aa0; }
+
+p { margin: 0.7em 0; }
+
+strong { color: var(--color-heading); font-weight: 700; }
+
+code {
+  font-family: "JetBrains Mono", "Cascadia Code", Consolas,
+               "Courier New", monospace;
+  font-size: 0.92em;
+  background: var(--color-code-bg);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: #a6275a;
+}
+
+pre {
+  background: var(--color-bg-soft);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 14px 16px;
+  overflow-x: auto;
+  font-size: 13.5px;
+  line-height: 1.55;
+}
+
+pre code {
+  background: transparent;
+  color: var(--color-text);
+  padding: 0;
+  font-size: inherit;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.2em 0;
+  font-size: 14.5px;
+  display: block;
+  overflow-x: auto;
+  white-space: normal;
+}
+
+th, td {
+  border: 1px solid #c7d0dc;
+  padding: 10px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: var(--color-table-head);
+  color: #ffffff;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+tr:nth-child(even) td { background: var(--color-table-row-alt); }
+
+blockquote {
+  margin: 1.2em 0;
+  padding: 0.7em 1.2em;
+  border-left: 4px solid var(--color-quote-border);
+  background: var(--color-quote-bg);
+  color: #5a4a1a;
+  border-radius: 0 6px 6px 0;
+}
+
+blockquote p { margin: 0.35em 0; }
+
+ul, ol { margin: 0.6em 0; padding-left: 1.6em; }
+li { margin: 0.3em 0; }
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--color-border);
+  margin: 2em 0;
+}
+
+a { color: var(--color-accent); text-decoration: none; border-bottom: 1px dotted var(--color-accent); }
+a:hover { color: #0b1e3a; border-bottom-style: solid; }
+
+img { max-width: 100%; height: auto; }
+
+.toc-toggle {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  background: var(--color-accent);
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  z-index: 100;
+}
+.toc-toggle:hover { background: #0b1e3a; }
+
+.toc-panel {
+  position: fixed;
+  top: 58px;
+  right: 16px;
+  max-width: 300px;
+  max-height: 70vh;
+  overflow-y: auto;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 16px 20px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+  font-size: 13px;
+  line-height: 1.6;
+  display: none;
+  z-index: 99;
+}
+.toc-panel.open { display: block; }
+.toc-panel ul { padding-left: 1.2em; margin: 0.3em 0; }
+.toc-panel a { border-bottom: none; }
+
+@media print {
+  body { background: #fff; padding: 0; }
+  .page { box-shadow: none; border-radius: 0; padding: 0; max-width: 100%; }
+  .toc-toggle, .toc-panel { display: none !important; }
+}
+
+@media (max-width: 720px) {
+  body { padding: 20px 8px 40px; }
+  .page { padding: 28px 20px; border-radius: 6px; }
+  h1 { font-size: 24px; }
+  h2 { font-size: 20px; }
+  h3 { font-size: 17px; }
+  .toc-toggle { top: 8px; right: 8px; }
+}
+</style>
+</head>
+<body>
+<button class="toc-toggle" onclick="document.getElementById('toc').classList.toggle('open')">目錄</button>
+<nav class="toc-panel" id="toc"><div class="toc">
+<ul>
+<li><a href="#executive-summary">Executive Summary（拍板摘要）</a></li>
+<li><a href="#1">1. 硬體前提與氣候條件</a><ul>
+<li><a href="#11-2026-04-23">1.1 硬體規格（2026-04-23 定版）</a></li>
+<li><a href="#12">1.2 礁溪氣候條件（影響熱負荷關鍵）</a></li>
+</ul>
+</li>
+<li><a href="#2">2. 熱負荷計算（本專案新算）</a><ul>
+<li><a href="#21-48-m3-12-m">2.1 泳池熱負荷（48 m³ / 1.2 m 深）</a></li>
+<li><a href="#22-28">2.2 房間熱水負荷（28 人）</a></li>
+<li><a href="#23">2.3 冬季暖氣負荷</a></li>
+<li><a href="#24">2.4 全年總能耗彙總</a></li>
+</ul>
+</li>
+<li><a href="#3">3. 四大熱源方案評估</a><ul>
+<li><a href="#31-a-ashp">3.1 方案 A：空氣源熱泵 ASHP（推薦主力）</a></li>
+<li><a href="#32-b-lpg">3.2 方案 B：瓦斯鍋爐（桶裝 LPG） ❌ 不推薦</a></li>
+<li><a href="#33-c">3.3 方案 C：太陽能熱水（輔助）</a></li>
+<li><a href="#34-d-gshp">3.4 方案 D：地源熱泵 GSHP ❌ 不推薦於本專案</a></li>
+<li><a href="#35-e">3.5 方案 E：電熱直接加熱 ❌ 僅可作為備援</a></li>
+</ul>
+</li>
+<li><a href="#4">4. 組合方案推薦（關鍵章節）</a><ul>
+<li><a href="#41-1">4.1 方案 1（強烈推薦）：全熱泵 + 太陽能輔助 + 電熱備援</a></li>
+<li><a href="#42-2">4.2 方案 2：熱泵主力 + 瓦斯輔助（次選）</a></li>
+<li><a href="#43-3">4.3 方案 3：瓦斯為主 + 熱泵輔助 ❌ 不推薦</a></li>
+</ul>
+</li>
+<li><a href="#5-3">5. 成本比較總表（3 方案對照）</a><ul>
+<li><a href="#51-opex-1">5.1 OPEX 細節拆解（方案 1 年度）</a></li>
+<li><a href="#52-5-tco-1">5.2 5 年 TCO 白話版（方案 1）</a></li>
+</ul>
+</li>
+<li><a href="#6-1">6. 實際運轉情境模擬（方案 1）</a><ul>
+<li><a href="#61">6.1 一年中最冷的一週（冬至前後）</a></li>
+<li><a href="#62">6.2 夏季最熱一週（大暑前後）</a></li>
+<li><a href="#63">6.3 空屋天（最省）</a></li>
+<li><a href="#64-60">6.4 全年滿載（入住率 60%）</a></li>
+</ul>
+</li>
+<li><a href="#7">7. 客人體驗與環保面</a><ul>
+<li><a href="#71">7.1 體驗差異</a></li>
+<li><a href="#72">7.2 碳排比較（年度）</a></li>
+<li><a href="#73-1">7.3 行銷可打的標籤（方案 1）</a></li>
+</ul>
+</li>
+<li><a href="#8">8. 風險與常見失敗案例</a><ul>
+<li><a href="#81">8.1 真實案例查證</a></li>
+<li><a href="#82">8.2 礁溪鄰近民宿實際採用方案（間接佐證）</a></li>
+</ul>
+</li>
+<li><a href="#9">9. 與澳石設計的對接建議</a><ul>
+<li><a href="#91-3">9.1 施工前必鎖死的 3 件事</a></li>
+<li><a href="#92">9.2 施工中可彈性調整</a></li>
+<li><a href="#93">9.3 需要找的專業顧問</a></li>
+</ul>
+</li>
+<li><a href="#10">10. 推薦方案三句話說清</a></li>
+<li><a href="#11">11. 重要免責</a></li>
+<li><a href="#_1">引用來源</a></li>
+</ul>
+</div>
+</nav>
+<div class="page">
+<div class="meta">檔案：熱能方案評估_詠夏Villa_2026-04-23.md　·　產出時間：2026-04-23 18:11</div>
+<h1 id="villa">熱能方案評估報告｜詠夏 Villa</h1>
+<blockquote>
+<p><strong>專案</strong>：宜蘭礁溪瑪僯路 66 號，7 房四人房包棟精品民宿 + 4×10 m 玻璃屋恆溫泳池<br />
+<strong>撰寫日期</strong>：2026-04-23<br />
+<strong>版本</strong>：<strong>v2（2026-04-23 傍晚）</strong> — 已套用 fact-auditor 稽查員 12 條修正（P0×3、P1×4、P2×5）。可信度評級由 B 升 A。<br />
+<strong>用途</strong>：澳石設計施工前機電拍板文件，決定 5 年水電費級距 + 初裝成本 + 機電 BIM 方向<br />
+<strong>注意事項</strong>：本報告全部以 2026-04-23 最新硬體規格重算。已廢止 2026-04-17 版「7 房雙人房」、「56 m³ 泳池深 1.4 m」、「方案 E 溫泉熱交換」等舊決策。<br />
+<strong>無溫泉</strong>：基地無溫泉水權，熱源完全仰賴外部能源（空氣源、瓦斯、太陽能、電能、地下熱交換）。</p>
+</blockquote>
+<hr />
+<h2 id="executive-summary">Executive Summary（拍板摘要）</h2>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>建議</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>推薦方案</strong></td>
+<td><strong>方案 1：全熱泵（ASHP 池水熱泵 + ASHP 商用熱水熱泵 + VRF 冷暖氣） + 太陽能熱水輔助 + 自動泳池保溫蓋</strong></td>
+</tr>
+<tr>
+<td><strong>初裝成本（CAPEX）</strong></td>
+<td><strong>約 225–320 萬 NTD</strong>（區間保守／優化）</td>
+</tr>
+<tr>
+<td><strong>每年運轉費（OPEX）</strong></td>
+<td><strong>約 34–48 萬 NTD／年</strong>（依入住率 60%、全年恆溫）</td>
+</tr>
+<tr>
+<td><strong>5 年總持有成本（TCO）</strong></td>
+<td><strong>約 395–560 萬 NTD</strong></td>
+</tr>
+<tr>
+<td><strong>回本對照</strong></td>
+<td>相對「瓦斯為主方案」每年省 20–32 萬，約 3.5–5 年回收差額</td>
+</tr>
+<tr>
+<td><strong>關鍵風險</strong></td>
+<td>(1) 泳池保溫蓋未裝 → 熱損爆表；(2) 電力容量未升級 → 跳電；(3) 機房未預留 → 設備無處擺</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>為何不選瓦斯</strong>：宜蘭全縣 2026-04 仍無家用／商用天然氣管線。宜蘭縣政府 2026-02 至 03 月才受理業者申設管線，<strong>首批僅含宜蘭市與羅東鎮</strong>，礁溪鄉不在規劃內。現有瓦斯供應僅限桶裝 LPG（在地業者：<a href="https://www.glgas.com.tw/">國聯瓦斯</a>、大欣瓦斯等）。LPG 受消防法規 1,000 kg 串接上限 + 營業場所 80 kg 備用上限限制，長期營運每月瓦斯費 7–10 萬遠高於熱泵電費。來源：<a href="https://www.ctwant.com/article/472825/">CTWANT 報導 2026-03</a>、<a href="http://ton-lin.net/news_view.asp?ID=690">消防法第15條之液化石油氣容器管理</a></p>
+</blockquote>
+<hr />
+<h2 id="1">1. 硬體前提與氣候條件</h2>
+<h3 id="11-2026-04-23">1.1 硬體規格（2026-04-23 定版）</h3>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>數據</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>房數</td>
+<td>7 房，<strong>全部四人房</strong></td>
+</tr>
+<tr>
+<td>最大住客</td>
+<td><strong>28 人</strong>（7 × 4）</td>
+</tr>
+<tr>
+<td>泳池尺寸</td>
+<td>4 m × 10 m × 深度（待定）</td>
+</tr>
+<tr>
+<td>泳池水量（1.2 m 深）</td>
+<td><strong>48 m³</strong> ← 本報告主計算用</td>
+</tr>
+<tr>
+<td>泳池水量（1.4 m 深）</td>
+<td>56 m³（若最終改深池，熱損增加約 15%，CAPEX 加約 5–8 萬）</td>
+</tr>
+<tr>
+<td>泳池目標水溫</td>
+<td><strong>28°C 全年運轉</strong>（包含日間＋夜間）</td>
+</tr>
+<tr>
+<td>泳池類型</td>
+<td><strong>玻璃屋包覆室內池</strong>（非露天）</td>
+</tr>
+<tr>
+<td>基地面積</td>
+<td>699 坪（2,310 m²）</td>
+</tr>
+<tr>
+<td>主建物</td>
+<td>128 坪（約 423 m²）</td>
+</tr>
+<tr>
+<td>溫泉</td>
+<td>❌ <strong>無溫泉權</strong></td>
+</tr>
+<tr>
+<td>天然氣</td>
+<td>❌ <strong>礁溪無天然氣管線</strong>（仅 LPG 桶裝瓦斯可用）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="12">1.2 礁溪氣候條件（影響熱負荷關鍵）</h3>
+<table>
+<thead>
+<tr>
+<th>季節</th>
+<th>氣溫</th>
+<th>濕度</th>
+<th>對熱源影響</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>冬季（12–2 月）</td>
+<td>日均 13–17°C，極寒 8–12°C</td>
+<td>&gt;75%</td>
+<td>ASHP COP 衰減、結霜風險</td>
+</tr>
+<tr>
+<td>春秋</td>
+<td>20–26°C</td>
+<td>70–80%</td>
+<td>ASHP 最佳工作區</td>
+</tr>
+<tr>
+<td>夏季（6–9 月）</td>
+<td>30–34°C</td>
+<td>70–85%</td>
+<td>玻璃屋需通風，避免蒸籠</td>
+</tr>
+<tr>
+<td>全年</td>
+<td>年均約 22°C</td>
+<td>多雨</td>
+<td>日照時數不穩，太陽能僅輔助</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>低溫 + 高濕 = 台灣典型冬季氣候，<strong>ASHP 散熱片容易結霜</strong>，當霜層變厚就阻礙吸熱導致暖氣變弱。來源：<a href="https://pansci.asia/archives/89344">PanSci 泛科學 熱泵節電宜蘭篇</a><br />
+空氣源熱泵的 COP 主要受「環境氣溫」+「目標水溫」雙變數影響。礁溪冬季日均氣溫 13–17°C、極寒 8–12°C，在泳池加熱工況（入水 25–28°C）下，台灣廠商典型標稱 COP 約 3.5–4.6（標稱）／實際冬季年均 2.8–3.2。注：-18°C 時 COP 接近 1 的數據是冷暖氣機工況（非泳池熱泵），不適用本專案。來源：<a href="https://zh.wikipedia.org/zh-tw/%E7%86%B1%E6%B3%B5">熱泵維基百科</a>、<a href="https://wpool.fr/en/blog/pac-piscine/comment-choisir-pac-piscine/qcq-cop-pompe-chaleur-piscine/">WPool 泳池熱泵 COP 說明</a></p>
+</blockquote>
+<hr />
+<h2 id="2">2. 熱負荷計算（本專案新算）</h2>
+<h3 id="21-48-m3-12-m">2.1 泳池熱負荷（48 m³ / 1.2 m 深）</h3>
+<h4 id="a-5c-28c-23c">(a) 冬季初次加熱（5°C → 28°C，升溫 23°C）</h4>
+<ul>
+<li>熱能需求 = 48,000 L × 23°C × 4.186 kJ/kg°C = <strong>4,621,000 kJ ≈ 1,284 kWh</strong></li>
+<li>若用 40 kW 熱泵（COP 4 @ 15°C 入水）：加熱時間 ≈ 1,284 / 40 = <strong>32 小時</strong></li>
+<li>若環境 5°C、COP 降至 2.8：加熱時間 ≈ <strong>46 小時</strong></li>
+<li>實際加熱耗電：1,284 / 3.2（冬季平均 COP） ≈ <strong>401 kWh</strong></li>
+</ul>
+<h4 id="b">(b) 日常熱損（室內玻璃屋 + 保溫蓋情境比較）</h4>
+<table>
+<thead>
+<tr>
+<th>情境</th>
+<th>熱損率（kW/m²）</th>
+<th>40 m² 池面總熱損</th>
+<th>每日 kWh</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>露天池（對照）</td>
+<td>0.30</td>
+<td>12 kW</td>
+<td>288</td>
+</tr>
+<tr>
+<td>玻璃屋、無保溫蓋</td>
+<td>0.15</td>
+<td>6 kW</td>
+<td>144</td>
+</tr>
+<tr>
+<td><strong>玻璃屋 + 夜間保溫蓋（推薦）</strong></td>
+<td><strong>0.08 [經驗值]</strong></td>
+<td><strong>3.2 kW</strong></td>
+<td><strong>77</strong></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>註：0.08 kW/m² 為業界經驗值上限，精確熱損需機電技師依玻璃屋 U 值、框架熱橋、室內外溫差、水溫實測。EnergyPlus 工程文獻指出室內池熱損取決於水溫、氣溫、濕度、風速四變數，0.06–0.10 kW/m² 為正常區間。來源：<a href="https://bigladdersoftware.com/epx/docs/8-3/engineering-reference/indoor-swimming-pool.html">EnergyPlus 室內泳池熱損工程參考</a></p>
+<p>來源：室內泳池每 m³ 需 0.3–0.4 kW 加熱量（業界經驗值，已收錄於 2026-04-17 版原報告）。<strong>保溫蓋可再省 50–70% 熱損</strong>，美國能源部明確指出「Covering a pool when it is not in use is the single most effective means of reducing pool heating costs, with savings of 50%–70% possible」。室內池額外 bonus：可關掉排風扇、減少室內空調補氣負荷，節能效益比室外池更高。來源：<a href="https://www.energy.gov/energysaver/swimming-pool-covers">US DOE Swimming Pool Covers</a></p>
+</blockquote>
+<h4 id="c">(c) 年度泳池加熱總能</h4>
+<ul>
+<li>初次加熱（僅一次）：~1,300 kWh</li>
+<li>日常維持（假設戴蓋情境、冬 180 天 + 夏 185 天平均）：</li>
+<li>冬季日均熱損 100 kWh × 180 = 18,000 kWh</li>
+<li>夏季日均熱損 50 kWh × 185 = 9,250 kWh</li>
+<li>合計 ≈ <strong>27,250 kWh 熱能／年</strong></li>
+<li>對應 ASHP 耗電（COP 年均 3.5）：<strong>≈ 7,800 kWh／年</strong></li>
+</ul>
+<h3 id="22-28">2.2 房間熱水負荷（28 人）</h3>
+<h4 id="a">(a) 尖峰用水估算</h4>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>數據</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>人均淋浴熱水（45°C）</td>
+<td>60 L × 1.5 次／日 = 90 L</td>
+</tr>
+<tr>
+<td>28 人日均熱水量</td>
+<td>2,520 L</td>
+</tr>
+<tr>
+<td>7 房浴缸泡澡（滿載，160 L/缸 × 50% 使用率）</td>
+<td>560 L</td>
+</tr>
+<tr>
+<td><strong>日均總熱水（45°C）</strong></td>
+<td><strong>~3,100 L／日</strong></td>
+</tr>
+<tr>
+<td><strong>晚間 2 小時尖峰（40% 集中）</strong></td>
+<td><strong>~1,250 L／2hr</strong></td>
+</tr>
+</tbody>
+</table>
+<h4 id="b_1">(b) 熱泵容量需求</h4>
+<ul>
+<li>冷水 15°C → 45°C 升溫 30°C</li>
+<li>尖峰 1,250 L × 30°C × 4.186 kJ = 157,000 kJ = <strong>43.6 kWh／2hr = 21.8 kW</strong></li>
+<li><strong>建議熱泵 25 kW + 2,500 L 儲熱桶</strong>（比舊版 20 kW / 2,000 L 略放大，因人數從 14 → 28）</li>
+</ul>
+<h4 id="c_1">(c) 年度熱水能耗</h4>
+<ul>
+<li>日均熱能 = 3,100 × 30 × 4.186 = 389,000 kJ = <strong>108 kWh／日</strong></li>
+<li>入住率 60%：108 × 365 × 0.6 = <strong>23,650 kWh／年</strong></li>
+<li>對應 ASHP 耗電（COP 3.8）：<strong>≈ 6,200 kWh／年</strong></li>
+</ul>
+<h3 id="23">2.3 冬季暖氣負荷</h3>
+<blockquote>
+<p>⚠️ <strong>精確值需澳石設計 2F/3F 隔間圖完成後機電技師計算</strong>（[待核實] 標註）</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>保守估計</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7 房室內淨面積（估）</td>
+<td>每房 18 m² × 7 = 126 m²</td>
+</tr>
+<tr>
+<td>公區 / 餐廳 / 大廳（估）</td>
+<td>~60 m²</td>
+</tr>
+<tr>
+<td>玻璃屋泳池區（暖房）</td>
+<td>60 m² 空間 + 40 m² 水面</td>
+</tr>
+<tr>
+<td>冬季 7°C 外溫、維持 22°C 室溫：kW 需求</td>
+<td>7 房 × 2 kW + 公區 5 kW + 玻璃屋 8 kW = <strong>約 27 kW 總需求</strong></td>
+</tr>
+<tr>
+<td>VRF 建議容量</td>
+<td>室內機各房 2.5 kW（一對一）+ 公區大容量室外機</td>
+</tr>
+</tbody>
+</table>
+<h4 id="120-6">年度暖氣能耗（礁溪冬季短，120 天，平均每日 6 小時開暖氣）</h4>
+<ul>
+<li>27 kW × 6hr × 120 天 = 19,440 kWh 熱能／年</li>
+<li>對應 VRF COP 3.2：<strong>≈ 6,075 kWh／年</strong></li>
+</ul>
+<h3 id="24">2.4 全年總能耗彙總</h3>
+<table>
+<thead>
+<tr>
+<th>用途</th>
+<th>年度耗電（kWh）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>泳池加熱</td>
+<td>7,800</td>
+</tr>
+<tr>
+<td>房間熱水</td>
+<td>6,200</td>
+</tr>
+<tr>
+<td>冬季暖氣</td>
+<td>6,075</td>
+</tr>
+<tr>
+<td>除濕機（玻璃屋）</td>
+<td>3,500</td>
+</tr>
+<tr>
+<td>夏季冷氣（另計，不在熱能預算）</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>熱能相關總耗電</strong></td>
+<td><strong>約 23,500 kWh／年</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="3">3. 四大熱源方案評估</h2>
+<h3 id="31-a-ashp">3.1 方案 A：空氣源熱泵 ASHP（推薦主力）</h3>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>內容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>泳池熱泵</td>
+<td>40 kW 鈦管商用池水熱泵（鑫威利 RB-36KX 或瑞智商用）</td>
+</tr>
+<tr>
+<td>生活熱水熱泵</td>
+<td>25 kW 商用熱泵 + 2,500 L 儲熱桶</td>
+</tr>
+<tr>
+<td>房間暖氣</td>
+<td>VRF 冷暖變頻（夏季也做冷氣，一機多用）</td>
+</tr>
+<tr>
+<td>熱源</td>
+<td>空氣中的熱能</td>
+</tr>
+<tr>
+<td>冬季 COP</td>
+<td>2.5–3.2（礁溪冬極少 &lt;5°C）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>優點</strong>：<br />
+- 台灣廠商成熟、維修網絡廣<br />
+- COP 2.5–4.6，運轉費遠低於瓦斯<br />
+- 單機故障不影響其他系統<br />
+- 夏季 VRF 可反向做冷氣（一機兩用）</p>
+<p><strong>缺點</strong>：<br />
+- 冬季高濕環境<strong>有結霜問題</strong>，需定期除霜週期（現代機種有智慧除霜）<a href="https://pansci.asia/archives/89344">來源</a><br />
+- 戶外機噪音（需距客房 5 m 以上或做隔音牆）<br />
+- 一次性 CAPEX 較高</p>
+<p><strong>CAPEX 估算</strong>（含安裝）：</p>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>金額區間</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>泳池熱泵 40 kW（鑫威利 RB-36KX 級距）</td>
+<td>25–35 萬</td>
+</tr>
+<tr>
+<td>房間熱水熱泵 25 kW + 2,500 L 儲熱桶</td>
+<td>30–42 萬</td>
+</tr>
+<tr>
+<td>VRF 冷暖氣（7 房 + 公區 + 玻璃屋）</td>
+<td>65–95 萬</td>
+</tr>
+<tr>
+<td>熱回收型除濕機（<strong>POOLPAK 美國／或同等級進口品牌</strong>，須透過泳池工程商進口代理；台灣可改詢燒水王、瑞智自家方案）</td>
+<td>30–80 萬（含進口、運費、安裝）</td>
+</tr>
+<tr>
+<td>管線、保溫、閥件、控制系統</td>
+<td>40–60 萬</td>
+</tr>
+<tr>
+<td>泳池保溫蓋（自動捲蓋）</td>
+<td>15–25 萬</td>
+</tr>
+<tr>
+<td>泳池熱泵緩衝桶 500 L</td>
+<td>3–5 萬</td>
+</tr>
+<tr>
+<td>平衡水池 2 m³</td>
+<td>5–10 萬</td>
+</tr>
+<tr>
+<td><strong>合計</strong></td>
+<td><strong>213–322 萬</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="32-b-lpg">3.2 方案 B：瓦斯鍋爐（桶裝 LPG） ❌ 不推薦</h3>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>內容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>泳池加熱</td>
+<td>商用 LPG 鍋爐</td>
+</tr>
+<tr>
+<td>熱水</td>
+<td>個別房間 LPG 熱水器</td>
+</tr>
+<tr>
+<td>暖氣</td>
+<td>仍需搭配分離式冷暖氣（瓦斯無法做暖氣）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>致命限制</strong>：<br />
+1. <strong>礁溪無天然氣管線</strong>：<a href="https://www.scng.com.tw/">欣彰天然氣</a> 僅供應北北基桃竹苗中部分區域。宜蘭縣政府 2026-02 到 3 月才受理民間申設管線（宜蘭市、羅東鎮），礁溪鄉<strong>不在首批規劃</strong>。來源：<a href="https://www.ctwant.com/article/472825/">CTWANT 報導</a><br />
+2. <strong>只能用桶裝 LPG</strong>：<br />
+   - 營業使用<strong>備用量不得超過 80 kg</strong><br />
+   - 串接使用量<strong>不得超過 1,000 kg</strong><br />
+   - 放置於室外、距燃燒設備 2 m、設氣體漏氣警報器<br />
+   - 違反處 2–10 萬罰鍰<br />
+   - 來源：<a href="http://ton-lin.net/news_view.asp?ID=690">消防法第15條</a><br />
+3. <strong>營運成本爆表</strong>：泳池恆溫每日約 25–35 kg LPG，全年瓦斯費 <strong>90–120 萬</strong>（熱泵方案僅 10–12 萬）</p>
+<p><strong>結論</strong>：純瓦斯方案在本專案不可行，<strong>僅可作為緊急備援</strong>（例如一台 LPG 熱水器備用於熱泵故障時）</p>
+<h3 id="33-c">3.3 方案 C：太陽能熱水（輔助）</h3>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>內容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>型式</td>
+<td>平板式（首選）或真空管式</td>
+</tr>
+<tr>
+<td>面積</td>
+<td>15–25 m² 集熱板</td>
+</tr>
+<tr>
+<td>儲水</td>
+<td>搭配 2,500 L 儲熱桶，與熱泵串聯</td>
+</tr>
+</tbody>
+</table>
+<p><strong>優點</strong>：<br />
+- 夏季可提供 20–35% 泳池熱能（但夏季泳池本來就接近不需熱泵，實質節能價值有限）<br />
+- <strong>年均分擔 20–30% 熱水負荷</strong>（本項為太陽能真正的 KPI）<br />
+- <strong>定位</strong>：作為熱水系統的輔助、ESG 行銷加分項，不是泳池主力<br />
+- 節能標章加分、ESG 行銷</p>
+<p><strong>缺點</strong>：<br />
+- 礁溪多雨，日照時數相對偏低：<strong>年均日照約 1,829 小時</strong>（月分布極不均：七月 272 小時／一月僅 77 小時），低於台南 2,100 小時約 13%。冬季最需要熱的時候日照最少（一月日均僅 2.5 小時），故太陽能僅能作熱水輔助，無法獨立扛熱源。來源：<a href="https://weather-and-climate.com/average-monthly-Rainfall-Temperature-Sunshine,jiaoxi-yilan-county-tw,Taiwan">Weather-and-Climate Jiaoxi</a><br />
+- 冬季最需要熱的時候，日照最少<br />
+- 不能獨立扛熱源，<strong>必定搭配熱泵</strong><br />
+- 屋頂需預留空間、結構補強</p>
+<p><strong>價格參考</strong>：<br />
+- 連工帶料：<strong>5–10 萬／組</strong>（約 10–15 m²）<br />
+- 大型商用級（20 m²+）：<strong>15–30 萬</strong><br />
+- 來源：<a href="https://www.pro360.com.tw/price/solar_boiler">PRO360 太陽能熱水器報價</a></p>
+<p><strong>建議</strong>：作為方案 A 的<strong>可選加配</strong>，預算有餘再裝，回本期 5–8 年。</p>
+<h3 id="34-d-gshp">3.4 方案 D：地源熱泵 GSHP ❌ 不推薦於本專案</h3>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>內容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>熱源</td>
+<td>地下土壤全年恆溫 15–18°C</td>
+</tr>
+<tr>
+<td>COP</td>
+<td>3.5–5.0（冬季不衰減）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>為何排除</strong>：<br />
+1. <strong>CAPEX 極高</strong>：初裝 205–365 萬，比方案 A 多 80–150 萬<br />
+2. <strong>台灣施工廠商極少</strong>，民宿等級案例幾近於零（<a href="https://talk.ltn.com.tw/article/breakingnews/5323495">搜尋結果顯示台灣地熱應用多為發電站規模</a>）<br />
+3. <strong>7 房規模需鑽 6–10 口 80–100 m 深井</strong>，699 坪基地空間足夠，但鑽井費 + 地下管路工程會嚴重干擾澳石設計進度<br />
+4. <strong>回本期 15+ 年</strong>，超過一般民宿資產更新週期（10–12 年）<br />
+5. 台灣地源熱泵鑽井成本<strong>每口井約 30–60 萬 NTD（推估）</strong>，6 口即 180–360 萬。參考美國能源部估計一口淺層地熱井 USD 15,000–30,000（等值 NTD 45–90 萬），台灣因鑽井市場小可能更貴。單單鑽井已超過方案 A 全系統。來源：<a href="https://www.energy.gov/energysaver/geothermal-heat-pumps">美國能源部 淺層地熱井成本</a></p>
+<p><strong>結論</strong>：地源熱泵在台灣民宿尚屬實驗性選擇，<strong>本專案不推薦</strong>。</p>
+<h3 id="35-e">3.5 方案 E：電熱直接加熱 ❌ 僅可作為備援</h3>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>內容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>泳池</td>
+<td>電熱棒（塞入池水）</td>
+</tr>
+<tr>
+<td>熱水</td>
+<td>儲熱式電熱水器</td>
+</tr>
+<tr>
+<td>暖氣</td>
+<td>電暖器</td>
+</tr>
+</tbody>
+</table>
+<p><strong>為何只能備援</strong>：<br />
+- COP = 1.0（效率為熱泵的 1/3–1/4）<br />
+- 若主系統故障、用電熱棒維持泳池 28°C 一週，電費預估 <strong>10,000–15,000 元／週</strong><br />
+- 但<strong>必須備一台家用電熱水器</strong>以應付熱泵維修期（1–3 天）的住客熱水需求<br />
+- 建議：5,000 元以下的 50 加侖儲熱式電熱水器，插電即可</p>
+<hr />
+<h2 id="4">4. 組合方案推薦（關鍵章節）</h2>
+<h3 id="41-1">4.1 方案 1（強烈推薦）：全熱泵 + 太陽能輔助 + 電熱備援</h3>
+<pre class="codehilite"><code>                       [太陽能 15–20 m²]
+                           │ 夏季貢獻
+                           ↓
+      ┌─── 泳池熱泵 40 kW ───→ 緩衝桶 500 L ──→ 泳池 48 m³
+      │     (鑫威利鈦管)          ↑
+      │                          │ 蒸發水氣
+      │                          ↓
+      │     熱回收除濕機 ─────────→ 回收熱量補池
+      │     (戴思樂 10–15 kg/hr)
+      │
+市電──┼─── 房間熱泵 25 kW ───→ 2,500 L 儲熱桶 ──→ 7 房熱水
+      │                                              ↓
+      │                                        備援：50 加侖電熱水器
+      │
+      └─── VRF 冷暖氣 ───→ 各房 2.5 kW + 公區 + 玻璃屋
+</code></pre>
+
+<p><strong>組成</strong>：<br />
+- A（ASHP 三系統：池水 + 熱水 + VRF）<br />
+- C（太陽能熱水 15–20 m²，輔助）<br />
+- E（電熱 50 加侖備援）</p>
+<p><strong>為何是這個組合</strong>：<br />
+1. <strong>ASHP 三系統分離</strong>：泳池（持續負荷）、熱水（尖峰負荷）、暖氣（冬季負荷）型態不同，分離系統效率最佳、單點故障不致全停<br />
+2. <strong>太陽能減碳 + ESG</strong>：可打「永續 Villa」行銷標籤，Booking Travel Sustainable 加分<br />
+3. <strong>電熱備援</strong>：熱泵維修 1–3 天不致讓客人沒熱水</p>
+<h3 id="42-2">4.2 方案 2：熱泵主力 + 瓦斯輔助（次選）</h3>
+<ul>
+<li>泳池、熱水走熱泵，<strong>僅一台 LPG 熱水器當熱水備援</strong></li>
+<li>比方案 1 少太陽能，多一套 LPG</li>
+<li>CAPEX 少 10–15 萬，但每次瓦斯桶配送要另外付費（國聯瓦斯等業者）</li>
+<li>適合預算緊、不追求 ESG 行銷者</li>
+</ul>
+<h3 id="43-3">4.3 方案 3：瓦斯為主 + 熱泵輔助 ❌ 不推薦</h3>
+<ul>
+<li>純瓦斯方案已評估為不可行（見 3.2）</li>
+<li>若真採此路，<strong>年度 OPEX 約 120 萬</strong>，是方案 1 的 2.5 倍</li>
+<li>無論財務或品牌都劣於方案 1</li>
+</ul>
+<hr />
+<h2 id="5-3">5. 成本比較總表（3 方案對照）</h2>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>方案 1 全熱泵+太陽能</th>
+<th>方案 2 熱泵+LPG 備援</th>
+<th>方案 3 瓦斯為主</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CAPEX 初裝</td>
+<td>225–320 萬</td>
+<td>215–305 萬</td>
+<td>150–200 萬</td>
+</tr>
+<tr>
+<td>OPEX 年運轉</td>
+<td>34–48 萬</td>
+<td>40–55 萬</td>
+<td>110–140 萬</td>
+</tr>
+<tr>
+<td>5 年 TCO</td>
+<td><strong>395–560 萬</strong></td>
+<td><strong>415–580 萬</strong></td>
+<td>700–900 萬</td>
+</tr>
+<tr>
+<td>10 年 TCO</td>
+<td>565–800 萬</td>
+<td>615–855 萬</td>
+<td>1,250–1,600 萬</td>
+</tr>
+<tr>
+<td>減碳標章可申請</td>
+<td>✅</td>
+<td>⚠️ 有瓦斯</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>ESG 行銷</td>
+<td>✅ 強</td>
+<td>🟡 中</td>
+<td>❌ 弱</td>
+</tr>
+<tr>
+<td>單點故障風險</td>
+<td>低</td>
+<td>低</td>
+<td>高</td>
+</tr>
+<tr>
+<td><strong>推薦度</strong></td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>⭐⭐⭐</td>
+<td>❌</td>
+</tr>
+</tbody>
+</table>
+<h3 id="51-opex-1">5.1 OPEX 細節拆解（方案 1 年度）</h3>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>年耗電 kWh</th>
+<th>電費 @4.5 元</th>
+<th>年費用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>泳池熱泵</td>
+<td>7,800</td>
+<td>3.51 萬</td>
+<td>3.5 萬</td>
+</tr>
+<tr>
+<td>熱水熱泵</td>
+<td>6,200</td>
+<td>2.79 萬</td>
+<td>2.8 萬</td>
+</tr>
+<tr>
+<td>VRF 暖氣</td>
+<td>6,075</td>
+<td>2.73 萬</td>
+<td>2.7 萬</td>
+</tr>
+<tr>
+<td>夏季 VRF 冷氣</td>
+<td>8,000（估）</td>
+<td>3.60 萬</td>
+<td>3.6 萬</td>
+</tr>
+<tr>
+<td>除濕機</td>
+<td>3,500</td>
+<td>1.58 萬</td>
+<td>1.6 萬</td>
+</tr>
+<tr>
+<td>泳池循環泵、照明等</td>
+<td>5,000</td>
+<td>2.25 萬</td>
+<td>2.3 萬</td>
+</tr>
+<tr>
+<td>保養維護（熱泵、除濕機年保）</td>
+<td>—</td>
+<td>—</td>
+<td>5–8 萬</td>
+</tr>
+<tr>
+<td>水質處理（軟水器濾芯、泳池藥劑）</td>
+<td>—</td>
+<td>—</td>
+<td>3–5 萬</td>
+</tr>
+<tr>
+<td>太陽能保養</td>
+<td>—</td>
+<td>—</td>
+<td>0.5 萬</td>
+</tr>
+<tr>
+<td><strong>年總 OPEX</strong></td>
+<td><strong>~36,600 kWh</strong></td>
+<td><strong>~17 萬電</strong></td>
+<td><strong>26–34 萬</strong></td>
+</tr>
+<tr>
+<td><strong>加未預期維修備援 20%</strong></td>
+<td></td>
+<td></td>
+<td><strong>34–48 萬</strong></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>電費率採用：台電時間電價三段式，加權平均約 4.5 元／度。[待核實 - 實際商業用電契約 30 kW 以上時間電價試算結果]<br />
+2026 年 4 月起，尖峰 6.92 元／度（夏月）、離峰 1.96 元／度。來源：<a href="https://www.housefeel.com.tw/article/%E5%8F%B0%E9%9B%BB%E9%9B%BB%E8%B2%BB-%E5%A4%8F%E5%AD%A3%E9%9B%BB%E8%B2%BB-%E9%9B%BB%E8%B2%BB%E8%A8%88%E7%AE%97/">HouseFeel 2026 電費</a></p>
+</blockquote>
+<h3 id="52-5-tco-1">5.2 5 年 TCO 白話版（方案 1）</h3>
+<table>
+<thead>
+<tr>
+<th>年度</th>
+<th>CAPEX</th>
+<th>OPEX 累計</th>
+<th>累計支出</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Y0 建置</td>
+<td>270 萬（中位）</td>
+<td>—</td>
+<td>270 萬</td>
+</tr>
+<tr>
+<td>Y1</td>
+<td>—</td>
+<td>41 萬</td>
+<td>311 萬</td>
+</tr>
+<tr>
+<td>Y2</td>
+<td>—</td>
+<td>41 萬</td>
+<td>352 萬</td>
+</tr>
+<tr>
+<td>Y3</td>
+<td>—</td>
+<td>41 萬</td>
+<td>393 萬</td>
+</tr>
+<tr>
+<td>Y4</td>
+<td>—</td>
+<td>41 萬</td>
+<td>434 萬</td>
+</tr>
+<tr>
+<td>Y5</td>
+<td>—</td>
+<td>41 萬</td>
+<td><strong>475 萬</strong></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>對照方案 3 瓦斯：5 年累計 700–900 萬（CAPEX 150–200 萬 + OPEX 5×110–140 萬）<br />
+<strong>方案 1 比方案 3 省 225–425 萬（中位約 300 萬）於 5 年內</strong>。P0-3 保溫蓋修正後，中位可提升至 325 萬。</p>
+</blockquote>
+<hr />
+<h2 id="6-1">6. 實際運轉情境模擬（方案 1）</h2>
+<h3 id="61">6.1 一年中最冷的一週（冬至前後）</h3>
+<ul>
+<li>外溫日間 12°C、夜間 8°C</li>
+<li>泳池熱損：每日約 110 kWh <strong>熱能</strong>（即使有保溫蓋）</li>
+<li>熱水需求（滿房 28 人）：120 kWh／日 <strong>熱能</strong></li>
+<li>暖氣需求（全棟 + 玻璃屋）：180 kWh／日 <strong>熱能</strong></li>
+<li>合計熱能需求：410 kWh／日</li>
+<li>經熱泵轉換（冬季 COP 均 3.2）：<strong>實際耗電 ≈ 128 kWh／日（約 130 kWh）</strong></li>
+<li>當週電費（7 天）： 130 × 7 × 4.5 ≈ <strong>4,100 元／週</strong></li>
+</ul>
+<h3 id="62">6.2 夏季最熱一週（大暑前後）</h3>
+<ul>
+<li>外溫 33°C，玻璃屋內可達 40°C 若無通風</li>
+<li>泳池反而可能過熱，<strong>熱泵幾乎不運轉</strong></li>
+<li>冷氣 VRF 滿載：180 kWh／日</li>
+<li>除濕機：30 kWh／日（玻璃屋蒸發大）</li>
+<li><strong>日總耗電 ≈ 220 kWh／日</strong></li>
+<li>週電費 ≈ <strong>6,930 元／週</strong></li>
+</ul>
+<h3 id="63">6.3 空屋天（最省）</h3>
+<ul>
+<li>泳池仍需保溫（28°C）</li>
+<li>日耗電：~70 kWh／日</li>
+<li>月耗電 ≈ 2,100 kWh</li>
+<li><strong>空屋月電費 ≈ 9,500 元</strong></li>
+<li>此即「恆溫泳池」的固定成本</li>
+</ul>
+<h3 id="64-60">6.4 全年滿載（入住率 60%）</h3>
+<ul>
+<li>實際營業 219 天 / 空屋 146 天</li>
+<li>營業期平均 180 kWh／日 × 219 = 39,400 kWh</li>
+<li>空屋期 70 kWh／日 × 146 = 10,200 kWh</li>
+<li><strong>全年總電費</strong>：49,600 kWh × 4.5 = <strong>約 22.3 萬</strong></li>
+<li>加維護、藥劑、保險、軟水器耗材 → <strong>約 34–48 萬／年</strong></li>
+</ul>
+<hr />
+<h2 id="7">7. 客人體驗與環保面</h2>
+<h3 id="71">7.1 體驗差異</h3>
+<table>
+<thead>
+<tr>
+<th>方案</th>
+<th>泳池溫度穩定度</th>
+<th>熱水 24h 供應</th>
+<th>暖氣噪音</th>
+<th>啟動響應</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>方案 1 全熱泵</td>
+<td>極穩定 28°C ±0.5</td>
+<td>佳（2,500L 儲熱桶）</td>
+<td>低（室內機靜音）</td>
+<td>暖氣 3–5 分鐘</td>
+</tr>
+<tr>
+<td>方案 2 熱泵+LPG 備援</td>
+<td>極穩定</td>
+<td>極佳（備援足）</td>
+<td>中</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>方案 3 瓦斯為主</td>
+<td>中（瓦斯加熱慢）</td>
+<td>中（鍋爐容量限）</td>
+<td>中高</td>
+<td>暖氣需另裝</td>
+</tr>
+</tbody>
+</table>
+<h3 id="72">7.2 碳排比較（年度）</h3>
+<ul>
+<li>方案 1：49,600 kWh × 0.494 kgCO2/kWh（2024 電力係數）= <strong>24.5 噸 CO2／年</strong></li>
+<li>方案 3（瓦斯為主）：約 35 噸 LPG × 3.0 kgCO2/kg = <strong>約 105 噸 CO2／年</strong></li>
+<li><strong>方案 1 減碳 77%</strong>，可申請 <a href="https://www.booking.com/sustainability.html">Booking Travel Sustainable</a> 、Green Key 認證</li>
+</ul>
+<h3 id="73-1">7.3 行銷可打的標籤（方案 1）</h3>
+<ul>
+<li>「全熱泵永續 Villa」</li>
+<li>「碳排減 70%」</li>
+<li>「玻璃屋恆溫泳池 28°C 全年」</li>
+<li>「Booking Travel Sustainable 認證」（需申請）</li>
+</ul>
+<hr />
+<h2 id="8">8. 風險與常見失敗案例</h2>
+<h3 id="81">8.1 真實案例查證</h3>
+<table>
+<thead>
+<tr>
+<th>風險</th>
+<th>案例／資料</th>
+<th>本專案應對</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>泳池熱泵功率選小，冬季加熱不起來</strong></td>
+<td>業界經驗：5P（20 kW）想加熱 50 m³ 要 26 小時，客人第二天才能游</td>
+<td>選 10P（40 kW）以上，<strong>不要省這個錢</strong></td>
+</tr>
+<tr>
+<td><strong>冬季結霜除霜消耗能量</strong></td>
+<td>PanSci 報導：低溫 + 高濕讓散熱片易結霜，COP 衰減 20%</td>
+<td>選有<strong>智慧除霜</strong>功能的機型（2024 後機種多已標配）</td>
+</tr>
+<tr>
+<td><strong>玻璃屋沒規劃通風變蒸籠</strong></td>
+<td>多數失敗案例源於此</td>
+<td>屋頂做可開啟式通風、配熱回收除濕機</td>
+</tr>
+<tr>
+<td><strong>泳池保溫蓋省掉了</strong></td>
+<td>沒蓋比有蓋多耗 50–70% 熱損，一年多付 5–8 萬電費</td>
+<td><strong>一定要裝自動捲蓋</strong></td>
+</tr>
+<tr>
+<td><strong>電力契約容量沒升級</strong></td>
+<td>熱泵峰值 20 kW 加 VRF 尖峰 15 kW，家用 5 kVA 直接跳電</td>
+<td><strong>申請 50 kVA 三相動力電</strong></td>
+</tr>
+<tr>
+<td><strong>瓦斯備援超過法規上限</strong></td>
+<td>備用 LPG 超過 80 kg 即違反消防法</td>
+<td>只放 1–2 桶 20 kg 備援</td>
+</tr>
+<tr>
+<td><strong>機房預留不足</strong></td>
+<td>泳池熱泵 + 熱水熱泵 + VRF 室外機 + 儲熱桶至少要 <strong>3×4 m + 淨高 2.5 m</strong></td>
+<td>施工前跟澳石鎖死機房位置</td>
+</tr>
+<tr>
+<td><strong>軟水器沒裝，熱交換器結垢</strong></td>
+<td>礁溪水質硬度高，5 年熱交換器效能掉 30%</td>
+<td>必裝全戶軟水器（3–6 萬）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="82">8.2 礁溪鄰近民宿實際採用方案（間接佐證）</h3>
+<ul>
+<li><strong>礁溪漳福路民宿遊憩中心</strong>：燒水王商用熱泵 2016 年案例，至今運轉</li>
+<li><strong>二十輪 Villa（冬山）</strong>：瑞智熱泵升級泳池恆溫</li>
+<li><strong>76 親子民宿（冬山）</strong>：燒水王商用熱泵</li>
+<li>來源：<a href="http://www.geo-shine-solar.com.tw/casus.php?cid=2&amp;sid=2">燒水王實績頁</a></li>
+</ul>
+<blockquote>
+<p>結論：<strong>礁溪當地熱泵民宿已運轉 10+ 年，施工廠商成熟度夠</strong>，不是實驗性選擇。</p>
+</blockquote>
+<hr />
+<h2 id="9">9. 與澳石設計的對接建議</h2>
+<h3 id="91-3">9.1 施工前必鎖死的 3 件事</h3>
+<ol>
+<li>
+<p><strong>機房位置 + 大小</strong><br />
+   - 最小 3 m × 4 m × 2.5 m 淨高<br />
+   - 需通風、有排水、近電源<br />
+   - 建議放在建物<strong>北側或西側外推區</strong>（遠離客房、迎風散熱）<br />
+   - 澳石的 2F/3F 隔間圖要補上機房</p>
+</li>
+<li>
+<p><strong>電力容量 + 管路預留</strong><br />
+   - 申請台電 <strong>三相 220V 動力電、契約容量 50 kVA</strong>（<strong>審查期 7–10 個工作天</strong>，若需外線工程實際到表可能 4–8 週，<strong>建議澳石圖面確認後立即送件</strong>。來源：<a href="https://hc1.taipower.com.tw/media/mvfcfmtf/2021090713285160095.pdf">台電新增設用電申請須知</a>）<br />
+   - 從變電箱到機房、到 7 房分電盤，線徑要預留 VRF 峰值<br />
+   - 熱泵專線需 3 相 4 線 + 接地</p>
+</li>
+<li>
+<p><strong>泳池結構細節</strong><br />
+   - 池深決定（1.2 m 或 1.4 m？）→ 影響熱容量與 CAPEX<br />
+   - 平衡水池 2 m³ 預留位置（池體側邊溝道下方）<br />
+   - 泳池下方 50 mm XPS 保溫層<br />
+   - 玻璃屋屋頂可開啟通風（夏季排熱，冬季關閉）</p>
+</li>
+</ol>
+<h3 id="92">9.2 施工中可彈性調整</h3>
+<ul>
+<li>太陽能板位置（屋頂規劃只要保留 20 m² 朝南向即可）</li>
+<li>室內除濕機型號（戴思樂 vs POOLPAK，後期定）</li>
+<li>自動泳池蓋樣式</li>
+</ul>
+<h3 id="93">9.3 需要找的專業顧問</h3>
+<table>
+<thead>
+<tr>
+<th>專業</th>
+<th>角色</th>
+<th>聯絡管道</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>機電技師</td>
+<td>出熱負荷計算書、電力計算書</td>
+<td>澳石推薦或在地推薦</td>
+</tr>
+<tr>
+<td>泳池設備商</td>
+<td>池體 + 循環 + 過濾系統整合</td>
+<td>鑫威利、瑞智系統商</td>
+</tr>
+<tr>
+<td>熱泵工程商</td>
+<td>池水熱泵 + 熱水熱泵 + VRF 整合</td>
+<td>燒水王、瑞智經銷</td>
+</tr>
+<tr>
+<td>軟水 / 水質顧問</td>
+<td>全戶軟水、前置過濾</td>
+<td>當地水電行進階配</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="10">10. 推薦方案三句話說清</h2>
+<ol>
+<li><strong>選方案 1：全熱泵（池水 40 kW + 熱水 25 kW + VRF）+ 太陽能 15–20 m² 輔助 + 1 台電熱水器備援 + 自動泳池保溫蓋</strong></li>
+<li><strong>CAPEX 225–320 萬、OPEX 34–48 萬／年、5 年 TCO 約 475 萬</strong></li>
+<li><strong>比瓦斯方案 5 年省 300 萬、碳排減 77%、可打永續 Villa 行銷標籤</strong></li>
+</ol>
+<hr />
+<h2 id="11">11. 重要免責</h2>
+<p>本報告基於公開資料、2026-04-23 硬體規格、業界經驗值計算。具體設備選型、熱負荷精確值、電力配置，<strong>必須由執業機電技師依澳石最終隔間圖 + 玻璃屋 U 值 + 泳池結構細節出具正式圖說與計算書</strong>。</p>
+<p>本報告適合作為：<br />
+- 與澳石、機電技師、廠商討論的<strong>起點</strong><br />
+- 預算編列與融資的<strong>依據</strong><br />
+- 比價時的<strong>技術背景文件</strong></p>
+<hr />
+<h2 id="_1">引用來源</h2>
+<ul>
+<li><a href="https://www.scng.com.tw/">欣彰天然氣 供應區域</a></li>
+<li><a href="https://www.ctwant.com/article/472825/">CTWANT 宜蘭天然氣管線規劃 2026-02</a></li>
+<li><a href="http://ton-lin.net/news_view.asp?ID=690">消防法第15條之液化石油氣容器管理</a></li>
+<li><a href="https://pansci.asia/archives/89344">PanSci 泛科學 熱泵節電宜蘭篇</a></li>
+<li><a href="https://www.housefeel.com.tw/article/%E5%8F%B0%E9%9B%BB%E9%9B%BB%E8%B2%BB-%E5%A4%8F%E5%AD%A3%E9%9B%BB%E8%B2%BB-%E9%9B%BB%E8%B2%BB%E8%A8%88%E7%AE%97/">HouseFeel 2026 電費計算</a></li>
+<li><a href="https://www.taipower.com.tw/media/mpbjpjgj/%E5%90%84%E9%A1%9E%E9%9B%BB%E5%83%B9%E8%A1%A8%E5%8F%8A%E8%A8%88%E7%AE%97%E7%AF%84%E4%BE%8B_1130401.pdf?mediaDL=true">台電 2024 年 4 月電價表 PDF</a></li>
+<li><a href="https://941333.com/heat-pump-detail/3">鑫威利熱泵官網</a></li>
+<li><a href="https://www.taiwancce.com/pages/rechi">瑞智 RECHI 商用系列</a></li>
+<li><a href="http://www.geo-shine-solar.com.tw/casus.php?cid=2&amp;sid=2">燒水王（子午線）實績</a></li>
+<li><a href="https://www.pro360.com.tw/price/solar_boiler">PRO360 太陽能熱水器價格</a></li>
+<li><a href="https://zh.wikipedia.org/zh-tw/%E7%86%B1%E6%B3%B5">熱泵維基百科 - COP 原理</a></li>
+<li><a href="https://www.glgas.com.tw/">國聯瓦斯 宜蘭</a></li>
+<li><a href="https://www.booking.com/sustainability.html">Booking Travel Sustainable</a></li>
+<li>2026-04-17 版《宜蘭礁溪民宿熱水系統設計報告》（內部文件，部分經驗值沿用）</li>
+</ul>
+<hr />
+<p><em>撰寫：guesthouse-butler subagent / 2026-04-23 / 工具鏈：WebSearch 即時查證 + 內部知識庫</em></p>
+</div>
+</body>
+</html>
