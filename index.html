@@ -11,51 +11,108 @@
     --ink: #1a1a1a;
     --muted: #6b6b6b;
     --accent: #2c5f5d;
+    --accent-alt: #b56a55;
     --line: #e5e1da;
+    --hover-bg: #f5f1ea;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
-    font-family: -apple-system, "PingFang TC", "Microsoft JhengHei", sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Microsoft JhengHei", sans-serif;
     background: var(--bg);
     color: var(--ink);
     line-height: 1.7;
     padding: 4rem 1.5rem;
-    max-width: 720px;
+    max-width: 760px;
     margin: 0 auto;
   }
-  header { margin-bottom: 3rem; }
-  h1 { font-size: 2rem; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
-  .tagline { color: var(--muted); font-size: 1.05rem; }
-  h2 {
-    font-size: 1.1rem;
-    margin: 3rem 0 1rem;
-    color: var(--accent);
+  header {
+    margin-bottom: 3.5rem;
+    padding-bottom: 2rem;
     border-bottom: 1px solid var(--line);
-    padding-bottom: 0.5rem;
   }
-  ul { list-style: none; }
-  li { padding: 0.6rem 0; border-bottom: 1px solid var(--line); }
-  li:last-child { border-bottom: none; }
+  h1 { font-size: 2.2rem; margin-bottom: 0.4rem; letter-spacing: -0.02em; }
+  .tagline { color: var(--muted); font-size: 1.05rem; }
+
+  .category {
+    margin-bottom: 3.5rem;
+  }
+  .category-label {
+    display: inline-block;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.4rem;
+    font-weight: 500;
+  }
+  .category h2 {
+    font-size: 1.3rem;
+    margin-bottom: 0.3rem;
+    letter-spacing: -0.01em;
+  }
+  .category .cat-desc {
+    color: var(--muted);
+    font-size: 0.92rem;
+    margin-bottom: 1.2rem;
+  }
+  .cat-villa h2 { color: var(--accent); }
+  .cat-persona h2 { color: var(--accent-alt); }
+
+  ul {
+    list-style: none;
+    border-top: 1px solid var(--line);
+  }
+  li {
+    padding: 0.9rem 0;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    transition: background 0.15s;
+  }
+  li:hover { background: var(--hover-bg); padding-left: 0.5rem; padding-right: 0.5rem; }
   a {
     color: var(--ink);
     text-decoration: none;
     border-bottom: 1px solid transparent;
     transition: border-color 0.2s;
+    flex: 1;
   }
-  a:hover { border-bottom-color: var(--accent); }
-  .date { color: var(--muted); font-size: 0.9rem; margin-left: 0.5rem; }
+  a:hover { border-bottom-color: currentColor; }
+  .date {
+    color: var(--muted);
+    font-size: 0.82rem;
+    font-family: ui-monospace, "Cascadia Mono", Menlo, monospace;
+    flex-shrink: 0;
+  }
+  .item-sub {
+    display: block;
+    color: var(--muted);
+    font-size: 0.82rem;
+    margin-top: 0.2rem;
+    font-weight: normal;
+  }
+
   footer {
-    margin-top: 4rem;
+    margin-top: 5rem;
     padding-top: 2rem;
     border-top: 1px solid var(--line);
     color: var(--muted);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     text-align: center;
   }
-  .empty {
+  footer a {
     color: var(--muted);
-    font-style: italic;
-    padding: 1rem 0;
+    border: none;
+  }
+  footer a:hover { color: var(--accent); }
+
+  @media (max-width: 600px) {
+    body { padding: 2.5rem 1.2rem; }
+    h1 { font-size: 1.7rem; }
+    li { flex-direction: column; gap: 0.2rem; }
+    .date { align-self: flex-start; }
   }
 </style>
 </head>
@@ -65,27 +122,45 @@
   <p class="tagline">作品、筆記、AI 實驗。持續更新中。</p>
 </header>
 
-<section>
-  <h2>最新發佈</h2>
+<section class="category cat-villa">
+  <div class="category-label">Project · Hospitality</div>
+  <h2>詠夏 Villa</h2>
+  <p class="cat-desc">宜蘭礁溪・7 房包棟精品民宿 + 玻璃屋恆溫泳池｜2027Q1 開幕籌備</p>
   <ul>
     <li>
-      <a href="熱能方案評估_詠夏Villa_v2_2026-04-23.html">詠夏 Villa ｜熱能方案評估（完整報告 v2）</a>
+      <a href="熱能方案評估_詠夏Villa_v2_2026-04-23.html">
+        熱能方案評估（完整報告 v2）
+        <span class="item-sub">泳池 + 暖氣 + 熱水三合一，含 A/B/C 方案能耗與回本分析</span>
+      </a>
       <span class="date">2026-04-23</span>
     </li>
     <li>
-      <a href="熱能方案摘要_手帳風_詠夏Villa.html">詠夏 Villa ｜熱能方案摘要（手帳風）</a>
+      <a href="熱能方案摘要_手帳風_詠夏Villa.html">
+        熱能方案摘要（手帳風）
+        <span class="item-sub">一頁看懂的對外敘事版本</span>
+      </a>
       <span class="date">2026-04-23</span>
     </li>
   </ul>
 </section>
 
-<section>
-  <h2>關於</h2>
-  <p>這是我存放公開作品、筆記與實驗的地方。想交流歡迎來信。</p>
+<section class="category cat-persona">
+  <div class="category-label">Experiment · AI Persona</div>
+  <h2>林詠夏 <span style="font-family:ui-monospace,monospace;font-size:0.85rem;color:var(--muted);font-weight:normal;">@yonxia.summer</span></h2>
+  <p class="cat-desc">AI 虛擬網紅養成實驗｜Instagram・純實驗專案</p>
+  <ul>
+    <li>
+      <a href="林詠夏_AI虛擬網紅_策略書.html">
+        完整策略書（10 份文件串聯）
+        <span class="item-sub">90 天作戰計劃 + 人設 + 工具鏈 + 貼文 + 種子圖 + 養成路線</span>
+      </a>
+      <span class="date">2026-04-23</span>
+    </li>
+  </ul>
 </section>
 
 <footer>
-  &copy; 2026 Haochun · <a href="https://github.com/haochunhungster">GitHub</a>
+  &copy; 2026 Haochun · <a href="https://github.com/haochunhungster">https://github.com/haochunhungster</a>
 </footer>
 </body>
 </html>

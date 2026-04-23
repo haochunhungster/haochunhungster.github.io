@@ -26,3 +26,6 @@ desktop.ini
 *.tmp
 *.bak
 *.log
+
+# 預覽區（本機看、不推）
+_preview/
