@@ -1,0 +1,28 @@
+# 系統
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 編輯器
+.vscode/
+.idea/
+*.swp
+*~
+
+# 敏感資料（多一層保險）
+*.env
+*.key
+*secret*
+*password*
+*_private.*
+*_私密.*
+*_私人.*
+民宿/
+稽查報告/
+財務/
+合約/
+
+# 暫存
+*.tmp
+*.bak
+*.log
