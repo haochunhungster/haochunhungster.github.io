@@ -3,519 +3,709 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Haochun｜Scrapbook of Works</title>
-<meta name="description" content="Haochun 的作品、筆記、AI 實驗。像一本手帳，記錄在做的事。">
+<title>HAOCHUN — An Editorial of Works</title>
+<meta name="description" content="A quiet magazine of works, notes, and experiments. ハオチュンの仕事帖。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Kalam:wght@400;700&family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500&family=Noto+Sans+JP:wght@300;400&family=Noto+Serif+JP:wght@400;700;900&family=Noto+Serif+TC:wght@400;700;900&family=Noto+Sans+TC:wght@300;400&display=swap" rel="stylesheet">
 <style>
   :root {
-    --paper: #f5f1e8;
-    --paper-dark: #ebe5d6;
-    --ink: #2a2520;
-    --muted: #7a6f62;
-    --villa: #2c5f5d;
-    --villa-soft: #c8d8d6;
-    --persona: #b56a55;
-    --persona-soft: #e8cfc4;
-    --tape: rgba(220, 200, 120, 0.55);
-    --tape-edge: rgba(180, 160, 80, 0.3);
-    --sticky: #f4e4a1;
-    --line: #d9d0bd;
-    --shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05);
-    --shadow-lift: 0 8px 24px rgba(0,0,0,0.12), 0 2px 6px rgba(0,0,0,0.08);
-    --hand: 'Caveat', 'Kalam', cursive;
-    --serif: 'Noto Serif TC', 'PingFang TC', serif;
-    --sans: 'Noto Sans TC', -apple-system, 'PingFang TC', sans-serif;
+    --paper: #f6f4ee;
+    --paper-warm: #ebe7dd;
+    --ink: #0f0e0c;
+    --ink-soft: #2a2620;
+    --muted: #8d8578;
+    --muted-faint: #c4bdac;
+    --accent: #b83f34;  /* 日式朱紅 */
+    --rule: #0f0e0c;
+
+    --serif-en: 'Cormorant Garamond', 'DM Serif Display', serif;
+    --serif-display: 'DM Serif Display', 'Cormorant Garamond', serif;
+    --serif-tc: 'Noto Serif TC', serif;
+    --serif-jp: 'Noto Serif JP', serif;
+    --sans-en: 'Inter', -apple-system, sans-serif;
+    --sans-tc: 'Noto Sans TC', -apple-system, sans-serif;
+    --sans-jp: 'Noto Sans JP', sans-serif;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
+  ::selection { background: var(--accent); color: var(--paper); }
+
+  html { scroll-behavior: smooth; }
+
   body {
     background: var(--paper);
-    background-image:
-      /* 紙質紋理：多層 noise */
-      radial-gradient(ellipse at 20% 30%, rgba(180,155,100,0.04) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 70%, rgba(120,100,70,0.03) 0%, transparent 60%),
-      /* 淺格線 */
-      linear-gradient(to right, rgba(160,140,110,0.05) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(160,140,110,0.05) 1px, transparent 1px);
-    background-size: auto, auto, 32px 32px, 32px 32px;
     color: var(--ink);
-    font-family: var(--sans);
-    line-height: 1.75;
-    min-height: 100vh;
-    padding: 3rem 1.5rem 6rem;
+    font-family: var(--sans-en);
+    font-weight: 300;
+    line-height: 1.8;
     overflow-x: hidden;
+    font-feature-settings: "palt";
   }
 
-  .container {
-    max-width: 880px;
-    margin: 0 auto;
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 3rem; }
+
+  /* ============ Magazine header bar ============ */
+  .mag-bar {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 1.5rem 0 1rem;
+    border-bottom: 1px solid var(--rule);
+    font-family: var(--sans-en);
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .mag-bar .left { text-align: left; }
+  .mag-bar .center { font-family: var(--serif-display); letter-spacing: 0.15em; font-size: 0.85rem; }
+  .mag-bar .right { text-align: right; font-family: var(--serif-jp); letter-spacing: 0.1em; }
+
+  /* ============ Hero ============ */
+  .hero {
+    padding: 6rem 0 5rem;
+    border-bottom: 1px solid var(--rule);
     position: relative;
   }
-
-  /* ========== Header ========== */
-  header {
-    position: relative;
-    padding: 3rem 1rem 2rem;
-    margin-bottom: 3rem;
-    text-align: center;
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 3rem;
+    align-items: end;
   }
 
-  .masthead-tape {
-    position: absolute;
-    top: -8px;
-    left: 50%;
-    transform: translateX(-50%) rotate(-2deg);
-    width: 140px;
-    height: 28px;
-    background: linear-gradient(180deg, var(--tape) 0%, rgba(220,200,120,0.75) 50%, var(--tape) 100%);
-    border-left: 1px dashed var(--tape-edge);
-    border-right: 1px dashed var(--tape-edge);
-    box-shadow: 0 1px 2px rgba(0,0,0,0.08);
-    opacity: 0.8;
+  .issue-stamp {
+    font-family: var(--serif-jp);
+    font-weight: 900;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-size: 0.95rem;
+    letter-spacing: 0.5em;
+    line-height: 1.4;
+    color: var(--ink);
+    padding-right: 1rem;
+    border-right: 1px solid var(--ink);
+    height: fit-content;
+    margin-left: auto;
   }
-
-  .eyebrow {
-    font-family: var(--hand);
-    font-size: 1.4rem;
+  .issue-stamp small {
+    display: block;
+    font-family: var(--sans-en);
+    font-weight: 400;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    margin-top: 2rem;
     color: var(--muted);
-    letter-spacing: 0.02em;
-    margin-bottom: 0.3rem;
-    transform: rotate(-1deg);
   }
 
-  h1.site-title {
-    font-family: var(--serif);
-    font-size: clamp(2.4rem, 6vw, 3.6rem);
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    line-height: 1.1;
+  .hero-title {
+    font-family: var(--serif-display);
+    font-size: clamp(4rem, 11vw, 9rem);
+    font-weight: 400;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
     margin-bottom: 0.8rem;
   }
+  .hero-title .italic { font-style: italic; color: var(--accent); font-family: var(--serif-display); }
 
-  .site-title .accent {
-    font-family: var(--hand);
-    font-weight: 400;
-    font-size: 0.7em;
-    color: var(--villa);
-    display: inline-block;
-    transform: rotate(-2deg) translateY(-4px);
-    margin-left: 0.3em;
-  }
-
-  .tagline {
-    font-family: var(--serif);
-    font-size: 1.05rem;
-    color: var(--muted);
-    max-width: 520px;
-    margin: 0 auto;
-    font-style: italic;
-  }
-
-  .meta-line {
-    margin-top: 1.5rem;
-    font-family: var(--hand);
-    font-size: 1.1rem;
-    color: var(--muted);
-    display: inline-flex;
-    align-items: center;
-    gap: 0.8rem;
-    transform: rotate(0.5deg);
-  }
-
-  .meta-line .dot {
-    width: 4px;
-    height: 4px;
-    background: var(--muted);
-    border-radius: 50%;
-    opacity: 0.5;
-  }
-
-  /* ========== Section ========== */
-  .scrapbook-page {
-    position: relative;
-    margin-bottom: 4rem;
-    padding: 2.5rem 2rem 2rem;
-    background: rgba(255, 253, 247, 0.6);
-    border-radius: 2px;
-    box-shadow: var(--shadow);
-  }
-
-  .scrapbook-page.villa {
-    background: rgba(255, 253, 247, 0.85);
-    border-top: 3px solid var(--villa-soft);
-    transform: rotate(-0.3deg);
-  }
-
-  .scrapbook-page.persona {
-    background: rgba(255, 251, 244, 0.85);
-    border-top: 3px solid var(--persona-soft);
-    transform: rotate(0.3deg);
-  }
-
-  /* 便利貼 tag */
-  .section-sticky {
-    position: absolute;
-    top: -18px;
-    left: 2.5rem;
-    padding: 0.45rem 1rem 0.4rem;
-    background: var(--sticky);
-    font-family: var(--hand);
-    font-size: 1rem;
-    color: var(--ink);
-    transform: rotate(-3deg);
-    box-shadow: 2px 3px 6px rgba(0,0,0,0.12);
-    letter-spacing: 0.03em;
-  }
-
-  .scrapbook-page.persona .section-sticky {
-    background: #f9d5c7;
-    transform: rotate(2deg);
-    left: auto;
-    right: 2.5rem;
-  }
-
-  /* 區塊標題 */
-  .section-header {
-    display: flex;
-    align-items: flex-end;
-    gap: 1rem;
-    margin-bottom: 0.6rem;
-    padding-top: 1rem;
-  }
-  .section-emoji {
-    font-size: 2.4rem;
-    line-height: 1;
-  }
-  .section-title-block h2 {
-    font-family: var(--serif);
-    font-size: 1.7rem;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    line-height: 1.2;
-  }
-  .villa .section-title-block h2 { color: var(--villa); }
-  .persona .section-title-block h2 { color: var(--persona); }
-
-  .section-handle {
-    font-family: var(--hand);
-    font-size: 1.1rem;
-    color: var(--muted);
-    margin-left: 0.5rem;
-  }
-
-  .section-desc {
-    font-family: var(--serif);
-    color: var(--muted);
-    font-size: 0.95rem;
-    margin: 0.6rem 0 2rem;
-    padding-left: 3.4rem;
-    font-style: italic;
-    border-left: 2px solid var(--line);
-    padding-top: 0.2rem;
-    padding-bottom: 0.2rem;
-    margin-left: 0.3rem;
-  }
-
-  /* ========== Card ========== */
-  .cards {
-    display: grid;
-    gap: 1.4rem;
-  }
-
-  .card {
-    position: relative;
-    padding: 1.6rem 1.5rem 1.3rem;
-    background: #fefcf7;
-    border-radius: 3px;
-    box-shadow: var(--shadow);
-    transition: all 0.25s ease;
-    cursor: pointer;
-    text-decoration: none;
-    color: inherit;
-    display: block;
-  }
-
-  .card:nth-child(odd) { transform: rotate(-0.4deg); }
-  .card:nth-child(even) { transform: rotate(0.3deg); }
-
-  .card:hover {
-    transform: rotate(0) translateY(-3px);
-    box-shadow: var(--shadow-lift);
-  }
-
-  /* 膠帶角落 */
-  .card::before {
-    content: "";
-    position: absolute;
-    top: -6px;
-    left: 1.5rem;
-    width: 70px;
-    height: 18px;
-    background: linear-gradient(180deg, var(--tape) 0%, rgba(220,200,120,0.7) 50%, var(--tape) 100%);
-    border-left: 1px dashed var(--tape-edge);
-    border-right: 1px dashed var(--tape-edge);
-    transform: rotate(-3deg);
-    box-shadow: 0 1px 2px rgba(0,0,0,0.06);
-    opacity: 0.7;
-    transition: opacity 0.25s;
-  }
-
-  .card:hover::before { opacity: 1; }
-
-  .card:nth-child(even)::before {
-    left: auto;
-    right: 1.5rem;
-    transform: rotate(3deg);
-  }
-
-  .card-head {
+  .hero-sub {
     display: flex;
     align-items: baseline;
-    gap: 0.7rem;
-    margin-bottom: 0.4rem;
+    gap: 1.5rem;
     flex-wrap: wrap;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule);
   }
-
-  .card-emoji {
-    font-size: 1.4rem;
-    line-height: 1;
+  .hero-sub .tc {
+    font-family: var(--serif-tc);
+    font-weight: 400;
+    font-size: 1.1rem;
+    letter-spacing: 0.12em;
   }
-
-  .card-title {
-    font-family: var(--serif);
-    font-size: 1.15rem;
-    font-weight: 600;
-    letter-spacing: -0.005em;
-    line-height: 1.3;
-    flex: 1;
-    min-width: 200px;
-  }
-
-  .card-date {
-    font-family: var(--hand);
+  .hero-sub .jp {
+    font-family: var(--serif-jp);
+    font-weight: 400;
     font-size: 1rem;
     color: var(--muted);
-    white-space: nowrap;
+    letter-spacing: 0.1em;
   }
-
-  .card-desc {
-    font-family: var(--sans);
-    font-size: 0.92rem;
+  .hero-sub .en {
+    font-family: var(--serif-en);
+    font-style: italic;
+    font-size: 1rem;
     color: var(--muted);
-    margin: 0.5rem 0 0.9rem;
-    line-height: 1.7;
+    margin-left: auto;
   }
 
-  .card-tags {
-    display: flex;
-    gap: 0.4rem;
-    flex-wrap: wrap;
+  /* ============ Contents index ============ */
+  .contents {
+    padding: 3rem 0 2rem;
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 3rem;
   }
-
-  .tag {
-    font-family: var(--hand);
+  .contents-label {
+    font-family: var(--serif-jp);
+    font-weight: 900;
+    writing-mode: vertical-rl;
+    font-size: 0.8rem;
+    letter-spacing: 0.4em;
+    color: var(--muted);
+    justify-self: end;
+    height: fit-content;
+  }
+  .contents-list {
+    list-style: none;
+  }
+  .contents-list li {
+    display: grid;
+    grid-template-columns: 50px 1fr auto;
+    gap: 1.5rem;
+    padding: 0.8rem 0;
+    align-items: baseline;
+    border-top: 1px solid var(--muted-faint);
+  }
+  .contents-list li:last-child { border-bottom: 1px solid var(--muted-faint); }
+  .contents-list .num {
+    font-family: var(--serif-display);
+    font-size: 1.3rem;
+    color: var(--accent);
+  }
+  .contents-list .name {
+    font-family: var(--serif-tc);
+    font-weight: 400;
+    font-size: 1.05rem;
+  }
+  .contents-list .name em {
+    font-family: var(--serif-en);
+    font-style: italic;
+    color: var(--muted);
+    margin-left: 0.6rem;
     font-size: 0.95rem;
-    padding: 0.1rem 0.55rem;
-    background: var(--paper-dark);
-    color: var(--muted);
-    border-radius: 12px;
-    line-height: 1.4;
   }
-
-  .villa .tag { background: var(--villa-soft); color: var(--villa); }
-  .persona .tag { background: var(--persona-soft); color: var(--persona); }
-
-  /* ========== Footer ========== */
-  footer {
-    text-align: center;
-    margin-top: 5rem;
-    padding-top: 2rem;
-    position: relative;
-  }
-  footer .stamp {
-    display: inline-block;
-    font-family: var(--hand);
-    font-size: 1.2rem;
-    color: var(--villa);
-    border: 2px solid var(--villa);
-    padding: 0.4rem 1.2rem;
-    transform: rotate(-4deg);
-    opacity: 0.7;
-    letter-spacing: 0.05em;
-  }
-  footer p {
-    margin-top: 1.2rem;
-    font-family: var(--serif);
+  .contents-list .pg {
+    font-family: var(--serif-en);
     font-size: 0.9rem;
     color: var(--muted);
+    font-style: italic;
   }
-  footer a {
+
+  /* ============ Article section ============ */
+  .article {
+    padding: 6rem 0 5rem;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+  }
+
+  .article-head {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 3rem;
+    margin-bottom: 4rem;
+    align-items: start;
+  }
+
+  .chapter-mark {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.8rem;
+  }
+  .chapter-mark .no {
+    font-family: var(--serif-display);
+    font-size: 5rem;
+    line-height: 1;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+  }
+  .chapter-mark .no em {
+    font-family: var(--serif-display);
+    font-style: italic;
+    color: var(--accent);
+    font-size: 1.5rem;
+    vertical-align: top;
+  }
+  .chapter-mark .vlabel {
+    font-family: var(--serif-jp);
+    font-weight: 700;
+    writing-mode: vertical-rl;
+    font-size: 0.8rem;
+    letter-spacing: 0.4em;
+    color: var(--muted);
+  }
+
+  .article-title {
+    font-family: var(--serif-tc);
+    font-weight: 900;
+    font-size: clamp(2.8rem, 6vw, 4.5rem);
+    line-height: 1.02;
+    letter-spacing: -0.01em;
+    margin-bottom: 1rem;
+  }
+  .article-title .en {
+    display: block;
+    font-family: var(--serif-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 0.4em;
+    color: var(--muted);
+    margin-top: 0.8rem;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+  }
+
+  .article-lede {
+    font-family: var(--serif-tc);
+    font-weight: 400;
+    font-size: 1.15rem;
+    line-height: 1.9;
+    max-width: 620px;
+    color: var(--ink-soft);
+    letter-spacing: 0.04em;
+  }
+  .article-lede .drop {
+    font-family: var(--serif-display);
+    float: left;
+    font-size: 4rem;
+    line-height: 1;
+    padding: 0.2rem 0.7rem 0 0;
+    color: var(--accent);
+  }
+
+  .article-meta {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--rule);
+    font-family: var(--sans-en);
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .article-meta span::before { content: "— "; margin-right: 0.3rem; opacity: 0.5; }
+
+  /* ============ Works list ============ */
+  .works {
+    display: grid;
+    gap: 0;
+  }
+
+  .work {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 3rem;
+    padding: 3rem 0;
+    border-top: 1px solid var(--muted-faint);
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.3s ease;
+    align-items: start;
+  }
+  .work:last-child { border-bottom: 1px solid var(--muted-faint); }
+  .work:hover {
+    background: var(--paper-warm);
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin: 0 -1rem;
+  }
+
+  .work-side {
+    font-family: var(--serif-en);
+    text-align: right;
+    padding-right: 1.5rem;
+    border-right: 1px solid var(--muted-faint);
+  }
+  .work-side .pgno {
+    font-family: var(--serif-display);
+    font-size: 2.5rem;
+    font-style: italic;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 0.8rem;
+  }
+  .work-side .date {
+    font-family: var(--sans-en);
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .work-side .date strong {
+    font-weight: 500;
+    color: var(--ink);
+    display: block;
+    font-size: 0.9rem;
+    font-family: var(--serif-display);
+    letter-spacing: 0.1em;
+    text-transform: none;
+    margin-top: 0.3rem;
+  }
+
+  .work-body { padding-top: 0.3rem; }
+
+  .work-kicker {
+    font-family: var(--serif-jp);
+    font-weight: 400;
+    font-size: 0.85rem;
+    letter-spacing: 0.3em;
+    color: var(--muted);
+    margin-bottom: 0.6rem;
+  }
+
+  .work-title {
+    font-family: var(--serif-tc);
+    font-weight: 700;
+    font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+    line-height: 1.15;
+    letter-spacing: -0.005em;
+    margin-bottom: 1rem;
+    transition: color 0.3s;
+  }
+  .work:hover .work-title { color: var(--accent); }
+
+  .work-desc {
+    font-family: var(--serif-tc);
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.85;
+    color: var(--ink-soft);
+    max-width: 620px;
+    letter-spacing: 0.03em;
+  }
+  .work-desc em {
+    font-family: var(--serif-en);
+    font-style: italic;
+    color: var(--muted);
+  }
+
+  .work-foot {
+    margin-top: 1.2rem;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    font-family: var(--sans-en);
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .work-foot .tags { display: flex; gap: 1rem; }
+  .work-foot .arrow {
+    margin-left: auto;
+    font-family: var(--serif-display);
+    font-size: 1.4rem;
+    text-transform: none;
+    letter-spacing: 0;
+    transition: transform 0.3s;
+  }
+  .work:hover .work-foot .arrow { transform: translateX(6px); color: var(--accent); }
+
+  /* ============ Colophon / Footer ============ */
+  .colophon {
+    padding: 5rem 0 4rem;
+    text-align: center;
+  }
+  .colophon .mark {
+    display: inline-block;
+    font-family: var(--serif-jp);
+    font-weight: 900;
+    font-size: 1rem;
+    letter-spacing: 0.8em;
+    padding: 1rem 2rem 1rem 2.8rem;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    margin-bottom: 2rem;
+  }
+  .colophon .quiet {
+    font-family: var(--serif-en);
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--muted);
+    max-width: 460px;
+    margin: 0 auto 1.5rem;
+    line-height: 1.8;
+  }
+  .colophon .links {
+    font-family: var(--sans-en);
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .colophon .links a {
     color: var(--muted);
     text-decoration: none;
-    border-bottom: 1px dotted var(--muted);
+    border-bottom: 1px solid var(--muted-faint);
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
   }
-  footer a:hover { color: var(--villa); }
+  .colophon .links a:hover { color: var(--accent); border-color: var(--accent); }
+  .colophon .dot { margin: 0 1rem; opacity: 0.4; }
 
-  /* ========== Scroll reveal ========== */
-  .reveal {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  .reveal.in {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .scrapbook-page.villa.reveal.in { transform: translateY(0) rotate(-0.3deg); }
-  .scrapbook-page.persona.reveal.in { transform: translateY(0) rotate(0.3deg); }
+  /* ============ Reveal ============ */
+  .reveal { opacity: 0; transform: translateY(18px); transition: all 0.8s ease; }
+  .reveal.in { opacity: 1; transform: none; }
 
-  /* ========== Mobile ========== */
-  @media (max-width: 640px) {
-    body { padding: 2rem 1rem 4rem; background-size: auto, auto, 24px 24px, 24px 24px; }
-    header { padding: 2rem 0.5rem 1.5rem; margin-bottom: 2rem; }
-    .scrapbook-page {
-      padding: 2rem 1.2rem 1.5rem;
-      transform: rotate(0) !important;
+  /* ============ Mobile ============ */
+  @media (max-width: 800px) {
+    .wrap { padding: 0 1.2rem; }
+    .mag-bar { grid-template-columns: 1fr; text-align: center !important; gap: 0.4rem; }
+    .mag-bar .left, .mag-bar .right { text-align: center; }
+
+    .hero { padding: 3rem 0 2.5rem; }
+    .hero-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    .issue-stamp {
+      writing-mode: horizontal-tb;
+      border-right: none;
+      border-left: 2px solid var(--ink);
+      padding-right: 0;
+      padding-left: 1rem;
+      margin-left: 0;
     }
-    .scrapbook-page.villa.reveal.in,
-    .scrapbook-page.persona.reveal.in { transform: rotate(0) !important; }
-    .section-sticky { left: 1rem !important; right: auto !important; }
-    .section-desc { padding-left: 0; border-left: none; border-top: 2px solid var(--line); padding-top: 0.6rem; margin-left: 0; }
-    .section-header { padding-top: 0.6rem; }
-    .card { padding: 1.3rem 1.1rem 1rem; transform: rotate(0) !important; }
-    .card::before { left: 1rem !important; right: auto !important; transform: rotate(-3deg); }
+    .issue-stamp small { margin-top: 0.4rem; }
+    .hero-sub .en { margin-left: 0; }
+
+    .contents { grid-template-columns: 1fr; gap: 1rem; padding: 2rem 0; }
+    .contents-label {
+      writing-mode: horizontal-tb;
+      justify-self: start;
+    }
+    .contents-list li { grid-template-columns: 36px 1fr auto; gap: 0.8rem; }
+
+    .article { padding: 3rem 0 2rem; }
+    .article-head { grid-template-columns: 1fr; gap: 1.2rem; margin-bottom: 2rem; }
+    .chapter-mark { flex-direction: row; align-items: baseline; gap: 1.5rem; }
+    .chapter-mark .no { font-size: 3rem; }
+    .chapter-mark .vlabel { writing-mode: horizontal-tb; }
+    .article-title { font-size: 2rem; }
+
+    .work { grid-template-columns: 1fr; gap: 1rem; padding: 2rem 0; }
+    .work:hover { padding-left: 0; padding-right: 0; margin: 0; }
+    .work-side {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      text-align: left;
+      padding-right: 0;
+      border-right: none;
+      border-bottom: 1px solid var(--muted-faint);
+      padding-bottom: 0.8rem;
+    }
+    .work-side .pgno { font-size: 2rem; margin-bottom: 0; }
+    .work-title { font-size: 1.6rem; }
   }
 </style>
 </head>
 <body>
-<div class="container">
 
-<header>
-  <div class="masthead-tape"></div>
-  <div class="eyebrow">a scrapbook of</div>
-  <h1 class="site-title">Haochun<span class="accent">&rsquo;s works</span></h1>
-  <p class="tagline">作品、筆記、AI 實驗。不是履歷，是一本持續生長的手帳。</p>
-  <div class="meta-line">
-    <span>Since 2026</span>
-    <span class="dot"></span>
-    <span>Taipei / Yilan</span>
-    <span class="dot"></span>
-    <span>持續更新</span>
+<div class="wrap">
+
+  <!-- ============ Top bar ============ -->
+  <div class="mag-bar">
+    <div class="left">Vol. 01 / 2026</div>
+    <div class="center">HAOCHUN — an editorial</div>
+    <div class="right">仕事帖</div>
   </div>
-</header>
 
-<!-- ========= 詠夏 Villa ========= -->
-<section class="scrapbook-page villa reveal">
-  <div class="section-sticky">Project · 民宿</div>
-
-  <div class="section-header">
-    <div class="section-emoji">🏡</div>
-    <div class="section-title-block">
-      <h2>詠夏 Villa</h2>
-      <span class="section-handle">Yongxia Villa</span>
+  <!-- ============ Hero ============ -->
+  <section class="hero">
+    <div class="hero-grid">
+      <div class="issue-stamp">
+        第壹期
+        <small>NO.01</small>
+      </div>
+      <div>
+        <h1 class="hero-title">Hao<span class="italic">chun</span>.</h1>
+        <div class="hero-sub">
+          <span class="tc">作品・筆記・実験</span>
+          <span class="jp">ハオチュンの仕事帖</span>
+          <span class="en">a quiet magazine of what I make.</span>
+        </div>
+      </div>
     </div>
-  </div>
-  <p class="section-desc">
-    宜蘭礁溪・7 房包棟精品民宿・玻璃屋恆溫泳池・2027 Q1 開幕籌備中。
-  </p>
+  </section>
 
-  <div class="cards">
+  <!-- ============ Contents ============ -->
+  <section class="contents">
+    <div class="contents-label">目 次</div>
+    <ul class="contents-list">
+      <li>
+        <span class="num">01</span>
+        <span class="name">詠夏 Villa<em>— Yongxia Villa</em></span>
+        <span class="pg">p. 012</span>
+      </li>
+      <li>
+        <span class="num">02</span>
+        <span class="name">林詠夏<em>— AI Persona Experiment</em></span>
+        <span class="pg">p. 036</span>
+      </li>
+    </ul>
+  </section>
 
-    <a class="card" href="熱能方案評估_詠夏Villa_v2_2026-04-23.html">
-      <div class="card-head">
-        <span class="card-emoji">🔥</span>
-        <span class="card-title">熱能方案評估（完整報告 v2）</span>
-        <span class="card-date">04 / 23</span>
+  <!-- ============ Article 01 ============ -->
+  <section class="article reveal">
+    <div class="article-head">
+      <div class="chapter-mark">
+        <div class="no">01<em>.</em></div>
+        <div class="vlabel">民 宿 企 劃</div>
       </div>
-      <p class="card-desc">
-        泳池 + 暖氣 + 熱水三合一，A / B / C 方案能耗與回本完整分析，含礁溪氣候數據與鄰近民宿對標。
-      </p>
-      <div class="card-tags">
-        <span class="tag">工程選型</span>
-        <span class="tag">能耗分析</span>
-        <span class="tag">45 KB</span>
+      <div>
+        <h2 class="article-title">
+          詠夏 Villa
+          <span class="en">Yongxia Villa — A guesthouse in the making.</span>
+        </h2>
+        <p class="article-lede">
+          <span class="drop">詠</span>宜蘭礁溪，一幢七房包棟民宿的籌備紀錄。玻璃屋恆溫泳池，2027 年春天開幕。這一頁收錄的是工程選型、能耗評估、品牌敘事的前置手稿。
+        </p>
+        <div class="article-meta">
+          <span>Yilan · Jiaoxi</span>
+          <span>2027 Q1 Opening</span>
+          <span>7 Rooms · 28 Guests</span>
+        </div>
       </div>
-    </a>
-
-    <a class="card" href="熱能方案摘要_手帳風_詠夏Villa.html">
-      <div class="card-head">
-        <span class="card-emoji">📝</span>
-        <span class="card-title">熱能方案摘要（手帳風）</span>
-        <span class="card-date">04 / 23</span>
-      </div>
-      <p class="card-desc">
-        一頁看懂的對外敘事版本：「不靠溫泉 bonus，靠自家玻璃屋 28°C 泳池，一整年都是夏天。」
-      </p>
-      <div class="card-tags">
-        <span class="tag">品牌敘事</span>
-        <span class="tag">視覺</span>
-      </div>
-    </a>
-
-  </div>
-</section>
-
-<!-- ========= 林詠夏 AI 虛擬網紅 ========= -->
-<section class="scrapbook-page persona reveal">
-  <div class="section-sticky">Experiment · AI Persona</div>
-
-  <div class="section-header">
-    <div class="section-emoji">🌸</div>
-    <div class="section-title-block">
-      <h2>林詠夏</h2>
-      <span class="section-handle">@yonxia.summer</span>
     </div>
-  </div>
-  <p class="section-desc">
-    AI 虛擬網紅養成實驗・純實驗專案・Instagram 為主・與 Villa 品牌脫鉤。
-  </p>
 
-  <div class="cards">
+    <div class="works">
 
-    <a class="card" href="林詠夏_AI虛擬網紅_策略書.html">
-      <div class="card-head">
-        <span class="card-emoji">📓</span>
-        <span class="card-title">完整策略書（10 份文件串聯）</span>
-        <span class="card-date">04 / 23</span>
+      <a class="work" href="熱能方案評估_詠夏Villa_v2_2026-04-23.html">
+        <div class="work-side">
+          <div class="pgno">i.</div>
+          <div class="date">
+            Published
+            <strong>Apr 23</strong>
+            2026
+          </div>
+        </div>
+        <div class="work-body">
+          <div class="work-kicker">エネルギー — Engineering Report</div>
+          <h3 class="work-title">熱能方案評估（完整報告 v2）</h3>
+          <p class="work-desc">
+            泳池、暖氣、熱水三合一系統。A / B / C 三方案比對能耗、碳排、回本年限。含礁溪氣候數據、鄰近民宿對標、供應商清單。<em>A 45KB long-read.</em>
+          </p>
+          <div class="work-foot">
+            <div class="tags">
+              <span>Engineering</span>
+              <span>Energy</span>
+              <span>Long-read</span>
+            </div>
+            <span class="arrow">→</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="work" href="熱能方案摘要_手帳風_詠夏Villa.html">
+        <div class="work-side">
+          <div class="pgno">ii.</div>
+          <div class="date">
+            Published
+            <strong>Apr 23</strong>
+            2026
+          </div>
+        </div>
+        <div class="work-body">
+          <div class="work-kicker">ブランド — Brand Narrative</div>
+          <h3 class="work-title">熱能方案摘要（手帳風）</h3>
+          <p class="work-desc">
+            一頁看懂的對外敘事版本 ——「不靠礁溪溫泉 bonus，靠自家玻璃屋 28°C 泳池，一整年都是夏天。」<em>One-pager for the outside world.</em>
+          </p>
+          <div class="work-foot">
+            <div class="tags">
+              <span>Narrative</span>
+              <span>One-pager</span>
+            </div>
+            <span class="arrow">→</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ============ Article 02 ============ -->
+  <section class="article reveal">
+    <div class="article-head">
+      <div class="chapter-mark">
+        <div class="no">02<em>.</em></div>
+        <div class="vlabel">仮 想 人 実 験</div>
       </div>
-      <p class="card-desc">
-        90 天作戰計劃 + 角色人設 Character Bible + 工具鏈 + 30 則貼文文案 + 種子圖 Prompt + 養成路線圖。
-      </p>
-      <div class="card-tags">
-        <span class="tag">IG 養成</span>
-        <span class="tag">人設</span>
-        <span class="tag">工具鏈</span>
-        <span class="tag">148 KB</span>
+      <div>
+        <h2 class="article-title">
+          林詠夏 <span style="font-family:var(--serif-en);font-style:italic;font-weight:400;font-size:0.5em;color:var(--muted);">@yonxia.summer</span>
+          <span class="en">Lin Yongxia — An AI persona experiment.</span>
+        </h2>
+        <p class="article-lede">
+          <span class="drop">虛</span>關於一個不存在的人、如何在演算法的縫隙裡長成自己。這不是行銷，是一場誠實的實驗 ——如果臉孔可以被生成，那麼人格，能被養成嗎？
+        </p>
+        <div class="article-meta">
+          <span>Instagram</span>
+          <span>Experimental</span>
+          <span>Independent from Villa</span>
+        </div>
       </div>
-    </a>
+    </div>
 
-  </div>
-</section>
+    <div class="works">
 
-<footer>
-  <div class="stamp">Handmade · 2026</div>
-  <p>
-    &copy; 2026 Haochun ·
-    <a href="https://github.com/haochunhungster" style="margin-left:0.4rem;">github.com/haochunhungster</a>
-  </p>
-</footer>
+      <a class="work" href="林詠夏_AI虛擬網紅_策略書.html">
+        <div class="work-side">
+          <div class="pgno">i.</div>
+          <div class="date">
+            Published
+            <strong>Apr 23</strong>
+            2026
+          </div>
+        </div>
+        <div class="work-body">
+          <div class="work-kicker">戦略書 — Strategy Playbook</div>
+          <h3 class="work-title">完整策略書（十份文件串聯）</h3>
+          <p class="work-desc">
+            九十天作戰計劃、角色 Character Bible、工具鏈、三十則貼文文案、種子圖 Prompt、零到百的養成路線。<em>A full playbook, 148KB, ten chapters in one.</em>
+          </p>
+          <div class="work-foot">
+            <div class="tags">
+              <span>Persona</span>
+              <span>Playbook</span>
+              <span>Ten-in-one</span>
+            </div>
+            <span class="arrow">→</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ============ Colophon ============ -->
+  <footer class="colophon">
+    <div class="mark">終</div>
+    <p class="quiet">
+      Thank you for reading. This is a working document —— new entries appear as they happen, without a schedule.
+    </p>
+    <div class="links">
+      <a href="https://github.com/haochunhungster">GitHub</a>
+      <span class="dot">·</span>
+      Vol. 01
+      <span class="dot">·</span>
+      2026
+    </div>
+  </footer>
 
 </div>
 
 <script>
-  const observer = new IntersectionObserver((entries) => {
+  const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('in');
-        observer.unobserve(e.target);
-      }
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
     });
-  }, { threshold: 0.15 });
-
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 </script>
 </body>
 </html>
