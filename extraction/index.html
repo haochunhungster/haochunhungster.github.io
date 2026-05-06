@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230a0b0a'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='18' font-weight='bold' fill='%23b3322b' text-anchor='middle'%3EE%3C/text%3E%3C/svg%3E" />
+<title>EXTRACTION — Tactical Top-Down Shooter</title>
+<style>
+  :root {
+    --bg: #0a0b0a;
+    --fg: #c9c9c2;
+    --accent: #b3322b;
+    --accent-dim: #5d1c18;
+    --warn: #d4a017;
+    --ok: #6b8e3d;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 100%; height: 100%;
+    background: #000;
+    color: var(--fg);
+    font-family: 'Consolas', 'Courier New', monospace;
+    overflow: hidden;
+    cursor: crosshair;
+    user-select: none;
+  }
+  #app { position: fixed; inset: 0; }
+  canvas { display: block; }
+
+  /* HUD */
+  #hud {
+    position: fixed; inset: 0;
+    pointer-events: none;
+    z-index: 10;
+    font-feature-settings: "tnum" 1;
+  }
+  #hud .corner {
+    position: absolute;
+    padding: 14px 18px;
+    background: rgba(10,11,10,0.55);
+    border: 1px solid rgba(201,201,194,0.18);
+    backdrop-filter: blur(2px);
+  }
+  #hud .tl { top: 14px; left: 14px; }
+  #hud .tr { top: 14px; right: 14px; text-align: right; }
+  #hud .bl { bottom: 14px; left: 14px; }
+  #hud .br { bottom: 14px; right: 14px; text-align: right; }
+  #hud .label {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: rgba(201,201,194,0.55);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  #hud .value {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+  #hp-bar {
+    width: 180px; height: 6px;
+    background: rgba(201,201,194,0.15);
+    margin-top: 6px;
+    position: relative;
+  }
+  #hp-bar::after {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: var(--hp, 100%);
+    background: var(--ok);
+    transition: width 0.15s, background 0.15s;
+  }
+  #hp.low #hp-bar::after { background: var(--accent); }
+
+  /* Crosshair */
+  #crosshair {
+    position: fixed;
+    width: 22px; height: 22px;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 11;
+    mix-blend-mode: screen;
+  }
+  #crosshair::before, #crosshair::after {
+    content: '';
+    position: absolute;
+    background: rgba(255,90,80,0.85);
+  }
+  #crosshair::before {
+    left: 50%; top: 0; bottom: 0;
+    width: 1px; transform: translateX(-50%);
+  }
+  #crosshair::after {
+    top: 50%; left: 0; right: 0;
+    height: 1px; transform: translateY(-50%);
+  }
+
+  /* Damage vignette */
+  #damage-vignette {
+    position: fixed; inset: 0;
+    pointer-events: none;
+    box-shadow: inset 0 0 200px 60px rgba(180,30,25,0);
+    transition: box-shadow 0.25s;
+    z-index: 9;
+  }
+  #damage-vignette.hit {
+    box-shadow: inset 0 0 220px 80px rgba(220,40,30,0.6);
+    transition: box-shadow 0.05s;
+  }
+
+  /* Overlays */
+  .overlay {
+    position: fixed; inset: 0;
+    background: rgba(10,11,10,0.92);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 24px;
+    z-index: 100;
+    text-align: center;
+  }
+  .overlay h1 {
+    font-size: 48px;
+    letter-spacing: 0.4em;
+    font-weight: 900;
+  }
+  .overlay h1 .red { color: var(--accent); }
+  .overlay p { font-size: 13px; letter-spacing: 0.2em; color: rgba(201,201,194,0.7); }
+  .overlay button {
+    background: transparent;
+    color: var(--fg);
+    border: 1px solid var(--fg);
+    padding: 14px 36px;
+    font-family: inherit;
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .overlay button:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+  .overlay .hint {
+    font-size: 11px; letter-spacing: 0.18em;
+    color: rgba(201,201,194,0.4);
+    margin-top: 8px;
+  }
+  .overlay .stats {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 6px 32px;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    margin: 16px 0;
+  }
+  .overlay .stats .k { color: rgba(201,201,194,0.55); text-align: right; }
+  .overlay .stats .v { color: var(--fg); text-align: left; font-weight: 700; }
+
+  .hidden { display: none !important; }
+
+  /* Extraction prompt */
+  #extraction-banner {
+    position: fixed;
+    top: 30%; left: 50%;
+    transform: translateX(-50%);
+    background: rgba(10,11,10,0.85);
+    border: 1px solid var(--ok);
+    padding: 16px 28px;
+    text-align: center;
+    z-index: 12;
+  }
+  #extraction-banner .title {
+    color: var(--ok);
+    font-size: 14px;
+    letter-spacing: 0.3em;
+  }
+  #extraction-banner .countdown {
+    font-size: 36px;
+    font-weight: 900;
+    margin-top: 8px;
+    letter-spacing: 0.1em;
+  }
+
+  /* Reload indicator */
+  #reload-indicator {
+    position: fixed;
+    top: 56%; left: 50%;
+    transform: translateX(-50%);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--warn);
+    z-index: 11;
+  }
+
+  /* Loader */
+  #loader { font-size: 11px; letter-spacing: 0.3em; }
+  #loader .bar {
+    width: 200px; height: 2px;
+    background: rgba(201,201,194,0.15);
+    margin-top: 12px;
+    position: relative; overflow: hidden;
+  }
+  #loader .bar::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: var(--accent);
+    width: 30%;
+    animation: loadbar 1.2s ease-in-out infinite;
+  }
+  @keyframes loadbar {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(400%); }
+  }
+
+  /* Film grain (CSS-only fallback, postfx 也會疊一層) */
+  #grain {
+    position: fixed; inset: 0;
+    pointer-events: none;
+    opacity: 0.06;
+    z-index: 8;
+    background-image:
+      repeating-radial-gradient(circle at 30% 20%, rgba(255,255,255,0.5) 0, transparent 0.5px),
+      repeating-radial-gradient(circle at 70% 80%, rgba(255,255,255,0.4) 0, transparent 0.5px);
+    mix-blend-mode: overlay;
+  }
+</style>
+</head>
+<body>
+  <div id="app"></div>
+
+  <!-- HUD -->
+  <div id="hud" class="hidden">
+    <div class="corner tl" id="hp">
+      <div class="label">VITALS</div>
+      <div class="value"><span id="hp-num">100</span> <span style="opacity:0.4;font-size:14px">/ 100</span></div>
+      <div id="hp-bar"></div>
+    </div>
+    <div class="corner tr">
+      <div class="label">M4A1</div>
+      <div class="value"><span id="ammo-mag">30</span><span style="opacity:0.4;font-size:14px"> / <span id="ammo-reserve">90</span></span></div>
+    </div>
+    <div class="corner bl">
+      <div class="label">HOSTILES</div>
+      <div class="value" id="enemies-left">--</div>
+    </div>
+    <div class="corner br">
+      <div class="label">TIME</div>
+      <div class="value" id="timer">00:00</div>
+    </div>
+  </div>
+
+  <div id="crosshair" class="hidden"></div>
+  <div id="damage-vignette"></div>
+  <div id="grain"></div>
+
+  <div id="extraction-banner" class="hidden">
+    <div class="title">EXTRACTION ZONE — HOLD POSITION</div>
+    <div class="countdown" id="extraction-countdown">10</div>
+  </div>
+
+  <div id="reload-indicator" class="hidden">RELOADING...</div>
+
+  <!-- Main Menu -->
+  <div id="menu" class="overlay">
+    <h1>EXT<span class="red">RA</span>CTION</h1>
+    <p>TACTICAL TOP-DOWN SHOOTER</p>
+    <button id="btn-start">DEPLOY</button>
+    <div class="hint">WASD MOVE · MOUSE AIM · LMB FIRE · R RELOAD · SHIFT SPRINT</div>
+  </div>
+
+  <!-- Loading -->
+  <div id="loading" class="overlay hidden">
+    <div id="loader">DEPLOYING ASSET<div class="bar"></div></div>
+  </div>
+
+  <!-- Game Over -->
+  <div id="gameover" class="overlay hidden">
+    <h1 style="font-size:32px"><span class="red">KIA</span></h1>
+    <p>YOU DIED.</p>
+    <div class="stats">
+      <span class="k">KILLS</span><span class="v" id="go-kills">0</span>
+      <span class="k">SURVIVED</span><span class="v" id="go-time">0s</span>
+      <span class="k">ACCURACY</span><span class="v" id="go-acc">0%</span>
+    </div>
+    <button id="btn-retry">REDEPLOY</button>
+  </div>
+
+  <!-- Victory -->
+  <div id="victory" class="overlay hidden">
+    <h1 style="font-size:32px;color:var(--ok)">EXTRACTED</h1>
+    <p>OPERATION SUCCESS.</p>
+    <div class="stats">
+      <span class="k">KILLS</span><span class="v" id="vc-kills">0</span>
+      <span class="k">TIME</span><span class="v" id="vc-time">0s</span>
+      <span class="k">ACCURACY</span><span class="v" id="vc-acc">0%</span>
+    </div>
+    <button id="btn-next">REDEPLOY</button>
+  </div>
+
+  <!-- Pause -->
+  <div id="pause" class="overlay hidden">
+    <h1 style="font-size:24px">PAUSED</h1>
+    <button id="btn-resume">RESUME</button>
+    <button id="btn-quit">ABORT</button>
+  </div>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
