@@ -22,14 +22,14 @@ class Game {
     this.renderer.shadowMap.enabled = true;
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    this.renderer.toneMappingExposure = 1.45;
+    this.renderer.toneMappingExposure = 1.7;
     this.renderer.outputColorSpace = THREE.SRGBColorSpace;
     document.getElementById('app').appendChild(this.renderer.domElement);
 
     // --- Scene ---
     this.scene = new THREE.Scene();
-    this.scene.background = new THREE.Color(0x1f1c18);
-    this.scene.fog = new THREE.FogExp2(0x252118, 0.008);
+    this.scene.background = new THREE.Color(0x2a2620);
+    this.scene.fog = null;
 
     // --- Camera (斜俯 45°) ---
     this.camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 200);
@@ -39,11 +39,11 @@ class Game {
     this.cameraLerp = 0.12;
 
     // --- Lights ---
-    const ambient = new THREE.AmbientLight(0x8090a0, 0.7);
+    const ambient = new THREE.AmbientLight(0x8090a0, 0.95);
     this.scene.add(ambient);
 
     // 主光（中性偏暖白，避免把場景染紅）
-    const sun = new THREE.DirectionalLight(0xfff2d8, 2.4);
+    const sun = new THREE.DirectionalLight(0xfff2d8, 2.7);
     sun.position.set(28, 38, 18);
     sun.castShadow = true;
     sun.shadow.mapSize.set(2048, 2048);
@@ -66,7 +66,7 @@ class Game {
     this.scene.add(fill);
 
     // --- Hemisphere（中性，避免把陰影區染藍） ---
-    const hemi = new THREE.HemisphereLight(0xb0b8c0, 0x484038, 0.55);
+    const hemi = new THREE.HemisphereLight(0xb0b8c0, 0x484038, 0.75);
     this.scene.add(hemi);
 
     // --- Postfx ---

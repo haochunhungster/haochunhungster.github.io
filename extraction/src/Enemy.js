@@ -8,9 +8,10 @@ const STATE = {
 };
 
 const ENEMY_RADIUS = 0.45;
-const VIEW_DIST = 22;
-const VIEW_FOV_COS = Math.cos(THREE.MathUtils.degToRad(55)); // 110° 視野
-const HEARING_DIST = 16; // 玩家開槍時的聽覺感知範圍
+const VIEW_DIST = 13;     // 敵人視距比玩家鏡頭可見範圍小，讓玩家先發現
+const VIEW_FOV_COS = Math.cos(THREE.MathUtils.degToRad(50)); // 100° 視野
+const HEARING_DIST = 16;  // 玩家開槍時的聽覺感知範圍
+const ALERT_DELAY = 0.45; // 看到玩家後 0.45 秒才能開第一槍
 
 class Enemy {
   constructor(manager, position) {
@@ -27,6 +28,7 @@ class Enemy {
     this.burstCooldown = 0;     // burst 之間的冷卻
     this.lastSeenPlayer = new THREE.Vector3();
     this.alertTimer = 0;
+    this.spotTimer = 0;        // 持續看到玩家的時間（過 ALERT_DELAY 才開槍）
     this.target = position.clone(); // 巡邏目標
     this.patrolTimer = 0;
 
@@ -142,6 +144,9 @@ class Enemy {
 
   // 視野檢查
   canSeePlayer() {
+    // 進場前 1 秒所有敵人裝瞎，給玩家反應時間
+    if (this.mgr.game.stats.elapsed < 1.0) return false;
+
     const player = this.mgr.game.player;
     const toPlayer = player.position.clone().sub(this.position);
     toPlayer.y = 0;
@@ -176,7 +181,7 @@ class Enemy {
     ).normalize();
 
     // 散佈（敵人較不準）
-    const spread = 0.06;
+    const spread = 0.10;
     dir.x += (Math.random() - 0.5) * spread;
     dir.y += (Math.random() - 0.5) * spread * 0.5;
     dir.z += (Math.random() - 0.5) * spread;
@@ -220,7 +225,7 @@ class Enemy {
     this.mgr.game.audio.playShot();
 
     if (hitPlayer) {
-      player.damage(8 + Math.random() * 4); // 8-12 傷害
+      player.damage(6 + Math.random() * 4); // 6-10 傷害
     }
 
     this.fireCooldown = 0.13; // 連發間隔
@@ -243,10 +248,14 @@ class Enemy {
       this.lastSeenPlayer.copy(player.position);
       this.state = STATE.CHASE;
       this.alertTimer = 5;
-    } else if (this.alertTimer > 0) {
-      this.alertTimer -= dt;
-    } else if (this.state === STATE.CHASE) {
-      this.state = STATE.IDLE;
+      this.spotTimer += dt;
+    } else {
+      this.spotTimer = 0; // 失去視線後重置（要再等 0.45 秒）
+      if (this.alertTimer > 0) {
+        this.alertTimer -= dt;
+      } else if (this.state === STATE.CHASE) {
+        this.state = STATE.IDLE;
+      }
     }
 
     // 行為
@@ -262,8 +271,8 @@ class Enemy {
       this.facing = Math.atan2(toTarget.x, toTarget.z) + Math.PI;
       this.mesh.rotation.y = this.facing;
 
-      // 開槍（看得見且距離合理）
-      if (seen && dist < 25 && dist > 1.5) {
+      // 開槍（看得見、距離合理、且警戒延遲已過）
+      if (seen && dist < 25 && dist > 1.5 && this.spotTimer > ALERT_DELAY) {
         this.fireAt(player.position);
       }
 
