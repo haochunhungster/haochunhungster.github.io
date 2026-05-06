@@ -11,11 +11,11 @@ const TacticalShader = {
   uniforms: {
     tDiffuse: { value: null },
     uTime: { value: 0 },
-    uVignette: { value: 0.85 },
-    uGrain: { value: 0.012 },
-    uContrast: { value: 1.10 },
-    uSaturation: { value: 0.85 },
-    uTint: { value: new THREE.Vector3(1.04, 1.0, 0.92) }, // 暖橘調
+    uVignette: { value: 0.7 },
+    uGrain: { value: 0.008 },
+    uContrast: { value: 1.08 },
+    uSaturation: { value: 0.88 },
+    uTint: { value: new THREE.Vector3(1.0, 1.0, 0.98) }, // 幾乎中性，微暖底
     uHurt: { value: 0.0 }, // 受傷時泛紅
   },
   vertexShader: /* glsl */`
@@ -54,11 +54,11 @@ const TacticalShader = {
       // tint
       c *= uTint;
 
-      // vignette
+      // vignette（柔和暗角）
       vec2 d = vUv - 0.5;
       float vig = 1.0 - dot(d, d) * uVignette;
       vig = clamp(vig, 0.0, 1.0);
-      c *= mix(0.72, 1.0, vig);
+      c *= mix(0.78, 1.0, vig);
 
       // film grain（cluster 在 ~4px 方塊，亮處乾淨）
       vec2 gp = floor(vUv * vec2(280.0, 175.0)) + floor(uTime * 14.0);
@@ -71,8 +71,8 @@ const TacticalShader = {
       c.r += uHurt * 0.45;
       c.gb *= mix(1.0, 0.7, uHurt);
 
-      // 微微暖底
-      c += vec3(0.012, 0.008, 0.004);
+      // 微微 lift（黑階稍微抬起）
+      c += vec3(0.008, 0.008, 0.008);
 
       gl_FragColor = vec4(c, col.a);
     }

@@ -149,8 +149,8 @@ class Enemy {
     if (dist > VIEW_DIST) return false;
     toPlayer.normalize();
 
-    // 朝向錐角檢查
-    const forward = new THREE.Vector3(Math.sin(this.facing), 0, Math.cos(this.facing));
+    // 朝向錐角檢查（mesh local -Z 是正面，所以世界 forward 取負）
+    const forward = new THREE.Vector3(-Math.sin(this.facing), 0, -Math.cos(this.facing));
     if (forward.dot(toPlayer) < VIEW_FOV_COS) return false;
 
     // 遮擋
@@ -259,7 +259,7 @@ class Enemy {
       toTarget.normalize();
 
       // 朝向玩家
-      this.facing = Math.atan2(toTarget.x, toTarget.z);
+      this.facing = Math.atan2(toTarget.x, toTarget.z) + Math.PI;
       this.mesh.rotation.y = this.facing;
 
       // 開槍（看得見且距離合理）
@@ -299,7 +299,7 @@ class Enemy {
       const d = toT.length();
       if (d > 0.5) {
         toT.normalize();
-        this.facing = Math.atan2(toT.x, toT.z);
+        this.facing = Math.atan2(toT.x, toT.z) + Math.PI;
         this.mesh.rotation.y = this.facing;
         this._move(toT, dt, 0.5); // 巡邏速度減半
       }

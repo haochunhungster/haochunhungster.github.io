@@ -10,16 +10,16 @@ function makeConcreteTexture() {
   c.width = c.height = size;
   const ctx = c.getContext('2d');
   // 底色
-  ctx.fillStyle = '#3a3530';
+  ctx.fillStyle = '#56544f';
   ctx.fillRect(0, 0, size, size);
 
-  // 大尺度斑塊（先鋪基底）
+  // 大尺度斑塊（先鋪基底，純灰階）
   for (let k = 0; k < 8; k++) {
     const x = Math.random() * size;
     const y = Math.random() * size;
     const r = 60 + Math.random() * 100;
-    const col = 40 + Math.random() * 30;
-    ctx.fillStyle = `rgba(${col}, ${col-3}, ${col-6}, 0.5)`;
+    const col = 60 + Math.random() * 26;
+    ctx.fillStyle = `rgba(${col}, ${col-1}, ${col-2}, 0.5)`;
     ctx.beginPath();
     ctx.ellipse(x, y, r, r * 0.8, Math.random() * Math.PI, 0, Math.PI * 2);
     ctx.fill();

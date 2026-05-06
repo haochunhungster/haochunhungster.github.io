@@ -22,28 +22,28 @@ class Game {
     this.renderer.shadowMap.enabled = true;
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    this.renderer.toneMappingExposure = 1.35;
+    this.renderer.toneMappingExposure = 1.45;
     this.renderer.outputColorSpace = THREE.SRGBColorSpace;
     document.getElementById('app').appendChild(this.renderer.domElement);
 
     // --- Scene ---
     this.scene = new THREE.Scene();
-    this.scene.background = new THREE.Color(0x14130f);
-    this.scene.fog = new THREE.FogExp2(0x1a1812, 0.012);
+    this.scene.background = new THREE.Color(0x1f1c18);
+    this.scene.fog = new THREE.FogExp2(0x252118, 0.008);
 
     // --- Camera (斜俯 45°) ---
-    this.camera = new THREE.PerspectiveCamera(48, window.innerWidth / window.innerHeight, 0.1, 200);
+    this.camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 200);
     // 角度與距離在 Player.js 內每幀更新
-    this.cameraOffset = new THREE.Vector3(0, 18, 14); // 高 18，後 14 → tilt ≈ 52°
+    this.cameraOffset = new THREE.Vector3(0, 15, 11); // 高 15，後 11 → tilt ≈ 54°，鏡頭較近
     this.cameraTarget = new THREE.Vector3();
     this.cameraLerp = 0.12;
 
     // --- Lights ---
-    const ambient = new THREE.AmbientLight(0x52606a, 0.85);
+    const ambient = new THREE.AmbientLight(0x8090a0, 0.7);
     this.scene.add(ambient);
 
-    // 黃昏側光（塔可夫味的關鍵）
-    const sun = new THREE.DirectionalLight(0xffd5a0, 2.2);
+    // 主光（中性偏暖白，避免把場景染紅）
+    const sun = new THREE.DirectionalLight(0xfff2d8, 2.4);
     sun.position.set(28, 38, 18);
     sun.castShadow = true;
     sun.shadow.mapSize.set(2048, 2048);
@@ -65,8 +65,8 @@ class Game {
     fill.position.set(-18, 14, -10);
     this.scene.add(fill);
 
-    // --- Hemisphere（讓暗部不要全黑） ---
-    const hemi = new THREE.HemisphereLight(0x90a0b0, 0x2a2218, 0.55);
+    // --- Hemisphere（中性，避免把陰影區染藍） ---
+    const hemi = new THREE.HemisphereLight(0xb0b8c0, 0x484038, 0.55);
     this.scene.add(hemi);
 
     // --- Postfx ---

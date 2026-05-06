@@ -148,10 +148,10 @@ export class Player {
     }
     this.aimWorld.copy(aimPoint);
 
-    // 2) 朝向滑鼠
+    // 2) 朝向滑鼠（模型 local -Z 是正面/槍口方向，所以角度要 +π）
     const dx = aimPoint.x - this.position.x;
     const dz = aimPoint.z - this.position.z;
-    this.facing = Math.atan2(dx, dz);
+    this.facing = Math.atan2(dx, dz) + Math.PI;
     this.mesh.rotation.y = this.facing;
 
     // 3) 移動

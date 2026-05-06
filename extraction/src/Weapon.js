@@ -164,11 +164,11 @@ export class Weapon {
       const r = this.recoilCam;
       this.game.cameraOffset.set(
         (Math.random() - 0.5) * r * 0.5,
-        18 + (Math.random() - 0.5) * r * 0.3,
-        14 + (Math.random() - 0.5) * r * 0.5,
+        15 + (Math.random() - 0.5) * r * 0.3,
+        11 + (Math.random() - 0.5) * r * 0.5,
       );
     } else {
-      this.game.cameraOffset.set(0, 18, 14);
+      this.game.cameraOffset.set(0, 15, 11);
     }
 
     // 換彈進度
