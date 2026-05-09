@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude_Code登入故障_完整解析</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --color-text: #1d2433;
+  --color-muted: #7a869a;
+  --color-heading: #0b1e3a;
+  --color-accent: #1b4b91;
+  --color-border: #d6dde8;
+  --color-bg: #ffffff;
+  --color-bg-soft: #f7f9fc;
+  --color-code-bg: #f3f5f9;
+  --color-table-head: #1b4b91;
+  --color-table-row-alt: #f5f8fc;
+  --color-quote-border: #f0a500;
+  --color-quote-bg: #fff8e7;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  font-family: "Noto Sans TC", "Noto Sans JP", "Microsoft JhengHei",
+               "PingFang TC", "Hiragino Sans", "Helvetica Neue", Arial,
+               "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+               sans-serif;
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--color-text);
+  background: #eef2f7;
+  margin: 0;
+  padding: 40px 20px 80px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  max-width: 880px;
+  margin: 0 auto;
+  background: var(--color-bg);
+  padding: 56px 64px;
+  border-radius: 10px;
+  box-shadow: 0 4px 24px rgba(11, 30, 58, 0.08);
+}
+
+.meta {
+  color: var(--color-muted);
+  font-size: 13px;
+  margin-bottom: 28px;
+  padding-bottom: 14px;
+  border-bottom: 1px dashed var(--color-border);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-heading);
+  line-height: 1.35;
+  margin: 1.6em 0 0.6em;
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 30px;
+  border-bottom: 3px solid var(--color-accent);
+  padding-bottom: 0.35em;
+  margin-top: 0;
+}
+
+h2 {
+  font-size: 23px;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 0.3em;
+}
+
+h3 { font-size: 19px; color: var(--color-accent); }
+h4 { font-size: 17px; color: #2b5aa0; }
+h5 { font-size: 15px; color: #2b5aa0; }
+
+p { margin: 0.7em 0; }
+
+strong { color: var(--color-heading); font-weight: 700; }
+
+code {
+  font-family: "JetBrains Mono", "Cascadia Code", Consolas,
+               "Courier New", monospace;
+  font-size: 0.92em;
+  background: var(--color-code-bg);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: #a6275a;
+}
+
+pre {
+  background: var(--color-bg-soft);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 14px 16px;
+  overflow-x: auto;
+  font-size: 13.5px;
+  line-height: 1.55;
+}
+
+pre code {
+  background: transparent;
+  color: var(--color-text);
+  padding: 0;
+  font-size: inherit;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.2em 0;
+  font-size: 14.5px;
+  display: block;
+  overflow-x: auto;
+  white-space: normal;
+}
+
+th, td {
+  border: 1px solid #c7d0dc;
+  padding: 10px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: var(--color-table-head);
+  color: #ffffff;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+tr:nth-child(even) td { background: var(--color-table-row-alt); }
+
+blockquote {
+  margin: 1.2em 0;
+  padding: 0.7em 1.2em;
+  border-left: 4px solid var(--color-quote-border);
+  background: var(--color-quote-bg);
+  color: #5a4a1a;
+  border-radius: 0 6px 6px 0;
+}
+
+blockquote p { margin: 0.35em 0; }
+
+ul, ol { margin: 0.6em 0; padding-left: 1.6em; }
+li { margin: 0.3em 0; }
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--color-border);
+  margin: 2em 0;
+}
+
+a { color: var(--color-accent); text-decoration: none; border-bottom: 1px dotted var(--color-accent); }
+a:hover { color: #0b1e3a; border-bottom-style: solid; }
+
+img { max-width: 100%; height: auto; }
+
+.toc-toggle {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  background: var(--color-accent);
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  z-index: 100;
+}
+.toc-toggle:hover { background: #0b1e3a; }
+
+.toc-panel {
+  position: fixed;
+  top: 58px;
+  right: 16px;
+  max-width: 300px;
+  max-height: 70vh;
+  overflow-y: auto;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 16px 20px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+  font-size: 13px;
+  line-height: 1.6;
+  display: none;
+  z-index: 99;
+}
+.toc-panel.open { display: block; }
+.toc-panel ul { padding-left: 1.2em; margin: 0.3em 0; }
+.toc-panel a { border-bottom: none; }
+
+@media print {
+  body { background: #fff; padding: 0; }
+  .page { box-shadow: none; border-radius: 0; padding: 0; max-width: 100%; }
+  .toc-toggle, .toc-panel { display: none !important; }
+}
+
+@media (max-width: 720px) {
+  body { padding: 20px 8px 40px; }
+  .page { padding: 28px 20px; border-radius: 6px; }
+  h1 { font-size: 24px; }
+  h2 { font-size: 20px; }
+  h3 { font-size: 17px; }
+  .toc-toggle { top: 8px; right: 8px; }
+}
+</style>
+</head>
+<body>
+<button class="toc-toggle" onclick="document.getElementById('toc').classList.toggle('open')">目錄</button>
+<nav class="toc-panel" id="toc"><div class="toc">
+<ul>
+<li><a href="#_1">一句話講發生什麼事</a></li>
+<li><a href="#_2">第一部分：症狀（你會看到的東西）</a><ul>
+<li><a href="#_3">故障當下</a></li>
+<li><a href="#_4">想救回來時看到的</a></li>
+</ul>
+</li>
+<li><a href="#_5">第二部分：時間線（從備份的檔案還原出來的事實）</a></li>
+<li><a href="#_6">第三部分：根本原因（為什麼會炸）</a><ul>
+<li><a href="#_7">直接原因</a></li>
+<li><a href="#_8">為什麼錯誤訊息誤導</a></li>
+<li><a href="#_9">為什麼登出後登不回來</a></li>
+</ul>
+</li>
+<li><a href="#_10">第四部分：為什麼那些直覺修法都沒用</a></li>
+<li><a href="#sop">第五部分：給未來自己的修法 SOP</a><ul>
+<li><a href="#claude-code_1">平時：把 Claude Code 從防毒掃描裡排除（治本）</a></li>
+<li><a href="#invoke-webrequest">大量下載時：別用 Invoke-WebRequest 並行</a></li>
+<li><a href="#eexist">真的又跳 EEXIST 時：精準清理（不用大砲）</a></li>
+</ul>
+</li>
+<li><a href="#_11">一頁總結</a></li>
+<li><a href="#_12">補充：能還原這個時間線的關鍵</a></li>
+</ul>
+</div>
+</nav>
+<div class="page">
+<div class="meta">檔案：Claude_Code登入故障_完整解析.md　·　產出時間：2026-05-10 00:22</div>
+<h1 id="claude-code">Claude Code 登入故障：完整解析</h1>
+<blockquote>
+<p>Windows 11 + Claude Code 2.1.138 上遇到的一個棘手登入卡死問題，<br />
+從症狀、時間線、根因到修法的完整 post-mortem，分享給可能遇到同樣狀況的人。</p>
+</blockquote>
+<p><strong>故障日期</strong>：2026-05-09<br />
+<strong>Claude Code 版本</strong>：2.1.138（Windows 11）<br />
+<strong>結案狀態</strong>：已修復 ✅</p>
+<hr />
+<h2 id="_1">一句話講發生什麼事</h2>
+<blockquote>
+<p>後台一直在下載大模型的時候，Claude Code 突然跳 <code>EEXIST</code> 錯誤，登出後再也登不回來。最後刪掉整個 <code>.claude\</code> 資料夾才救活。</p>
+</blockquote>
+<hr />
+<h2 id="_2">第一部分：症狀（你會看到的東西）</h2>
+<h3 id="_3">故障當下</h3>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code>API Error: EEXIST: file already exists, mkdir &#39;C:\Users\&lt;user&gt;\.claude&#39;
+</code></pre></div>
+
+<h3 id="_4">想救回來時看到的</h3>
+<ul>
+<li><code>claude auth login --claudeai</code> → 顯示 ✅ Login successful</li>
+<li><code>claude auth status</code> → ❌ Not logged in</li>
+<li><code>claude -p "say ok"</code> → ❌ Not logged in · Please run /login</li>
+</ul>
+<blockquote>
+<p>兩個訊息互相打架，所以一直找不到問題出在哪。</p>
+</blockquote>
+<hr />
+<h2 id="_5">第二部分：時間線（從備份的檔案還原出來的事實）</h2>
+<table>
+<thead>
+<tr>
+<th>時間（台北）</th>
+<th>發生了什麼</th>
+<th>證據</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>16:09</td>
+<td>一個 task 起動，建立 <code>.lock</code> 鎖檔</td>
+<td><code>tasks\&lt;uuid-1&gt;\.lock</code> 存在但未釋放</td>
+</tr>
+<tr>
+<td>17:16</td>
+<td>另一個 task 起動</td>
+<td><code>tasks\&lt;uuid-2&gt;\.lock</code></td>
+</tr>
+<tr>
+<td>17:35</td>
+<td>task 寫到第 7 步後 process 異常結束，<strong>第一次 crash 但沒注意</strong></td>
+<td><code>.lock</code> 沒被刪、<code>7.json</code> 後沒繼續</td>
+</tr>
+<tr>
+<td>17:35 ~ 23:18</td>
+<td>Claude Code 帶著 stale lock 又跑了 5+ 小時</td>
+<td>mtime 持續更新但 lock 檔不變</td>
+</tr>
+<tr>
+<td>23:18:39</td>
+<td>發覺有狀況，按 <code>/logout</code></td>
+<td><code>history.jsonl</code> 第 N 行</td>
+</tr>
+<tr>
+<td>23:18 ~ 23:23</td>
+<td>logout <strong>成功清掉了</strong> <code>.credentials.json</code>，但 <code>.claude.json</code> 裡的 oauthAccount metadata 沒清乾淨</td>
+<td>備份的 <code>.claude\</code> 裡找不到 <code>.credentials.json</code></td>
+</tr>
+<tr>
+<td>23:23:58</td>
+<td>按 <code>/login</code></td>
+<td><code>history.jsonl</code> 最後一行</td>
+</tr>
+<tr>
+<td>23:23 ~ 23:27</td>
+<td>login 試著建立子目錄 + 寫新 token，<strong>踩到 stale lock + AV/IO race</strong> → 噴 EEXIST</td>
+<td><code>settings.json</code> mtime 卡在 23:27 不再更新</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_6">第三部分：根本原因（為什麼會炸）</h2>
+<h3 id="_7">直接原因</h3>
+<p><strong>Node.js 在 Windows 上做 <code>mkdir</code> 時，遇到「目錄已經存在但 metadata 不一致」就會丟 EEXIST。</strong></p>
+<blockquote>
+<p>「目錄不一致」常見的成因：<br />
+- 防毒軟體（Windows Defender / 預載 AV）瞬間鎖住目錄做掃描<br />
+- 後台大量 IO（當時 5+ 個 PowerShell 同時下大模型）<br />
+- 殘留的 stale lock 檔讓 Claude Code 內部 state 混亂</p>
+</blockquote>
+<h3 id="_8">為什麼錯誤訊息誤導</h3>
+<p>訊息寫 <code>file already exists</code>，看起來像是「<code>.claude</code> 變成檔案不是資料夾」。</p>
+<p>但實際查證：故障當下 <code>.claude</code> 還是正常資料夾（沒有變成檔案、沒有變成 symlink）。</p>
+<blockquote>
+<p>「file」在 Node 的訊息裡是「file system entity」通稱，不一定指真的檔案。</p>
+</blockquote>
+<h3 id="_9">為什麼登出後登不回來</h3>
+<p>登出 / 登入流程其實會動到<strong>兩個檔</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>檔案路徑</th>
+<th>存什麼</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>C:\Users\&lt;user&gt;\.claude.json</code></td>
+<td>帳號 metadata（email、會員類型、權限旗標）</td>
+</tr>
+<tr>
+<td><code>C:\Users\&lt;user&gt;\.claude\.credentials.json</code></td>
+<td>真正的 OAuth token</td>
+</tr>
+</tbody>
+</table>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code>logout 動作只清了 .credentials.json
+.claude.json 的 oauthAccount 殘留 stale 狀態
+        ↓
+  login 重新寫入時遇到殘留資料 + stale lock 檔
+        ↓
+        EEXIST mkdir 失敗
+        ↓
+本機 token 從來沒寫成功
+（OAuth server 端有回 OK，所以你看到 &quot;Login successful&quot;）
+        ↓
+auth status 永遠是 Not logged in
+</code></pre></div>
+
+<hr />
+<h2 id="_10">第四部分：為什麼那些直覺修法都沒用</h2>
+<table>
+<thead>
+<tr>
+<th>試了什麼</th>
+<th>為什麼沒用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>再 <code>claude auth logout</code></td>
+<td>credentials 已經被清過，這次是空轉</td>
+</tr>
+<tr>
+<td>關掉所有 claude.exe</td>
+<td>殺得掉 process，殺不掉檔案系統裡的 stale <code>.lock</code></td>
+</tr>
+<tr>
+<td>移走 <code>C:\Users\&lt;user&gt;\.claude.json</code></td>
+<td>沒動到 <code>.claude\tasks\</code> 裡兩個 stale <code>.lock</code> 檔</td>
+</tr>
+<tr>
+<td><strong>刪掉整個 <code>.claude\</code> 資料夾</strong></td>
+<td>✅ 兩個 stale lock + 所有殘留 state 一次清光</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="sop">第五部分：給未來自己的修法 SOP</h2>
+<h3 id="claude-code_1">平時：把 Claude Code 從防毒掃描裡排除（治本）</h3>
+<p>以<strong>系統管理員</strong>身份開 PowerShell，跑：</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code><span style="color: #008000">Add-MpPreference</span> -ExclusionPath <span style="color: #BA2121">&quot;C:\Users\&lt;your-username&gt;\.claude&quot;</span>
+<span style="color: #008000">Add-MpPreference</span> -ExclusionPath <span style="color: #BA2121">&quot;C:\Users\&lt;your-username&gt;\.claude.json&quot;</span>
+<span style="color: #008000">Add-MpPreference</span> -ExclusionProcess <span style="color: #BA2121">&quot;claude.exe&quot;</span>
+<span style="color: #008000">Add-MpPreference</span> -ExclusionProcess <span style="color: #BA2121">&quot;node.exe&quot;</span>
+</code></pre></div>
+
+<blockquote>
+<p>這個只設一次就好，從此 Defender 不會在 mkdir 時搶走目錄 handle。</p>
+</blockquote>
+<h3 id="invoke-webrequest">大量下載時：別用 Invoke-WebRequest 並行</h3>
+<p><code>Invoke-WebRequest</code> 沒有頻寬限流、沒有斷點續傳，多個並行會把網卡 IO 吃滿，影響 Claude 的 streaming 連線。</p>
+<p>下次大下載改用：</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code>aria2c -x 4 -s 4 --max-overall-download-limit=20M --continue=true -d 目的資料夾 URL
+</code></pre></div>
+
+<h3 id="eexist">真的又跳 EEXIST 時：精準清理（不用大砲）</h3>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code><span style="color: #3D7B7B; font-style: italic"># 1. 清掉所有 stale lock</span>
+<span style="color: #008000">Get-ChildItem</span> <span style="color: #BA2121">&quot;C:\Users\&lt;your-username&gt;\.claude\tasks&quot;</span> -Recurse -Filter <span style="color: #BA2121">&quot;.lock&quot;</span> `
+  | <span style="color: #008000">Remove-Item</span> -Force
+<span style="color: #008000">Get-ChildItem</span> <span style="color: #BA2121">&quot;C:\Users\&lt;your-username&gt;\.claude\sessions&quot;</span> -Recurse -Filter <span style="color: #BA2121">&quot;.lock&quot;</span> `
+  -ErrorAction SilentlyContinue | <span style="color: #008000">Remove-Item</span> -Force
+
+<span style="color: #3D7B7B; font-style: italic"># 2. 清 auth state 的兩個檔</span>
+<span style="color: #008000">Remove-Item</span> <span style="color: #BA2121">&quot;C:\Users\&lt;your-username&gt;\.claude\.credentials.json&quot;</span> -Force `
+  -ErrorAction SilentlyContinue
+<span style="color: #008000">Remove-Item</span> <span style="color: #BA2121">&quot;C:\Users\&lt;your-username&gt;\.claude.json&quot;</span> -Force
+
+<span style="color: #3D7B7B; font-style: italic"># 3. 重新登入</span>
+claude auth login --claudeai
+</code></pre></div>
+
+<blockquote>
+<p>這個方式可以<strong>保住</strong> <code>agents\</code>、<code>skills\</code>、<code>plugins\</code>、<code>projects\</code>（含記憶）、<code>history.jsonl</code>，不必整個資料夾砍掉。</p>
+</blockquote>
+<hr />
+<h2 id="_11">一頁總結</h2>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code>故障：Windows 上後台大下載 + AV 掃描 race → mkdir EEXIST
+連鎖：stale .lock + .claude.json 殘留 oauthAccount → logout/login 卡死
+誤導：「Login successful」是 server 回應，不代表本機檔寫成功
+修復：刪整個 .claude\ 為什麼有效 = 一次清光 stale lock + 殘留 state
+預防：把 .claude\ 加進 Defender 排除清單 + 大下載用 aria2c 別用 IWR
+</code></pre></div>
+
+<hr />
+<h2 id="_12">補充：能還原這個時間線的關鍵</h2>
+<p>故障當下若有意識把整個 <code>.claude\</code> 資料夾整個複製出來備份，後續的根因分析才有實證；<br />
+否則只看 stdout 的 EEXIST 訊息，會永遠停在「應該是 race condition 吧」這種推測。</p>
+<p>任何 CLI 工具突然行為錯亂時，<strong>先複製整個 config 目錄出來再做任何修復動作</strong>是最便宜的保險。</p>
+<hr />
+<p><em>本文是真實故障的事後分析。如果你也遇到 Claude Code 在 Windows 上跳 EEXIST、或是 Login successful 但 auth status 是 Not logged in，希望這份紀錄能省你幾小時。</em></p>
+</div>
+</body>
+</html>

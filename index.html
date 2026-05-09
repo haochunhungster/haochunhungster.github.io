@@ -551,6 +551,11 @@
         <span class="name">家人筆記<em>— On Caring for Aging Parents</em></span>
         <span class="pg">p. 058</span>
       </li>
+      <li>
+        <span class="num">04</span>
+        <span class="name">障害報告<em>— Field Notes from a Bug</em></span>
+        <span class="pg">p. 080</span>
+      </li>
     </ul>
   </section>
 
@@ -732,6 +737,60 @@
               <span>Health</span>
               <span>Family</span>
               <span>Long-read</span>
+            </div>
+            <span class="arrow">→</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ============ Article 04 ============ -->
+  <section class="article reveal">
+    <div class="article-head">
+      <div class="chapter-mark">
+        <div class="no">04<em>.</em></div>
+        <div class="vlabel">障 害 報 告</div>
+      </div>
+      <div>
+        <h2 class="article-title">
+          現場筆記
+          <span class="en">Field Notes from a Bug — A Claude Code post-mortem.</span>
+        </h2>
+        <p class="article-lede">
+          <span class="drop">壊</span>有時候 CLI 工具突然行為錯亂，錯誤訊息卻像翻譯機 ——「file already exists」未必是檔案，「Login successful」未必是真的登入。這一頁，是把一次 Windows 上 Claude Code 的卡死故障，從備份還原時間軸、找出根因、寫下修法 SOP 的紀錄。
+        </p>
+        <div class="article-meta">
+          <span>Windows 11</span>
+          <span>Claude Code 2.1.138</span>
+          <span>Post-mortem</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="works">
+
+      <a class="work" href="Claude_Code登入故障_完整解析.html">
+        <div class="work-side">
+          <div class="pgno">i.</div>
+          <div class="date">
+            Published
+            <strong>May 09</strong>
+            2026
+          </div>
+        </div>
+        <div class="work-body">
+          <div class="work-kicker">障害報告 — Incident Report</div>
+          <h3 class="work-title">Claude Code 登入故障：完整解析</h3>
+          <p class="work-desc">
+            EEXIST 噴錯、登出後再也登不回來，最後砍整個 .claude\ 才救活。從備份還原的時間軸、Node.js mkdir 在 Windows 上的 race、為什麼直覺修法都沒用、給未來自己的 SOP。<em>If you've hit this — this page might save you a few hours.</em>
+          </p>
+          <div class="work-foot">
+            <div class="tags">
+              <span>Debug</span>
+              <span>Windows</span>
+              <span>CLI</span>
             </div>
             <span class="arrow">→</span>
           </div>
