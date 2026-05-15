@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>對話分析・情緒勒索識別與應對手冊</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Noto+Serif+TC:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f5f1;
+    --bg-card: #ffffff;
+    --ink: #2a2a2a;
+    --ink-soft: #555;
+    --line: #e6e0d6;
+    --accent: #6b8e7f;       /* 灰綠 */
+    --accent-deep: #3f5b50;
+    --warn: #c05746;          /* 暖紅 */
+    --warn-bg: #fbeeea;
+    --good: #5a8a5e;
+    --good-bg: #ecf3ec;
+    --neutral-bg: #f1ede5;
+    --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.04);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    font-family: "Noto Sans TC", system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.75;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  /* HERO */
+  .hero {
+    text-align: center;
+    margin-bottom: 56px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--line);
+  }
+  .hero .tag {
+    display: inline-block;
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+  .hero h1 {
+    font-family: "Noto Serif TC", serif;
+    font-size: 36px;
+    font-weight: 700;
+    margin: 0 0 12px;
+    color: var(--ink);
+    letter-spacing: 0.02em;
+  }
+  .hero .subtitle {
+    color: var(--ink-soft);
+    font-size: 16px;
+    margin: 0;
+  }
+  .hero .one-liner {
+    margin-top: 28px;
+    padding: 20px 24px;
+    background: var(--neutral-bg);
+    border-left: 3px solid var(--accent);
+    text-align: left;
+    font-size: 15px;
+    color: var(--ink);
+    border-radius: 0 6px 6px 0;
+  }
+  .hero .one-liner strong {
+    color: var(--accent-deep);
+  }
+
+  /* SECTION */
+  section {
+    margin-bottom: 64px;
+  }
+  .section-num {
+    display: inline-block;
+    font-family: "Noto Serif TC", serif;
+    font-size: 14px;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    margin-bottom: 8px;
+  }
+  h2 {
+    font-family: "Noto Serif TC", serif;
+    font-size: 28px;
+    color: var(--ink);
+    margin: 0 0 8px;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 14px;
+    margin-bottom: 32px;
+  }
+  h3 {
+    font-size: 19px;
+    color: var(--accent-deep);
+    margin: 32px 0 12px;
+    font-weight: 700;
+  }
+  h4 {
+    font-size: 16px;
+    color: var(--ink);
+    margin: 20px 0 8px;
+    font-weight: 700;
+  }
+
+  p { margin: 0 0 14px; }
+
+  /* CARD */
+  .card {
+    background: var(--bg-card);
+    border-radius: 10px;
+    padding: 24px 28px;
+    margin: 16px 0;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--line);
+  }
+
+  /* TRAIT GRID */
+  .trait-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 14px;
+    margin: 24px 0;
+  }
+  .trait {
+    background: var(--bg-card);
+    padding: 18px 20px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--accent);
+  }
+  .trait .num {
+    font-family: "Noto Serif TC", serif;
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    margin-bottom: 4px;
+  }
+  .trait .title {
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+  .trait .desc {
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+
+  /* DOUBLE BIND TABLE */
+  table.bind {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 14px;
+    background: var(--bg-card);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  table.bind th, table.bind td {
+    padding: 14px 18px;
+    text-align: left;
+    border-bottom: 1px solid var(--line);
+  }
+  table.bind th {
+    background: var(--accent-deep);
+    color: white;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+  table.bind td.x {
+    color: var(--warn);
+    font-weight: 500;
+  }
+
+  /* DIALOG SCRIPT */
+  .scene {
+    border-left: 4px solid var(--accent);
+    padding: 4px 0 4px 20px;
+    margin: 24px 0;
+  }
+  .scene .label {
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .scene .their-line {
+    background: #f1ede5;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    margin: 8px 0 16px;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+  .opt {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 14.5px;
+    line-height: 1.7;
+  }
+  .opt.bad {
+    background: var(--warn-bg);
+    border-left: 3px solid var(--warn);
+  }
+  .opt.good {
+    background: var(--good-bg);
+    border-left: 3px solid var(--good);
+  }
+  .opt .mark {
+    font-weight: 700;
+    margin-right: 6px;
+  }
+  .opt.bad .mark { color: var(--warn); }
+  .opt.good .mark { color: var(--good); }
+
+  /* TEMPLATE BOX */
+  .template {
+    background: #fcfaf5;
+    border: 1px dashed var(--accent);
+    padding: 16px 20px;
+    border-radius: 8px;
+    margin: 14px 0;
+    font-family: "Noto Serif TC", serif;
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--accent-deep);
+  }
+  .template::before {
+    content: "「";
+    font-size: 28px;
+    color: var(--accent);
+    line-height: 0;
+    vertical-align: -8px;
+    margin-right: 2px;
+  }
+  .template::after {
+    content: "」";
+    font-size: 28px;
+    color: var(--accent);
+    line-height: 0;
+    vertical-align: -14px;
+    margin-left: 2px;
+  }
+
+  /* SIGNAL GRID */
+  .signal-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 20px 0;
+  }
+  @media (max-width: 640px) {
+    .signal-row { grid-template-columns: 1fr; }
+  }
+  .signal-box {
+    padding: 20px 22px;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+  }
+  .signal-box.good {
+    background: var(--good-bg);
+    border-top: 4px solid var(--good);
+  }
+  .signal-box.warn {
+    background: var(--warn-bg);
+    border-top: 4px solid var(--warn);
+  }
+  .signal-box h4 {
+    margin-top: 0;
+    color: var(--ink);
+  }
+  .signal-box ul {
+    margin: 0;
+    padding-left: 20px;
+    font-size: 14.5px;
+    line-height: 1.8;
+  }
+  .signal-box li { margin-bottom: 6px; }
+
+  /* CHECKLIST */
+  .checklist {
+    background: var(--bg-card);
+    padding: 24px 28px;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--warn);
+  }
+  .checklist .item {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 15px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .checklist .item:last-child { border-bottom: 0; }
+  .checklist .box {
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--accent);
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+  .checklist .alert {
+    margin-top: 16px;
+    padding: 14px 18px;
+    background: var(--warn-bg);
+    border-radius: 6px;
+    font-size: 14px;
+    color: var(--warn);
+    font-weight: 500;
+  }
+
+  /* TIP BLOCK */
+  .tip {
+    background: var(--neutral-bg);
+    padding: 18px 22px;
+    border-radius: 8px;
+    margin: 16px 0;
+    font-size: 14.5px;
+  }
+  .tip .head {
+    font-weight: 700;
+    color: var(--accent-deep);
+    margin-bottom: 6px;
+  }
+
+  /* WARNING LABELS */
+  .label-pill {
+    display: inline-block;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    padding: 3px 10px;
+    border-radius: 99px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .label-pill.core {
+    background: var(--accent-deep);
+    color: white;
+  }
+  .label-pill.warn {
+    background: var(--warn);
+    color: white;
+  }
+
+  /* FOOTER */
+  footer {
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    text-align: center;
+    color: var(--ink-soft);
+    font-size: 13px;
+  }
+
+  /* PRINT */
+  @media print {
+    body { background: white; }
+    .card, table.bind, .signal-box, .checklist { box-shadow: none; border: 1px solid #ccc; }
+    section { page-break-inside: avoid; }
+  }
+
+  /* MOBILE */
+  @media (max-width: 640px) {
+    .container { padding: 24px 16px 60px; }
+    .hero h1 { font-size: 26px; }
+    h2 { font-size: 22px; }
+    .card { padding: 18px 20px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="tag">DIALOGUE ANALYSIS</div>
+    <h1>對話分析・情緒勒索識別與應對手冊</h1>
+    <p class="subtitle">從兩段聊天截圖看見對方的互動模式，以及你可以怎麼回應、判斷、保護自己</p>
+    <div class="one-liner">
+      <strong>一句話結論：</strong>對方是一位<strong>焦慮型依附 + 控制型互動傾向</strong>的人。慣用「真誠度測試」與「災難化敘事」維繫關係，本質上是把自己的不安全感外包給你解決。<br>
+      <strong>你不是太敏感，那個迴圈是真的。</strong>
+    </div>
+  </header>
+
+  <!-- PART 1: 性格剖析 -->
+  <section>
+    <div class="section-num">PART 1</div>
+    <h2>對方的人格剖析</h2>
+
+    <div class="card">
+      <span class="label-pill core">CORE PATTERN</span>
+      <h3 style="margin-top:0">核心模式：真誠度測試陷阱（Double Bind）</h3>
+      <p>對方的所有對話，本質上都圍繞同一個核心需求運轉——<strong>逼你證明「我對你是特別的」</strong>。但證明的方式被設計成永遠不會成立：</p>
+
+      <table class="bind">
+        <thead>
+          <tr>
+            <th>你的行為</th>
+            <th>對方的解讀</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>我提了之後你才揪我</td>
+            <td class="x">不算，因為是被提醒才做</td>
+          </tr>
+          <tr>
+            <td>你主動揪我</td>
+            <td class="x">「確定不是因為我說？」還是會懷疑</td>
+          </tr>
+          <tr>
+            <td>你完全不揪</td>
+            <td class="x">「我真的覺得離妳越來越遠了」</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p style="margin-bottom:0">→ <strong>這是一場你永遠無法通過的考試。</strong>因為通關條件不是「行為」，而是要求你證明<em>動機是純粹的</em>——而動機本來就無法被證明，所以對方永遠有理由懷疑你。</p>
+    </div>
+
+    <h3>八個觀察到的行為特徵</h3>
+
+    <div class="trait-grid">
+      <div class="trait">
+        <div class="num">— 01 —</div>
+        <div class="title">迴避型溝通</div>
+        <div class="desc">被問直接問題時，答的是「描述事實」而非「立場」。例如被問「你有情緒勒索嗎」→ 答「確實有讓妳感到有壓力」。</div>
+      </div>
+      <div class="trait">
+        <div class="num">— 02 —</div>
+        <div class="title">反推責任</div>
+        <div class="desc">「如果妳真的有看懂裡面的內容就會懂我的感受」——把問題轉成「你不夠用心理解我」，接近 DARVO 雛形。</div>
+      </div>
+      <div class="trait">
+        <div class="num">— 03 —</div>
+        <div class="title">受害者敘事</div>
+        <div class="desc">主動拋出「或許我對妳而言並沒有那麼特殊」，替你下結論，再要你否認——被動式地索取保證。</div>
+      </div>
+      <div class="trait">
+        <div class="num">— 04 —</div>
+        <div class="title">焦慮型依附</div>
+        <div class="desc">對「特殊感」近乎強迫地在意，把你的提問解讀為「你要離開我」，戰累了又突然說抱歉。</div>
+      </div>
+      <div class="trait">
+        <div class="num">— 05 —</div>
+        <div class="title">碎句迴圈節奏</div>
+        <div class="desc">用 4-8 字短句堆疊情緒，邊打邊翻湧；不留完整論述，方便後續說「你誤會我了」。</div>
+      </div>
+      <div class="trait">
+        <div class="num">— 06 —</div>
+        <div class="title">真誠度測試</div>
+        <div class="desc">設計一套你永遠無法通關的雙重束縛，逼你證明動機純粹度——這是整個模式的核心。</div>
+      </div>
+      <div class="trait">
+        <div class="num">— 07 —</div>
+        <div class="title">用比較製造愧疚</div>
+        <div class="desc">把過去的人事物（威仔、麻將、英勇）搬出來當對照組，潛台詞是「你以前會這樣對別人」。</div>
+      </div>
+      <div class="trait">
+        <div class="num">— 08 —</div>
+        <div class="title">災難化收尾</div>
+        <div class="desc">每次對話走到最後就丟出「離越來越遠」級別的宣告，逼你為了避免關係破裂而妥協承諾。</div>
+      </div>
+    </div>
+
+    <div class="tip">
+      <div class="head">關鍵觀察</div>
+      你自己其實已經點破了關鍵字——「<strong>情緒勒索</strong>」。而對方回了「確實有讓妳感到有壓力」。<br>
+      注意：這不是承認，這是把球丟回給你（變成「是<em>你感到</em>有壓力，不是<em>我做了</em>勒索」）。<br>
+      <strong>這個避而不答本身，比承認還能說明問題。</strong>
+    </div>
+  </section>
+
+  <!-- PART 2: 對話劇本 -->
+  <section>
+    <div class="section-num">PART 2 ・ STEP 1</div>
+    <h2>怎麼設界線，又不被反咬「你不在乎」</h2>
+
+    <p>核心心法：<strong>不要落入「證明動機」的辯護框架</strong>。一旦你開始解釋「我有想到你才揪你」，你就接受了「你必須證明自己」這個不合理前提，迴圈就此啟動。</p>
+
+    <h3>三種典型情境劇本</h3>
+
+    <!-- 情境 A -->
+    <div class="scene">
+      <div class="label">情境 A ・ 真誠度測試</div>
+      <div class="their-line">「妳沒有想過 自己單獨一個人時 主動來找我玩嗎」</div>
+
+      <div class="opt bad">
+        <span class="mark">✕ 不要：</span>「我有想過啊！」<span style="color:#999">（落入辯護陷阱）</span>
+      </div>
+      <div class="opt bad">
+        <span class="mark">✕ 不要：</span>「對不起我下次會主動」<span style="color:#999">（接受了不合理的前提）</span>
+      </div>
+      <div class="opt bad">
+        <span class="mark">✕ 不要：</span>「你也沒主動找我啊」<span style="color:#999">（升級為互相指責）</span>
+      </div>
+
+      <div class="opt good">
+        <span class="mark">✓ 建議回應：</span>命名 + 不接受框架
+      </div>
+      <div class="template">
+        我聽到的是，不管我怎麼做，你都有理由懷疑我的動機。這個前提我沒辦法回答。動機沒辦法用行為證明給你，我能說的是事實：我有想到你才揪你。如果這對你不夠，那是另一件事，但我沒辦法用更多解釋來通過這個測試。
+      </div>
+    </div>
+
+    <!-- 情境 B -->
+    <div class="scene">
+      <div class="label">情境 B ・ 災難化收尾</div>
+      <div class="their-line">「我真的覺得離妳越來越遠了」</div>
+
+      <div class="opt bad">
+        <span class="mark">✕ 不要：</span>「沒有啦你想太多」<span style="color:#999">（觸發更激烈反應）</span>
+      </div>
+      <div class="opt bad">
+        <span class="mark">✕ 不要：</span>「我以後一定會更主動」<span style="color:#999">（過度承諾，循環加碼）</span>
+      </div>
+
+      <div class="opt good">
+        <span class="mark">✓ 建議回應：</span>承接感受，但拒絕模式
+      </div>
+      <div class="template">
+        你說的這個感覺我聽到了。但我注意到，每次我們對話到後面都會走到這裡——你說關係要崩了。這個模式本身在傷害我們。我願意聊感受，但不願意每次都用「離越來越遠」當作對話的結尾。
+      </div>
+    </div>
+
+    <!-- 情境 C -->
+    <div class="scene">
+      <div class="label">情境 C ・ 不正面回答</div>
+      <div class="their-line">（問什麼都答「我知道妳不開心 / 確實有讓妳壓力 / 我沒這麼說」）</div>
+
+      <div class="opt bad">
+        <span class="mark">✕ 不要：</span>反覆追問同一個問題<span style="color:#999">（你會被消耗）</span>
+      </div>
+
+      <div class="opt good">
+        <span class="mark">✓ 建議回應：</span>直接命名，給對方台階
+      </div>
+      <div class="template">
+        我注意到剛剛這個問題你沒有正面回答，這已經是第 N 次了。我需要的不是猜你的意思。如果你的答案是「我沒辦法回答」，那也告訴我——這對我來說也是答案。
+      </div>
+    </div>
+
+    <h3>四個萬用句型（可重組使用）</h3>
+
+    <div class="card">
+      <h4>① 不接受不合理前提</h4>
+      <div class="template">這個問題的前提是 ＿＿＿，但這個前提不成立，所以我沒辦法用你預設的方式回答。</div>
+
+      <h4>② 命名模式</h4>
+      <div class="template">我注意到我們每次都走到這個迴圈：你 A → 我 B → 你 C。我覺得這個模式本身有問題，不是內容的問題。</div>
+
+      <h4>③ 拒絕被讀心</h4>
+      <div class="template">我沒辦法猜你的需求。如果你希望我做 ＿＿＿，請直接告訴我，我願意聽，但不願意用「你應該自己想到」來互動。</div>
+
+      <h4>④ 給情緒空間但不扛責任</h4>
+      <div class="template">你有這個感受是真的，但這個感受不一定是我造成的，也不是我該獨自負責處理的。</div>
+    </div>
+
+    <h3>對話雷區（這幾句別說）</h3>
+    <div class="signal-box warn">
+      <ul>
+        <li><strong>「你在情緒勒索」</strong>——貼標籤會升級衝突，對方會花十倍時間證明「我沒有」</li>
+        <li><strong>「你想太多」</strong>——觸發更激烈反應，等於否定對方所有感受</li>
+        <li><strong>「對不起，是我不好」</strong>——過度道歉會強化對方「你錯了」的框架</li>
+        <li><strong>「我們冷靜一下」然後直接消失</strong>——對方會解讀為遺棄，下次更激烈</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- PART 3: 關係前景 -->
+  <section>
+    <div class="section-num">PART 3 ・ STEP 2</div>
+    <h2>這段關係能不能好？要看哪些訊號</h2>
+
+    <p>這種模式<strong>有可能改善，但條件嚴格</strong>——核心是：對方願不願意承認問題、處理自己的不安全感。你無法替對方做這件事。</p>
+
+    <div class="signal-row">
+      <div class="signal-box good">
+        <h4>✓ 改善信號（值得繼續觀察）</h4>
+        <ul>
+          <li>對方在被指出模式時會「停下來」，而不是「升級」</li>
+          <li>願意承認：「我剛剛問的方式有點過頭」</li>
+          <li>能夠直接表達需求，而不是用測試你的方式</li>
+          <li>主動處理自己的不安全感（諮商、自我覺察、看書）</li>
+          <li>有除了你以外的支持系統與情緒出口</li>
+          <li>獨處時不會立刻焦慮、不需要被持續回應</li>
+        </ul>
+      </div>
+
+      <div class="signal-box warn">
+        <h4>✕ 警訊（難改善 / 需保護自己）</h4>
+        <ul>
+          <li>即使設了多次界線，循環還是照舊</li>
+          <li>你開始懷疑「我是不是真的不夠在乎對方」</li>
+          <li>每次對話都是你在道歉、你在補救</li>
+          <li>對方拒絕承認問題，把問題全推給你</li>
+          <li>你開始隱藏自己的人際活動避免對方不安</li>
+          <li>你發現自己在「演」一個對方期待的版本</li>
+          <li>對方的不安隨著你的承諾<strong>不斷加碼</strong></li>
+          <li>每次互動完你都感到疲憊、自我懷疑</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>建議：設一個 6–12 週的觀察期</h3>
+
+    <div class="card">
+      <ol style="margin:0; padding-left:20px; line-height:1.9">
+        <li><strong>明確設一次界線</strong>——挑下一次迴圈出現時，用 Part 2 的句型完整講一次。</li>
+        <li><strong>觀察反應</strong>——對方對「被指出模式」的第一反應是什麼？停下來思考？還是立刻反擊「你也是這樣」？</li>
+        <li><strong>記錄狀態</strong>——每次互動完，給自己當下狀態打 1–5 分（1 = 很糟、5 = 還好）。一個月後看趨勢。</li>
+        <li><strong>給一次機會就好</strong>——同一個界線設過兩、三次，對方還是同樣的反應，這就是答案。不必設第十次。</li>
+      </ol>
+    </div>
+
+    <div class="tip">
+      <div class="head">一個殘酷但重要的判準</div>
+      在健康的關係裡，<strong>你不會需要看這份手冊</strong>。<br>
+      如果你正在認真讀這一段——這本身已經是一個訊號。
+    </div>
+  </section>
+
+  <!-- PART 4: 自我保護 -->
+  <section>
+    <div class="section-num">PART 3 ・ STEP 3</div>
+    <h2>每次對話完很內耗，怎麼處理</h2>
+
+    <h3>即時止血（對話當下）</h3>
+
+    <div class="card">
+      <h4>5-5-5 暫停法</h4>
+      <p style="margin-bottom:0">當你發現自己進入「我要趕快證明自己」的狀態時：</p>
+      <ul style="margin-top:8px">
+        <li>暫停 <strong>5 秒</strong>——不要立刻回</li>
+        <li>問自己 <strong>5 個字</strong>：「我為什麼要證明這個？」</li>
+        <li>給自己 <strong>5 分鐘</strong>不回訊息——這是你的權利</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h4>暫離對話的腳本</h4>
+      <div class="template">我需要時間消化，我們等等再聊。</div>
+      <p style="margin-top:8px; margin-bottom:0; font-size:14px; color:var(--ink-soft)">不需要說「等等」是多久。你不需要替對方的等待負責。</p>
+    </div>
+
+    <div class="card">
+      <h4>接地練習（grounding）</h4>
+      <p style="margin-bottom:0">看周圍 <strong>5 個東西</strong>、聽 <strong>4 個聲音</strong>、摸 <strong>3 個物品</strong>。把自己拉回現實，不要被困在訊息泡泡裡——對方的字會塞滿你的腦，但你的人在現實，不在那個對話框。</p>
+    </div>
+
+    <h3>長期內耗管理</h3>
+
+    <div class="card">
+      <h4>① 建立「事實 vs 解讀」筆記</h4>
+      <p>把每次容易陷入的對話拆成三層：</p>
+      <ul>
+        <li><strong>事實</strong>：對方說了什麼字（不加詮釋）</li>
+        <li><strong>我的自動解讀</strong>：我聽到後第一個冒出的想法</li>
+        <li><strong>真相</strong>：兩者之間的距離有多大</li>
+      </ul>
+      <p style="margin-bottom:0; font-size:14px; color:var(--ink-soft)">範例 → 事實：對方說「我覺得離你越來越遠」｜自動解讀：「都是我的錯，我要趕快補救」｜真相：對方的感受是對方的，不一定是我造成的。</p>
+    </div>
+
+    <div class="card">
+      <h4>② 跨關係對比</h4>
+      <p style="margin-bottom:0">記錄一週——跟其他朋友互動完是什麼感覺？跟這個人互動完是什麼感覺？<br>
+      <strong>對比之後，答案會自己浮現。</strong>不要用單一關係當作衡量自己的標準。</p>
+    </div>
+
+    <div class="card">
+      <h4>③ 重建自我敘事</h4>
+      <p>列出 <strong>10 件你最近做的好事或努力</strong>。對方否定你時，回看這份清單。<br>
+      <strong>不要讓對方的視角成為你的視角。</strong>一個人的敘事只是一個人的敘事，不是真相。</p>
+    </div>
+
+    <div class="card">
+      <h4>④ 建立支持系統</h4>
+      <ul style="margin-bottom:0">
+        <li>至少有 2–3 個<strong>不知道對方的朋友</strong>可以聊——避免被當事人立場污染</li>
+        <li>必要時找諮商心理師。你的內耗值得專業協助，不是「小題大作」</li>
+      </ul>
+    </div>
+
+    <h3>紅旗自檢清單</h3>
+
+    <div class="checklist">
+      <div class="item"><div class="box"></div><div>我是不是越來越不敢提自己的需求？</div></div>
+      <div class="item"><div class="box"></div><div>我是不是開始隱藏跟其他朋友的互動？</div></div>
+      <div class="item"><div class="box"></div><div>我是不是常常為「沒做錯的事」道歉？</div></div>
+      <div class="item"><div class="box"></div><div>我是不是覺得「跟他相處要很小心」？</div></div>
+      <div class="item"><div class="box"></div><div>我是不是每次對話完都需要時間恢復？</div></div>
+      <div class="item"><div class="box"></div><div>我是不是在猜對方的情緒勝過顧自己的？</div></div>
+      <div class="item"><div class="box"></div><div>我是不是覺得「離開」會讓我很愧疚？</div></div>
+
+      <div class="alert">
+        以上有 <strong>3 個以上 yes</strong> → 你已經被消耗到一個程度了。<br>
+        這不是「再多忍一下」可以解決的，需要主動處理。
+      </div>
+    </div>
+  </section>
+
+  <!-- 結語 -->
+  <section>
+    <div class="section-num">EPILOGUE</div>
+    <h2>最後想跟你說</h2>
+
+    <div class="card">
+      <p>讀到這裡你可能會想：「他是不是其實沒那麼壞？我是不是太冷血了？」</p>
+
+      <p><strong>這個自我懷疑本身，就是這套模式運作的副產品。</strong></p>
+
+      <p>對方多半不是壞人，可能是真的很焦慮、真的很需要安全感。<br>
+      但「對方有自己的痛」和「你必須無限承接對方的痛」是兩件事。<br>
+      你可以對一個人有同情，同時不接受被那個模式消耗。</p>
+
+      <p>你截圖最後一句話——<strong>「你別一直用這種方式跟我對話」</strong>——這句話本身就是健康的訊號。<br>
+      你的直覺一直都對。</p>
+
+      <p style="margin-bottom:0">這份手冊不是要你硬下心離開，而是給你<strong>選擇的自由</strong>：<br>
+      留下，但用一個不傷害自己的方式；或者離開，但帶著清楚的判斷而不是愧疚。<br>
+      兩條路都是好路。</p>
+    </div>
+  </section>
+
+  <footer>
+    對話分析・情緒勒索識別與應對手冊　・　2026
+  </footer>
+</div>
+</body>
+</html>
