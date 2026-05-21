@@ -1,0 +1,860 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>礁溪瑪璘路民宿｜設計師討論事項（線上協作版）</title>
+  <meta name="description" content="礁溪瑪璘路民宿 — 業主與設計師線上協作的議題清單與回覆">
+  <style>
+    :root {
+      --ink: #1f2933;
+      --muted: #65717f;
+      --line: #d7dde4;
+      --paper: #fbfcf8;
+      --panel: #ffffff;
+      --green: #2f6f5e;
+      --green-soft: #e7f1ed;
+      --blue: #2f5f8f;
+      --blue-soft: #e8eef7;
+      --gold: #8a6a2f;
+      --gold-soft: #f3ecd8;
+      --rose: #9c4f4f;
+      --rose-soft: #f7e8e6;
+      --shadow: 0 18px 55px rgba(31, 41, 51, 0.08);
+      --reply-bg: #f1f7ff;
+      --reply-border: #b7d2ed;
+      --reply-accent: #2f5f8f;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; color: var(--ink); background: var(--paper);
+      font-family: "Noto Sans TC", "Microsoft JhengHei", "PingFang TC", Arial, sans-serif;
+      line-height: 1.72; padding-top: 108px;
+    }
+
+    /* ====== 頂部工具列 ====== */
+    #top-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
+      background: #1f2933; color: #fff;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.18); padding: 10px 18px;
+    }
+    #top-bar .row {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+      max-width: 1200px; margin: 0 auto;
+    }
+    #top-bar .row + .row { margin-top: 6px; }
+    #top-bar .badge {
+      font-weight: 700; letter-spacing: 1px;
+      padding: 4px 10px; border-radius: 6px;
+      background: var(--blue); color: #fff; font-size: 13px;
+    }
+    #top-bar.owner-mode .badge { background: var(--gold); }
+    #top-bar label { font-size: 12px; color: #a3b1c0; margin-left: 8px; }
+    #top-bar input[type=text], #top-bar input[type=email], #top-bar input[type=date] {
+      background: #2c3845; color: #fff;
+      border: 1px solid #4a5662; border-radius: 5px;
+      padding: 5px 8px; font-size: 13px; min-width: 120px;
+    }
+    #top-bar input::placeholder { color: #6b7a8a; }
+    #top-bar button {
+      cursor: pointer; border: 1px solid #4a5662;
+      background: #2c3845; color: #fff;
+      padding: 6px 12px; border-radius: 6px;
+      font-size: 13px; transition: 0.15s;
+    }
+    #top-bar button:hover { background: #3a4756; border-color: #6b7a8a; }
+    #top-bar button.primary {
+      background: var(--green); border-color: var(--green); font-weight: 700;
+    }
+    #top-bar button.primary:hover { background: #257059; }
+    #top-bar button.gold { background: #8a6a2f; border-color: #8a6a2f; }
+    #top-bar button.gold:hover { background: #735726; }
+    #top-bar .spacer { flex: 1; }
+    #top-bar .status {
+      color: #ffd66b; font-size: 12px; font-weight: 700;
+      margin-left: 8px; min-width: 160px;
+    }
+    #top-bar .conn {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; padding: 3px 10px;
+      border-radius: 999px;
+      background: #2c3845;
+    }
+    #top-bar .conn .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #888;
+    }
+    #top-bar .conn.connecting .dot { background: #ffd66b; animation: pulse 1s infinite; }
+    #top-bar .conn.online .dot { background: #4ade80; }
+    #top-bar .conn.offline .dot { background: #f87171; }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; } 50% { opacity: 0.3; }
+    }
+
+    /* 業主編輯狀態 */
+    body[data-mode="owner"] [data-editable="true"] {
+      outline: 1px dashed transparent; border-radius: 4px;
+      transition: outline 0.15s, background 0.15s;
+    }
+    body[data-mode="owner"] [data-editable="true"]:hover {
+      outline-color: #b8c4d0; background: rgba(255, 251, 230, 0.6);
+    }
+    body[data-mode="owner"] [data-editable="true"]:focus {
+      outline: 2px solid var(--green); background: #fffbe6;
+    }
+
+    /* 設計師回覆區 */
+    .reply-zone {
+      margin-top: 18px; padding: 14px 16px 12px;
+      background: var(--reply-bg); border: 1px solid var(--reply-border);
+      border-left: 5px solid var(--reply-accent); border-radius: 8px;
+    }
+    .reply-head {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 10px; margin-bottom: 8px;
+      font-weight: 700; color: var(--reply-accent); font-size: 14px;
+    }
+    .reply-head .reply-status {
+      font-size: 12px; font-weight: 500; color: var(--muted);
+    }
+    .reply-head .reply-status.filled { color: var(--green); }
+    .reply-body {
+      min-height: 64px; padding: 10px 12px;
+      background: #fff; border: 1px solid #d3deea; border-radius: 6px;
+      font-size: 15px; line-height: 1.7; outline: none;
+    }
+    .reply-body:focus {
+      border-color: var(--reply-accent);
+      box-shadow: 0 0 0 3px rgba(47,95,143,0.12);
+    }
+    .reply-body:empty::before {
+      content: attr(data-placeholder); color: #9aa6b3;
+    }
+    body[data-mode="owner"] .reply-zone {
+      opacity: 0.85; pointer-events: none; position: relative;
+    }
+    body[data-mode="owner"] .reply-zone::after {
+      content: "（業主編輯模式：設計師回覆區暫時鎖定）";
+      position: absolute; right: 12px; top: 12px;
+      font-size: 11px; color: var(--rose);
+    }
+    .remote-update-flash {
+      animation: flash 0.6s ease;
+    }
+    @keyframes flash {
+      0% { background: #fff7c5; }
+      100% { background: transparent; }
+    }
+
+    /* 送出按鈕 */
+    .reply-actions {
+      margin-top: 10px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+    .btn-submit-reply {
+      cursor: pointer;
+      padding: 7px 14px;
+      border: 1.5px solid var(--reply-accent);
+      background: #fff;
+      color: var(--reply-accent);
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 700;
+      transition: 0.15s;
+    }
+    .btn-submit-reply:hover {
+      background: var(--reply-accent);
+      color: #fff;
+    }
+    .btn-submit-reply.confirmed {
+      background: var(--green);
+      color: #fff;
+      border-color: var(--green);
+    }
+    .btn-submit-reply.confirmed:hover {
+      background: #fff;
+      color: var(--green);
+    }
+    .reply-zone[data-confirmed="true"] {
+      border-left-color: var(--green);
+      background: #eef7f2;
+      border-color: #bfd7cc;
+    }
+    .reply-zone[data-confirmed="true"] .reply-head {
+      color: var(--green);
+    }
+    .reply-status.confirmed { color: var(--green) !important; font-weight: 700; }
+    .reply-status.draft { color: var(--gold) !important; }
+
+    /* 原本版型 */
+    .page { max-width: 1120px; margin: 0 auto; padding: 36px 22px 64px; }
+    header { padding: 32px 0 26px; border-bottom: 2px solid var(--ink); }
+    .eyebrow { margin: 0 0 10px; color: var(--green); font-size: 14px; font-weight: 700; }
+    h1 { margin: 0; max-width: 880px; font-size: 38px; line-height: 1.2; font-weight: 800; }
+    .subtitle { max-width: 820px; margin: 14px 0 0; color: var(--muted); font-size: 17px; }
+    .meta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+    .pill {
+      display: inline-flex; align-items: center;
+      min-height: 32px; padding: 4px 12px;
+      border: 1px solid var(--line); background: var(--panel);
+      border-radius: 999px; color: var(--muted); font-size: 14px; white-space: nowrap;
+    }
+    section { margin-top: 32px; padding-top: 6px; }
+    h2 { margin: 0 0 14px; font-size: 26px; line-height: 1.3; }
+    h3 { margin: 0 0 10px; font-size: 18px; line-height: 1.35; }
+    p { margin: 0 0 12px; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; }
+    .grid.one { grid-template-columns: 1fr; }
+    .card {
+      padding: 20px; background: var(--panel);
+      border: 1px solid var(--line); border-radius: 8px; box-shadow: var(--shadow);
+    }
+    .card.green { border-top: 5px solid var(--green); }
+    .card.blue { border-top: 5px solid var(--blue); }
+    .card.gold { border-top: 5px solid var(--gold); }
+    .card.rose { border-top: 5px solid var(--rose); }
+    .band { padding: 22px; border-radius: 8px; border: 1px solid var(--line); background: var(--panel); }
+    .band.green { background: var(--green-soft); border-color: #bfd7cc; }
+    .band.blue { background: var(--blue-soft); border-color: #c6d5e8; }
+    .band.gold { background: var(--gold-soft); border-color: #dfcf9f; }
+    .band.rose { background: var(--rose-soft); border-color: #e5c0bb; }
+    ul { margin: 8px 0 0; padding-left: 22px; }
+    li { margin: 6px 0; }
+    .checklist { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; margin-top: 14px; }
+    .check {
+      min-height: 52px; padding: 12px 14px;
+      border: 1px solid var(--line); border-radius: 8px;
+      background: #fff; font-size: 15px;
+    }
+    .check::before { content: "□"; margin-right: 8px; color: var(--green); font-weight: 800; }
+    table {
+      width: 100%; border-collapse: collapse; margin-top: 12px;
+      background: var(--panel); border: 1px solid var(--line);
+      border-radius: 8px; overflow: hidden; display: table;
+    }
+    th, td { padding: 12px 14px; border-bottom: 1px solid var(--line); vertical-align: top; text-align: left; }
+    th { background: #f2f5f4; font-size: 14px; color: #334155; white-space: nowrap; }
+    tr:last-child td { border-bottom: 0; }
+    .quote {
+      margin-top: 14px; padding: 16px 18px;
+      border-left: 5px solid var(--green); background: #fff;
+      border-radius: 0 8px 8px 0; font-weight: 700;
+    }
+    .small { color: var(--muted); font-size: 14px; }
+    .files { display: grid; gap: 10px; }
+    .file { padding: 12px 14px; border: 1px solid var(--line); border-radius: 8px; background: #fff; }
+    .file strong { display: block; margin-bottom: 4px; }
+    footer { margin-top: 46px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+
+    @media (max-width: 760px) {
+      body { padding-top: 156px; }
+      .page { padding: 24px 16px 44px; }
+      h1 { font-size: 28px; }
+      .grid, .checklist { grid-template-columns: 1fr; }
+      table, thead, tbody, th, td, tr { display: block; }
+      thead { display: none; }
+      td { border-bottom: 0; padding: 8px 12px; }
+      tr { padding: 10px 0; border-bottom: 1px solid var(--line); }
+      tr:last-child { border-bottom: 0; }
+      td::before {
+        content: attr(data-label); display: block; margin-bottom: 2px;
+        color: var(--muted); font-size: 12px; font-weight: 700;
+      }
+    }
+
+    @media print {
+      body { background: #fff; padding-top: 0; }
+      #top-bar { display: none; }
+      .page { max-width: none; padding: 18mm; }
+      .card, .band, .reply-zone { box-shadow: none; break-inside: avoid; }
+    }
+  </style>
+</head>
+<body data-mode="designer">
+
+  <!-- 頂部工具列 -->
+  <div id="top-bar">
+    <div class="row">
+      <span class="badge" id="mode-badge">✏ 設計師回覆模式</span>
+      <span class="conn connecting" id="conn-status"><span class="dot"></span><span id="conn-text">連線中…</span></span>
+      <label>姓名</label>
+      <input type="text" id="designer-name" placeholder="輸入您的姓名" style="min-width:130px">
+      <label>日期</label>
+      <input type="date" id="reply-date">
+      <span class="spacer"></span>
+      <span class="status" id="save-status">尚未填寫</span>
+      <button id="btn-toggle-mode">切換 業主編輯模式</button>
+    </div>
+    <div class="row">
+      <label>業主信箱</label>
+      <input type="email" id="owner-email" placeholder="business@example.com" value="whatpjone@gmail.com" style="min-width:200px">
+      <span class="spacer"></span>
+      <button id="btn-download-replies" class="gold">⬇ 下載完整快照 HTML</button>
+      <button id="btn-mailto" class="primary">📧 寄回給業主</button>
+    </div>
+  </div>
+
+  <main class="page" id="root">
+    <header>
+      <p class="eyebrow" data-editable="true">礁溪瑪璘路民宿｜設計師會議資料（線上協作版）</p>
+      <h1 data-editable="true">熱水、電力、平面配置、陽台室內化與 AI 建模交付需求</h1>
+      <p class="subtitle" data-editable="true">目的：把本次要和設計師確認的事項整理成可執行清單，避免只停留在口頭討論，後續能直接進入圖面修正、機電估算、白模建模與外觀渲染。</p>
+      <div class="meta">
+        <span class="pill" data-editable="true">基地：宜蘭礁溪瑪璘路</span>
+        <span class="pill" data-editable="true">規劃：民宿 / Villa / 包棟</span>
+        <span class="pill" data-editable="true">房型方向：7 間雙人房，可評估部分四人房</span>
+        <span class="pill" data-editable="true">重點設施：玻璃屋恆溫泳池</span>
+      </div>
+    </header>
+
+    <section data-section-title="一、會議目標">
+      <h2 data-editable="true">一、會議目標</h2>
+      <div class="grid">
+        <article class="card green">
+          <h3 data-editable="true">熱水系統要有初步方向</h3>
+          <p data-editable="true">確認泳池、客房熱水是否共用熱泵，或採用「泳池熱泵、客房瓦斯熱水器」等分系統配置，並同步確認設備位置、維修動線。</p>
+        </article>
+        <article class="card blue">
+          <h3 data-editable="true">1F 外推後要出正式圖</h3>
+          <p data-editable="true">請設計師提供一樓外推後的完整平面圖，作為公共區、廚房、餐廳、備品、泳池與入口動線規劃基礎。</p>
+        </article>
+        <article class="card gold">
+          <h3 data-editable="true">2F / 3F 房型要實測</h3>
+          <p data-editable="true">討論陽台是否室內化，以及哪些房間可放兩張 queen size 雙人床，同時不犧牲走道、行李、浴室與拍照質感。</p>
+        </article>
+        <article class="card rose">
+          <h3 data-editable="true">機電與 AI 建模資料要同步</h3>
+          <p data-editable="true">確認電力配置定案時程與業主需提供的設備清單。請設計師交付 DWG / DXF、立面、剖面與尺寸資料，方便後續 AI 白模與渲染。</p>
+        </article>
+      </div>
+    </section>
+
+    <section data-section-title="二、熱水系統討論">
+      <h2 data-editable="true">二、熱水系統討論</h2>
+      <div class="band green">
+        <h3 data-editable="true">核心問題</h3>
+        <p data-editable="true">泳池是長時間恆溫負載，客房是尖峰瞬間用水負載。兩者使用邏輯不同，建議分開估算容量、管線、儲熱與故障風險。</p>
+      </div>
+
+      <table>
+        <thead>
+          <tr><th>方案</th><th>內容</th><th>需要設計師確認</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="方案" data-editable="true">A</td>
+            <td data-label="內容" data-editable="true">泳池與客房都使用熱泵系統</td>
+            <td data-label="需要設計師確認" data-editable="true">總用電容量、儲熱桶容量、7 間房尖峰同時用水是否足夠、回溫速度、設備空間與維修動線。</td>
+          </tr>
+          <tr>
+            <td data-label="方案" data-editable="true">B</td>
+            <td data-label="內容" data-editable="true">泳池用熱泵，客房用瓦斯熱水器</td>
+            <td data-label="需要設計師確認" data-editable="true">熱水器與瓦斯桶若放頂樓，是否需要可安全上去的樓梯、平台、防水、排水、通風、遮蔽檢討。</td>
+          </tr>
+          <tr>
+            <td data-label="方案" data-editable="true">C</td>
+            <td data-label="內容" data-editable="true">設計師或機電顧問提出替代方案</td>
+            <td data-label="需要設計師確認" data-editable="true">初期成本、使用成本、維修便利性、故障備援、噪音與設備外觀影響。</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="quote" data-editable="true">請設計師不要只口頭建議，要把設備位置、管線方向、儲熱桶/水塔/加壓馬達、頂樓維修動線畫進圖面或設備配置圖。</div>
+
+      <div class="checklist">
+        <div class="check" data-editable="true">頂樓需要增設可走上去的功能（樓梯、平台、防墜安全）。</div>
+        <div class="check" data-editable="true">7 間房同時洗澡時，熱水量與水壓是否足夠。</div>
+        <div class="check" data-editable="true">設備放置是否影響外觀、噪音、維修與鄰房感受。</div>
+        <div class="check" data-editable="true">是否需要請機電顧問或水電師傅提前加入評估。</div>
+      </div>
+    </section>
+
+    <section data-section-title="三、一樓外推後平面圖">
+      <h2 data-editable="true">三、一樓外推後平面圖</h2>
+      <div class="band blue">
+        <h3 data-editable="true">要請設計師交付</h3>
+        <p data-editable="true">一樓外推後的正式平面圖，需有比例、尺寸、牆線、柱位、門窗位置與外推範圍。這張圖會決定未來公共區與營運動線。</p>
+      </div>
+
+      <div class="grid one">
+        <article class="card blue">
+          <h3 data-editable="true">一樓要規劃的空間</h3>
+          <ul data-editable="true">
+            <li>入口與客人抵達動線</li>
+            <li>接待或自助 check-in 區</li>
+            <li>餐廳、公共客廳、聚會空間</li>
+            <li>廚房、備餐、冰箱與垃圾處理</li>
+            <li>備品間、清潔工具與房務動線</li>
+            <li>泳池、玻璃屋與戶外區銜接</li>
+            <li>可先暫不規劃，先提供 CAD，讓 AI 依照真實尺寸建模後再規劃區域與家具擺放</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="quote" data-editable="true">請設計師提供「外推後的一樓平面圖」，後續才有辦法做家具、動線與營運規劃。</div>
+    </section>
+
+    <section data-section-title="四、2F / 3F 陽台是否室內化">
+      <h2 data-editable="true">四、2F / 3F 陽台是否室內化</h2>
+      <div class="band gold">
+        <h3 data-editable="true">討論方向</h3>
+        <p data-editable="true">陽台改成全室內可以增加房間坪數與床位彈性，但會牽涉合法性、採光通風、外觀、防水、冷氣、消防與機電位置。</p>
+      </div>
+
+      <div class="checklist">
+        <div class="check" data-editable="true">每間房陽台室內化後，可增加多少實際可用坪數。</div>
+        <div class="check" data-editable="true">外觀立面會如何改變，是否需要重新出立面圖。</div>
+        <div class="check" data-editable="true">窗戶、防水、排水、冷氣與室外機位置如何處理。</div>
+        <div class="check" data-editable="true">是否保留部分半戶外空間作為機電或景觀緩衝。</div>
+      </div>
+
+      <div class="quote" data-editable="true">可以請設計師評估三種版本：陽台保留、陽台全室內化、半室內彈性空間，並標出各版本每間房的可用坪數。</div>
+    </section>
+
+    <section data-section-title="五、房型與床位配置">
+      <h2 data-editable="true">五、房型與床位配置</h2>
+      <p data-editable="true">這部分會直接影響未來定價、客群與照片質感。重點不是床能不能塞進去，而是客人入住時是否真的舒適。</p>
+
+      <table>
+        <thead>
+          <tr><th>房型版本</th><th>配置方向</th><th>圖面需確認</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="房型版本" data-editable="true">雙人房版</td>
+            <td data-label="配置方向" data-editable="true">每間 1 張 queen 或 king，保留舒適感、行李區與拍照質感。</td>
+            <td data-label="圖面需確認" data-editable="true">床、電視、衣櫃、行李架、冰箱、小桌、窗簾、冷氣出風、浴室門與房門開啟方向。</td>
+          </tr>
+          <tr>
+            <td data-label="房型版本" data-editable="true">四人房版</td>
+            <td data-label="配置方向" data-editable="true">挑選部分較大的房間放 2 張 queen size 雙人床，作為家庭房或朋友房。</td>
+            <td data-label="圖面需確認" data-editable="true">兩床之間、床側、床尾走道寬度；行李可否攤開；浴室與入口動線是否擁擠。</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="checklist">
+        <div class="check" data-editable="true">請標出每間房實際室內尺寸與可用坪數。</div>
+        <div class="check" data-editable="true">請畫出放 1 張 queen / king 的家具配置。</div>
+        <div class="check" data-editable="true">請畫出可放 2 張 queen 的房間配置。</div>
+        <div class="check" data-editable="true">請確認浴室門、房門、落地窗不互卡。</div>
+        <div class="check" data-editable="true">請確認冷氣不直吹床，並保留維修位置。</div>
+        <div class="check" data-editable="true">請確認照片視角不會呈現過度擁擠。</div>
+      </div>
+    </section>
+
+    <section data-section-title="六、電力配置與定案時程">
+      <h2 data-editable="true">六、電力配置與定案時程</h2>
+      <div class="band rose">
+        <h3 data-editable="true">要先問設計師</h3>
+        <p data-editable="true">電力配置什麼時間點要定案？是在平面圖定案後、機電圖前，還是水電進場前？若後續改房型、床位、熱水系統、冷氣位置，是否會影響台電容量、配電盤、迴路與管線？</p>
+      </div>
+
+      <div class="grid">
+        <article class="card rose">
+          <h3 data-editable="true">請設計師確認</h3>
+          <ul data-editable="true">
+            <li>台電申請容量需要多少</li>
+            <li>是否需要三相電</li>
+            <li>配電盤位置與分區方式</li>
+            <li>每間房是否獨立迴路</li>
+            <li>冷氣、熱泵、泳池、廚房是否專用迴路</li>
+            <li>弱電箱、Wi-Fi AP、監視器與電子門鎖位置</li>
+            <li>是否預留 EV 充電、烤肉區或戶外活動用電</li>
+          </ul>
+        </article>
+        <article class="card rose">
+          <h3 data-editable="true">業主需提供設備清單</h3>
+          <ul data-editable="true">
+            <li>每間房：冷氣、電視、小冰箱、吹風機、快煮壺、插座、USB / Type-C</li>
+            <li>浴室：免治馬桶、抽風、鏡燈、暖風或除濕設備</li>
+            <li>公共區：冷氣、照明、音響、投影、冰箱、飲水機、咖啡機</li>
+            <li>廚房：冰箱、冷凍櫃、爐具、烤箱、微波爐、洗碗機、抽油煙機</li>
+            <li>泳池：熱泵、循環馬達、過濾設備、照明、除濕或通風</li>
+            <li>戶外：招牌、庭院燈、停車燈、戶外插座、監視器、EV 充電車位</li>
+            <li>可以的話我們還想做蓄電系統</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="quote" data-editable="true">請在房型、床位、冷氣、熱水與泳池設備確定後，先做一次總用電負載估算，確認台電容量、三相電、配電盤與專用迴路。</div>
+    </section>
+
+    <section data-section-title="七、AI 建模與白模所需資料">
+      <h2 data-editable="true">七、AI 建模與白模所需資料</h2>
+      <p data-editable="true">如果後續要用 AI 或建模工具依照尺寸生成格局、白模，再套外觀渲染，設計師交付資料越接近 CAD 原始資料越好。</p>
+
+      <table>
+        <thead><tr><th>資料</th><th>用途</th><th>優先級</th></tr></thead>
+        <tbody>
+          <tr>
+            <td data-label="資料" data-editable="true">DWG / DXF 原始檔</td>
+            <td data-label="用途" data-editable="true">直接抓牆線、柱位、門窗、尺寸，是精準建模最重要的資料。</td>
+            <td data-label="優先級" data-editable="true">最高</td>
+          </tr>
+          <tr>
+            <td data-label="資料" data-editable="true">各樓層平面圖</td>
+            <td data-label="用途" data-editable="true">包含 1F 外推後、2F、3F、頂樓設備配置，作為格局建模基礎。</td>
+            <td data-label="優先級" data-editable="true">最高</td>
+          </tr>
+          <tr>
+            <td data-label="資料" data-editable="true">立面圖</td>
+            <td data-label="用途" data-editable="true">確認窗戶、陽台、屋頂、外牆高度與外觀比例。</td>
+            <td data-label="優先級" data-editable="true">高</td>
+          </tr>
+          <tr>
+            <td data-label="資料" data-editable="true">剖面圖</td>
+            <td data-label="用途" data-editable="true">確認每層樓高、樓板厚度、樑高、屋頂與女兒牆高度。</td>
+            <td data-label="優先級" data-editable="true">高</td>
+          </tr>
+          <tr>
+            <td data-label="資料" data-editable="true">門窗表</td>
+            <td data-label="用途" data-editable="true">建立門窗尺寸、離地高度、開啟方式與材質樣式。</td>
+            <td data-label="優先級" data-editable="true">中高</td>
+          </tr>
+          <tr>
+            <td data-label="資料" data-editable="true">尺寸表與版本說明</td>
+            <td data-label="用途" data-editable="true">避免使用錯版本，並補足 PDF 上看不清楚的尺寸。</td>
+            <td data-label="優先級" data-editable="true">中高</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="quote" data-editable="true">請設計師交付 PDF 給人看，DWG / DXF 給建模用，並提供清楚版本名稱，例如「1F 外推後」、「2F/3F 雙人房版」、「陽台室內化版」。</div>
+    </section>
+
+    <section data-section-title="八、目前已有圖面資料">
+      <h2 data-editable="true">八、目前已有圖面資料</h2>
+      <div class="files">
+        <div class="file">
+          <strong data-editable="true">馮文宗 農舍建照圖_0812-配置1.pdf</strong>
+          <span class="small" data-editable="true">1 頁，建照 / 配置相關圖。</span>
+        </div>
+        <div class="file">
+          <strong data-editable="true">瑪璘路民宿 2f3f 隔間放樣圖說 20260414.pdf</strong>
+          <span class="small" data-editable="true">4 頁，包含 2F / 3F 平面設計圖，比例 1/50，日期 2026.03.11。</span>
+        </div>
+        <div class="file">
+          <strong data-editable="true">瑪璘路民宿 第二版2f3f 20260422.dwg 雙人房版.pdf</strong>
+          <span class="small" data-editable="true">2 頁，第二版 2F / 3F 雙人房版平面設計圖，比例 1/50。</span>
+        </div>
+      </div>
+    </section>
+
+    <section data-section-title="九、總結">
+      <h2 data-editable="true">九、總結</h2>
+      <div class="band green">
+        <p data-editable="true">我這次想把幾件事一次確認清楚：熱水系統、電力配置、一樓外推後平面圖、2F/3F 陽台是否室內化、各房間床位配置，以及後續 AI 建模需要的圖面資料。</p>
+        <p data-editable="true">熱水部分，請幫我比較泳池與房間都用熱泵，或泳池用熱泵、房間用瓦斯熱水器。如果房間用瓦斯，熱水器和瓦斯桶放頂樓是否需要規劃可安全上去的樓梯、平台與設備區，也請確認法規與維修動線。</p>
+        <p data-editable="true">一樓我們打算外推，請幫我出一版外推後正式平面圖，標示尺寸、牆線、柱位、門窗與動線，方便我規劃公共區、廚房、餐廳、備品間、泳池與客人動線。</p>
+        <p data-editable="true">2F/3F 想評估陽台是否改成全室內，請幫我確認合法性、採光通風、外觀、防水、冷氣與消防影響，並標出每間房室內化前後的可用坪數。</p>
+        <p data-editable="true">房間配置部分，請幫我畫出雙人房版與部分四人房版，看哪些房間可以放兩張 queen size 雙人床，且走道、行李、浴室門、電視、冷氣與窗簾都能正常使用，不要只是勉強塞得下。</p>
+        <p data-editable="true">電力部分，請告訴我什麼時候要定案，以及我需要提供哪些設備資料。希望能在房型、床位、冷氣、熱水、泳池設備確認後，先做一次總用電負載估算，確認台電容量、三相電、配電盤與專用迴路。</p>
+        <p data-editable="true">最後，後續我會用 AI 協助做格局白模和外觀渲染，所以希望圖面除了 PDF，也能提供 DWG / DXF、各樓層尺寸、樓高、立面圖、剖面圖、門窗表與設備配置圖。</p>
+      </div>
+    </section>
+
+    <footer>
+      <p data-editable="true">整理日期：2026-05-21。用途：與設計師討論圖面、機電、熱水、房型與後續 AI 建模交付資料。所有編輯即時同步至所有連線者。</p>
+      <p class="small" id="last-update">尚未有遠端更新紀錄</p>
+    </footer>
+  </main>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
+    import {
+      getFirestore, doc, setDoc, onSnapshot, serverTimestamp, getDoc
+    } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBNPXs107DEyV8MCQhTEImwSDkeTKGFIYo",
+      authDomain: "bnbjiaoxi.firebaseapp.com",
+      projectId: "bnbjiaoxi",
+      storageBucket: "bnbjiaoxi.firebasestorage.app",
+      messagingSenderId: "698208015058",
+      appId: "1:698208015058:web:51477a127f809e4088930b",
+      measurementId: "G-BESK5R3592"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const docRef = doc(db, 'meetings', 'maling-design');
+
+    const body = document.body;
+    const root = document.getElementById('root');
+    const status = document.getElementById('save-status');
+    const connStatus = document.getElementById('conn-status');
+    const connText = document.getElementById('conn-text');
+    const lastUpdate = document.getElementById('last-update');
+    const nameInput = document.getElementById('designer-name');
+    const dateInput = document.getElementById('reply-date');
+    const emailInput = document.getElementById('owner-email');
+    const modeBadge = document.getElementById('mode-badge');
+
+    // 預設今日
+    dateInput.value = new Date().toISOString().slice(0,10);
+
+    // 為每個 editable 元素打 ID（穩定的索引）
+    root.querySelectorAll('[data-editable="true"]').forEach((el, idx) => {
+      el.dataset.editKey = 'e-' + idx;
+    });
+
+    // 為每個 section 注入「設計師回覆」區塊
+    root.querySelectorAll('section[data-section-title]').forEach((sec, i) => {
+      const title = sec.dataset.sectionTitle;
+      const zone = document.createElement('div');
+      zone.className = 'reply-zone';
+      zone.dataset.replyKey = 'sec-' + i;
+      zone.dataset.confirmed = 'false';
+      zone.innerHTML = `
+        <div class="reply-head">
+          <span>✏ 設計師對【${title}】的回覆</span>
+          <span class="reply-status" data-status>尚未填寫</span>
+        </div>
+        <div class="reply-body" contenteditable="true"
+             data-placeholder="請在此回覆，或補充建議、提問、可行性說明…"></div>
+        <div class="reply-actions">
+          <button class="btn-submit-reply" type="button">📤 標記為「已送出」</button>
+        </div>
+      `;
+      zone.querySelector('.btn-submit-reply').addEventListener('click', () => {
+        const cur = zone.dataset.confirmed === 'true';
+        const txt = zone.querySelector('.reply-body').innerText.trim();
+        if (!cur && !txt) {
+          alert('還沒填寫回覆，無法標記為已送出。');
+          return;
+        }
+        zone.dataset.confirmed = cur ? 'false' : 'true';
+        updateConfirmedUI(zone);
+        refreshStatuses();
+        scheduleWrite();
+      });
+      sec.appendChild(zone);
+    });
+
+    function updateConfirmedUI(zone) {
+      const btn = zone.querySelector('.btn-submit-reply');
+      if (zone.dataset.confirmed === 'true') {
+        btn.textContent = '✓ 已送出（點此撤回）';
+        btn.classList.add('confirmed');
+      } else {
+        btn.textContent = '📤 標記為「已送出」';
+        btn.classList.remove('confirmed');
+      }
+    }
+
+    // ===== Firestore 同步 =====
+    const clientId = crypto.randomUUID();
+    let lastWriteByMe = 0;
+
+    function setConn(state, text) {
+      connStatus.className = 'conn ' + state;
+      connText.textContent = text;
+    }
+
+    function refreshStatuses() {
+      document.querySelectorAll('.reply-zone').forEach(z => {
+        const txt = z.querySelector('.reply-body').innerText.trim();
+        const s = z.querySelector('[data-status]');
+        const confirmed = z.dataset.confirmed === 'true';
+        s.classList.remove('confirmed', 'draft', 'filled');
+        if (confirmed && txt) { s.textContent = '✓ 已送出'; s.classList.add('confirmed'); }
+        else if (txt) { s.textContent = '草稿中…'; s.classList.add('draft'); }
+        else { s.textContent = '尚未填寫'; }
+      });
+      const total = document.querySelectorAll('.reply-zone').length;
+      const submitted = [...document.querySelectorAll('.reply-zone')]
+        .filter(z => z.dataset.confirmed === 'true').length;
+      const drafted = [...document.querySelectorAll('.reply-zone')]
+        .filter(z => z.querySelector('.reply-body').innerText.trim() && z.dataset.confirmed !== 'true').length;
+      if (submitted === 0 && drafted === 0) {
+        status.textContent = '尚未填寫';
+      } else {
+        status.textContent = `✓ 已送出 ${submitted}/${total}　|　草稿 ${drafted}`;
+      }
+    }
+
+    function collectAll() {
+      const replies = {};
+      const confirms = {};
+      document.querySelectorAll('.reply-zone').forEach(z => {
+        replies[z.dataset.replyKey] = z.querySelector('.reply-body').innerHTML;
+        confirms[z.dataset.replyKey] = z.dataset.confirmed === 'true';
+      });
+      const ownerEdits = {};
+      root.querySelectorAll('[data-editable="true"]').forEach(el => {
+        ownerEdits[el.dataset.editKey] = el.innerHTML;
+      });
+      return {
+        replies,
+        confirms,
+        owner_edits: ownerEdits,
+        designer_name: nameInput.value || '',
+        designer_email: emailInput.value || '',
+        reply_date: dateInput.value || '',
+      };
+    }
+
+    function applyRemote(data) {
+      if (!data) return;
+      // 不覆蓋當前 focus 中的元素
+      const active = document.activeElement;
+
+      if (data.designer_name != null && nameInput !== active) nameInput.value = data.designer_name;
+      if (data.designer_email != null && emailInput !== active) emailInput.value = data.designer_email;
+      if (data.reply_date != null && dateInput !== active) dateInput.value = data.reply_date;
+
+      Object.entries(data.replies || {}).forEach(([key, html]) => {
+        const el = document.querySelector(`.reply-zone[data-reply-key="${key}"] .reply-body`);
+        if (el && el !== active && el.innerHTML !== html) {
+          el.innerHTML = html;
+          el.classList.add('remote-update-flash');
+          setTimeout(() => el.classList.remove('remote-update-flash'), 600);
+        }
+      });
+      Object.entries(data.confirms || {}).forEach(([key, val]) => {
+        const z = document.querySelector(`.reply-zone[data-reply-key="${key}"]`);
+        if (z) {
+          z.dataset.confirmed = val ? 'true' : 'false';
+          updateConfirmedUI(z);
+        }
+      });
+      Object.entries(data.owner_edits || {}).forEach(([key, html]) => {
+        const el = root.querySelector(`[data-edit-key="${key}"]`);
+        if (el && el !== active && el.innerHTML !== html) {
+          el.innerHTML = html;
+        }
+      });
+
+      if (data.updated_at && data.updated_at.toDate) {
+        const t = data.updated_at.toDate();
+        const who = data.updated_by_name || (data.updated_by_role || '某人');
+        lastUpdate.textContent = `最後更新：${t.toLocaleString('zh-TW')} ｜ by ${who}`;
+      }
+
+      refreshStatuses();
+    }
+
+    let writeTimer = null;
+    function scheduleWrite() {
+      clearTimeout(writeTimer);
+      writeTimer = setTimeout(async () => {
+        try {
+          const payload = collectAll();
+          payload.updated_at = serverTimestamp();
+          payload.updated_by_client = clientId;
+          payload.updated_by_name = nameInput.value || (body.dataset.mode === 'owner' ? '業主' : '匿名設計師');
+          payload.updated_by_role = body.dataset.mode;
+          lastWriteByMe = Date.now();
+          await setDoc(docRef, payload, { merge: true });
+        } catch (e) {
+          console.error(e);
+          setConn('offline', '✗ 同步失敗：' + (e.code || e.message));
+        }
+      }, 600);
+    }
+
+    // 訂閱
+    setConn('connecting', '連線中…');
+    onSnapshot(docRef, (snap) => {
+      setConn('online', '✓ 即時同步中');
+      if (snap.exists()) applyRemote(snap.data());
+    }, (err) => {
+      console.error(err);
+      setConn('offline', '✗ 連線失敗（' + err.code + '）');
+    });
+
+    // 監聽所有輸入
+    [nameInput, emailInput, dateInput].forEach(el => el.addEventListener('input', scheduleWrite));
+    root.addEventListener('input', () => { refreshStatuses(); scheduleWrite(); });
+
+    // ===== 模式切換 =====
+    document.getElementById('btn-toggle-mode').addEventListener('click', (e) => {
+      const cur = body.dataset.mode;
+      const next = cur === 'designer' ? 'owner' : 'designer';
+      body.dataset.mode = next;
+      document.getElementById('top-bar').classList.toggle('owner-mode', next === 'owner');
+      if (next === 'owner') {
+        modeBadge.textContent = '🛠 業主編輯模式';
+        e.target.textContent = '切換 設計師回覆模式';
+        root.querySelectorAll('[data-editable="true"]').forEach(el => el.setAttribute('contenteditable', 'true'));
+        root.querySelectorAll('.reply-body').forEach(el => el.setAttribute('contenteditable', 'false'));
+      } else {
+        modeBadge.textContent = '✏ 設計師回覆模式';
+        e.target.textContent = '切換 業主編輯模式';
+        root.querySelectorAll('[data-editable="true"]').forEach(el => el.removeAttribute('contenteditable'));
+        root.querySelectorAll('.reply-body').forEach(el => el.setAttribute('contenteditable', 'true'));
+      }
+    });
+
+    // ===== 下載快照 =====
+    document.getElementById('btn-download-replies').addEventListener('click', () => {
+      const clone = document.documentElement.cloneNode(true);
+      clone.querySelector('#top-bar')?.remove();
+      clone.querySelectorAll('script').forEach(s => s.remove());
+      clone.querySelectorAll('.reply-zone').forEach(z => {
+        const txt = z.querySelector('.reply-body').innerText.trim();
+        if (!txt) { z.remove(); return; }
+        z.querySelectorAll('[contenteditable]').forEach(el => el.removeAttribute('contenteditable'));
+      });
+      clone.querySelectorAll('[contenteditable]').forEach(el => el.removeAttribute('contenteditable'));
+      const styleEl = clone.querySelector('style');
+      if (styleEl) styleEl.textContent = styleEl.textContent.replace(/padding-top:\s*\d+px;\s*/g,'');
+      const t = clone.querySelector('title');
+      if (t) t.textContent = '礁溪瑪璘路民宿｜會議紀錄快照（' + (nameInput.value || '') + ' / ' + dateInput.value + '）';
+      const cb = clone.querySelector('body');
+      if (cb) cb.removeAttribute('data-mode');
+
+      const meta = document.createElement('div');
+      meta.style.cssText = 'max-width:1120px;margin:0 auto;padding:20px 22px 0;color:#65717f;font-size:14px;';
+      meta.innerHTML = `下載快照｜${nameInput.value ? '回覆者：<b>'+escapeHtml(nameInput.value)+'</b>　|　' : ''}日期：${dateInput.value}　|　產生時間：${new Date().toLocaleString('zh-TW')}`;
+      const mainEl = clone.querySelector('main.page');
+      mainEl.parentNode.insertBefore(meta, mainEl);
+
+      const html = '<!doctype html>\n' + clone.outerHTML;
+      const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      const safe = (nameInput.value || 'snapshot').replace(/[\\/:*?"<>|]/g, '');
+      a.href = url;
+      a.download = `民宿會議快照_${safe}_${dateInput.value}.html`;
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    });
+
+    // ===== mailto =====
+    document.getElementById('btn-mailto').addEventListener('click', () => {
+      if (!emailInput.value) { alert('請先填業主信箱'); return; }
+      const lines = [];
+      lines.push(`【礁溪瑪璘路民宿｜設計師回覆】`);
+      lines.push(`回覆者：${nameInput.value || '（未署名）'}`);
+      lines.push(`日期：${dateInput.value}`);
+      lines.push(`線上協作版：${location.href}`);
+      lines.push('');
+      lines.push('────────────────────');
+      document.querySelectorAll('.reply-zone').forEach(z => {
+        const title = z.querySelector('.reply-head span').textContent
+          .replace('✏ 設計師對【','').replace('】的回覆','').trim();
+        const txt = z.querySelector('.reply-body').innerText.trim();
+        if (!txt) return;
+        lines.push('');
+        lines.push(`■ ${title}`);
+        lines.push(txt);
+        lines.push('');
+      });
+      lines.push('────────────────────');
+      lines.push('（此封信由「線上協作版」自動產生）');
+
+      const subject = encodeURIComponent(`【民宿設計師回覆】${nameInput.value || '未署名'} - ${dateInput.value}`);
+      const bodyTxt = encodeURIComponent(lines.join('\n'));
+      window.location.href = `mailto:${encodeURIComponent(emailInput.value)}?subject=${subject}&body=${bodyTxt}`;
+    });
+
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+    }
+  </script>
+</body>
+</html>
