@@ -3,8 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>礁溪瑪璘路民宿｜設計師討論事項（線上協作版）</title>
-  <meta name="description" content="礁溪瑪璘路民宿 — 業主與設計師線上協作的議題清單與回覆">
+  <title>礁溪瑪璘路民宿｜會議線上協作（留言板）</title>
   <style>
     :root {
       --ink: #1f2933;
@@ -21,15 +20,20 @@
       --rose: #9c4f4f;
       --rose-soft: #f7e8e6;
       --shadow: 0 18px 55px rgba(31, 41, 51, 0.08);
-      --reply-bg: #f1f7ff;
-      --reply-border: #b7d2ed;
-      --reply-accent: #2f5f8f;
     }
     * { box-sizing: border-box; }
     body {
       margin: 0; color: var(--ink); background: var(--paper);
       font-family: "Noto Sans TC", "Microsoft JhengHei", "PingFang TC", Arial, sans-serif;
       line-height: 1.72; padding-top: 108px;
+    }
+
+    /* ====== 預覽橫幅 ====== */
+    .preview-banner {
+      background: #ffeb99; color: #5c4400;
+      padding: 8px 18px; text-align: center;
+      font-size: 13px; font-weight: 700;
+      border-bottom: 2px solid #d4a017;
     }
 
     /* ====== 頂部工具列 ====== */
@@ -50,7 +54,7 @@
     }
     #top-bar.owner-mode .badge { background: var(--gold); }
     #top-bar label { font-size: 12px; color: #a3b1c0; margin-left: 8px; }
-    #top-bar input[type=text], #top-bar input[type=email], #top-bar input[type=date] {
+    #top-bar input[type=text], #top-bar input[type=email], #top-bar select {
       background: #2c3845; color: #fff;
       border: 1px solid #4a5662; border-radius: 5px;
       padding: 5px 8px; font-size: 13px; min-width: 120px;
@@ -77,8 +81,7 @@
     #top-bar .conn {
       display: inline-flex; align-items: center; gap: 6px;
       font-size: 12px; padding: 3px 10px;
-      border-radius: 999px;
-      background: #2c3845;
+      border-radius: 999px; background: #2c3845;
     }
     #top-bar .conn .dot {
       width: 8px; height: 8px; border-radius: 50%;
@@ -87,9 +90,22 @@
     #top-bar .conn.connecting .dot { background: #ffd66b; animation: pulse 1s infinite; }
     #top-bar .conn.online .dot { background: #4ade80; }
     #top-bar .conn.offline .dot { background: #f87171; }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; } 50% { opacity: 0.3; }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+    #top-bar .identity-chip {
+      display: inline-flex; align-items: center;
+      gap: 6px; padding: 4px 10px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 999px; font-size: 12px;
     }
+    #top-bar .identity-chip .ident-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #aaa;
+    }
+    #top-bar .identity-chip.role-owner .ident-dot { background: #d4a017; }
+    #top-bar .identity-chip.role-family .ident-dot { background: #d97757; }
+    #top-bar .identity-chip.role-designer .ident-dot { background: #5b8fc8; }
+    #top-bar .identity-chip.role-other .ident-dot { background: #888; }
 
     /* 業主編輯狀態 */
     body[data-mode="owner"] [data-editable="true"] {
@@ -103,90 +119,146 @@
       outline: 2px solid var(--green); background: #fffbe6;
     }
 
-    /* 設計師回覆區 */
-    .reply-zone {
-      margin-top: 18px; padding: 14px 16px 12px;
-      background: var(--reply-bg); border: 1px solid var(--reply-border);
-      border-left: 5px solid var(--reply-accent); border-radius: 8px;
+    /* ====== 留言板 thread-zone ====== */
+    .thread-zone {
+      margin-top: 20px;
+      padding: 16px 18px 14px;
+      background: #f5f9fd;
+      border: 1px solid #c8d8eb;
+      border-left: 5px solid var(--blue);
+      border-radius: 8px;
     }
-    .reply-head {
+    .thread-head {
       display: flex; align-items: center; justify-content: space-between;
-      gap: 10px; margin-bottom: 8px;
-      font-weight: 700; color: var(--reply-accent); font-size: 14px;
+      gap: 10px; margin-bottom: 12px;
+      font-weight: 700; color: var(--blue); font-size: 14px;
     }
-    .reply-head .reply-status {
+    .thread-head .comment-count {
       font-size: 12px; font-weight: 500; color: var(--muted);
+      background: #fff; padding: 3px 10px; border-radius: 999px;
+      border: 1px solid #d3deea;
     }
-    .reply-head .reply-status.filled { color: var(--green); }
-    .reply-body {
-      min-height: 64px; padding: 10px 12px;
-      background: #fff; border: 1px solid #d3deea; border-radius: 6px;
-      font-size: 15px; line-height: 1.7; outline: none;
+    .thread-head .comment-count.has { color: var(--blue); border-color: #b7d2ed; }
+
+    .comments-list {
+      display: flex; flex-direction: column; gap: 8px;
+      margin-bottom: 12px;
     }
-    .reply-body:focus {
-      border-color: var(--reply-accent);
-      box-shadow: 0 0 0 3px rgba(47,95,143,0.12);
+    .comments-list:empty { display: none; }
+
+    .comment {
+      padding: 10px 12px;
+      background: #fff;
+      border-left: 4px solid var(--muted);
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+      animation: fadeIn 0.3s ease;
     }
-    .reply-body:empty::before {
-      content: attr(data-placeholder); color: #9aa6b3;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-    body[data-mode="owner"] .reply-zone {
-      opacity: 0.85; pointer-events: none; position: relative;
+    .comment.role-owner { border-left-color: var(--gold); background: #fefbf3; }
+    .comment.role-family { border-left-color: #d97757; background: #fdf3ee; }
+    .comment.role-designer { border-left-color: var(--blue); background: #f1f5fa; }
+    .comment.role-other { border-left-color: var(--muted); background: #f7f7f6; }
+
+    .comment-head {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 12px; margin-bottom: 6px;
+      flex-wrap: wrap;
     }
-    body[data-mode="owner"] .reply-zone::after {
-      content: "（業主編輯模式：設計師回覆區暫時鎖定）";
-      position: absolute; right: 12px; top: 12px;
-      font-size: 11px; color: var(--rose);
+    .comment-role {
+      padding: 2px 8px; border-radius: 999px;
+      font-size: 11px; font-weight: 700;
+      background: rgba(0,0,0,0.06);
+      color: var(--ink);
     }
-    .remote-update-flash {
-      animation: flash 0.6s ease;
+    .role-owner .comment-role { background: #fcecc4; color: #6e5217; }
+    .role-family .comment-role { background: #f7d8c9; color: #7d3e23; }
+    .role-designer .comment-role { background: #d6e3f1; color: #1f4878; }
+    .role-other .comment-role { background: #e2e2e0; color: #4a4a48; }
+
+    .comment-author { font-weight: 700; color: var(--ink); font-size: 13px; }
+    .comment-ts { color: var(--muted); font-size: 11px; margin-left: auto; }
+    .comment-del {
+      background: none; border: none; cursor: pointer;
+      color: #aaa; font-size: 16px; padding: 0 4px;
+      line-height: 1; transition: color 0.15s;
     }
-    @keyframes flash {
-      0% { background: #fff7c5; }
-      100% { background: transparent; }
+    .comment-del:hover { color: var(--rose); }
+    .comment-body {
+      font-size: 14px; line-height: 1.7;
+      color: var(--ink); white-space: pre-wrap;
+      word-wrap: break-word;
     }
 
-    /* 送出按鈕 */
-    .reply-actions {
-      margin-top: 10px;
-      display: flex;
-      justify-content: flex-end;
-      gap: 8px;
-    }
-    .btn-submit-reply {
-      cursor: pointer;
-      padding: 7px 14px;
-      border: 1.5px solid var(--reply-accent);
+    /* 新增留言表單 */
+    .new-comment-form {
+      padding: 10px 12px;
       background: #fff;
-      color: var(--reply-accent);
+      border: 1px dashed #b7d2ed;
+      border-radius: 6px;
+    }
+    .new-comment-form .form-head {
+      font-size: 12px; color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .new-comment-form textarea {
+      width: 100%;
+      min-height: 60px;
+      padding: 8px 10px;
+      border: 1px solid #d3deea;
+      border-radius: 5px;
+      font-family: inherit;
+      font-size: 14px;
+      line-height: 1.6;
+      resize: vertical;
+      outline: none;
+    }
+    .new-comment-form textarea:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(47,95,143,0.12);
+    }
+    .new-comment-form .form-actions {
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .new-comment-form .form-actions .spacer { flex: 1; }
+    .new-comment-form .ident-hint {
+      font-size: 12px; color: var(--muted);
+    }
+    .new-comment-form .ident-hint b {
+      color: var(--ink);
+    }
+    .btn-submit-comment {
+      cursor: pointer;
+      padding: 7px 16px;
+      border: 1.5px solid var(--blue);
+      background: var(--blue);
+      color: #fff;
       border-radius: 6px;
       font-size: 13px;
       font-weight: 700;
       transition: 0.15s;
     }
-    .btn-submit-reply:hover {
-      background: var(--reply-accent);
-      color: #fff;
+    .btn-submit-comment:hover { background: #25527c; border-color: #25527c; }
+    .btn-submit-comment:disabled {
+      background: #b8c4d0; border-color: #b8c4d0; cursor: not-allowed;
     }
-    .btn-submit-reply.confirmed {
-      background: var(--green);
-      color: #fff;
-      border-color: var(--green);
+
+    body[data-mode="owner"] .thread-zone {
+      opacity: 0.7; pointer-events: none; position: relative;
     }
-    .btn-submit-reply.confirmed:hover {
-      background: #fff;
-      color: var(--green);
+    body[data-mode="owner"] .thread-zone::after {
+      content: "（業主編輯模式：留言區暫時鎖定，切回討論模式才能發言）";
+      position: absolute; right: 12px; top: 12px;
+      font-size: 11px; color: var(--rose);
+      background: #fff; padding: 2px 8px; border-radius: 4px;
     }
-    .reply-zone[data-confirmed="true"] {
-      border-left-color: var(--green);
-      background: #eef7f2;
-      border-color: #bfd7cc;
-    }
-    .reply-zone[data-confirmed="true"] .reply-head {
-      color: var(--green);
-    }
-    .reply-status.confirmed { color: var(--green) !important; font-weight: 700; }
-    .reply-status.draft { color: var(--gold) !important; }
 
     /* 原本版型 */
     .page { max-width: 1120px; margin: 0 auto; padding: 36px 22px 64px; }
@@ -249,7 +321,7 @@
     footer { margin-top: 46px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
 
     @media (max-width: 760px) {
-      body { padding-top: 156px; }
+      body { padding-top: 192px; }
       .page { padding: 24px 16px 44px; }
       h1 { font-size: 28px; }
       .grid, .checklist { grid-template-columns: 1fr; }
@@ -266,9 +338,10 @@
 
     @media print {
       body { background: #fff; padding-top: 0; }
-      #top-bar { display: none; }
+      #top-bar, .preview-banner { display: none; }
       .page { max-width: none; padding: 18mm; }
-      .card, .band, .reply-zone { box-shadow: none; break-inside: avoid; }
+      .card, .band, .thread-zone { box-shadow: none; break-inside: avoid; }
+      .new-comment-form { display: none; }
     }
   </style>
 </head>
@@ -277,30 +350,37 @@
   <!-- 頂部工具列 -->
   <div id="top-bar">
     <div class="row">
-      <span class="badge" id="mode-badge">✏ 設計師回覆模式</span>
+      <span class="badge" id="mode-badge">💬 留言討論模式</span>
       <span class="conn connecting" id="conn-status"><span class="dot"></span><span id="conn-text">連線中…</span></span>
-      <label>姓名</label>
-      <input type="text" id="designer-name" placeholder="輸入您的姓名" style="min-width:130px">
-      <label>日期</label>
-      <input type="date" id="reply-date">
       <span class="spacer"></span>
-      <span class="status" id="save-status">尚未填寫</span>
+      <span class="status" id="save-status">尚無留言</span>
       <button id="btn-toggle-mode">切換 業主編輯模式</button>
     </div>
     <div class="row">
+      <label>目前身份</label>
+      <input type="text" id="ident-name" placeholder="你的姓名" style="min-width:130px">
+      <select id="ident-role">
+        <option value="owner">業主</option>
+        <option value="family">業主家人</option>
+        <option value="designer">設計師</option>
+        <option value="other">其他（顧問/朋友…）</option>
+      </select>
+      <span class="identity-chip role-owner" id="ident-chip">
+        <span class="ident-dot"></span><span id="ident-display">未設定</span>
+      </span>
+      <span class="spacer"></span>
       <label>業主信箱</label>
       <input type="email" id="owner-email" placeholder="business@example.com" value="whatpjone@gmail.com" style="min-width:200px">
-      <span class="spacer"></span>
-      <button id="btn-download-replies" class="gold">⬇ 下載完整快照 HTML</button>
-      <button id="btn-mailto" class="primary">📧 寄回給業主</button>
+      <button id="btn-download-replies" class="gold">⬇ 下載快照</button>
+      <button id="btn-mailto" class="primary">📧 寄全部留言給業主</button>
     </div>
   </div>
 
   <main class="page" id="root">
     <header>
-      <p class="eyebrow" data-editable="true">礁溪瑪璘路民宿｜設計師會議資料（線上協作版）</p>
+      <p class="eyebrow" data-editable="true">礁溪瑪璘路民宿｜會議資料（線上協作・留言板版）</p>
       <h1 data-editable="true">熱水、電力、平面配置、陽台室內化與 AI 建模交付需求</h1>
-      <p class="subtitle" data-editable="true">目的：把本次要和設計師確認的事項整理成可執行清單，避免只停留在口頭討論，後續能直接進入圖面修正、機電估算、白模建模與外觀渲染。</p>
+      <p class="subtitle" data-editable="true">每個議題下方都是一個「留言串」，業主、家人、設計師、其他顧問都可以在自己的身份下發言、互相討論，全部即時同步。</p>
       <div class="meta">
         <span class="pill" data-editable="true">基地：宜蘭礁溪瑪璘路</span>
         <span class="pill" data-editable="true">規劃：民宿 / Villa / 包棟</span>
@@ -309,7 +389,7 @@
       </div>
     </header>
 
-    <section data-section-title="一、會議目標">
+    <section data-section-key="sec-1" data-section-title="一、會議目標">
       <h2 data-editable="true">一、會議目標</h2>
       <div class="grid">
         <article class="card green">
@@ -331,7 +411,7 @@
       </div>
     </section>
 
-    <section data-section-title="二、熱水系統討論">
+    <section data-section-key="sec-2" data-section-title="二、熱水系統討論">
       <h2 data-editable="true">二、熱水系統討論</h2>
       <div class="band green">
         <h3 data-editable="true">核心問題</h3>
@@ -339,9 +419,7 @@
       </div>
 
       <table>
-        <thead>
-          <tr><th>方案</th><th>內容</th><th>需要設計師確認</th></tr>
-        </thead>
+        <thead><tr><th>方案</th><th>內容</th><th>需要設計師確認</th></tr></thead>
         <tbody>
           <tr>
             <td data-label="方案" data-editable="true">A</td>
@@ -371,7 +449,7 @@
       </div>
     </section>
 
-    <section data-section-title="三、一樓外推後平面圖">
+    <section data-section-key="sec-3" data-section-title="三、一樓外推後平面圖">
       <h2 data-editable="true">三、一樓外推後平面圖</h2>
       <div class="band blue">
         <h3 data-editable="true">要請設計師交付</h3>
@@ -396,7 +474,7 @@
       <div class="quote" data-editable="true">請設計師提供「外推後的一樓平面圖」，後續才有辦法做家具、動線與營運規劃。</div>
     </section>
 
-    <section data-section-title="四、2F / 3F 陽台是否室內化">
+    <section data-section-key="sec-4" data-section-title="四、2F / 3F 陽台是否室內化">
       <h2 data-editable="true">四、2F / 3F 陽台是否室內化</h2>
       <div class="band gold">
         <h3 data-editable="true">討論方向</h3>
@@ -413,14 +491,12 @@
       <div class="quote" data-editable="true">可以請設計師評估三種版本：陽台保留、陽台全室內化、半室內彈性空間，並標出各版本每間房的可用坪數。</div>
     </section>
 
-    <section data-section-title="五、房型與床位配置">
+    <section data-section-key="sec-5" data-section-title="五、房型與床位配置">
       <h2 data-editable="true">五、房型與床位配置</h2>
       <p data-editable="true">這部分會直接影響未來定價、客群與照片質感。重點不是床能不能塞進去，而是客人入住時是否真的舒適。</p>
 
       <table>
-        <thead>
-          <tr><th>房型版本</th><th>配置方向</th><th>圖面需確認</th></tr>
-        </thead>
+        <thead><tr><th>房型版本</th><th>配置方向</th><th>圖面需確認</th></tr></thead>
         <tbody>
           <tr>
             <td data-label="房型版本" data-editable="true">雙人房版</td>
@@ -445,7 +521,7 @@
       </div>
     </section>
 
-    <section data-section-title="六、電力配置與定案時程">
+    <section data-section-key="sec-6" data-section-title="六、電力配置與定案時程">
       <h2 data-editable="true">六、電力配置與定案時程</h2>
       <div class="band rose">
         <h3 data-editable="true">要先問設計師</h3>
@@ -482,7 +558,7 @@
       <div class="quote" data-editable="true">請在房型、床位、冷氣、熱水與泳池設備確定後，先做一次總用電負載估算，確認台電容量、三相電、配電盤與專用迴路。</div>
     </section>
 
-    <section data-section-title="七、AI 建模與白模所需資料">
+    <section data-section-key="sec-7" data-section-title="七、AI 建模與白模所需資料">
       <h2 data-editable="true">七、AI 建模與白模所需資料</h2>
       <p data-editable="true">如果後續要用 AI 或建模工具依照尺寸生成格局、白模，再套外觀渲染，設計師交付資料越接近 CAD 原始資料越好。</p>
 
@@ -525,7 +601,7 @@
       <div class="quote" data-editable="true">請設計師交付 PDF 給人看，DWG / DXF 給建模用，並提供清楚版本名稱，例如「1F 外推後」、「2F/3F 雙人房版」、「陽台室內化版」。</div>
     </section>
 
-    <section data-section-title="八、目前已有圖面資料">
+    <section data-section-key="sec-8" data-section-title="八、目前已有圖面資料">
       <h2 data-editable="true">八、目前已有圖面資料</h2>
       <div class="files">
         <div class="file">
@@ -543,7 +619,7 @@
       </div>
     </section>
 
-    <section data-section-title="九、總結">
+    <section data-section-key="sec-9" data-section-title="九、總結">
       <h2 data-editable="true">九、總結</h2>
       <div class="band green">
         <p data-editable="true">我這次想把幾件事一次確認清楚：熱水系統、電力配置、一樓外推後平面圖、2F/3F 陽台是否室內化、各房間床位配置，以及後續 AI 建模需要的圖面資料。</p>
@@ -557,15 +633,16 @@
     </section>
 
     <footer>
-      <p data-editable="true">整理日期：2026-05-21。用途：與設計師討論圖面、機電、熱水、房型與後續 AI 建模交付資料。所有編輯即時同步至所有連線者。</p>
-      <p class="small" id="last-update">尚未有遠端更新紀錄</p>
+      <p data-editable="true">整理日期：2026-05-21。所有留言即時同步至所有開連結的人。</p>
+      <p class="small" id="last-update">尚未有留言</p>
     </footer>
   </main>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
     import {
-      getFirestore, doc, setDoc, onSnapshot, serverTimestamp, getDoc
+      getFirestore, doc, setDoc, onSnapshot, serverTimestamp,
+      collection, addDoc, deleteDoc, query, orderBy
     } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js";
 
     const firebaseConfig = {
@@ -578,197 +655,247 @@
       measurementId: "G-BESK5R3592"
     };
 
+    const DOC_ID = 'maling-design';   // 正式版 doc
+
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
-    const docRef = doc(db, 'meetings', 'maling-design');
+    const docRef = doc(db, 'meetings', DOC_ID);
+    const commentsRef = collection(db, 'meetings', DOC_ID, 'comments');
 
     const body = document.body;
     const root = document.getElementById('root');
-    const status = document.getElementById('save-status');
+    const saveStatus = document.getElementById('save-status');
     const connStatus = document.getElementById('conn-status');
     const connText = document.getElementById('conn-text');
     const lastUpdate = document.getElementById('last-update');
-    const nameInput = document.getElementById('designer-name');
-    const dateInput = document.getElementById('reply-date');
+    const identName = document.getElementById('ident-name');
+    const identRole = document.getElementById('ident-role');
+    const identChip = document.getElementById('ident-chip');
+    const identDisplay = document.getElementById('ident-display');
     const emailInput = document.getElementById('owner-email');
     const modeBadge = document.getElementById('mode-badge');
 
-    // 預設今日
-    dateInput.value = new Date().toISOString().slice(0,10);
+    const ROLE_LABEL = {
+      owner: '業主',
+      family: '業主家人',
+      designer: '設計師',
+      other: '其他'
+    };
 
-    // 為每個 editable 元素打 ID（穩定的索引）
+    // 還原本機身份設定
+    identName.value = localStorage.getItem('ident_name') || '';
+    identRole.value = localStorage.getItem('ident_role') || 'owner';
+    refreshIdentChip();
+
+    function refreshIdentChip() {
+      identChip.className = 'identity-chip role-' + identRole.value;
+      const n = identName.value.trim();
+      identDisplay.textContent = n
+        ? `${n} · ${ROLE_LABEL[identRole.value]}`
+        : `（未設定）· ${ROLE_LABEL[identRole.value]}`;
+    }
+
+    [identName, identRole].forEach(el => el.addEventListener('input', () => {
+      localStorage.setItem('ident_name', identName.value);
+      localStorage.setItem('ident_role', identRole.value);
+      refreshIdentChip();
+    }));
+
+    // 為每個 editable 元素打 ID
     root.querySelectorAll('[data-editable="true"]').forEach((el, idx) => {
       el.dataset.editKey = 'e-' + idx;
     });
 
-    // 為每個 section 注入「設計師回覆」區塊
-    root.querySelectorAll('section[data-section-title]').forEach((sec, i) => {
+    // 為每個 section 注入「留言串」區塊
+    root.querySelectorAll('section[data-section-key]').forEach((sec) => {
+      const sectionKey = sec.dataset.sectionKey;
       const title = sec.dataset.sectionTitle;
       const zone = document.createElement('div');
-      zone.className = 'reply-zone';
-      zone.dataset.replyKey = 'sec-' + i;
-      zone.dataset.confirmed = 'false';
+      zone.className = 'thread-zone';
+      zone.dataset.sectionKey = sectionKey;
       zone.innerHTML = `
-        <div class="reply-head">
-          <span>✏ 設計師對【${title}】的回覆</span>
-          <span class="reply-status" data-status>尚未填寫</span>
+        <div class="thread-head">
+          <span>💬 議題討論串【${title}】</span>
+          <span class="comment-count" data-count>0 則留言</span>
         </div>
-        <div class="reply-body" contenteditable="true"
-             data-placeholder="請在此回覆，或補充建議、提問、可行性說明…"></div>
-        <div class="reply-actions">
-          <button class="btn-submit-reply" type="button">📤 標記為「已送出」</button>
+        <div class="comments-list" data-list></div>
+        <div class="new-comment-form">
+          <div class="form-head">✏ 新增留言</div>
+          <textarea class="new-text" placeholder="輸入你的補充、提問、建議、回覆…&#10;（Ctrl + Enter 也能送出）"></textarea>
+          <div class="form-actions">
+            <span class="ident-hint">以 <b class="ident-snap">（未設定）</b> 身份留言</span>
+            <span class="spacer"></span>
+            <button class="btn-submit-comment" type="button">📤 送出留言</button>
+          </div>
         </div>
       `;
-      zone.querySelector('.btn-submit-reply').addEventListener('click', () => {
-        const cur = zone.dataset.confirmed === 'true';
-        const txt = zone.querySelector('.reply-body').innerText.trim();
-        if (!cur && !txt) {
-          alert('還沒填寫回覆，無法標記為已送出。');
-          return;
+      const textArea = zone.querySelector('.new-text');
+      const btn = zone.querySelector('.btn-submit-comment');
+      btn.addEventListener('click', () => submitComment(zone));
+      textArea.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+          e.preventDefault();
+          submitComment(zone);
         }
-        zone.dataset.confirmed = cur ? 'false' : 'true';
-        updateConfirmedUI(zone);
-        refreshStatuses();
-        scheduleWrite();
       });
       sec.appendChild(zone);
     });
 
-    function updateConfirmedUI(zone) {
-      const btn = zone.querySelector('.btn-submit-reply');
-      if (zone.dataset.confirmed === 'true') {
-        btn.textContent = '✓ 已送出（點此撤回）';
-        btn.classList.add('confirmed');
-      } else {
-        btn.textContent = '📤 標記為「已送出」';
-        btn.classList.remove('confirmed');
-      }
+    // 更新各 form 顯示的身份
+    function refreshIdentSnap() {
+      const n = identName.value.trim() || '（未設定）';
+      const r = ROLE_LABEL[identRole.value];
+      document.querySelectorAll('.ident-snap').forEach(el => el.textContent = `${n} · ${r}`);
     }
+    refreshIdentSnap();
+    [identName, identRole].forEach(el => el.addEventListener('input', refreshIdentSnap));
 
-    // ===== Firestore 同步 =====
-    const clientId = crypto.randomUUID();
-    let lastWriteByMe = 0;
-
+    // ===== Firestore：訂閱留言 collection =====
     function setConn(state, text) {
       connStatus.className = 'conn ' + state;
       connText.textContent = text;
     }
 
-    function refreshStatuses() {
-      document.querySelectorAll('.reply-zone').forEach(z => {
-        const txt = z.querySelector('.reply-body').innerText.trim();
-        const s = z.querySelector('[data-status]');
-        const confirmed = z.dataset.confirmed === 'true';
-        s.classList.remove('confirmed', 'draft', 'filled');
-        if (confirmed && txt) { s.textContent = '✓ 已送出'; s.classList.add('confirmed'); }
-        else if (txt) { s.textContent = '草稿中…'; s.classList.add('draft'); }
-        else { s.textContent = '尚未填寫'; }
+    setConn('connecting', '連線中…');
+
+    onSnapshot(query(commentsRef, orderBy('ts', 'asc')), (snap) => {
+      setConn('online', '✓ 即時同步中');
+      const all = [];
+      snap.forEach(d => all.push({ id: d.id, ...d.data() }));
+      renderComments(all);
+    }, (err) => {
+      console.error(err);
+      setConn('offline', '✗ 連線失敗（' + err.code + '）');
+    });
+
+    function renderComments(comments) {
+      const grouped = {};
+      comments.forEach(c => {
+        const k = c.section_key || 'unknown';
+        if (!grouped[k]) grouped[k] = [];
+        grouped[k].push(c);
       });
-      const total = document.querySelectorAll('.reply-zone').length;
-      const submitted = [...document.querySelectorAll('.reply-zone')]
-        .filter(z => z.dataset.confirmed === 'true').length;
-      const drafted = [...document.querySelectorAll('.reply-zone')]
-        .filter(z => z.querySelector('.reply-body').innerText.trim() && z.dataset.confirmed !== 'true').length;
-      if (submitted === 0 && drafted === 0) {
-        status.textContent = '尚未填寫';
+      document.querySelectorAll('.thread-zone').forEach(z => {
+        const key = z.dataset.sectionKey;
+        const list = z.querySelector('[data-list]');
+        const countEl = z.querySelector('[data-count]');
+        list.innerHTML = '';
+        const arr = grouped[key] || [];
+        arr.forEach(c => list.appendChild(buildCommentEl(c)));
+        countEl.textContent = arr.length + ' 則留言';
+        countEl.classList.toggle('has', arr.length > 0);
+      });
+      const total = comments.length;
+      saveStatus.textContent = total === 0 ? '尚無留言' : `共 ${total} 則留言`;
+      if (comments.length > 0) {
+        const last = comments[comments.length - 1];
+        if (last.ts && last.ts.toDate) {
+          const t = last.ts.toDate();
+          lastUpdate.textContent = `最後留言：${t.toLocaleString('zh-TW')} ｜ ${last.author || '匿名'}（${ROLE_LABEL[last.role] || '其他'}）`;
+        }
       } else {
-        status.textContent = `✓ 已送出 ${submitted}/${total}　|　草稿 ${drafted}`;
+        lastUpdate.textContent = '尚未有留言';
       }
     }
 
-    function collectAll() {
-      const replies = {};
-      const confirms = {};
-      document.querySelectorAll('.reply-zone').forEach(z => {
-        replies[z.dataset.replyKey] = z.querySelector('.reply-body').innerHTML;
-        confirms[z.dataset.replyKey] = z.dataset.confirmed === 'true';
+    function buildCommentEl(c) {
+      const div = document.createElement('div');
+      div.className = 'comment role-' + (c.role || 'other');
+      const ts = (c.ts && c.ts.toDate) ? c.ts.toDate().toLocaleString('zh-TW') : '（剛剛）';
+      div.innerHTML = `
+        <div class="comment-head">
+          <span class="comment-role">${escapeHtml(ROLE_LABEL[c.role] || '其他')}</span>
+          <span class="comment-author">${escapeHtml(c.author || '匿名')}</span>
+          <span class="comment-ts">${ts}</span>
+          <button class="comment-del" title="刪除這則留言">×</button>
+        </div>
+        <div class="comment-body">${escapeHtml(c.text || '')}</div>
+      `;
+      div.querySelector('.comment-del').addEventListener('click', async () => {
+        if (confirm(`刪除「${c.author || '匿名'}」的這則留言？\n\n內容：${(c.text || '').slice(0, 60)}${c.text && c.text.length > 60 ? '...' : ''}`)) {
+          try {
+            await deleteDoc(doc(db, 'meetings', DOC_ID, 'comments', c.id));
+          } catch (e) {
+            alert('刪除失敗：' + e.message);
+          }
+        }
       });
-      const ownerEdits = {};
-      root.querySelectorAll('[data-editable="true"]').forEach(el => {
-        ownerEdits[el.dataset.editKey] = el.innerHTML;
-      });
-      return {
-        replies,
-        confirms,
-        owner_edits: ownerEdits,
-        designer_name: nameInput.value || '',
-        designer_email: emailInput.value || '',
-        reply_date: dateInput.value || '',
-      };
+      return div;
     }
 
-    function applyRemote(data) {
-      if (!data) return;
-      // 不覆蓋當前 focus 中的元素
+    async function submitComment(zone) {
+      const textArea = zone.querySelector('.new-text');
+      const text = textArea.value.trim();
+      const name = identName.value.trim();
+      if (!name) {
+        alert('請先在頂部填寫你的姓名再留言');
+        identName.focus();
+        return;
+      }
+      if (!text) {
+        alert('請先輸入留言內容');
+        textArea.focus();
+        return;
+      }
+      const btn = zone.querySelector('.btn-submit-comment');
+      btn.disabled = true;
+      btn.textContent = '送出中…';
+      try {
+        await addDoc(commentsRef, {
+          section_key: zone.dataset.sectionKey,
+          author: name,
+          role: identRole.value,
+          text: text,
+          ts: serverTimestamp(),
+        });
+        textArea.value = '';
+      } catch (e) {
+        alert('送出失敗：' + e.message + '\n\n（如果是 permission-denied，請去 Firestore Rules 確認允許寫入）');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '📤 送出留言';
+      }
+    }
+
+    // ===== 業主編輯（議題本身）→ 同步到主 doc =====
+    let writeTimer = null;
+    function scheduleOwnerWrite() {
+      clearTimeout(writeTimer);
+      writeTimer = setTimeout(async () => {
+        const ownerEdits = {};
+        root.querySelectorAll('[data-editable="true"]').forEach(el => {
+          ownerEdits[el.dataset.editKey] = el.innerHTML;
+        });
+        try {
+          await setDoc(docRef, {
+            owner_edits: ownerEdits,
+            owner_email: emailInput.value || '',
+            updated_at: serverTimestamp(),
+          }, { merge: true });
+        } catch (e) {
+          console.error(e);
+        }
+      }, 700);
+    }
+
+    onSnapshot(docRef, (snap) => {
+      if (!snap.exists()) return;
+      const data = snap.data();
       const active = document.activeElement;
-
-      if (data.designer_name != null && nameInput !== active) nameInput.value = data.designer_name;
-      if (data.designer_email != null && emailInput !== active) emailInput.value = data.designer_email;
-      if (data.reply_date != null && dateInput !== active) dateInput.value = data.reply_date;
-
-      Object.entries(data.replies || {}).forEach(([key, html]) => {
-        const el = document.querySelector(`.reply-zone[data-reply-key="${key}"] .reply-body`);
-        if (el && el !== active && el.innerHTML !== html) {
-          el.innerHTML = html;
-          el.classList.add('remote-update-flash');
-          setTimeout(() => el.classList.remove('remote-update-flash'), 600);
-        }
-      });
-      Object.entries(data.confirms || {}).forEach(([key, val]) => {
-        const z = document.querySelector(`.reply-zone[data-reply-key="${key}"]`);
-        if (z) {
-          z.dataset.confirmed = val ? 'true' : 'false';
-          updateConfirmedUI(z);
-        }
-      });
+      if (data.owner_email != null && emailInput !== active) emailInput.value = data.owner_email;
       Object.entries(data.owner_edits || {}).forEach(([key, html]) => {
         const el = root.querySelector(`[data-edit-key="${key}"]`);
         if (el && el !== active && el.innerHTML !== html) {
           el.innerHTML = html;
         }
       });
-
-      if (data.updated_at && data.updated_at.toDate) {
-        const t = data.updated_at.toDate();
-        const who = data.updated_by_name || (data.updated_by_role || '某人');
-        lastUpdate.textContent = `最後更新：${t.toLocaleString('zh-TW')} ｜ by ${who}`;
-      }
-
-      refreshStatuses();
-    }
-
-    let writeTimer = null;
-    function scheduleWrite() {
-      clearTimeout(writeTimer);
-      writeTimer = setTimeout(async () => {
-        try {
-          const payload = collectAll();
-          payload.updated_at = serverTimestamp();
-          payload.updated_by_client = clientId;
-          payload.updated_by_name = nameInput.value || (body.dataset.mode === 'owner' ? '業主' : '匿名設計師');
-          payload.updated_by_role = body.dataset.mode;
-          lastWriteByMe = Date.now();
-          await setDoc(docRef, payload, { merge: true });
-        } catch (e) {
-          console.error(e);
-          setConn('offline', '✗ 同步失敗：' + (e.code || e.message));
-        }
-      }, 600);
-    }
-
-    // 訂閱
-    setConn('connecting', '連線中…');
-    onSnapshot(docRef, (snap) => {
-      setConn('online', '✓ 即時同步中');
-      if (snap.exists()) applyRemote(snap.data());
-    }, (err) => {
-      console.error(err);
-      setConn('offline', '✗ 連線失敗（' + err.code + '）');
     });
 
-    // 監聽所有輸入
-    [nameInput, emailInput, dateInput].forEach(el => el.addEventListener('input', scheduleWrite));
-    root.addEventListener('input', () => { refreshStatuses(); scheduleWrite(); });
+    root.addEventListener('input', (e) => {
+      const el = e.target.closest('[data-editable="true"]');
+      if (el) scheduleOwnerWrite();
+    });
+    emailInput.addEventListener('input', scheduleOwnerWrite);
 
     // ===== 模式切換 =====
     document.getElementById('btn-toggle-mode').addEventListener('click', (e) => {
@@ -777,39 +904,40 @@
       body.dataset.mode = next;
       document.getElementById('top-bar').classList.toggle('owner-mode', next === 'owner');
       if (next === 'owner') {
-        modeBadge.textContent = '🛠 業主編輯模式';
-        e.target.textContent = '切換 設計師回覆模式';
+        modeBadge.textContent = '🛠 業主編輯議題';
+        e.target.textContent = '切換 留言討論模式';
         root.querySelectorAll('[data-editable="true"]').forEach(el => el.setAttribute('contenteditable', 'true'));
-        root.querySelectorAll('.reply-body').forEach(el => el.setAttribute('contenteditable', 'false'));
       } else {
-        modeBadge.textContent = '✏ 設計師回覆模式';
+        modeBadge.textContent = '💬 留言討論模式';
         e.target.textContent = '切換 業主編輯模式';
         root.querySelectorAll('[data-editable="true"]').forEach(el => el.removeAttribute('contenteditable'));
-        root.querySelectorAll('.reply-body').forEach(el => el.setAttribute('contenteditable', 'true'));
       }
     });
 
-    // ===== 下載快照 =====
+    // ===== 下載快照（含所有留言）=====
     document.getElementById('btn-download-replies').addEventListener('click', () => {
       const clone = document.documentElement.cloneNode(true);
       clone.querySelector('#top-bar')?.remove();
+      clone.querySelector('.preview-banner')?.remove();
       clone.querySelectorAll('script').forEach(s => s.remove());
-      clone.querySelectorAll('.reply-zone').forEach(z => {
-        const txt = z.querySelector('.reply-body').innerText.trim();
-        if (!txt) { z.remove(); return; }
-        z.querySelectorAll('[contenteditable]').forEach(el => el.removeAttribute('contenteditable'));
+      // 拿掉每個 thread-zone 的新留言表單，留言列表保留
+      clone.querySelectorAll('.thread-zone').forEach(z => {
+        const list = z.querySelector('[data-list]');
+        if (!list || !list.children.length) { z.remove(); return; }
+        z.querySelector('.new-comment-form')?.remove();
+        z.querySelectorAll('.comment-del').forEach(b => b.remove());
       });
       clone.querySelectorAll('[contenteditable]').forEach(el => el.removeAttribute('contenteditable'));
       const styleEl = clone.querySelector('style');
       if (styleEl) styleEl.textContent = styleEl.textContent.replace(/padding-top:\s*\d+px;\s*/g,'');
       const t = clone.querySelector('title');
-      if (t) t.textContent = '礁溪瑪璘路民宿｜會議紀錄快照（' + (nameInput.value || '') + ' / ' + dateInput.value + '）';
+      if (t) t.textContent = '礁溪瑪璘路民宿｜會議紀錄快照（' + new Date().toLocaleDateString('zh-TW') + '）';
       const cb = clone.querySelector('body');
       if (cb) cb.removeAttribute('data-mode');
 
       const meta = document.createElement('div');
       meta.style.cssText = 'max-width:1120px;margin:0 auto;padding:20px 22px 0;color:#65717f;font-size:14px;';
-      meta.innerHTML = `下載快照｜${nameInput.value ? '回覆者：<b>'+escapeHtml(nameInput.value)+'</b>　|　' : ''}日期：${dateInput.value}　|　產生時間：${new Date().toLocaleString('zh-TW')}`;
+      meta.innerHTML = `下載快照｜產生時間：${new Date().toLocaleString('zh-TW')}`;
       const mainEl = clone.querySelector('main.page');
       mainEl.parentNode.insertBefore(meta, mainEl);
 
@@ -817,37 +945,41 @@
       const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
-      const safe = (nameInput.value || 'snapshot').replace(/[\\/:*?"<>|]/g, '');
       a.href = url;
-      a.download = `民宿會議快照_${safe}_${dateInput.value}.html`;
+      a.download = `民宿會議紀錄快照_${new Date().toISOString().slice(0,10)}.html`;
       document.body.appendChild(a); a.click(); a.remove();
       setTimeout(() => URL.revokeObjectURL(url), 1000);
     });
 
-    // ===== mailto =====
+    // ===== 寄全部留言給業主 =====
     document.getElementById('btn-mailto').addEventListener('click', () => {
       if (!emailInput.value) { alert('請先填業主信箱'); return; }
       const lines = [];
-      lines.push(`【礁溪瑪璘路民宿｜設計師回覆】`);
-      lines.push(`回覆者：${nameInput.value || '（未署名）'}`);
-      lines.push(`日期：${dateInput.value}`);
+      lines.push('【礁溪瑪璘路民宿｜留言串整理】');
+      lines.push(`匯出時間：${new Date().toLocaleString('zh-TW')}`);
       lines.push(`線上協作版：${location.href}`);
       lines.push('');
-      lines.push('────────────────────');
-      document.querySelectorAll('.reply-zone').forEach(z => {
-        const title = z.querySelector('.reply-head span').textContent
-          .replace('✏ 設計師對【','').replace('】的回覆','').trim();
-        const txt = z.querySelector('.reply-body').innerText.trim();
-        if (!txt) return;
-        lines.push('');
+      document.querySelectorAll('.thread-zone').forEach(z => {
+        const comments = z.querySelectorAll('.comment');
+        if (!comments.length) return;
+        const title = z.querySelector('.thread-head span').textContent
+          .replace('💬 議題討論串【','').replace('】','').trim();
+        lines.push('━━━━━━━━━━━━━━━━━━━━');
         lines.push(`■ ${title}`);
-        lines.push(txt);
         lines.push('');
+        comments.forEach(c => {
+          const role = c.querySelector('.comment-role').textContent;
+          const author = c.querySelector('.comment-author').textContent;
+          const ts = c.querySelector('.comment-ts').textContent;
+          const txt = c.querySelector('.comment-body').textContent;
+          lines.push(`[${role}] ${author} · ${ts}`);
+          lines.push(txt);
+          lines.push('');
+        });
       });
-      lines.push('────────────────────');
-      lines.push('（此封信由「線上協作版」自動產生）');
+      lines.push('━━━━━━━━━━━━━━━━━━━━');
 
-      const subject = encodeURIComponent(`【民宿設計師回覆】${nameInput.value || '未署名'} - ${dateInput.value}`);
+      const subject = encodeURIComponent(`【民宿留言串整理】${new Date().toLocaleDateString('zh-TW')}`);
       const bodyTxt = encodeURIComponent(lines.join('\n'));
       window.location.href = `mailto:${encodeURIComponent(emailInput.value)}?subject=${subject}&body=${bodyTxt}`;
     });
