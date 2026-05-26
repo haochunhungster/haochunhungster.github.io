@@ -86,6 +86,15 @@ section{padding:100px 0}
 .feature-card h3{font-size:1.15rem;font-weight:600;margin-bottom:10px}
 .feature-card p{font-size:.9rem;color:var(--text2);line-height:1.65}
 
+/* ─── EXAMPLES ROW ─── */
+.examples-row{display:flex;flex-wrap:wrap;gap:14px}
+.example-pill{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:14px;background:var(--surface);border:1px solid var(--border);color:var(--text);text-decoration:none;font-size:.95rem;font-weight:500;transition:all .3s;cursor:pointer}
+.example-pill:hover{border-color:var(--blue);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.3);background:var(--surface2)}
+.ep-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:#fff;flex-shrink:0}
+.ep-more{border-style:dashed;color:var(--text2)}
+.ep-more:hover{color:var(--text);border-color:var(--red)}
+@media(max-width:600px){.examples-row{flex-direction:column}.example-pill{justify-content:center}}
+
 /* ─── PROMPTS ─── */
 .prompts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
 .prompt-card{border-radius:20px;overflow:hidden;border:1px solid var(--border);background:var(--surface);transition:all .35s}
@@ -260,12 +269,24 @@ footer .foot-sub{color:var(--text2);font-size:.85rem;margin-top:12px}
   </div>
 </section>
 
-<!-- ═══ PROMPT EXAMPLES ═══ -->
+<!-- ═══ LIVE EXAMPLES ═══ -->
 <section>
   <div class="wrap">
-    <div class="section-tag reveal">Prompt Examples</div>
+    <div class="section-tag reveal">Live Examples</div>
+    <h2 class="section-title reveal reveal-delay-1">官方範例 &mdash; 點進去直接看</h2>
+    <p class="section-desc reveal reveal-delay-2">這些是 Stitch 官方提供的真實範例專案，點擊即可在 Stitch 中開啟瀏覽。</p>
+
+    <div class="examples-row reveal reveal-delay-3">
+      <a href="https://stitch.withgoogle.com/projects/7135214756829568731-example" target="_blank" rel="noopener" class="example-pill"><span class="ep-icon" style="background:var(--green)">&#127793;</span>Indoor Plant Care Dashboard</a>
+      <a href="https://stitch.withgoogle.com/projects/18001405658297145424-example" target="_blank" rel="noopener" class="example-pill"><span class="ep-icon" style="background:var(--blue)">&#9968;</span>Alps Skiing Guide</a>
+      <a href="https://stitch.withgoogle.com/projects/17114621391484281147-example" target="_blank" rel="noopener" class="example-pill"><span class="ep-icon" style="background:var(--yellow);color:#000">&#127863;</span>Ceramic &amp; Pottery Marketplace</a>
+      <a href="https://stitch.withgoogle.com/projects" target="_blank" rel="noopener" class="example-pill ep-more"><span class="ep-icon" style="background:var(--red)">+</span>瀏覽更多範例 &rarr;</a>
+    </div>
+
+    <div style="height:64px"></div>
+    <div class="section-tag reveal">Prompt Templates</div>
     <h2 class="section-title reveal reveal-delay-1">一句話，一個完整介面</h2>
-    <p class="section-desc reveal reveal-delay-2">看看這些範本 prompt 能產出什麼樣的設計。</p>
+    <p class="section-desc reveal reveal-delay-2">把這些 prompt 直接貼進 Stitch，幾秒就能看到結果。</p>
     <div class="prompts-grid">
 
       <div class="prompt-card reveal reveal-delay-1">
