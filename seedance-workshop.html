@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Seedance 2.0 實戰筆記</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Noto+Sans+TC:wght@300;400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0f;--surface:#12121a;--card:#1a1a2e;--border:#2a2a3e;--text:#e4e4ef;--muted:#8888a0;--accent:#6c5ce7;--green:#00cec9;--red:#ff6b6b;--yellow:#feca57;--blue:#48dbfb;--mono:'JetBrains Mono',monospace;--sans:'Inter','Noto Sans TC',sans-serif}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.7;overflow-x:hidden}
+::selection{background:var(--accent);color:#fff}
+
+.slide{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:4rem 2rem;max-width:1100px;margin:0 auto;position:relative}
+.slide+.slide{border-top:1px solid var(--border)}
+
+.cover{text-align:center;padding:8rem 2rem}
+.cover h1{font-size:clamp(2.5rem,6vw,4.5rem);font-weight:900;line-height:1.1;background:linear-gradient(135deg,var(--accent),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:1rem}
+.cover .sub{font-size:1.2rem;color:var(--muted);letter-spacing:0.15em}
+.cover .date{margin-top:2rem;font-family:var(--mono);font-size:0.85rem;color:var(--muted)}
+
+h2{font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:900;margin-bottom:1.5rem;line-height:1.2}
+h2 .hl{color:var(--accent)}
+h3{font-size:1.15rem;font-weight:700;margin:1.5rem 0 0.8rem;color:var(--blue)}
+
+.chapter-tag{display:inline-block;font-family:var(--mono);font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;padding:0.3rem 0.8rem;border:1px solid var(--accent);color:var(--accent);border-radius:3px;margin-bottom:1rem}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin:1rem 0}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}}
+
+.card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.5rem;transition:border-color 0.3s}
+.card:hover{border-color:var(--accent)}
+.card h4{font-size:1rem;font-weight:700;margin-bottom:0.5rem}
+.card p,.card li{font-size:0.9rem;color:var(--muted);line-height:1.6}
+.card ul{padding-left:1.2rem;margin-top:0.5rem}
+.card ul li{margin-bottom:0.3rem}
+
+a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
+
+table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.85rem}
+th{background:var(--card);text-align:left;padding:0.6rem 0.8rem;border:1px solid var(--border);font-weight:700;color:var(--accent)}
+td{padding:0.6rem 0.8rem;border:1px solid var(--border)}
+tr:nth-child(even){background:var(--surface)}
+
+pre{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:1.2rem;overflow-x:auto;margin:1rem 0;font-family:var(--mono);font-size:0.8rem;line-height:1.6;color:#c3cee3}
+code{font-family:var(--mono);font-size:0.85em;background:var(--surface);padding:0.1em 0.4em;border-radius:3px}
+
+.tag{display:inline-block;font-size:0.7rem;padding:0.2rem 0.5rem;border-radius:3px;font-weight:600;margin-right:0.3rem}
+.tag-green{background:#00cec920;color:var(--green);border:1px solid #00cec940}
+.tag-red{background:#ff6b6b20;color:var(--red);border:1px solid #ff6b6b40}
+.tag-blue{background:#48dbfb20;color:var(--blue);border:1px solid #48dbfb40}
+.tag-yellow{background:#feca5720;color:var(--yellow);border:1px solid #feca5740}
+
+.vs-box{display:grid;grid-template-columns:1fr auto 1fr;gap:1rem;align-items:start;margin:1.5rem 0}
+.vs-box .vs{font-size:2rem;font-weight:900;color:var(--accent);align-self:center;text-align:center}
+@media(max-width:700px){.vs-box{grid-template-columns:1fr;}.vs-box .vs{font-size:1.5rem}}
+
+.flow{display:flex;align-items:center;gap:0.8rem;flex-wrap:wrap;margin:1.5rem 0;justify-content:center}
+.flow .step{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:0.8rem 1.2rem;text-align:center;font-size:0.85rem;font-weight:600}
+.flow .arrow{font-size:1.5rem;color:var(--accent)}
+
+.stat-row{display:flex;gap:1rem;margin:1rem 0;flex-wrap:wrap}
+.stat{flex:1;min-width:120px;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1rem;text-align:center}
+.stat .num{font-size:1.8rem;font-weight:900;font-family:var(--mono)}
+.stat .label{font-size:0.75rem;color:var(--muted);margin-top:0.3rem}
+
+.toc{list-style:none;padding:0}
+.toc li{padding:0.8rem 0;border-bottom:1px solid var(--border);display:flex;align-items:baseline;gap:1rem}
+.toc .n{font-family:var(--mono);font-size:1.5rem;font-weight:900;color:var(--accent);min-width:40px}
+.toc .t{font-size:1.1rem;font-weight:600}
+.toc .d{font-size:0.85rem;color:var(--muted);margin-left:auto}
+
+.note{background:var(--surface);border-left:3px solid var(--accent);padding:1rem 1.2rem;margin:1rem 0;font-size:0.9rem;border-radius:0 6px 6px 0}
+.note.warn{border-left-color:var(--yellow)}
+.note.good{border-left-color:var(--green)}
+</style>
+</head>
+<body>
+
+<!-- ===== COVER ===== -->
+<section class="slide cover">
+  <h1>Seedance 2.0 實戰筆記</h1>
+  <div class="sub">Prompt Engineering &times; 超解析度 &times; Threads 爬蟲</div>
+  <div class="date">2026-05-26</div>
+</section>
+
+<!-- ===== TOC ===== -->
+<section class="slide">
+  <h2>目錄</h2>
+  <ul class="toc">
+    <li><span class="n">01</span><span class="t">兩個開源 Prompt Skill 學到什麼</span><span class="d">GitHub repos</span></li>
+    <li><span class="n">02</span><span class="t">學習前 vs 學習後的 Prompt</span><span class="d">Before / After</span></li>
+    <li><span class="n">03</span><span class="t">720p vs 1080p — 為什麼低解析度反而更好</span><span class="d">實測 + 原理</span></li>
+    <li><span class="n">04</span><span class="t">Threads 爬蟲 — 繞過限制的方法</span><span class="d">Playwright</span></li>
+  </ul>
+</section>
+
+<!-- ===== CH1: SKILLS ===== -->
+<section class="slide">
+  <div class="chapter-tag">Chapter 01</div>
+  <h2>兩個開源 Prompt Skill <span class="hl">學到什麼</span></h2>
+
+  <div class="grid2">
+    <div class="card">
+      <h4>MapleShaw / seedance2.0-prompt-skill</h4>
+      <p><a href="https://github.com/MapleShaw/seedance2.0-prompt-skill" target="_blank">GitHub</a> &middot; <span class="tag tag-blue">中文</span><span class="tag tag-yellow">創意總監型</span></p>
+      <ul>
+        <li><strong>相機四維編碼</strong> Z(距離) Y(高度) X(方位) F(濾鏡)</li>
+        <li><strong>六套剪輯公式</strong>（呼吸/心跳/海浪/子彈時間/脈衝/靜默錘擊）</li>
+        <li><strong>長片 25 格生產流水線</strong>（角色卡 &rarr; 分鏡 &rarr; 逐鏡頭）</li>
+        <li><strong>深度美學約束</strong>（Octane 級渲染詞 + 6 套色調組合）</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>dexhunter / seedance2-skill</h4>
+      <p><a href="https://github.com/dexhunter/seedance2-skill" target="_blank">GitHub</a> &middot; <span class="tag tag-green">英中雙語</span><span class="tag tag-blue">工具書型</span></p>
+      <ul>
+        <li><strong>@ 引用語法表</strong>（13 種角色：首幀/角色/場景/運鏡/BGM...）</li>
+        <li><strong>10 類 prompt 模板</strong>（角色一致/運鏡複刻/電商/短劇...）</li>
+        <li><strong>常見錯誤清單</strong>（7 大踩坑點）</li>
+        <li><strong>原生 Claude Code 安裝</strong>（<code>npx skills add</code>）</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>互補關係</h3>
+  <table>
+    <tr><th>面向</th><th>MapleShaw = 創意總監</th><th>dexhunter = 參考手冊</th></tr>
+    <tr><td>定位</td><td>引導對話、先問再做</td><td>語法查找、直接套模板</td></tr>
+    <tr><td>鏡頭系統</td><td>四維座標 Z/Y/X/F</td><td>標準術語表（push in、orbit...）</td></tr>
+    <tr><td>長片支援</td><td>完整流水線 + 剪輯公式</td><td>時間戳分鏡</td></tr>
+    <tr><td>模板數</td><td>3 條路徑</td><td>10 類 + 常見錯誤</td></tr>
+    <tr><td>安裝</td><td>手動複製</td><td><code>npx skills add</code></td></tr>
+  </table>
+</section>
+
+<!-- ===== CH2: BEFORE/AFTER ===== -->
+<section class="slide">
+  <div class="chapter-tag">Chapter 02</div>
+  <h2>學習前 vs 學習後的 <span class="hl">Prompt</span></h2>
+
+  <div class="vs-box">
+    <div class="card" style="border-color:var(--red)">
+      <h4><span class="tag tag-red">BEFORE</span> 學習前</h4>
+<pre style="border-color:var(--red)">台灣熱炒店場景，一個男上司拿筷子指著魚
+對女下屬說話，女下屬生氣把魚砸在他臉上，
+男的被砸飛撞牆壁，站起來說我只是想吃
+巴沙魚。搞笑風格，15秒。</pre>
+      <p style="color:var(--red);font-size:0.85rem;margin-top:0.5rem">沒有分鏡、沒有鏡頭語言、沒有音效、沒有 @ 引用、台詞混在描述裡</p>
+    </div>
+    <div class="vs">VS</div>
+    <div class="card" style="border-color:var(--green)">
+      <h4><span class="tag tag-green">AFTER</span> 學習後</h4>
+<pre style="border-color:var(--green);font-size:0.7rem">台灣熱炒店夜間公司聚餐，暖黃燈光混雜霓虹，
+手持攝影微晃感，寫實都市喜劇質感，
+
+@圖片1 的男性角色為男上司，
+@圖片2 的女性角色為女下屬，
+
+0-3秒：Medium Shot 中景拍攝聚餐桌面，
+  上司拿筷子指著紅燒魚——
+  台詞（男上司，油膩）："魚是好魚，就是刺多"
+  環境音鍋鏟翻炒聲和杯盤碰撞；
+
+4-6秒：Close-Up 女下屬臉部，困惑→暴怒——
+  台詞（女下屬，暴怒）："你他媽吃個魚也要
+  機機掰掰！" Whip Pan 甩鏡魚盤砸向面門；
+
+7-10秒：Wide Shot 全景，撞穿牆壁人形大洞，
+  慢動作捕捉，音效巨大撞擊+牆壁崩塌碎裂；
+
+11-15秒：Low Angle 仰拍，灰頭土臉站起——
+  台詞（男上司，委屈）："我只是想吃巴沙魚…"
+
+禁止：任何文字、字幕、LOGO、水印</pre>
+    </div>
+  </div>
+
+  <h3>差異總結</h3>
+  <table>
+    <tr><th>維度</th><th><span class="tag tag-red">Before</span></th><th><span class="tag tag-green">After</span></th></tr>
+    <tr><td>時間控制</td><td>完全沒有</td><td><code>0-3s / 4-6s / 7-10s / 11-15s</code></td></tr>
+    <tr><td>鏡頭語言</td><td>不存在</td><td>Medium Shot / Close-Up / Whip Pan / Wide Shot / Low Angle</td></tr>
+    <tr><td>角色引用</td><td>「一個男上司」</td><td><code>@圖片1</code> <code>@圖片2</code> 三視角設定圖</td></tr>
+    <tr><td>音效設計</td><td>沒有</td><td>鍋鏟翻炒 / 砸臉撞擊 / 牆壁崩塌碎裂</td></tr>
+    <tr><td>台詞格式</td><td>混在描述裡</td><td><code>台詞（角色，情緒）："內容"</code></td></tr>
+    <tr><td>風格總綱</td><td>「搞笑風格」</td><td>暖黃燈光 + 手持微晃 + 寫實都市喜劇</td></tr>
+    <tr><td>禁止項</td><td>沒有</td><td>禁止文字 / 字幕 / LOGO / 水印</td></tr>
+  </table>
+
+  <div class="note good">從「寫作文」進化到「寫分鏡腳本」 — 這就是 Prompt Skill 帶來的最大改變。</div>
+</section>
+
+<!-- ===== CH3: 720p vs 1080p ===== -->
+<section class="slide">
+  <div class="chapter-tag">Chapter 03</div>
+  <h2>720p vs 1080p — 為什麼低解析度<span class="hl">反而更好</span></h2>
+
+  <p>用<strong>完全相同的 prompt + 同樣的角色參考圖</strong>，分別生成 720p 和 1080p：</p>
+
+  <div class="grid2" style="margin:1.5rem 0">
+    <div class="card" style="border-color:var(--green)">
+      <h4 style="color:var(--green);text-align:center;font-size:1.3rem">720p &#10003;</h4>
+      <ul>
+        <li>動作連貫性<strong>佳</strong></li>
+        <li>角色一致性<strong>高</strong></li>
+        <li>Prompt 遵循度<strong>好</strong></li>
+        <li>分鏡轉場<strong>自然</strong></li>
+      </ul>
+    </div>
+    <div class="card" style="border-color:var(--red)">
+      <h4 style="color:var(--red);text-align:center;font-size:1.3rem">1080p &#10007;</h4>
+      <ul>
+        <li>動作<strong>斷裂不連貫</strong></li>
+        <li>角色臉部<strong>飄移</strong></li>
+        <li>部分分鏡<strong>被忽略</strong></li>
+        <li>AI 破綻<strong>更明顯</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>四個核心原因</h3>
+
+  <div class="card" style="margin-bottom:0.8rem">
+    <h4>1. 算力稀釋效應</h4>
+    <p>1080p = <strong>207 萬像素/幀</strong> vs 720p = <strong>92 萬像素/幀</strong> &rarr; 差距 <strong>2.25 倍</strong><br>
+    同樣的推理預算被稀釋，每個像素分到的「注意力」更少。</p>
+  </div>
+  <div class="card" style="margin-bottom:0.8rem">
+    <h4>2. 原生訓練解析度</h4>
+    <p>模型在 <strong>720p 或更低</strong>解析度上訓練。1080p 靠超解析度模組硬拉，不是原生生成。</p>
+  </div>
+  <div class="card" style="margin-bottom:0.8rem">
+    <h4>3. 恐怖谷效應</h4>
+    <p>720p 的輕微模糊反而<strong>掩蓋 AI 破綻</strong>（手指畸變、臉部微抖）。1080p 全部放大暴露。</p>
+  </div>
+  <div class="card">
+    <h4>4. 複雜 Prompt 的天花板</h4>
+    <p>4 個分鏡 + 2 段台詞 + 撞牆物理效果 &rarr; 720p 剛好能處理，1080p 力不從心。</p>
+  </div>
+
+  <h3>最佳實戰策略</h3>
+
+  <div class="flow">
+    <div class="step" style="border-color:var(--blue)">Seedance 2.0<br><strong>720p 生成</strong></div>
+    <div class="arrow">&rarr;</div>
+    <div class="step" style="border-color:var(--accent)">Real-ESRGAN<br><strong>AI 超解析度</strong></div>
+    <div class="arrow">&rarr;</div>
+    <div class="step" style="border-color:var(--green)">1440p / 4K / 5K<br><strong>高清輸出</strong></div>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat"><div class="num" style="color:var(--muted)">720p</div><div class="label">原始 &middot; ~6 MB</div></div>
+    <div class="stat"><div class="num" style="color:var(--blue)">1440p</div><div class="label">2x 超解析度 &middot; 18 MB</div></div>
+    <div class="stat"><div class="num" style="color:var(--accent)">5K</div><div class="label">4x 超解析度 &middot; 54 MB</div></div>
+  </div>
+
+  <div class="note good">全部免費 — Real-ESRGAN 開源 + RTX 5090 本機 CUDA 運算，不花一毛錢。</div>
+
+  <h3>一行指令</h3>
+<pre>python D:\claude\tools\video_upscale.py "輸入.mp4" "輸出.mp4" 2
+# 最後的數字是倍率：2 = 1440p, 4 = 5K
+# Real-ESRGAN x4plus 模型 | CUDA 加速 | 自動合併原始音軌</pre>
+</section>
+
+<!-- ===== CH4: THREADS ===== -->
+<section class="slide">
+  <div class="chapter-tag">Chapter 04</div>
+  <h2>Threads 爬蟲 — <span class="hl">繞過限制</span>的方法</h2>
+
+  <h3>問題背景：Threads 的三重封鎖</h3>
+  <div class="grid2" style="grid-template-columns:1fr 1fr 1fr">
+    <div class="card" style="text-align:center;border-color:var(--red)">
+      <div style="font-size:2rem">&#128683;</div>
+      <h4>沒有公開 API</h4>
+      <p>Meta 沒有提供任何官方 API</p>
+    </div>
+    <div class="card" style="text-align:center;border-color:var(--red)">
+      <div style="font-size:2rem">&#128196;</div>
+      <h4>空殼 HTML</h4>
+      <p>HTTP 請求只拿到空的 <code>&lt;div&gt;</code></p>
+    </div>
+    <div class="card" style="text-align:center;border-color:var(--red)">
+      <div style="font-size:2rem">&#9889;</div>
+      <h4>JS 動態載入</h4>
+      <p>所有內容都靠 JavaScript 渲染</p>
+    </div>
+  </div>
+
+  <div class="note warn">Firecrawl scrape、curl、requests、BeautifulSoup 全部失敗 — 抓到的都是空殼。</div>
+
+  <h3>解決方案：Playwright Headless Browser</h3>
+  <p>不走 HTTP 請求 &rarr; 直接用<strong>無頭瀏覽器</strong>載入頁面 &rarr; 等 JS 跑完 &rarr; 從 DOM 提取</p>
+
+  <div class="flow">
+    <div class="step">Playwright 啟動<br>Headless Chromium</div>
+    <div class="arrow">&rarr;</div>
+    <div class="step">載入 URL<br>+ 偽裝 User-Agent</div>
+    <div class="arrow">&rarr;</div>
+    <div class="step">等待 JS 渲染<br><code>networkidle</code></div>
+    <div class="arrow">&rarr;</div>
+    <div class="step">CSS Selector<br>提取資料</div>
+    <div class="arrow">&rarr;</div>
+    <div class="step">結構化輸出<br>JSON / Text</div>
+  </div>
+
+  <h3>核心技術</h3>
+<pre>
+<span style="color:#6c5ce7"># 1. 啟動 headless Chromium</span>
+browser = playwright.chromium.launch(headless=True)
+
+<span style="color:#6c5ce7"># 2. 偽裝 User-Agent（看起來像一般瀏覽器）</span>
+page = browser.new_page(user_agent="Mozilla/5.0 ... Chrome/131.0")
+
+<span style="color:#6c5ce7"># 3. 載入頁面並等 JS 渲染完成</span>
+page.goto(url, wait_until="networkidle")  <span style="color:#feca57"># &larr; 關鍵</span>
+
+<span style="color:#6c5ce7"># 4. 從 rendered DOM 提取</span>
+posts = page.query_selector_all("[data-pressable-container]")
+
+<span style="color:#6c5ce7"># 5. 搜尋模式走 Google site:threads.net</span>
+page.goto(f"https://www.google.com/search?q=site:threads.net+{query}")
+</pre>
+
+  <h3>四種模式</h3>
+<pre>python threads_scraper.py user zuck          <span style="color:var(--muted)"># 抓用戶最近貼文</span>
+python threads_scraper.py post &lt;url&gt;         <span style="color:var(--muted)"># 單篇含互動數</span>
+python threads_scraper.py search "AI 台灣"    <span style="color:var(--muted)"># Google 索引搜尋</span>
+python threads_scraper.py info zuck          <span style="color:var(--muted)"># 用戶基本資訊</span></pre>
+
+  <h3>還可以應用在哪裡？</h3>
+  <div class="grid2">
+    <div class="card">
+      <h4>適用場景</h4>
+      <ul>
+        <li><strong>SPA / CSR 網站</strong>（React / Vue / Angular）</li>
+        <li><strong>社群平台公開資料</strong>（Instagram / Twitter/X）</li>
+        <li><strong>JS 渲染才有內容的頁面</strong>（Notion 公開頁）</li>
+        <li><strong>反爬蟲但不需登入的網站</strong></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>進階組合</h4>
+      <ul>
+        <li><strong>+ Firecrawl interact</strong>：點擊、填表、翻頁、登入</li>
+        <li><strong>+ Whisper 語音轉文字</strong>：影片字幕結構化</li>
+        <li><strong>+ 排程任務</strong>：每日自動抓取趨勢分析</li>
+        <li><strong>+ LLM 分析</strong>：抓完直接餵 Claude 摘要</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="note">已整合到每日流行話題日報（<code>daily_trending_topics.py</code>），結合 Firecrawl 的 9 大來源破 AI 同溫層。</div>
+</section>
+
+<!-- ===== SUMMARY ===== -->
+<section class="slide">
+  <h2>重點回顧</h2>
+
+  <div class="grid2">
+    <div class="card" style="border-left:3px solid var(--blue)">
+      <h4 style="color:var(--blue)">Prompt Skill</h4>
+      <p>Seedance prompt 從「寫作文」進化到「寫分鏡腳本」。時間戳 + 鏡頭語言 + @ 引用 + 音效 + 台詞格式 + 禁止項。</p>
+    </div>
+    <div class="card" style="border-left:3px solid var(--green)">
+      <h4 style="color:var(--green)">720p + 超解析度</h4>
+      <p>720p 生成（品質最穩）&rarr; Real-ESRGAN 後期拉到 4K/5K。全部免費，本機 GPU 運算。</p>
+    </div>
+    <div class="card" style="border-left:3px solid var(--accent)">
+      <h4 style="color:var(--accent)">Playwright Headless</h4>
+      <p>突破 SPA 網站的萬能鑰匙。Threads / IG / 任何 JS 渲染頁面。搭配排程 = 自動化資料收集。</p>
+    </div>
+    <div class="card" style="border-left:3px solid var(--yellow)">
+      <h4 style="color:var(--yellow)">免費工具鏈</h4>
+      <p>三者結合 = 免費的影片製作 + 研究工具鏈。Seedance &rarr; 超解析度 &rarr; 爬蟲 &rarr; 日報，全自動零成本。</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:2rem">資源連結</h3>
+  <table>
+    <tr><th>資源</th><th>連結</th></tr>
+    <tr><td>Seedance Prompt（中文版）</td><td><a href="https://github.com/MapleShaw/seedance2.0-prompt-skill" target="_blank">MapleShaw/seedance2.0-prompt-skill</a></td></tr>
+    <tr><td>Seedance Prompt（英文版）</td><td><a href="https://github.com/dexhunter/seedance2-skill" target="_blank">dexhunter/seedance2-skill</a></td></tr>
+    <tr><td>Real-ESRGAN</td><td><a href="https://github.com/xinntao/Real-ESRGAN" target="_blank">xinntao/Real-ESRGAN</a></td></tr>
+    <tr><td>Playwright</td><td><a href="https://github.com/microsoft/playwright" target="_blank">microsoft/playwright</a></td></tr>
+  </table>
+
+  <div style="text-align:center;margin-top:3rem;color:var(--muted);font-size:0.85rem">
+    2026-05-26 &middot; Built with Claude Code
+  </div>
+</section>
+
+</body>
+</html>
