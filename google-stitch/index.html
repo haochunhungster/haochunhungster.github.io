@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Google Stitch — 用一句話設計整個 App</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Space+Mono:wght@400;700&family=Sora:wght@300;400;600;700;800&display=swap');
+
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0a0f;
+  --surface:#13131a;
+  --surface2:#1a1a24;
+  --border:#2a2a3a;
+  --text:#e8e8f0;
+  --text2:#9898b0;
+  --blue:#4285f4;
+  --green:#34a853;
+  --yellow:#fbbc04;
+  --red:#ea4335;
+  --grad:linear-gradient(135deg,#4285f4,#34a853,#fbbc04,#ea4335);
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--bg);color:var(--text);font-family:'Noto Sans TC','Sora',sans-serif;overflow-x:hidden;line-height:1.7}
+
+/* Grain overlay */
+body::after{content:'';position:fixed;inset:0;pointer-events:none;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");z-index:9999}
+
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+
+/* ─── HERO ─── */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;width:800px;height:800px;border-radius:50%;background:radial-gradient(circle,rgba(66,133,244,.12) 0%,transparent 70%);top:-200px;left:-200px;animation:float 20s ease-in-out infinite}
+.hero::after{content:'';position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(234,67,53,.08) 0%,transparent 70%);bottom:-150px;right:-150px;animation:float 25s ease-in-out infinite reverse}
+@keyframes float{0%,100%{transform:translate(0,0)}50%{transform:translate(40px,30px)}}
+
+.hero-inner{position:relative;z-index:1}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 20px;border-radius:100px;border:1px solid var(--border);background:var(--surface);font-size:.85rem;color:var(--text2);margin-bottom:32px;font-family:'Space Mono',monospace}
+.hero-badge span{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+.hero h1{font-family:'Sora','Noto Sans TC',sans-serif;font-size:clamp(2.4rem,6vw,4.5rem);font-weight:800;line-height:1.15;margin-bottom:24px;letter-spacing:-.02em}
+.hero h1 .g{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:clamp(1rem,2vw,1.3rem);color:var(--text2);max-width:640px;margin:0 auto 40px;font-weight:300}
+.hero-cta{display:inline-flex;align-items:center;gap:10px;padding:16px 36px;border-radius:14px;background:var(--blue);color:#fff;text-decoration:none;font-weight:600;font-size:1.05rem;transition:all .3s;border:none;cursor:pointer;position:relative;overflow:hidden}
+.hero-cta:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(66,133,244,.35)}
+.hero-cta::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,.15) 50%,transparent 60%);transform:translateX(-100%);transition:transform .6s}
+.hero-cta:hover::after{transform:translateX(100%)}
+
+.hero-stats{display:flex;justify-content:center;gap:48px;margin-top:64px;flex-wrap:wrap}
+.hero-stats div{text-align:center}
+.hero-stats strong{display:block;font-family:'Sora',sans-serif;font-size:2rem;font-weight:700;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-stats span{font-size:.85rem;color:var(--text2)}
+
+/* ─── SECTIONS ─── */
+section{padding:100px 0}
+.section-tag{font-family:'Space Mono',monospace;font-size:.8rem;text-transform:uppercase;letter-spacing:3px;color:var(--blue);margin-bottom:12px}
+.section-title{font-family:'Sora','Noto Sans TC',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;margin-bottom:20px;line-height:1.25}
+.section-desc{color:var(--text2);font-size:1.05rem;max-width:600px;margin-bottom:48px;font-weight:300}
+
+/* ─── WHAT IS ─── */
+.what-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.what-visual{position:relative;aspect-ratio:4/3;border-radius:20px;overflow:hidden;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center}
+.what-visual-inner{padding:40px;text-align:center}
+.what-visual svg{width:160px;height:160px;margin-bottom:20px}
+.stitch-wordmark{font-family:'Sora',sans-serif;font-size:2.4rem;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.what-visual-tag{font-size:.9rem;color:var(--text2);margin-top:8px}
+.what-points{display:flex;flex-direction:column;gap:24px;margin-top:32px}
+.what-point{display:flex;gap:16px;align-items:flex-start}
+.what-point-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.what-point-icon.b{background:rgba(66,133,244,.15);color:var(--blue)}
+.what-point-icon.g{background:rgba(52,168,83,.15);color:var(--green)}
+.what-point-icon.y{background:rgba(251,188,4,.15);color:var(--yellow)}
+.what-point h4{font-weight:600;margin-bottom:4px}
+.what-point p{font-size:.9rem;color:var(--text2)}
+
+/* ─── FEATURES ─── */
+.features-section{background:var(--surface)}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.feature-card{padding:36px;border-radius:18px;background:var(--bg);border:1px solid var(--border);transition:all .35s;position:relative;overflow:hidden}
+.feature-card:hover{border-color:var(--blue);transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.3)}
+.feature-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--grad);opacity:0;transition:opacity .35s}
+.feature-card:hover::before{opacity:1}
+.feature-icon{font-size:2rem;margin-bottom:16px;display:block}
+.feature-card h3{font-size:1.15rem;font-weight:600;margin-bottom:10px}
+.feature-card p{font-size:.9rem;color:var(--text2);line-height:1.65}
+
+/* ─── PROMPTS ─── */
+.prompts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.prompt-card{border-radius:20px;overflow:hidden;border:1px solid var(--border);background:var(--surface);transition:all .35s}
+.prompt-card:hover{border-color:var(--green);transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.3)}
+.prompt-header{padding:20px 24px 16px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border)}
+.prompt-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}
+.prompt-header h3{font-size:1.05rem;font-weight:600}
+.prompt-body{padding:24px}
+.prompt-code{font-family:'Space Mono',monospace;font-size:.78rem;line-height:1.7;color:var(--text2);background:var(--bg);padding:16px;border-radius:10px;margin-bottom:16px;border:1px solid var(--border);word-break:break-word}
+.prompt-code::before{content:'prompt >';color:var(--green);display:block;margin-bottom:8px;font-weight:700;font-size:.7rem;text-transform:uppercase;letter-spacing:1px}
+.prompt-desc{font-size:.9rem;color:var(--text2)}
+
+/* ─── WORKFLOW ─── */
+.workflow-section{background:var(--surface)}
+.workflow-track{display:flex;gap:0;position:relative;padding:40px 0}
+.workflow-track::before{content:'';position:absolute;top:50%;left:0;right:0;height:2px;background:var(--border)}
+.wf-step{flex:1;text-align:center;position:relative;z-index:1}
+.wf-num{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-family:'Sora',sans-serif;font-weight:700;font-size:1.1rem;color:#fff;transition:transform .3s}
+.wf-step:nth-child(1) .wf-num{background:var(--blue)}
+.wf-step:nth-child(2) .wf-num{background:var(--red)}
+.wf-step:nth-child(3) .wf-num{background:var(--yellow);color:#000}
+.wf-step:nth-child(4) .wf-num{background:var(--green)}
+.wf-step:nth-child(5) .wf-num{background:linear-gradient(135deg,var(--blue),var(--green))}
+.wf-step:hover .wf-num{transform:scale(1.15)}
+.wf-step h4{font-size:.95rem;font-weight:600;margin-bottom:6px}
+.wf-step p{font-size:.8rem;color:var(--text2);padding:0 8px}
+
+/* ─── COMPARISON ─── */
+.comp-table-wrap{overflow-x:auto;border-radius:18px;border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;font-size:.95rem}
+thead{background:var(--surface2)}
+th{padding:18px 24px;text-align:left;font-weight:600;font-size:.9rem;border-bottom:1px solid var(--border)}
+th:first-child{width:180px}
+td{padding:16px 24px;border-bottom:1px solid var(--border)}
+tr:last-child td{border-bottom:none}
+tbody tr:hover{background:rgba(66,133,244,.04)}
+.t-stitch{color:var(--green);font-weight:600}
+.t-figma{color:var(--text2)}
+.comp-note{margin-top:20px;font-size:.85rem;color:var(--text2);text-align:center}
+
+/* ─── FOOTER ─── */
+footer{padding:60px 0 40px;border-top:1px solid var(--border);text-align:center}
+footer a{color:var(--blue);text-decoration:none;font-weight:500}
+footer a:hover{text-decoration:underline}
+footer .foot-sub{color:var(--text2);font-size:.85rem;margin-top:12px}
+.foot-colors{display:flex;justify-content:center;gap:8px;margin-bottom:24px}
+.foot-colors span{width:24px;height:4px;border-radius:2px}
+
+/* ─── ANIMATIONS ─── */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s,transform .7s}
+.reveal.visible{opacity:1;transform:none}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+.reveal-delay-4{transition-delay:.4s}
+.reveal-delay-5{transition-delay:.5s}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:900px){
+  .what-grid{grid-template-columns:1fr}
+  .features-grid,.prompts-grid{grid-template-columns:1fr}
+  .workflow-track{flex-direction:column;gap:32px}
+  .workflow-track::before{top:0;bottom:0;left:50%;width:2px;height:100%}
+  .hero-stats{gap:32px}
+  section{padding:64px 0}
+}
+@media(max-width:600px){
+  .hero-stats strong{font-size:1.5rem}
+  th,td{padding:12px 14px;font-size:.85rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge reveal"><span></span> Google Labs 最新發布</div>
+    <h1 class="reveal reveal-delay-1"><span class="g">Google Stitch</span><br>用一句話設計整個 App</h1>
+    <p class="reveal reveal-delay-2">Google Labs 推出的免費 AI 設計工具，由 Gemini 2.5 Pro 驅動<br>從文字描述到完整 UI，幾秒內完成</p>
+    <a href="https://stitch.withgoogle.com" target="_blank" rel="noopener" class="hero-cta reveal reveal-delay-3">開始使用 Stitch &rarr;</a>
+    <div class="hero-stats reveal reveal-delay-4">
+      <div><strong>400</strong><span>每日免費 Credits</span></div>
+      <div><strong>7+</strong><span>框架程式碼匯出</span></div>
+      <div><strong>5</strong><span>畫面同時生成</span></div>
+      <div><strong>$0</strong><span>完全免費</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHAT IS ═══ -->
+<section>
+  <div class="wrap">
+    <div class="what-grid">
+      <div>
+        <div class="section-tag reveal">What is Stitch</div>
+        <h2 class="section-title reveal reveal-delay-1">AI 原生設計平台<br>直接挑戰 Figma</h2>
+        <p class="section-desc reveal reveal-delay-2">Google Stitch 是一套完全免費的 AI 設計工具，你只需要打字描述想要的介面，它就能在幾秒內生成高品質的 UI 設計，並直接匯出可用的程式碼。</p>
+        <div class="what-points">
+          <div class="what-point reveal reveal-delay-2">
+            <div class="what-point-icon b">&#9889;</div>
+            <div><h4>Gemini 2.5 Pro 驅動</h4><p>Google 最強大的多模態模型，理解設計語言與使用者意圖</p></div>
+          </div>
+          <div class="what-point reveal reveal-delay-3">
+            <div class="what-point-icon g">&#10003;</div>
+            <div><h4>完全免費</h4><p>每天 400 credits，月計約 12,450 次生成，不需信用卡</p></div>
+          </div>
+          <div class="what-point reveal reveal-delay-4">
+            <div class="what-point-icon y">&#9733;</div>
+            <div><h4>I/O 2026 重磅更新</h4><p>即時串流 Agent + 多人協作，正面對決 Figma</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="what-visual reveal reveal-delay-2">
+        <div class="what-visual-inner">
+          <svg viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="10" width="60" height="60" rx="14" fill="#4285f4" opacity=".9"/>
+            <rect x="90" y="10" width="60" height="60" rx="14" fill="#ea4335" opacity=".9"/>
+            <rect x="10" y="90" width="60" height="60" rx="14" fill="#fbbc04" opacity=".9"/>
+            <rect x="90" y="90" width="60" height="60" rx="14" fill="#34a853" opacity=".9"/>
+            <path d="M70 50 L90 50" stroke="#fff" stroke-width="2" opacity=".5"/>
+            <path d="M50 70 L50 90" stroke="#fff" stroke-width="2" opacity=".5"/>
+            <path d="M110 70 L110 90" stroke="#fff" stroke-width="2" opacity=".5"/>
+            <path d="M70 110 L90 110" stroke="#fff" stroke-width="2" opacity=".5"/>
+          </svg>
+          <div class="stitch-wordmark">Stitch</div>
+          <div class="what-visual-tag">Design with AI &mdash; by Google Labs</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FEATURES ═══ -->
+<section class="features-section">
+  <div class="wrap">
+    <div class="section-tag reveal">Features</div>
+    <h2 class="section-title reveal reveal-delay-1">六大核心功能</h2>
+    <p class="section-desc reveal reveal-delay-2">不只是生成圖片，而是一套完整的設計工作流。</p>
+    <div class="features-grid">
+      <div class="feature-card reveal reveal-delay-1">
+        <span class="feature-icon">&#128483;</span>
+        <h3>語音設計</h3>
+        <p>Voice Canvas 讓你用說的創造介面。對著畫布講話，AI 即時回應，邊說邊設計，手都不用動。</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-2">
+        <span class="feature-icon">&#128241;</span>
+        <h3>多螢幕生成</h3>
+        <p>一次描述整個 App 流程，同時生成最多 5 個互相連結的畫面，色彩、字型、元件庫自動統一。</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-3">
+        <span class="feature-icon">&#9999;</span>
+        <h3>手繪變 UI</h3>
+        <p>上傳手繪草稿、線框圖或現有截圖，Stitch 自動辨識佈局並轉換成精緻的數位介面。</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-1">
+        <span class="feature-icon">&#128187;</span>
+        <h3>程式碼匯出</h3>
+        <p>支援 HTML/CSS、Tailwind、React、Vue、Angular、Flutter、SwiftUI，涵蓋幾乎所有主流框架。</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-2">
+        <span class="feature-icon">&#127917;</span>
+        <h3>即時原型</h3>
+        <p>一鍵預覽互動原型，點擊按鈕時 AI 會自動預測下一個畫面，不需要手動連結。</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-3">
+        <span class="feature-icon">&#128101;</span>
+        <h3>多人協作</h3>
+        <p>I/O 2026 新功能。多人同時編輯同一個設計稿，即時同步，免費提供 &mdash; Figma 收 $15/月。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROMPT EXAMPLES ═══ -->
+<section>
+  <div class="wrap">
+    <div class="section-tag reveal">Prompt Examples</div>
+    <h2 class="section-title reveal reveal-delay-1">一句話，一個完整介面</h2>
+    <p class="section-desc reveal reveal-delay-2">看看這些範本 prompt 能產出什麼樣的設計。</p>
+    <div class="prompts-grid">
+
+      <div class="prompt-card reveal reveal-delay-1">
+        <div class="prompt-header">
+          <div class="prompt-dot" style="background:var(--red)"></div>
+          <h3>外送 App</h3>
+        </div>
+        <div class="prompt-body">
+          <div class="prompt-code">Design a mobile food delivery app with white background, orange accents, card-style restaurant listings, bottom navigation with Home/Search/Orders/Profile tabs, and a hero banner for promotions</div>
+          <p class="prompt-desc">一句 prompt 生成完整外送 App 介面，包含首頁、搜尋、訂單追蹤等多個畫面，設計系統自動統一。</p>
+        </div>
+      </div>
+
+      <div class="prompt-card reveal reveal-delay-2">
+        <div class="prompt-header">
+          <div class="prompt-dot" style="background:var(--blue)"></div>
+          <h3>SaaS 數據儀表板</h3>
+        </div>
+        <div class="prompt-body">
+          <div class="prompt-code">A SaaS analytics dashboard showing user signups, churn rate, and MRR over time. Left sidebar navigation, top bar with date range filter, KPI cards at top, line charts below, dark theme</div>
+          <p class="prompt-desc">從零到完整的數據分析後台，包含圖表、篩選器、導航列，直接匯出 React 元件即可使用。</p>
+        </div>
+      </div>
+
+      <div class="prompt-card reveal reveal-delay-3">
+        <div class="prompt-header">
+          <div class="prompt-dot" style="background:var(--green)"></div>
+          <h3>產品 Landing Page</h3>
+        </div>
+        <div class="prompt-body">
+          <div class="prompt-code">Modern SaaS landing page for a project management tool. Dark navy hero, white content sections, blue accent buttons. Include: hero with headline + CTA, 3-column features grid with icons, pricing table with 3 tiers, testimonials, footer</div>
+          <p class="prompt-desc">完整的產品著陸頁，從 Hero 區塊到定價方案到頁尾，設計語言一致，可直接匯出上線。</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WORKFLOW ═══ -->
+<section class="workflow-section">
+  <div class="wrap">
+    <div class="section-tag reveal">Workflow</div>
+    <h2 class="section-title reveal reveal-delay-1">五步驟，從想法到程式碼</h2>
+    <p class="section-desc reveal reveal-delay-2">不需要設計經驗，任何人都能上手。</p>
+    <div class="workflow-track reveal reveal-delay-3">
+      <div class="wf-step">
+        <div class="wf-num">1</div>
+        <h4>輸入描述</h4>
+        <p>文字、語音、或上傳圖片</p>
+      </div>
+      <div class="wf-step">
+        <div class="wf-num">2</div>
+        <h4>AI 生成設計</h4>
+        <p>幾秒內完成高品質 UI</p>
+      </div>
+      <div class="wf-step">
+        <div class="wf-num">3</div>
+        <h4>即時預覽</h4>
+        <p>互動原型 & 微調細節</p>
+      </div>
+      <div class="wf-step">
+        <div class="wf-num">4</div>
+        <h4>匯出程式碼</h4>
+        <p>React / Vue / Flutter ...</p>
+      </div>
+      <div class="wf-step">
+        <div class="wf-num">5</div>
+        <h4>貼進專案</h4>
+        <p>直接整合到你的 Codebase</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ COMPARISON ═══ -->
+<section>
+  <div class="wrap">
+    <div class="section-tag reveal">Comparison</div>
+    <h2 class="section-title reveal reveal-delay-1">Stitch vs Figma</h2>
+    <p class="section-desc reveal reveal-delay-2">不是要取代 Figma，而是提供一條更快的路。</p>
+    <div class="comp-table-wrap reveal reveal-delay-3">
+      <table>
+        <thead>
+          <tr><th></th><th>Google Stitch</th><th>Figma</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>價格</strong></td><td class="t-stitch">免費</td><td class="t-figma">$15 / 人 / 月</td></tr>
+          <tr><td><strong>AI 生成</strong></td><td class="t-stitch">原生內建 (Gemini)</td><td class="t-figma">需第三方外掛</td></tr>
+          <tr><td><strong>程式碼匯出</strong></td><td class="t-stitch">7+ 框架原生支援</td><td class="t-figma">需外掛</td></tr>
+          <tr><td><strong>多人協作</strong></td><td class="t-stitch">&#10003; (2026.05 新增)</td><td class="t-figma">&#10003;</td></tr>
+          <tr><td><strong>學習曲線</strong></td><td class="t-stitch">極低（打字就好）</td><td class="t-figma">中等</td></tr>
+          <tr><td><strong>最適合</strong></td><td class="t-stitch">快速原型、MVP</td><td class="t-figma">精細設計、設計系統</td></tr>
+          <tr><td><strong>語音設計</strong></td><td class="t-stitch">&#10003; Voice Canvas</td><td class="t-figma">&#10007;</td></tr>
+          <tr><td><strong>手繪轉 UI</strong></td><td class="t-stitch">&#10003; 原生支援</td><td class="t-figma">&#10007;</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="comp-note">Figma 在精細設計和完整設計系統管理方面仍有優勢，兩者可互補使用。</p>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-colors">
+      <span style="background:var(--blue)"></span>
+      <span style="background:var(--red)"></span>
+      <span style="background:var(--yellow)"></span>
+      <span style="background:var(--green)"></span>
+    </div>
+    <p>免費使用 &mdash; <a href="https://stitch.withgoogle.com" target="_blank" rel="noopener">stitch.withgoogle.com</a></p>
+    <p class="foot-sub">資料整理：2026.05 &#12288;|&#12288;本頁非 Google 官方內容</p>
+  </div>
+</footer>
+
+<script>
+const io=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}})},{threshold:.15,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
