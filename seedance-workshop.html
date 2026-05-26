@@ -197,8 +197,42 @@ code{font-family:var(--mono);font-size:0.85em;background:var(--surface);padding:
   <div class="chapter-tag">Chapter 03</div>
   <h2>720p vs 1080p — 為什麼低解析度<span class="hl">反而更好</span></h2>
 
-  <p>用<strong>完全相同的 prompt + 同樣的角色參考圖</strong>，分別生成 720p 和 1080p：</p>
+  <p>用<strong>完全相同的 prompt + 同樣的角色參考圖</strong>，分別生成 720p 和 1080p。直接看影片比較：</p>
 
+  <h3>720p 原始版（15 秒一鏡）— 效果最好</h3>
+  <div class="card" style="border-color:var(--green);padding:0.5rem">
+    <video controls playsinline style="width:100%;border-radius:6px" poster="">
+      <source src="https://d8j0ntlcm91z4.cloudfront.net/user_3DiAp84wNTAFou8B3EEVfUzRey7/hf_20260526_043228_0e5829d3-4c60-4dff-9cf4-002795d7a147.mp4" type="video/mp4">
+    </video>
+    <p style="text-align:center;margin:0.5rem 0 0;font-size:0.8rem"><span class="tag tag-green">720p</span> 1280&times;720 &middot; 15s &middot; Seedance 2.0 &middot; comedy 模式</p>
+  </div>
+
+  <h3>1080p 同 prompt 重生（15 秒）— 品質下降</h3>
+  <div class="card" style="border-color:var(--red);padding:0.5rem">
+    <video controls playsinline style="width:100%;border-radius:6px">
+      <source src="https://d8j0ntlcm91z4.cloudfront.net/user_3DiAp84wNTAFou8B3EEVfUzRey7/hf_20260526_045551_70d7317f-fa52-4f3a-9e54-6d3c955ee312.mp4" type="video/mp4">
+    </video>
+    <p style="text-align:center;margin:0.5rem 0 0;font-size:0.8rem"><span class="tag tag-red">1080p</span> 1920&times;1080 &middot; 15s &middot; 同一個 prompt &middot; 動作連貫性明顯下降</p>
+  </div>
+
+  <h3>分段拍攝嘗試（各 10 秒 1080p）</h3>
+  <div class="grid2">
+    <div class="card" style="padding:0.5rem">
+      <video controls playsinline style="width:100%;border-radius:6px">
+        <source src="https://d8j0ntlcm91z4.cloudfront.net/user_3DiAp84wNTAFou8B3EEVfUzRey7/hf_20260526_044031_6dcd57b6-54bd-427c-8ae9-501b900854a9.mp4" type="video/mp4">
+      </video>
+      <p style="text-align:center;margin:0.5rem 0 0;font-size:0.8rem"><span class="tag tag-yellow">第 1 段</span> 聚餐 &rarr; 指魚 &rarr; 砸魚</p>
+    </div>
+    <div class="card" style="padding:0.5rem">
+      <video controls playsinline style="width:100%;border-radius:6px">
+        <source src="https://d8j0ntlcm91z4.cloudfront.net/user_3DiAp84wNTAFou8B3EEVfUzRey7/hf_20260526_044518_8df47c93-f48e-4fbf-9c00-3326a170488c.mp4" type="video/mp4">
+      </video>
+      <p style="text-align:center;margin:0.5rem 0 0;font-size:0.8rem"><span class="tag tag-yellow">第 2 段</span> 撞牆 &rarr; 站起 &rarr; 結尾台詞</p>
+    </div>
+  </div>
+  <div class="note warn">分段拍攝的問題：兩段之間角色外觀和場景會不一致，拼接後有明顯斷裂感。</div>
+
+  <h3>實測結論</h3>
   <div class="grid2" style="margin:1.5rem 0">
     <div class="card" style="border-color:var(--green)">
       <h4 style="color:var(--green);text-align:center;font-size:1.3rem">720p &#10003;</h4>
@@ -248,6 +282,29 @@ code{font-family:var(--mono);font-size:0.85em;background:var(--surface);padding:
     <div class="step" style="border-color:var(--accent)">Real-ESRGAN<br><strong>AI 超解析度</strong></div>
     <div class="arrow">&rarr;</div>
     <div class="step" style="border-color:var(--green)">1440p / 4K / 5K<br><strong>高清輸出</strong></div>
+  </div>
+
+  <h3>三個版本直接比較 — 播放看差異</h3>
+
+  <div class="card" style="border-color:var(--muted);padding:0.5rem;margin-bottom:1rem">
+    <video controls playsinline style="width:100%;border-radius:6px">
+      <source src="https://d8j0ntlcm91z4.cloudfront.net/user_3DiAp84wNTAFou8B3EEVfUzRey7/hf_20260526_043228_0e5829d3-4c60-4dff-9cf4-002795d7a147.mp4" type="video/mp4">
+    </video>
+    <p style="text-align:center;margin:0.5rem 0 0;font-size:0.8rem"><span class="tag tag-blue">原始 720p</span> 1280&times;720 &middot; ~6 MB &middot; Seedance 2.0 直出</p>
+  </div>
+
+  <div class="card" style="border-color:var(--blue);padding:0.5rem;margin-bottom:1rem">
+    <video controls playsinline style="width:100%;border-radius:6px">
+      <source src="https://d2ol7oe51mr4n9.cloudfront.net/user_3DiAp84wNTAFou8B3EEVfUzRey7/fa694d9c-4711-4563-9df6-def6c789084e.mp4" type="video/mp4">
+    </video>
+    <p style="text-align:center;margin:0.5rem 0 0;font-size:0.8rem"><span class="tag tag-green">2x &rarr; 1440p</span> 2560&times;1440 &middot; 18 MB &middot; Real-ESRGAN 後期超解析度</p>
+  </div>
+
+  <div class="card" style="border-color:var(--accent);padding:0.5rem;margin-bottom:1rem">
+    <video controls playsinline style="width:100%;border-radius:6px">
+      <source src="https://d2ol7oe51mr4n9.cloudfront.net/user_3DiAp84wNTAFou8B3EEVfUzRey7/33dde22a-f82a-4224-bb38-dc95c01d1ef4.mp4" type="video/mp4">
+    </video>
+    <p style="text-align:center;margin:0.5rem 0 0;font-size:0.8rem"><span class="tag tag-yellow">4x &rarr; 5K</span> 5120&times;2880 &middot; 54 MB &middot; Real-ESRGAN 後期超解析度</p>
   </div>
 
   <div class="stat-row">
