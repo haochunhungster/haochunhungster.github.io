@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="zh-Hant"><head>
+<meta charset="utf-8">
+<title>農地測繪圖</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@400;500;700&display=swap');
+/* cyrillic-ext */
+/* cyrillic */
+/* greek */
+/* vietnamese */
+/* latin-ext */
+/* latin */
+/* cyrillic-ext */
+/* cyrillic */
+/* greek */
+/* vietnamese */
+/* latin-ext */
+/* latin */
+/* cyrillic */
+/* vietnamese */
+/* latin-ext */
+/* latin */
+/* cyrillic */
+/* vietnamese */
+/* latin-ext */
+/* latin */
+/* cyrillic */
+/* vietnamese */
+/* latin-ext */
+/* latin */
+/* cyrillic */
+/* vietnamese */
+/* latin-ext */
+/* latin */
+/* cyrillic */
+/* vietnamese */
+/* latin-ext */
+/* latin */
+</style>
+<style>
+  :root {
+    --paper: #f1ece0;
+    --paper-2: #e8e1d1;
+    --ink: #1a1814;
+    --ink-2: #4a463d;
+    --ink-3: #807a6b;
+    --rule: #2a2620;
+    --plot: #b8c89a;
+    --plot-stroke: #4a5d2f;
+    --accent: #8a3a1f;
+    --grid: rgba(40, 36, 28, 0.06);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: #2a2620;
+    font-family: "Noto Sans TC", system-ui, sans-serif;
+    color: var(--ink);
+    min-height: 100vh;
+  }
+  body {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 40px 24px 60px;
+  }
+  .sheet {
+    width: min(1200px, 100%);
+    background: var(--paper);
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 20px 20px;
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.4) inset,
+      0 30px 60px -20px rgba(0,0,0,0.5),
+      0 8px 20px -8px rgba(0,0,0,0.4);
+    border: 1px solid #c9c0a8;
+    position: relative;
+    padding: 36px 44px 32px;
+  }
+  /* corner registration marks */
+  .sheet::before,
+  .sheet::after,
+  .sheet > .reg-bl,
+  .sheet > .reg-br {
+    content: "";
+    position: absolute;
+    width: 14px; height: 14px;
+    border: 1px solid var(--ink);
+  }
+  .sheet::before { top: 14px; left: 14px; border-right: none; border-bottom: none; }
+  .sheet::after  { top: 14px; right: 14px; border-left: none; border-bottom: none; }
+  .sheet > .reg-bl { bottom: 14px; left: 14px; border-right: none; border-top: none; }
+  .sheet > .reg-br { bottom: 14px; right: 14px; border-left: none; border-top: none; }
+
+  /* ---------- header ---------- */
+  .header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    border-bottom: 2px solid var(--rule);
+    padding-bottom: 14px;
+    margin-bottom: 8px;
+  }
+  .title-block {
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+  }
+  .title-zh {
+    font-family: "Noto Serif TC", serif;
+    font-weight: 700;
+    font-size: 30px;
+    letter-spacing: 0.18em;
+    line-height: 1;
+  }
+  .title-en {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    color: var(--ink-3);
+    text-transform: uppercase;
+    padding-bottom: 3px;
+  }
+  .meta {
+    display: flex;
+    gap: 28px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    color: var(--ink-2);
+    letter-spacing: 0.08em;
+  }
+  .meta dt { color: var(--ink-3); font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 2px; }
+  .meta dd { font-size: 12px; color: var(--ink); }
+
+  /* ---------- sub bar ---------- */
+  .subbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0 22px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+    color: var(--ink-3);
+    text-transform: uppercase;
+  }
+  .subbar .crumb { display: flex; gap: 10px; align-items: center; }
+  .subbar .crumb b { color: var(--ink); font-weight: 500; }
+  .subbar .dot { width: 4px; height: 4px; background: var(--ink-3); border-radius: 50%; }
+
+  /* ---------- main grid ---------- */
+  .canvas {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 24px;
+    align-items: stretch;
+  }
+  .plot-area {
+    background: var(--paper-2);
+    border: 1px solid #b8af96;
+    position: relative;
+    padding: 28px 30px 22px;
+    min-height: 1280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  svg.plot { width: 100%; max-width: 560px; height: auto; display: block; }
+  .plot-area .corner-tick {
+    position: absolute;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 9px;
+    color: var(--ink-3);
+    letter-spacing: 0.1em;
+  }
+  .ct-tl { top: 8px; left: 12px; }
+  .ct-tr { top: 8px; right: 12px; }
+  .ct-bl { bottom: 8px; left: 12px; }
+  .ct-br { bottom: 8px; right: 12px; }
+
+  svg.plot { width: 100%; height: auto; display: block; }
+
+  svg.plot svg-text-label,
+  svg.plot text { font-family: "JetBrains Mono", monospace; }
+
+  /* ---------- data panel ---------- */
+  .panel {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .card {
+    background: var(--paper-2);
+    border: 1px solid #b8af96;
+    padding: 14px 16px 16px;
+  }
+  .card h3 {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.28em;
+    color: var(--ink-3);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #c9c0a8;
+    display: flex;
+    justify-content: space-between;
+  }
+  .card h3 .idx { color: var(--ink); }
+
+  .side-list { display: flex; flex-direction: column; gap: 8px; }
+  .side-row {
+    display: grid;
+    grid-template-columns: 18px 1fr auto;
+    gap: 10px;
+    align-items: baseline;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 13px;
+  }
+  .side-row .pip {
+    width: 14px; height: 14px;
+    border: 1.5px solid var(--rule);
+    display: inline-flex;
+    align-items: center; justify-content: center;
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--ink);
+    background: var(--paper);
+    transform: translateY(2px);
+  }
+  .side-row .lbl { color: var(--ink-2); font-size: 11px; letter-spacing: 0.16em; }
+  .side-row .val { font-weight: 500; font-variant-numeric: tabular-nums; }
+  .side-row .val small { font-size: 10px; color: var(--ink-3); margin-left: 2px; }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: #c9c0a8;
+    border: 1px solid #c9c0a8;
+    margin: -2px -2px 0;
+  }
+  .stat {
+    background: var(--paper-2);
+    padding: 10px 12px 12px;
+  }
+  .stat .k {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    color: var(--ink-3);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .stat .v {
+    font-family: "Noto Serif TC", serif;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .stat .v sub {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    color: var(--ink-3);
+    margin-left: 3px;
+    font-weight: 400;
+    vertical-align: baseline;
+  }
+  .stat.primary { grid-column: 1 / -1; }
+  .stat.primary .v { font-size: 30px; }
+
+  .note {
+    font-size: 11px;
+    line-height: 1.65;
+    color: var(--ink-2);
+    letter-spacing: 0.02em;
+  }
+  .note b { color: var(--ink); font-weight: 500; }
+
+  /* ---------- footer ---------- */
+  .footer {
+    margin-top: 18px;
+    padding-top: 12px;
+    border-top: 1px solid #c9c0a8;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    color: var(--ink-3);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  .footer .stamp {
+    border: 1.5px solid var(--accent);
+    color: var(--accent);
+    padding: 4px 12px 5px;
+    font-weight: 700;
+    letter-spacing: 0.32em;
+    transform: rotate(-2deg);
+    opacity: 0.85;
+  }
+
+  /* ---------- north arrow ---------- */
+  .compass {
+    position: absolute;
+    top: 22px;
+    right: 22px;
+    width: 56px; height: 56px;
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+<span class="reg-bl"></span><span class="reg-br"></span>
+
+<!-- ============ HEADER ============ -->
+<header class="header">
+  <div class="title-block">
+    <div class="title-zh">農地測繪圖</div>
+    <div class="title-en">Parcel&nbsp;·&nbsp;Site Survey&nbsp;·&nbsp;Sheet 01</div>
+  </div>
+  <dl class="meta">
+    <div><dt>圖號 / Drawing</dt><dd>NT-01 · v3</dd></div>
+    <div><dt>比例 / Scale</dt><dd>1 : 300</dd></div>
+    <div><dt>日期 / Date</dt><dd>2026.05.25</dd></div>
+  </dl>
+</header>
+
+<div class="subbar">
+  <div class="crumb">
+    <span>Geometry</span><span class="dot"></span>
+    <b>Irregular quadrilateral</b><span class="dot"></span>
+    <span>4 vertices · 4 edges</span>
+  </div>
+  <div class="crumb">
+    <span>Status</span><span class="dot"></span>
+    <b style="color:var(--accent)">尺寸確認中 / Dimensions only</b>
+  </div>
+</div>
+
+<!-- ============ MAIN ============ -->
+<div class="canvas">
+
+  <!-- ===== PLOT ===== -->
+  <section class="plot-area">
+    <span class="corner-tick ct-tl">D</span>
+    <span class="corner-tick ct-tr">A</span>
+    <span class="corner-tick ct-bl">C</span>
+    <span class="corner-tick ct-br">B</span>
+
+    <!-- north arrow -->
+    <svg class="compass" viewBox="0 0 56 56" aria-hidden="true">
+      <circle cx="28" cy="28" r="26" fill="none" stroke="#1a1814" stroke-width="0.8"></circle>
+      <circle cx="28" cy="28" r="20" fill="none" stroke="#807a6b" stroke-width="0.4" stroke-dasharray="2 2"></circle>
+      <polygon points="28,6 32,28 28,24 24,28" fill="#1a1814"></polygon>
+      <polygon points="28,50 32,28 28,32 24,28" fill="none" stroke="#1a1814" stroke-width="0.6"></polygon>
+      <text x="28" y="4" text-anchor="middle" font-family="JetBrains Mono" font-size="6.5" font-weight="700" fill="#1a1814">N</text>
+      <text x="28" y="55" text-anchor="middle" font-family="JetBrains Mono" font-size="5" fill="#807a6b">S</text>
+      <text x="3" y="30" text-anchor="middle" font-family="JetBrains Mono" font-size="5" fill="#807a6b">W</text>
+      <text x="53" y="30" text-anchor="middle" font-family="JetBrains Mono" font-size="5" fill="#807a6b">E</text>
+    </svg>
+
+    <!-- Main survey drawing
+         Drawing units: 1 px = 0.18 m (so 115.6m ≈ 642 px)
+         The trapezoid is drawn slightly exaggerated so the geometry reads.
+         Real coords:
+           A (NW) = (0, 0)
+           B (NE) = (115.3, ~0.4)        -- top edge 115.3m
+           C (SE) = (115.3, 19.5)        -- right edge 19.1m
+           D (SW) = (-0.3, 20.1)         -- bottom edge ≈115.6m, left edge ≈20.2m
+    -->
+    <svg class="plot" viewBox="0 0 360 820" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(360 0) rotate(90)">
+      <defs>
+        <pattern id="hatch" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)">
+          <line x1="0" y1="0" x2="0" y2="6" stroke="#4a5d2f" stroke-width="0.6" opacity="0.35"></line>
+        </pattern>
+        <pattern id="hatch2" patternUnits="userSpaceOnUse" width="14" height="14">
+          <rect width="14" height="14" fill="#b8c89a" opacity="0.55"></rect>
+          <circle cx="3" cy="3" r="0.6" fill="#4a5d2f" opacity="0.5"></circle>
+          <circle cx="10" cy="9" r="0.6" fill="#4a5d2f" opacity="0.5"></circle>
+          <circle cx="6" cy="11" r="0.4" fill="#4a5d2f" opacity="0.4"></circle>
+        </pattern>
+        <marker id="arrowEnd" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 Z" fill="#1a1814"></path>
+        </marker>
+        <marker id="tickStart" viewBox="-5 -5 10 10" refX="0" refY="0" markerWidth="8" markerHeight="8" orient="auto">
+          <line x1="0" y1="-4" x2="0" y2="4" stroke="#1a1814" stroke-width="1.2"></line>
+        </marker>
+      </defs>
+
+      <!-- baseline grid (subtle) -->
+      <g opacity="0.5">
+        <path d="M60,60 H800 M60,300 H800" stroke="#807a6b" stroke-width="0.4" stroke-dasharray="2 4"></path>
+      </g>
+
+      <defs>
+        <pattern id="glass" patternUnits="userSpaceOnUse" width="12" height="12">
+          <rect width="12" height="12" fill="#d4e2ea"></rect>
+          <rect x="0.5" y="0.5" width="11" height="11" fill="none" stroke="#6a8b9c" stroke-width="0.4" opacity="0.7"></rect>
+          <line x1="0" y1="0" x2="12" y2="12" stroke="#9ab4c2" stroke-width="0.3" opacity="0.5"></line>
+        </pattern>
+        <pattern id="bldg" patternUnits="userSpaceOnUse" width="18" height="10">
+          <rect width="18" height="10" fill="#dcc6aa"></rect>
+          <line x1="0" y1="5" x2="18" y2="5" stroke="#8a6a48" stroke-width="0.4" opacity="0.55"></line>
+          <line x1="0" y1="0" x2="0" y2="5" stroke="#8a6a48" stroke-width="0.4" opacity="0.55"></line>
+          <line x1="9" y1="5" x2="9" y2="10" stroke="#8a6a48" stroke-width="0.4" opacity="0.55"></line>
+        </pattern>
+        <pattern id="paved" patternUnits="userSpaceOnUse" width="8" height="8">
+          <rect width="8" height="8" fill="#cfc6b8"></rect>
+          <circle cx="2" cy="3" r="0.3" fill="#8a8270" opacity="0.5"></circle>
+          <circle cx="6" cy="6" r="0.3" fill="#8a8270" opacity="0.5"></circle>
+          <circle cx="4" cy="1" r="0.2" fill="#9a9080" opacity="0.4"></circle>
+        </pattern>
+        <pattern id="welcome" patternUnits="userSpaceOnUse" width="8" height="8">
+          <rect width="8" height="8" fill="#ede5cc"></rect>
+          <line x1="0" y1="4" x2="8" y2="4" stroke="#b8a880" stroke-width="0.3" opacity="0.55"></line>
+          <line x1="4" y1="0" x2="4" y2="8" stroke="#b8a880" stroke-width="0.3" opacity="0.55"></line>
+          <line x1="0" y1="0" x2="8" y2="0" stroke="#b8a880" stroke-width="0.25" opacity="0.4"></line>
+          <line x1="0" y1="0" x2="0" y2="8" stroke="#b8a880" stroke-width="0.25" opacity="0.4"></line>
+        </pattern>
+        <!-- Parking stall pattern: 2.5m wide × 5m deep, tiled along the parcel south edge (edge ④) -->
+        <pattern id="stalls5" patternUnits="userSpaceOnUse" x="70" y="194" width="14.3125" height="42">
+          <rect width="14.3125" height="42" fill="#cfc6b8"></rect>
+          <circle cx="3" cy="8" r="0.3" fill="#8a8270" opacity="0.45"></circle>
+          <circle cx="9" cy="24" r="0.3" fill="#8a8270" opacity="0.45"></circle>
+          <circle cx="6" cy="34" r="0.2" fill="#9a9080" opacity="0.4"></circle>
+          <line x1="0" y1="3" x2="0" y2="40" stroke="#6a5a40" stroke-width="0.45" opacity="0.75"></line>
+        </pattern>
+        <marker id="flowArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto">
+          <path d="M0,0 L10,5 L0,10 Z" fill="#c8421f"></path>
+        </marker>
+      </defs>
+
+      <!--
+        Plot polygon — scaled for legibility. We scale long axis to 660px,
+        short axis to 130px, and inject a small skew so the trapezoid reads.
+        A(70, 90) — NW
+        B(730, 95) — NE  (115.3m top, slight downward)
+        C(730, 225) — SE (19.1m right)
+        D(64, 235) — SW  (115.6m bottom, slight downward; 20.2m left)
+        Visual scale: ≈19-20m → 135px, so 1m ≈ 6.85px → 4m driveway ≈ 27px.
+      -->
+      <polygon points="70,90 730,95 730,225 64,235" fill="url(#hatch2)" stroke="#4a5d2f" stroke-width="2" stroke-linejoin="miter"></polygon>
+
+      <!-- ============ DRIVEWAY (4m, shortened to east section only) ============ -->
+      <defs>
+        <pattern id="gravel" patternUnits="userSpaceOnUse" width="8" height="8">
+          <rect width="8" height="8" fill="#d8c89c"></rect>
+          <circle cx="2" cy="2" r="0.7" fill="#8a7548" opacity="0.7"></circle>
+          <circle cx="6" cy="5" r="0.6" fill="#8a7548" opacity="0.6"></circle>
+          <circle cx="3" cy="6" r="0.4" fill="#8a7548" opacity="0.5"></circle>
+          <circle cx="7" cy="1" r="0.5" fill="#a89060" opacity="0.5"></circle>
+        </pattern>
+      </defs>
+      <!-- ============ 車道 4m: 出入口 → 圓環 ============ -->
+      <!-- Driveway: 4m wide strip along east edge, from gate (x=730) to building boundary (x=535.6) -->
+      <polygon points="535.6,93.5 730,95 730,122 535.6,120.5" fill="url(#paved)" stroke="#6a5a40" stroke-width="1.2" stroke-linejoin="miter"></polygon>
+      <line x1="540" y1="107" x2="725" y2="108.5" stroke="#3a3020" stroke-width="0.8" stroke-dasharray="6 6" opacity="0.5"></line>
+      <g font-family="JetBrains Mono, monospace" fill="#3a3020">
+        <text x="632" y="108" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="3">車道 · DRIVEWAY · 4.0 m</text>
+      </g>
+
+      <!-- ============ 東南畸零填補: 圓環弧→主建物→東邊界 的楔形鋪面 ============ -->
+      <!-- Fills the crescent between roundabout arc, building edge (x=535.6), and east edge (y≈93) -->
+      <path d="M 535.6,161
+               L 535.6,93.5
+               L 467.6,93
+               A 68,68 0 0 1 535.6,161
+               Z" fill="url(#paved)" stroke="none"></path>
+      <defs>
+        <marker id="arrowAccess" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+          <path d="M0,0 L10,5 L0,10 Z" fill="#8a3a1f"></path>
+        </marker>
+        <pattern id="asphalt" patternUnits="userSpaceOnUse" width="6" height="6">
+          <rect width="6" height="6" fill="#3a3530"></rect>
+          <circle cx="1" cy="1" r="0.4" fill="#5a544a" opacity="0.5"></circle>
+          <circle cx="4" cy="3" r="0.3" fill="#6a635a" opacity="0.4"></circle>
+          <circle cx="2" cy="5" r="0.3" fill="#4a443a" opacity="0.6"></circle>
+        </pattern>
+      </defs>
+
+      <!-- ============ 通道 4m: 圓環左側 → 北邊界(邊①), 緊貼停車格東側 ============ -->
+      <!-- Bottom edge aligns with parking top; 27px wide (4m); from roundabout x≈400 to north boundary x≈65 -->
+      <polygon points="66,174 400,168 400,196 65,201" fill="url(#paved)" stroke="#6a5a40" stroke-width="0.7"></polygon>
+      <line x1="100" y1="187" x2="380" y2="182" stroke="#5a4a30" stroke-width="0.6" stroke-dasharray="5 5" opacity="0.4"></line>
+      <text x="230" y="186" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7.5" font-weight="700" fill="#3a2410" letter-spacing="1.5">通道 · AISLE · 4.0 m</text>
+
+      <!-- ============ Vehicle flow: 暫時隱藏，等道路與停車格配置確認後再畫 ============ -->
+
+      <!-- ============ 停車格 × 28 (2.5 m × 5 m, 沿邊 ④ D→C 南緣, 東端接下車區) ============ -->
+      <g>
+        <!-- Parallelogram strip along sloped south edge -->
+        <polygon points="70,200.91 470.75,194.89 470.75,228.89 70,234.91" fill="url(#stalls5)" stroke="#6a5a40" stroke-width="0.9"></polygon>
+        <!-- East cap line (closing the last stall) -->
+        <line x1="470.75" y1="196" x2="470.75" y2="228" stroke="#6a5a40" stroke-width="0.45" opacity="0.75"></line>
+        <!-- Stall numbers (every 5th, ending at 28) -->
+        <g font-family="JetBrains Mono, monospace" font-size="5.5" fill="#6a4a30" text-anchor="middle" opacity="0.75">
+          <text x="77" y="208">01</text>
+          <text x="134" y="207">05</text>
+          <text x="206" y="206">10</text>
+          <text x="278" y="205">15</text>
+          <text x="349" y="204">20</text>
+          <text x="421" y="203">25</text>
+          <text x="464" y="202">28</text>
+        </g>
+        <!-- 5 m depth dimension (vertical in original = horizontal in rotated view) -->
+        <g stroke="#5a4628" stroke-width="0.5" fill="none">
+          <line x1="62" y1="201.5" x2="62" y2="234.5" marker-start="url(#arrowEnd)" marker-end="url(#arrowEnd)"></line>
+        </g>
+        <g transform="translate(57 218) rotate(-90)" font-family="JetBrains Mono, monospace" fill="#3a2410">
+          <rect x="-13" y="-6" width="26" height="11" fill="#f1ece0" stroke="none"></rect>
+          <text text-anchor="middle" dominant-baseline="middle" font-size="8" font-weight="700">5.0 m</text>
+        </g>
+        <!-- 2.5 m width dimension (horizontal in original = vertical in rotated view) -->
+        <g stroke="#5a4628" stroke-width="0.5" fill="none">
+          <line x1="70" y1="244" x2="84.3" y2="243.7" marker-start="url(#arrowEnd)" marker-end="url(#arrowEnd)"></line>
+        </g>
+        <g font-family="JetBrains Mono, monospace" fill="#3a2410">
+          <rect x="63" y="247" width="28" height="10" fill="#f1ece0" stroke="none"></rect>
+          <text x="77" y="255" text-anchor="middle" font-size="7.5" font-weight="700">2.5 m</text>
+        </g>
+        <!-- Region label inside strip -->
+        <text x="270" y="218" text-anchor="middle" font-family="Noto Serif TC, serif" font-size="11" font-weight="700" fill="#3a2410" letter-spacing="3">停車格 × 28</text>
+      </g>
+
+      <!-- ============ 迴車圓環 (正圓, 三邊內切: 東邊+西邊+主建物) ============ -->
+      <!-- 圓心 (467.6, 161), R=68px=9.9m. 東緣y=93貼邊②, 西緣y=229貼邊④, 南緣x=535.6貼主建物 -->
+      <g>
+        <!-- Road ring: outer R=68 minus island R=21 -->
+        <path d="M 535.6,161 A 68,68 0 1 0 399.6,161 A 68,68 0 1 0 535.6,161 Z
+                 M 488.6,161 A 21,21 0 1 1 446.6,161 A 21,21 0 1 1 488.6,161 Z"
+              fill="url(#paved)" fill-rule="evenodd" stroke="#6a5a38" stroke-width="1.2"></path>
+
+        <!-- Center island: R=3m=21px -->
+        <circle cx="467.6" cy="161" r="21" fill="#a8c878" stroke="#5a8040" stroke-width="0.8"></circle>
+        <!-- Island tree dots -->
+        <g fill="#4a7a30" opacity="0.65">
+          <circle cx="462" cy="152" r="3.5"></circle>
+          <circle cx="473" cy="155" r="3"></circle>
+          <circle cx="460" cy="166" r="3"></circle>
+          <circle cx="472" cy="169" r="3.5"></circle>
+        </g>
+
+        <!-- Tangent point indicators -->
+        <g stroke="#c8421f" stroke-width="1.5" opacity="0.7">
+          <line x1="463" y1="93" x2="472" y2="93"></line>
+          <line x1="463" y1="229" x2="472" y2="229"></line>
+          <line x1="535.6" y1="157" x2="535.6" y2="165"></line>
+        </g>
+
+        <!-- Centerline guide (dashed, r=44.5 = midpoint of road) -->
+        <circle cx="467.6" cy="161" r="44.5" fill="none" stroke="#5a4a30" stroke-width="0.5" stroke-dasharray="4 3" opacity="0.4"></circle>
+
+        <!-- CCW flow arrows on road -->
+        <g stroke="#6a5a38" stroke-width="0.9" fill="#6a5a38" opacity="0.5">
+          <polygon points="462,97 458,94 458,100"></polygon>
+          <polygon points="403,167 400,163 406,163"></polygon>
+          <polygon points="473,225 477,222 477,228"></polygon>
+          <polygon points="532,155 529,159 535,159"></polygon>
+        </g>
+
+        <!-- Dimension: outer radius R 9.9m -->
+        <g stroke="#5a4a28" stroke-width="0.6" fill="none">
+          <line x1="467.6" y1="161" x2="535.6" y2="161" marker-end="url(#arrowEnd)"></line>
+        </g>
+        <g font-family="JetBrains Mono, monospace" fill="#3a2410">
+          <rect x="494" y="152" width="32" height="10" fill="#f1ece0" stroke="none"></rect>
+          <text x="510" y="160" text-anchor="middle" font-size="8" font-weight="700">R 9.9m</text>
+        </g>
+
+        <!-- Dimension: island R 3m -->
+        <g stroke="#5a4a28" stroke-width="0.5" fill="none">
+          <line x1="467.6" y1="161" x2="467.6" y2="140" marker-end="url(#arrowEnd)"></line>
+        </g>
+        <g font-family="JetBrains Mono, monospace" fill="#3a2410">
+          <rect x="470" y="143" width="22" height="9" fill="#f1ece0" stroke="none"></rect>
+          <text x="481" y="150" text-anchor="middle" font-size="7" font-weight="700">r 3m</text>
+        </g>
+
+        <!-- Dimension: road width 6.9m (= 9.9 − 3) -->
+        <g stroke="#5a4a28" stroke-width="0.5" fill="none">
+          <line x1="399.6" y1="150" x2="446.6" y2="150" marker-start="url(#arrowEnd)" marker-end="url(#arrowEnd)"></line>
+        </g>
+        <g font-family="JetBrains Mono, monospace" fill="#3a2410">
+          <rect x="413" y="140" width="22" height="9" fill="#f1ece0" stroke="none"></rect>
+          <text x="424" y="147" text-anchor="middle" font-size="7" font-weight="700">6.9 m</text>
+        </g>
+
+        <!-- Label -->
+        <text x="467.6" y="164" text-anchor="middle" font-family="Noto Serif TC, serif" font-size="8" font-weight="700" fill="#3a2410" letter-spacing="2" opacity="0.7">景觀島</text>
+      </g>
+
+      <!-- ============ 主建物 (Main building zone, 24m, west of glass house) ============ -->
+      <!-- Zone polygon: 24m wide (x=535.6→673), below driveway down to south edge -->
+      <polygon points="535.6,120.5 673,121.6 673,225.9 535.6,227.9" fill="url(#bldg)" stroke="#6a4a30" stroke-width="1.4" stroke-linejoin="miter"></polygon>
+      <!-- west boundary division line -->
+      <line x1="535.6" y1="120.5" x2="535.6" y2="227.9" stroke="#6a4a30" stroke-width="1.2" stroke-dasharray="5 3"></line>
+      <!-- 24m dimension along top of zone -->
+      <g stroke="#6a4a30" stroke-width="0.7" fill="none">
+        <line x1="540" y1="129" x2="668" y2="130.6" marker-start="url(#arrowEnd)" marker-end="url(#arrowEnd)"></line>
+      </g>
+      <g font-family="JetBrains Mono, monospace" fill="#4a2e18">
+        <rect x="589" y="123" width="30" height="12" fill="#dcc6aa" stroke="none"></rect>
+        <text x="604" y="133" text-anchor="middle" font-size="9" font-weight="700">24.0 m</text>
+      </g>
+      <!-- main building labels (centered) -->
+      <g font-family="Noto Serif TC, serif" fill="#3a2410">
+        <text x="604" y="168" text-anchor="middle" font-size="20" font-weight="700" letter-spacing="12">主 建 物</text>
+      </g>
+      <g font-family="JetBrains Mono, monospace" fill="#6a4a30">
+        <text x="604" y="188" text-anchor="middle" font-size="9" letter-spacing="3">MAIN BUILDING</text>
+        <text x="604" y="205" text-anchor="middle" font-size="8" letter-spacing="1.5" opacity="0.85">24.0 × ≈15.5 m  ·  ~373 m²</text>
+      </g>
+      <!-- footprint hint: subtle inner rectangle (building outline) -->
+      <rect x="547" y="145" width="114" height="68" fill="none" stroke="#6a4a30" stroke-width="0.6" stroke-dasharray="3 3" opacity="0.55"></rect>
+
+      <!-- ============ 迴車圓環與動線已就位 ============ -->
+
+      <!-- ============ 玻璃屋規劃區 (Glass house planning zone, 10m at east end) ============ -->
+      <!-- Zone polygon: 10m wide (x=673→730), below driveway down to south edge -->
+      <polygon points="673,121.6 730,122 730,225 673,225.9" fill="url(#glass)" stroke="#3a5a6c" stroke-width="1.4" stroke-linejoin="miter"></polygon>
+      <!-- division line (west boundary of glass house zone, dashed) -->
+      <line x1="673" y1="121.6" x2="673" y2="225.9" stroke="#3a5a6c" stroke-width="1.2" stroke-dasharray="5 3"></line>
+      <!-- 10m dimension along top of zone -->
+      <g stroke="#3a5a6c" stroke-width="0.7" fill="none">
+        <line x1="677" y1="129" x2="726" y2="129.4" marker-start="url(#arrowEnd)" marker-end="url(#arrowEnd)"></line>
+      </g>
+      <g font-family="JetBrains Mono, monospace" fill="#2a4a5a">
+        <rect x="686" y="123" width="30" height="12" fill="#d4e2ea" stroke="none"></rect>
+        <text x="701" y="133" text-anchor="middle" font-size="9" font-weight="700">10.0 m</text>
+      </g>
+      <!-- vertical labels inside glass house -->
+      <g font-family="Noto Serif TC, serif" fill="#1f3845">
+        <text x="701" y="158" text-anchor="middle" font-size="12" font-weight="700" letter-spacing="2">玻璃屋</text>
+        <text x="701" y="176" text-anchor="middle" font-size="12" font-weight="700" letter-spacing="2">規劃區</text>
+      </g>
+      <g font-family="JetBrains Mono, monospace" fill="#3a5a6c">
+        <text x="701" y="193" text-anchor="middle" font-size="7" letter-spacing="1.5">GLASS</text>
+        <text x="701" y="202" text-anchor="middle" font-size="7" letter-spacing="1.5">HOUSE</text>
+        <text x="701" y="217" text-anchor="middle" font-size="7" letter-spacing="1" opacity="0.85">~151 m²</text>
+      </g>
+
+      <!-- ============ 瑪僯路 (East-side road, FLUSH against parcel) ============ -->
+      <g>
+        <!-- property line at parcel edge -->
+        <line x1="730" y1="55" x2="730" y2="305" stroke="#4a463d" stroke-width="0.5" stroke-dasharray="5 2" opacity="0.55"></line>
+        <!-- west shoulder (thin gravel against parcel) -->
+        <rect x="731" y="55" width="3" height="250" fill="#a89c80"></rect>
+        <!-- asphalt -->
+        <rect x="734" y="55" width="60" height="250" fill="url(#asphalt)"></rect>
+        <!-- lane edge white lines -->
+        <line x1="737" y1="55" x2="737" y2="305" stroke="#e8e1d1" stroke-width="0.5" opacity="0.5"></line>
+        <line x1="791" y1="55" x2="791" y2="305" stroke="#e8e1d1" stroke-width="0.5" opacity="0.5"></line>
+        <!-- center dashed yellow -->
+        <line x1="764" y1="55" x2="764" y2="305" stroke="#e8c84a" stroke-width="1" stroke-dasharray="10 8" opacity="0.85"></line>
+        <!-- east shoulder -->
+        <rect x="794" y="55" width="3" height="250" fill="#a89c80"></rect>
+        <!-- road name vertical -->
+        <g transform="translate(764 180) rotate(-90)" font-family="Noto Serif TC, serif">
+          <text text-anchor="middle" dominant-baseline="middle" font-size="20" font-weight="700" fill="#f1ece0" letter-spacing="14">瑪 僯 路</text>
+        </g>
+        <text x="764" y="48" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="3" fill="#5a544a">MǍLÍN RD</text>
+        <text x="764" y="316" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="3" fill="#5a544a">↑ N · S ↓</text>
+        <!-- traffic flow arrows -->
+        <g stroke="#f1ece0" stroke-width="0.8" fill="none" opacity="0.55">
+          <path d="M 748,80 L 748,68 M 745,74 L 748,68 L 751,74"></path>
+          <path d="M 780,280 L 780,292 M 777,286 L 780,292 L 783,286"></path>
+        </g>
+      </g>
+
+      <!-- ============ 出入口 GATE (driveway east end opens directly to road) ============ -->
+      <g>
+        <!-- gate opening on east edge -->
+        <line x1="730" y1="93" x2="730" y2="124" stroke="#8a3a1f" stroke-width="3.5" stroke-linecap="round"></line>
+        <!-- gate posts -->
+        <circle cx="730" cy="93" r="2.6" fill="#8a3a1f"></circle>
+        <circle cx="730" cy="124" r="2.6" fill="#8a3a1f"></circle>
+        <!-- gate label above the parcel, perpendicular to road -->
+        <rect x="690" y="73" width="66" height="14" fill="#f1ece0" stroke="#8a3a1f" stroke-width="0.8"></rect>
+        <text x="723" y="83" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="#8a3a1f" letter-spacing="2">出入口 GATE</text>
+        <!-- pointer from badge to gate -->
+        <line x1="729" y1="87" x2="729" y2="92" stroke="#8a3a1f" stroke-width="0.8"></line>
+      </g>
+
+      <!-- west end — dead-end note (no access) -->
+      <g>
+        <line x1="36" y1="96" x2="36" y2="118" stroke="#807a6b" stroke-width="1" stroke-dasharray="2 2"></line>
+        <text x="30" y="110" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="1" fill="#807a6b">END</text>
+      </g>
+
+      <!-- vertex pins -->
+      <g stroke="#1a1814" stroke-width="1.4" fill="#f1ece0">
+        <circle cx="70" cy="90" r="4"></circle>
+        <circle cx="730" cy="95" r="4"></circle>
+        <circle cx="730" cy="225" r="4"></circle>
+        <circle cx="64" cy="235" r="4"></circle>
+      </g>
+
+      <!-- vertex labels -->
+      <g font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#1a1814">
+        <text x="56" y="80">A</text>
+        <text x="734" y="86">B</text>
+        <text x="734" y="244">C</text>
+        <text x="50" y="252">D</text>
+      </g>
+
+      <!-- ============ DIMENSION LINES ============ -->
+      <!-- TOP edge: 115.3m (A→B) -->
+      <g stroke="#1a1814" stroke-width="0.8" fill="none">
+        <!-- extension lines -->
+        <line x1="70" y1="86" x2="70" y2="50"></line>
+        <line x1="730" y1="91" x2="730" y2="50"></line>
+        <!-- dimension line with arrows -->
+        <line x1="74" y1="56" x2="726" y2="56" marker-start="url(#arrowEnd)" marker-end="url(#arrowEnd)"></line>
+      </g>
+      <g font-family="JetBrains Mono, monospace" fill="#1a1814">
+        <rect x="370" y="44" width="60" height="18" fill="#e8e1d1" stroke="none"></rect>
+        <text x="400" y="58" text-anchor="middle" font-size="13" font-weight="500">115.3 m</text>
+        <text x="400" y="38" text-anchor="middle" font-size="9" letter-spacing="2" fill="#807a6b">EDGE · ②  A → B</text>
+      </g>
+
+      <!-- BOTTOM edge: 115.6m (D→C) -->
+      <g stroke="#1a1814" stroke-width="0.8" fill="none">
+        <line x1="64" y1="239" x2="64" y2="290"></line>
+        <line x1="730" y1="229" x2="730" y2="290"></line>
+        <line x1="68" y1="284" x2="726" y2="284" marker-start="url(#arrowEnd)" marker-end="url(#arrowEnd)"></line>
+      </g>
+      <g font-family="JetBrains Mono, monospace" fill="#1a1814">
+        <rect x="370" y="294" width="60" height="18" fill="#e8e1d1" stroke="none"></rect>
+        <text x="400" y="308" text-anchor="middle" font-size="13" font-weight="500">115.6 m</text>
+        <text x="400" y="328" text-anchor="middle" font-size="9" letter-spacing="2" fill="#807a6b">EDGE · ④  D → C</text>
+      </g>
+
+      <!-- LEFT edge: 20.2m (A→D) -->
+      <g stroke="#1a1814" stroke-width="0.8" fill="none">
+        <line x1="66" y1="90" x2="20" y2="90"></line>
+        <line x1="60" y1="235" x2="20" y2="235"></line>
+        <line x1="26" y1="94" x2="26" y2="231" marker-start="url(#arrowEnd)" marker-end="url(#arrowEnd)"></line>
+      </g>
+      <g font-family="JetBrains Mono, monospace" fill="#1a1814">
+        <g transform="translate(14 162) rotate(-90)">
+          <rect x="-30" y="-9" width="60" height="18" fill="#e8e1d1" stroke="none"></rect>
+          <text text-anchor="middle" dominant-baseline="middle" font-size="13" font-weight="500">20.2 m</text>
+        </g>
+      </g>
+
+      <!-- RIGHT edge: 19.1m (B→C) — labelled inline near gate since road is now flush -->
+      <g font-family="JetBrains Mono, monospace" fill="#1a1814">
+        <g transform="translate(716 160) rotate(90)">
+          <rect x="-22" y="-7" width="44" height="14" fill="#e8e1d1" stroke="#807a6b" stroke-width="0.3"></rect>
+          <text text-anchor="middle" dominant-baseline="middle" font-size="10" font-weight="500">19.1 m</text>
+        </g>
+      </g>
+
+      <!-- edge numeric tags ① ② ③ ④ -->
+      <g font-family="JetBrains Mono, monospace" font-size="10" font-weight="700">
+        <g>
+          <circle cx="400" cy="92" r="9" fill="#1a1814"></circle>
+          <text x="400" y="96" text-anchor="middle" fill="#f1ece0">2</text>
+        </g>
+        <g>
+          <circle cx="700" cy="110" r="9" fill="#1a1814"></circle>
+          <text x="700" y="114" text-anchor="middle" fill="#f1ece0">3</text>
+        </g>
+        <g>
+          <circle cx="397" cy="230" r="9" fill="#1a1814"></circle>
+          <text x="397" y="234" text-anchor="middle" fill="#f1ece0">4</text>
+        </g>
+        <g>
+          <circle cx="67" cy="162" r="9" fill="#1a1814"></circle>
+          <text x="67" y="166" text-anchor="middle" fill="#f1ece0">1</text>
+        </g>
+      </g>
+
+      <!-- centroid label for cultivation (drop-off loop also carved out; shifted further west) -->
+      <g font-family="Noto Serif TC, serif" fill="#3a4a22" opacity="0.75">
+        <text x="255" y="178" text-anchor="middle" font-size="18" font-weight="500" letter-spacing="6">耕作區</text>
+        <text x="255" y="196" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="3" fill="#4a5d2f">CULTIVATION · ~1 100 m²</text>
+      </g>
+
+      <!-- ============ Old vehicle flow block removed ============ -->
+
+      <!-- ============ Vehicle flow 已由迴車圓環取代 ============ -->
+
+      <!-- scale bar -->
+      <g transform="translate(70 335)" font-family="JetBrains Mono, monospace" font-size="9" fill="#1a1814">
+        <line x1="0" y1="0" x2="180" y2="0" stroke="#1a1814" stroke-width="1.2"></line>
+        <line x1="0" y1="-4" x2="0" y2="4" stroke="#1a1814" stroke-width="1.2"></line>
+        <line x1="60" y1="-3" x2="60" y2="3" stroke="#1a1814" stroke-width="0.8"></line>
+        <line x1="120" y1="-3" x2="120" y2="3" stroke="#1a1814" stroke-width="0.8"></line>
+        <line x1="180" y1="-4" x2="180" y2="4" stroke="#1a1814" stroke-width="1.2"></line>
+        <rect x="0" y="-3" width="60" height="6" fill="#1a1814"></rect>
+        <rect x="120" y="-3" width="60" height="6" fill="#1a1814"></rect>
+        <text x="0" y="16">0</text>
+        <text x="60" y="16" text-anchor="middle">10</text>
+        <text x="120" y="16" text-anchor="middle">20</text>
+        <text x="180" y="16" text-anchor="middle">30 m</text>
+        <text x="200" y="3" font-size="9" letter-spacing="2" fill="#807a6b">SCALE BAR</text>
+      </g>
+      </g>
+    </svg>
+  </section>
+
+  <!-- ===== DATA PANEL ===== -->
+  <aside class="panel">
+
+    <div class="card">
+      <h3><span>邊長 / Edges</span><span class="idx">04</span></h3>
+      <div class="side-list">
+        <div class="side-row">
+          <span class="pip">1</span>
+          <span class="lbl">A → D · 北</span>
+          <span class="val">20.20<small>m</small></span>
+        </div>
+        <div class="side-row">
+          <span class="pip">2</span>
+          <span class="lbl">A → B · 東</span>
+          <span class="val">115.30<small>m</small></span>
+        </div>
+        <div class="side-row">
+          <span class="pip">3</span>
+          <span class="lbl">B → C · 南</span>
+          <span class="val">19.10<small>m</small></span>
+        </div>
+        <div class="side-row">
+          <span class="pip">4</span>
+          <span class="lbl">D → C · 西</span>
+          <span class="val">115.60<small>m</small></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="padding:0">
+      <h3 style="margin:14px 16px 10px"><span>面積 / Area</span><span class="idx">est.</span></h3>
+      <div class="stat-grid">
+        <div class="stat primary">
+          <div class="k">總面積 · Gross</div>
+          <div class="v">2,268.6 <sub>m²</sub></div>
+        </div>
+        <div class="stat" style="background:#e8dcbf">
+          <div class="k" style="color:#6a5a38">車道 · Drive</div>
+          <div class="v" style="font-size:18px">180.0 <sub>m²</sub></div>
+        </div>
+        <div class="stat" style="background:#ede0c8">
+          <div class="k" style="color:#4a2e18">主建物 · Bldg</div>
+          <div class="v" style="font-size:18px">373.2 <sub>m²</sub></div>
+        </div>
+        <div class="stat" style="background:#dee9ef">
+          <div class="k" style="color:#2a4a5a">玻璃屋 · Glass</div>
+          <div class="v" style="font-size:18px">151.0 <sub>m²</sub></div>
+        </div>
+        <div class="stat" style="background:#e8e0cc">
+          <div class="k" style="color:#5a4628">圓環 · R-about</div>
+          <div class="v" style="font-size:18px">173.8 <sub>m²</sub></div>
+        </div>
+        <div class="stat" style="background:#dcd3c0">
+          <div class="k" style="color:#4a3a20">停車 ×28</div>
+          <div class="v" style="font-size:18px">350.0 <sub>m²</sub></div>
+        </div>
+        <div class="stat" style="background:#e0d6c0">
+          <div class="k" style="color:#4a3a20">通道 · Aisle</div>
+          <div class="v" style="font-size:18px">281.0 <sub>m²</sub></div>
+        </div>
+        <div class="stat" style="background:#d8e4c2">
+          <div class="k" style="color:#3a4a22">耕作 · Net</div>
+          <div class="v" style="font-size:18px">759.6 <sub>m²</sub></div>
+        </div>
+        <div class="stat">
+          <div class="k">耕作坪</div>
+          <div class="v">229.7</div>
+        </div>
+        <div class="stat">
+          <div class="k">耕作分</div>
+          <div class="v">0.78</div>
+        </div>
+        <div class="stat">
+          <div class="k">主建物坪</div>
+          <div class="v">112.9</div>
+        </div>
+        <div class="stat">
+          <div class="k">周長 / Perim.</div>
+          <div class="v">270.2 <sub>m</sub></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3><span>圖例 / Legend</span><span class="idx">02</span></h3>
+      <div style="display:flex; flex-direction:column; gap:8px; font-size:11.5px; color:var(--ink-2);">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span style="width:22px; height:14px; background:#b8c89a; border:1px solid #4a5d2f; display:inline-block;"></span>
+          <span><b style="color:var(--ink)">耕作區</b> · cultivation</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span style="width:22px; height:14px; background:#cfc6b8; border:1px solid #6a5a40; display:inline-block; position:relative;">
+            <span style="position:absolute; left:50%; top:50%; width:8px; height:8px; border-radius:50%; background:#a8c878; border:1px solid #5a8040; transform:translate(-50%,-50%);"></span>
+          </span>
+          <span><b style="color:var(--ink)">迴車圓環</b> · roundabout · 9.0 × 19.7 m</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span style="width:22px; height:14px; background:#cfc6b8; border:1px solid #6a5a40; display:inline-block; position:relative;">
+            <span style="position:absolute; left:33%; top:0; bottom:0; width:1px; background:#6a5a40;"></span>
+            <span style="position:absolute; left:66%; top:0; bottom:0; width:1px; background:#6a5a40;"></span>
+          </span>
+          <span><b style="color:var(--ink)">停車格</b> · 28 × (2.5×5 m) · 沿邊④</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span style="width:22px; height:14px; background:#cfc6b8; border:1px solid #6a5a40; display:inline-block;"></span>
+          <span><b style="color:var(--ink)">通道</b> · aisle 4 m (圓環 → 停車)</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span style="width:22px; height:14px; background:#cfc6b8; border:1px solid #6a5a40; display:inline-block; position:relative;">
+            <span style="position:absolute; left:50%; top:50%; width:7px; height:7px; border-radius:50%; background:#bcd0a0; border:1px solid #5a8040; transform:translate(-50%,-50%);"></span>
+          </span>
+          <span><b style="color:var(--ink)">中島</b> · island (圓環內綠化)</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span style="width:22px; height:0; border-top:2px dashed #c8421f; display:inline-block; transform:translateY(-1px);"></span>
+          <span><b style="color:var(--ink)">車輛動線</b> · vehicle flow</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span style="width:22px; height:14px; background:#dcc6aa; border:1px solid #6a4a30; display:inline-block;"></span>
+          <span><b style="color:var(--ink)">主建物</b> · main building · 24 × 15.5 m</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span style="width:22px; height:14px; background:#d4e2ea; border:1px solid #3a5a6c; display:inline-block;"></span>
+          <span><b style="color:var(--ink)">玻璃屋規劃區</b> · 10 × 15.1 m</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span style="width:22px; height:14px; background:#d8c89c; border:1px solid #6a5a38; display:inline-block;"></span>
+          <span><b style="color:var(--ink)">車道</b> · driveway · 4.0 m</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span style="width:22px; height:14px; background:#3a3530; display:inline-block; position:relative;">
+            <span style="position:absolute; left:50%; top:1px; bottom:1px; width:1px; background:#e8c84a; transform:translateX(-50%);"></span>
+          </span>
+          <span><b style="color:var(--ink)">瑪僯路</b> · Mǎlín Rd (貼齊南緣)</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span style="width:22px; height:14px; background:#f1ece0; border:1.5px solid #8a3a1f; display:inline-block;"></span>
+          <span><b style="color:var(--ink)">出入口</b> · gate (車道東端)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3><span>備註 / Notes</span><span class="idx">01</span></h3>
+      <p class="note">
+        原<b>下車區 + 迎賓區</b>合併為<b>迴車圓環</b>（9.0 × 19.7 m 橢圓, 東西貼齊地界, 車道寬 3.5 m）。
+        車輛自<b>瑪僯路出入口</b>沿 4 m 車道進入圓環，逆時針繞行；右側緊鄰主建物可<b>放客下車</b>，
+        左側出口銜接<b>4 m 通道</b> → 停車格 × 28。迴轉半徑滿足<b>中巴 medium bus</b> 需求。
+        中島綠化面積 ≈ 48 m²，圓環車道面積 ≈ 126 m²。
+      </p>
+    </div>
+
+  </aside>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <span>農地 / Nóngdì · Parcel survey · sheet 01 of 01</span>
+  <span class="stamp">草圖 DRAFT</span>
+  <span>units: meters · ⌀ approx. ±5cm</span>
+</footer>
+
+</div>
+
+
+</body></html>
