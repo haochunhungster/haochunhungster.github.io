@@ -327,7 +327,7 @@
   <dl class="meta">
     <div><dt>圖號 / Drawing</dt><dd>NT-01 · v3</dd></div>
     <div><dt>比例 / Scale</dt><dd>1 : 300</dd></div>
-    <div><dt>日期 / Date</dt><dd>2026.05.25</dd></div>
+    <div><dt>日期 / Date</dt><dd>2026.05.28</dd></div>
   </dl>
 </header>
 
@@ -460,19 +460,19 @@
       </defs>
       <!-- ============ 車道 4m: 出入口 → 圓環 ============ -->
       <!-- Driveway: 4m wide strip along east edge, from gate (x=730) to building boundary (x=535.6) -->
-      <polygon points="535.6,93.5 730,95 730,122 535.6,120.5" fill="url(#paved)" stroke="#6a5a40" stroke-width="1.2" stroke-linejoin="miter"></polygon>
-      <line x1="540" y1="107" x2="725" y2="108.5" stroke="#3a3020" stroke-width="0.8" stroke-dasharray="6 6" opacity="0.5"></line>
+      <polygon points="592.85,93.94 730,95 730,122 592.85,120.94" fill="url(#paved)" stroke="#6a5a40" stroke-width="1.2" stroke-linejoin="miter"></polygon>
+      <line x1="597" y1="107.4" x2="725" y2="108.5" stroke="#3a3020" stroke-width="0.8" stroke-dasharray="6 6" opacity="0.5"></line>
       <g font-family="JetBrains Mono, monospace" fill="#3a3020">
-        <text x="632" y="108" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="3">車道 · DRIVEWAY · 4.0 m</text>
+        <text x="661" y="108" text-anchor="middle" font-size="9" font-weight="700" letter-spacing="1.5">車道 · DRIVEWAY · 4.0 m</text>
       </g>
 
       <!-- ============ 東南畸零填補: 圓環弧→主建物→東邊界 的楔形鋪面 ============ -->
       <!-- Fills the crescent between roundabout arc, building edge (x=535.6), and east edge (y≈93) -->
-      <path d="M 535.6,161
+      <g transform="translate(57.25 0)"><path d="M 535.6,161
                L 535.6,93.5
                L 467.6,93
                A 68,68 0 0 1 535.6,161
-               Z" fill="url(#paved)" stroke="none"></path>
+               Z" fill="url(#paved)" stroke="none"></path></g>
       <defs>
         <marker id="arrowAccess" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
           <path d="M0,0 L10,5 L0,10 Z" fill="#8a3a1f"></path>
@@ -487,14 +487,16 @@
 
       <!-- ============ 通道 4m: 圓環左側 → 北邊界(邊①), 緊貼停車格東側 ============ -->
       <!-- Bottom edge aligns with parking top; 27px wide (4m); from roundabout x≈400 to north boundary x≈65 -->
+      <g transform="translate(57.25 0)">
       <polygon points="66,174 400,168 400,196 65,201" fill="url(#paved)" stroke="#6a5a40" stroke-width="0.7"></polygon>
       <line x1="100" y1="187" x2="380" y2="182" stroke="#5a4a30" stroke-width="0.6" stroke-dasharray="5 5" opacity="0.4"></line>
       <text x="230" y="186" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7.5" font-weight="700" fill="#3a2410" letter-spacing="1.5">通道 · AISLE · 4.0 m</text>
+      </g>
 
       <!-- ============ Vehicle flow: 暫時隱藏，等道路與停車格配置確認後再畫 ============ -->
 
       <!-- ============ 停車格 × 28 (2.5 m × 5 m, 沿邊 ④ D→C 南緣, 東端接下車區) ============ -->
-      <g>
+      <g transform="translate(57.25 0)">
         <!-- Parallelogram strip along sloped south edge -->
         <polygon points="70,200.91 470.75,194.89 470.75,228.89 70,234.91" fill="url(#stalls5)" stroke="#6a5a40" stroke-width="0.9"></polygon>
         <!-- East cap line (closing the last stall) -->
@@ -531,7 +533,7 @@
 
       <!-- ============ 迴車圓環 (正圓, 三邊內切: 東邊+西邊+主建物) ============ -->
       <!-- 圓心 (467.6, 161), R=68px=9.9m. 東緣y=93貼邊②, 西緣y=229貼邊④, 南緣x=535.6貼主建物 -->
-      <g>
+      <g transform="translate(57.25 0)">
         <!-- Road ring: outer R=68 minus island R=21 -->
         <path d="M 535.6,161 A 68,68 0 1 0 399.6,161 A 68,68 0 1 0 535.6,161 Z
                  M 488.6,161 A 21,21 0 1 1 446.6,161 A 21,21 0 1 1 488.6,161 Z"
@@ -598,27 +600,28 @@
 
       <!-- ============ 主建物 (Main building zone, 24m, west of glass house) ============ -->
       <!-- Zone polygon: 24m wide (x=535.6→673), below driveway down to south edge -->
-      <polygon points="535.6,120.5 673,121.6 673,225.9 535.6,227.9" fill="url(#bldg)" stroke="#6a4a30" stroke-width="1.4" stroke-linejoin="miter"></polygon>
+      <polygon points="592.85,120.96 673,121.6 673,225.9 592.85,227.07" fill="url(#bldg)" stroke="#6a4a30" stroke-width="1.4" stroke-linejoin="miter"></polygon>
       <!-- west boundary division line -->
-      <line x1="535.6" y1="120.5" x2="535.6" y2="227.9" stroke="#6a4a30" stroke-width="1.2" stroke-dasharray="5 3"></line>
+      <line x1="592.85" y1="120.96" x2="592.85" y2="227.07" stroke="#6a4a30" stroke-width="1.2" stroke-dasharray="5 3"></line>
       <!-- 24m dimension along top of zone -->
       <g stroke="#6a4a30" stroke-width="0.7" fill="none">
-        <line x1="540" y1="129" x2="668" y2="130.6" marker-start="url(#arrowEnd)" marker-end="url(#arrowEnd)"></line>
+        <line x1="598" y1="130" x2="668" y2="130.6" marker-start="url(#arrowEnd)" marker-end="url(#arrowEnd)"></line>
       </g>
       <g font-family="JetBrains Mono, monospace" fill="#4a2e18">
-        <rect x="589" y="123" width="30" height="12" fill="#dcc6aa" stroke="none"></rect>
-        <text x="604" y="133" text-anchor="middle" font-size="9" font-weight="700">24.0 m</text>
+        <rect x="618" y="123" width="30" height="12" fill="#dcc6aa" stroke="none"></rect>
+        <text x="633" y="133" text-anchor="middle" font-size="9" font-weight="700">14.0 m</text>
       </g>
       <!-- main building labels (centered) -->
       <g font-family="Noto Serif TC, serif" fill="#3a2410">
-        <text x="604" y="168" text-anchor="middle" font-size="20" font-weight="700" letter-spacing="12">主 建 物</text>
+        <text x="633" y="166" text-anchor="middle" font-size="17" font-weight="700" letter-spacing="5">主建物</text>
       </g>
       <g font-family="JetBrains Mono, monospace" fill="#6a4a30">
-        <text x="604" y="188" text-anchor="middle" font-size="9" letter-spacing="3">MAIN BUILDING</text>
-        <text x="604" y="205" text-anchor="middle" font-size="8" letter-spacing="1.5" opacity="0.85">24.0 × ≈15.5 m  ·  ~373 m²</text>
+        <text x="633" y="184" text-anchor="middle" font-size="8" letter-spacing="1">MAIN BUILDING</text>
+        <text x="633" y="196" text-anchor="middle" font-size="7.5" letter-spacing="0.5" opacity="0.85">14.0 × 15.5 m</text>
+        <text x="633" y="206" text-anchor="middle" font-size="7.5" letter-spacing="0.5" opacity="0.85">~217 m²</text>
       </g>
       <!-- footprint hint: subtle inner rectangle (building outline) -->
-      <rect x="547" y="145" width="114" height="68" fill="none" stroke="#6a4a30" stroke-width="0.6" stroke-dasharray="3 3" opacity="0.55"></rect>
+      <rect x="602" y="150" width="62" height="58" fill="none" stroke="#6a4a30" stroke-width="0.6" stroke-dasharray="3 3" opacity="0.55"></rect>
 
       <!-- ============ 迴車圓環與動線已就位 ============ -->
 
@@ -778,10 +781,35 @@
         </g>
       </g>
 
-      <!-- centroid label for cultivation (drop-off loop also carved out; shifted further west) -->
-      <g font-family="Noto Serif TC, serif" fill="#3a4a22" opacity="0.75">
-        <text x="255" y="178" text-anchor="middle" font-size="18" font-weight="500" letter-spacing="6">耕作區</text>
-        <text x="255" y="196" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="3" fill="#4a5d2f">CULTIVATION · ~1 100 m²</text>
+      <!-- ============ 種植/耕作區：長寬面積標註 (不規則 L 形：西段全寬 + 北側帶狀) ============ -->
+      <!-- 長度 (E–W extent) -->
+      <g stroke="#4a5d2f" stroke-width="0.7" fill="none">
+        <line x1="76" y1="108" x2="450" y2="108" marker-start="url(#arrowEnd)" marker-end="url(#arrowEnd)"></line>
+      </g>
+      <g font-family="JetBrains Mono, monospace" fill="#2f3d1c">
+        <rect x="236" y="101" width="52" height="12" fill="#e8e1d1" stroke="none"></rect>
+        <text x="262" y="110" text-anchor="middle" font-size="8.5" font-weight="700">長 ≈ 71 m</text>
+      </g>
+      <!-- 西段全寬 (N–S, 20 m) -->
+      <g stroke="#4a5d2f" stroke-width="0.7" fill="none">
+        <line x1="90" y1="96" x2="90" y2="230" marker-start="url(#arrowEnd)" marker-end="url(#arrowEnd)"></line>
+      </g>
+      <g transform="translate(90 170) rotate(-90)" font-family="JetBrains Mono, monospace" fill="#2f3d1c">
+        <rect x="-26" y="-6" width="52" height="11" fill="#e8e1d1" stroke="none"></rect>
+        <text text-anchor="middle" dominant-baseline="middle" font-size="8" font-weight="700">寬 ≈ 20 m</text>
+      </g>
+      <!-- 北側帶狀寬 (N–S, 11 m) -->
+      <g stroke="#4a5d2f" stroke-width="0.6" fill="none">
+        <line x1="178" y1="96" x2="178" y2="164" marker-start="url(#arrowEnd)" marker-end="url(#arrowEnd)"></line>
+      </g>
+      <g transform="translate(178 128) rotate(-90)" font-family="JetBrains Mono, monospace" fill="#2f3d1c">
+        <rect x="-20" y="-6" width="40" height="11" fill="#e8e1d1" stroke="none"></rect>
+        <text text-anchor="middle" dominant-baseline="middle" font-size="7.5" font-weight="700">≈ 11 m</text>
+      </g>
+      <!-- centroid label for cultivation -->
+      <g font-family="Noto Serif TC, serif" fill="#3a4a22" opacity="0.82">
+        <text x="320" y="132" text-anchor="middle" font-size="16" font-weight="500" letter-spacing="5">種植區</text>
+        <text x="320" y="148" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7.5" letter-spacing="1.5" fill="#4a5d2f">CULTIVATION · 955.8 m² · 289 坪</text>
       </g>
 
       <!-- ============ Old vehicle flow block removed ============ -->
@@ -845,11 +873,11 @@
         </div>
         <div class="stat" style="background:#e8dcbf">
           <div class="k" style="color:#6a5a38">車道 · Drive</div>
-          <div class="v" style="font-size:18px">180.0 <sub>m²</sub></div>
+          <div class="v" style="font-size:18px">140.0 <sub>m²</sub></div>
         </div>
         <div class="stat" style="background:#ede0c8">
           <div class="k" style="color:#4a2e18">主建物 · Bldg</div>
-          <div class="v" style="font-size:18px">373.2 <sub>m²</sub></div>
+          <div class="v" style="font-size:18px">217.0 <sub>m²</sub></div>
         </div>
         <div class="stat" style="background:#dee9ef">
           <div class="k" style="color:#2a4a5a">玻璃屋 · Glass</div>
@@ -869,19 +897,19 @@
         </div>
         <div class="stat" style="background:#d8e4c2">
           <div class="k" style="color:#3a4a22">耕作 · Net</div>
-          <div class="v" style="font-size:18px">759.6 <sub>m²</sub></div>
+          <div class="v" style="font-size:18px">955.8 <sub>m²</sub></div>
         </div>
         <div class="stat">
           <div class="k">耕作坪</div>
-          <div class="v">229.7</div>
+          <div class="v">289.1</div>
         </div>
         <div class="stat">
           <div class="k">耕作分</div>
-          <div class="v">0.78</div>
+          <div class="v">0.99</div>
         </div>
         <div class="stat">
           <div class="k">主建物坪</div>
-          <div class="v">112.9</div>
+          <div class="v">65.6</div>
         </div>
         <div class="stat">
           <div class="k">周長 / Perim.</div>
@@ -901,7 +929,7 @@
           <span style="width:22px; height:14px; background:#cfc6b8; border:1px solid #6a5a40; display:inline-block; position:relative;">
             <span style="position:absolute; left:50%; top:50%; width:8px; height:8px; border-radius:50%; background:#a8c878; border:1px solid #5a8040; transform:translate(-50%,-50%);"></span>
           </span>
-          <span><b style="color:var(--ink)">迴車圓環</b> · roundabout · 9.0 × 19.7 m</span>
+          <span><b style="color:var(--ink)">迴車圓環</b> · roundabout · 外 R 9.9 m / 環道 6.9 m</span>
         </div>
         <div style="display:flex; align-items:center; gap:10px;">
           <span style="width:22px; height:14px; background:#cfc6b8; border:1px solid #6a5a40; display:inline-block; position:relative;">
@@ -926,7 +954,7 @@
         </div>
         <div style="display:flex; align-items:center; gap:10px;">
           <span style="width:22px; height:14px; background:#dcc6aa; border:1px solid #6a4a30; display:inline-block;"></span>
-          <span><b style="color:var(--ink)">主建物</b> · main building · 24 × 15.5 m</span>
+          <span><b style="color:var(--ink)">主建物</b> · main building · 14 × 15.5 m</span>
         </div>
         <div style="display:flex; align-items:center; gap:10px;">
           <span style="width:22px; height:14px; background:#d4e2ea; border:1px solid #3a5a6c; display:inline-block;"></span>
@@ -952,7 +980,7 @@
     <div class="card">
       <h3><span>備註 / Notes</span><span class="idx">01</span></h3>
       <p class="note">
-        原<b>下車區 + 迎賓區</b>合併為<b>迴車圓環</b>（9.0 × 19.7 m 橢圓, 東西貼齊地界, 車道寬 3.5 m）。
+        原<b>下車區 + 迎賓區</b>合併為<b>迴車圓環</b>（外徑 R 9.9 m, 環道寬 6.9 m, 中島 r 3 m, 東西貼齊地界）。
         車輛自<b>瑪僯路出入口</b>沿 4 m 車道進入圓環，逆時針繞行；右側緊鄰主建物可<b>放客下車</b>，
         左側出口銜接<b>4 m 通道</b> → 停車格 × 28。迴轉半徑滿足<b>中巴 medium bus</b> 需求。
         中島綠化面積 ≈ 48 m²，圓環車道面積 ≈ 126 m²。
@@ -961,6 +989,112 @@
 
   </aside>
 </div>
+
+<!-- ============ 車輛分析 / VEHICLE ACCESS ANALYSIS ============ -->
+<section style="margin-top:26px; border-top:2px solid var(--rule); padding-top:18px;">
+  <div style="display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:8px; margin-bottom:6px;">
+    <div style="display:flex; align-items:baseline; gap:16px; flex-wrap:wrap;">
+      <span style="font-family:'Noto Serif TC',serif; font-weight:700; font-size:22px; letter-spacing:0.14em; color:var(--ink);">車輛分析</span>
+      <span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.24em; color:var(--ink-3); text-transform:uppercase;">Vehicle Access Analysis · 20 人座小巴</span>
+    </div>
+    <span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.16em; color:var(--accent);">桌上評估 · desktop check</span>
+  </div>
+  <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.02em; color:var(--ink-2); margin-bottom:16px;">
+    問題：4 m 車道寬＋迴車圓環，能否讓 20 人座小巴順利<b style="color:var(--ink)">進場</b>、<b style="color:var(--ink)">繞行迴轉</b>、<b style="color:var(--ink)">抵達後方停車</b>？
+  </div>
+
+  <div style="display:grid; grid-template-columns:270px 1fr; gap:16px; align-items:start;">
+
+    <!-- 基準車型 -->
+    <div class="card" style="background:var(--paper-2);">
+      <h3><span>基準車型 / Vehicle</span><span class="idx">Coaster</span></h3>
+      <div style="font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--ink-2); line-height:1.95;">
+        <div style="display:flex; justify-content:space-between; gap:8px;"><span>車型</span><b style="color:var(--ink); text-align:right;">Coaster 長軸 20 人</b></div>
+        <div style="display:flex; justify-content:space-between;"><span>車長 Length</span><b style="color:var(--ink);">6.99 m</b></div>
+        <div style="display:flex; justify-content:space-between;"><span>車寬 Width</span><b style="color:var(--ink);">2.08 m <span style="color:var(--ink-3);">(鏡 2.27)</span></b></div>
+        <div style="display:flex; justify-content:space-between;"><span>車高 Height</span><b style="color:var(--ink);">2.64 m</b></div>
+        <div style="display:flex; justify-content:space-between;"><span>軸距 Wheelbase</span><b style="color:var(--ink);">3.94 m</b></div>
+        <div style="display:flex; justify-content:space-between;"><span>迴轉圈 Kerb ⌀</span><b style="color:var(--ink);">≈ 13.0 m</b></div>
+        <div style="display:flex; justify-content:space-between;"><span>牆對牆 R</span><b style="color:var(--ink);">≈ 7.9 m</b></div>
+      </div>
+      <div style="font-size:10px; color:var(--ink-3); margin-top:10px; line-height:1.5;">規格依 Toyota 官方規格表＋CarsGuide；20 人＝長軸版（短軸 6.2 m／超長軸 7.7 m）。</div>
+    </div>
+
+    <!-- 逐段檢核 -->
+    <div class="card" style="padding:0; overflow:hidden;">
+      <h3 style="margin:14px 16px 0;"><span>逐段檢核 / Segment check</span><span class="idx">5 段</span></h3>
+      <table style="width:100%; border-collapse:collapse; font-size:11.5px;">
+        <thead>
+          <tr style="font-family:'JetBrains Mono',monospace; font-size:8.5px; letter-spacing:0.12em; color:var(--ink-3); text-transform:uppercase;">
+            <th style="text-align:left; padding:8px 8px 6px 16px; font-weight:500;">區段</th>
+            <th style="text-align:left; padding:8px 8px 6px; font-weight:500;">關鍵尺寸</th>
+            <th style="text-align:center; padding:8px 8px 6px; font-weight:500;">判定</th>
+            <th style="text-align:left; padding:8px 16px 6px 8px; font-weight:500;">說明</th>
+          </tr>
+        </thead>
+        <tbody style="color:var(--ink-2);">
+          <tr style="border-top:1px solid #d8d0bd;">
+            <td style="padding:9px 8px 9px 16px; vertical-align:top;"><b style="color:var(--ink);">① 出入口閘口</b><br><span style="font-size:10px; color:var(--ink-3);">瑪僯路→車道 90°</span></td>
+            <td style="padding:9px 8px; vertical-align:top; font-family:'JetBrains Mono',monospace; font-size:10.5px;">口寬 4.0 m<br>直角轉</td>
+            <td style="padding:9px 8px; vertical-align:top; text-align:center;"><span style="display:inline-block; padding:2px 8px; border-radius:10px; background:#efd6c8; color:#8a3a1f; font-family:'JetBrains Mono',monospace; font-size:10px; font-weight:700; white-space:nowrap;">偏緊</span></td>
+            <td style="padding:9px 16px 9px 8px; vertical-align:top; line-height:1.55;">7 m 車 90° 轉入 4 m 口、無喇叭擴大 → 內輪差壓內側、車頭借對向。<b style="color:var(--ink);">取決瑪僯路實際淨寬（圖上未定）。全線最大瓶頸。</b></td>
+          </tr>
+          <tr style="border-top:1px solid #d8d0bd;">
+            <td style="padding:9px 8px 9px 16px; vertical-align:top;"><b style="color:var(--ink);">② 車道直行</b></td>
+            <td style="padding:9px 8px; vertical-align:top; font-family:'JetBrains Mono',monospace; font-size:10.5px;">4.0 m<br>vs 寬 2.08 m</td>
+            <td style="padding:9px 8px; vertical-align:top; text-align:center;"><span style="display:inline-block; padding:2px 8px; border-radius:10px; background:#d8e8c4; color:#3a5a22; font-family:'JetBrains Mono',monospace; font-size:10px; font-weight:700;">可行</span></td>
+            <td style="padding:9px 16px 9px 8px; vertical-align:top; line-height:1.55;">雙側各餘 ~0.96 m（含後視鏡 ~0.86 m）。單向單車通過順暢。</td>
+          </tr>
+          <tr style="border-top:1px solid #d8d0bd;">
+            <td style="padding:9px 8px 9px 16px; vertical-align:top;"><b style="color:var(--ink);">③ 迴車圓環</b></td>
+            <td style="padding:9px 8px; vertical-align:top; font-family:'JetBrains Mono',monospace; font-size:10.5px;">外 R 9.9 m<br>環道 6.9 m<br>島 r 3 m</td>
+            <td style="padding:9px 8px; vertical-align:top; text-align:center;"><span style="display:inline-block; padding:2px 8px; border-radius:10px; background:#d8e8c4; color:#3a5a22; font-family:'JetBrains Mono',monospace; font-size:10px; font-weight:700;">可行</span></td>
+            <td style="padding:9px 16px 9px 8px; vertical-align:top; line-height:1.55;">沿環道中線繞行，車頭外擺 ~7.9–8.5 m＜外緣 9.9 m（餘 ~1.5–2 m）；內側距中島餘 ~1–1.5 m。<b style="color:var(--ink);">可繞行、可 U 迴轉、可貼主建物放客下車。</b></td>
+          </tr>
+          <tr style="border-top:1px solid #d8d0bd;">
+            <td style="padding:9px 8px 9px 16px; vertical-align:top;"><b style="color:var(--ink);">④ 抵達後方停車</b></td>
+            <td style="padding:9px 8px; vertical-align:top; font-family:'JetBrains Mono',monospace; font-size:10.5px;">車格 2.5×5 m<br>通道 4 m</td>
+            <td style="padding:9px 8px; vertical-align:top; text-align:center; white-space:nowrap;"><span style="display:inline-block; padding:2px 7px; border-radius:10px; background:#f0e2bd; color:#8a6a18; font-family:'JetBrains Mono',monospace; font-size:10px; font-weight:700;">可到</span> <span style="display:inline-block; margin-top:3px; padding:2px 7px; border-radius:10px; background:#efd6c8; color:#8a3a1f; font-family:'JetBrains Mono',monospace; font-size:10px; font-weight:700;">不可停</span></td>
+            <td style="padding:9px 16px 9px 8px; vertical-align:top; line-height:1.55;">可經圓環→4 m 通道往西抵達停車區；但 <b style="color:var(--ink);">6.99 m 小巴停不進 5 m 車格</b>（超出 ~2 m，4 m 通道亦無法垂直入庫）。通道西端盡頭、無迴轉空間，駛入需倒車退出。</td>
+          </tr>
+          <tr style="border-top:1px solid #d8d0bd;">
+            <td style="padding:9px 8px 9px 16px; vertical-align:top;"><b style="color:var(--ink);">⑤ 離場</b></td>
+            <td style="padding:9px 8px; vertical-align:top; font-family:'JetBrains Mono',monospace; font-size:10.5px;">圓環迴轉一圈</td>
+            <td style="padding:9px 8px; vertical-align:top; text-align:center;"><span style="display:inline-block; padding:2px 8px; border-radius:10px; background:#d8e8c4; color:#3a5a22; font-family:'JetBrains Mono',monospace; font-size:10px; font-weight:700;">可行</span></td>
+            <td style="padding:9px 16px 9px 8px; vertical-align:top; line-height:1.55;">繞圓環回正、原路出閘，全程不需倒車（前提：閘口與圓環外緣符合上述）。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 結論 + 建議 -->
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:16px;">
+    <div class="card" style="background:#efe7d2;">
+      <h3><span>結論 / Verdict</span><span class="idx">∑</span></h3>
+      <div style="font-size:12px; line-height:1.7; color:var(--ink-2);">
+        <div style="margin-bottom:7px;"><b style="color:#3a5a22;">▸ 進場</b>：可行，但<b style="color:var(--ink);">閘口必須放大喇叭口</b>並確認瑪僯路淨寬——目前唯一真正的瓶頸。</div>
+        <div style="margin-bottom:7px;"><b style="color:#3a5a22;">▸ 繞行／迴轉／放客</b>：可行，外緣略留即綽綽有餘。</div>
+        <div style="margin-bottom:7px;"><b style="color:#8a3a1f;">▸ 後方停車</b>：<b style="color:var(--ink);">小巴無法停入現有 2.5×5 m 車格</b>，需另設巴士席或改採「圓環放客、車輛駛離」。</div>
+        <div><b style="color:#3a5a22;">▸ 離場</b>：可行，全程不需倒車。</div>
+      </div>
+    </div>
+    <div class="card" style="background:var(--paper-2);">
+      <h3><span>建議 / Recommendations</span><span class="idx">5</span></h3>
+      <ol style="margin:0; padding-left:18px; font-size:11.5px; line-height:1.65; color:var(--ink-2);">
+        <li style="margin-bottom:5px;">車道口做<b style="color:var(--ink);">喇叭口</b>（建議口寬 6–7 m、轉角 R ≥ 6 m），動工前先量瑪僯路淨寬。</li>
+        <li style="margin-bottom:5px;">圓環<b style="color:var(--ink);">外緣設可輾壓緣石</b>／加寬鋪面，吸收車頭外擺。</li>
+        <li style="margin-bottom:5px;">巴士臨停：圓環旁或南緣劃 1 席 <b style="color:var(--ink);">≥ 3.5 × 12 m</b> 巴士彎（可併 2–3 席小客車格）；或定位「小巴僅圓環放客、不進停車區」。</li>
+        <li style="margin-bottom:5px;">通道西端若要小巴進出，須留<b style="color:var(--ink);">迴轉頭</b>；否則維持小客車專用。</li>
+        <li>出圖前以<b style="color:var(--ink);">行駛軌跡模板（swept-path / AutoTURN）</b>實測該車軌跡複核。</li>
+      </ol>
+    </div>
+  </div>
+
+  <p style="font-family:'JetBrains Mono',monospace; font-size:9.5px; color:var(--ink-3); margin-top:14px; line-height:1.6; letter-spacing:0.02em;">
+    ⚠ 桌上估算：依圖面標註尺寸＋車輛原廠規格推算（草圖 ±5 cm），非實測軌跡。最終放行須以實際行駛軌跡模板＋瑪僯路現場淨寬＋閘口轉角放樣複核。｜車規來源：Toyota Coaster 官方規格表（6,990×2,080×2,635 mm／軸距 3,935 mm）、CarsGuide（turning circle ≈ 13 m）。
+  </p>
+</section>
 
 <!-- ============ FOOTER ============ -->
 <footer class="footer">
