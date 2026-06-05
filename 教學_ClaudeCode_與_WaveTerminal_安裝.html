@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code × Wave Terminal 安裝教學</title>
+<style>
+  :root {
+    --bg: #1c1814;
+    --bg-card: #262019;
+    --bg-code: #14110d;
+    --text: #e8ddd0;
+    --text-dim: #a89880;
+    --accent: #e8a04c;
+    --accent2: #d4763b;
+    --green: #9cbf6e;
+    --red: #d97a6c;
+    --border: #3a3128;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Microsoft JhengHei", "Noto Sans TC", "PingFang TC", sans-serif;
+    line-height: 1.8;
+    padding: 0 0 80px;
+  }
+  .hero {
+    background: linear-gradient(135deg, #2a2118 0%, #1c1814 60%);
+    border-bottom: 2px solid var(--accent2);
+    padding: 56px 24px 40px;
+    text-align: center;
+  }
+  .hero h1 { font-size: 2rem; color: var(--accent); letter-spacing: 2px; }
+  .hero p { color: var(--text-dim); margin-top: 12px; font-size: 1.05rem; }
+  .hero .meta { margin-top: 18px; font-size: .85rem; color: var(--text-dim); }
+  .container { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+  nav.toc {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 28px;
+    margin: 32px auto;
+  }
+  nav.toc h2 { font-size: 1rem; color: var(--accent); margin-bottom: 10px; }
+  nav.toc ol { padding-left: 24px; }
+  nav.toc a { color: var(--text); text-decoration: none; }
+  nav.toc a:hover { color: var(--accent); }
+  h2.section {
+    font-size: 1.5rem;
+    color: var(--accent);
+    margin: 56px 0 8px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  h2.section .num {
+    display: inline-block;
+    background: var(--accent2);
+    color: #fff;
+    border-radius: 8px;
+    font-size: 1rem;
+    padding: 2px 12px;
+    margin-right: 12px;
+    vertical-align: 3px;
+  }
+  h3 { color: var(--accent); font-size: 1.15rem; margin: 32px 0 8px; }
+  p { margin: 12px 0; }
+  ul, ol { padding-left: 28px; margin: 12px 0; }
+  li { margin: 6px 0; }
+  a { color: var(--accent); }
+  code {
+    background: var(--bg-code);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2px 7px;
+    font-family: Consolas, "Cascadia Code", monospace;
+    font-size: .9em;
+    color: #f0c987;
+  }
+  pre {
+    background: var(--bg-code);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent2);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 14px 0;
+    overflow-x: auto;
+  }
+  pre code { background: none; border: none; padding: 0; color: #f0c987; font-size: .95rem; }
+  .label {
+    display: inline-block;
+    font-size: .78rem;
+    border-radius: 4px;
+    padding: 1px 10px;
+    margin-bottom: -6px;
+    color: #1c1814;
+    font-weight: bold;
+  }
+  .label.win { background: #7ab8d9; }
+  .label.mac { background: #c9c9c9; }
+  .label.linux { background: #d9c97a; }
+  .box {
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 18px 0;
+    border: 1px solid var(--border);
+  }
+  .box.tip { background: #22281b; border-left: 4px solid var(--green); }
+  .box.warn { background: #2b1f1b; border-left: 4px solid var(--red); }
+  .box.info { background: #262019; border-left: 4px solid var(--accent); }
+  .box .t { font-weight: bold; margin-bottom: 4px; }
+  .box.tip .t { color: var(--green); }
+  .box.warn .t { color: var(--red); }
+  .box.info .t { color: var(--accent); }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 18px 0;
+    font-size: .95rem;
+  }
+  th, td { border: 1px solid var(--border); padding: 10px 14px; text-align: left; }
+  th { background: var(--bg-card); color: var(--accent); }
+  tr:nth-child(even) td { background: #211c16; }
+  .step {
+    display: flex;
+    gap: 16px;
+    margin: 20px 0;
+  }
+  .step .n {
+    flex: 0 0 36px;
+    height: 36px;
+    background: var(--accent2);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-top: 4px;
+  }
+  .step .c { flex: 1; }
+  .step .c b { color: var(--accent); }
+  footer { text-align: center; color: var(--text-dim); font-size: .85rem; margin-top: 64px; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>🛠️ Claude Code × Wave Terminal 安裝教學</h1>
+  <p>從零開始：裝好一個現代化終端機，再把 AI 編程助手裝進去</p>
+  <div class="meta">資料查證日期：2026-06-05 ｜ Wave Terminal 最新版 0.14.5（2026-04-16 發布）｜ 來源：官方文件</div>
+</div>
+
+<div class="container">
+
+<nav class="toc">
+  <h2>📑 目錄</h2>
+  <ol>
+    <li><a href="#intro">這兩個工具是什麼？</a></li>
+    <li><a href="#wave">安裝 Wave Terminal</a></li>
+    <li><a href="#claude">安裝 Claude Code</a></li>
+    <li><a href="#login">第一次啟動與登入</a></li>
+    <li><a href="#combo">合體：在 Wave Terminal 裡跑 Claude Code</a></li>
+    <li><a href="#faq">常見問題排除</a></li>
+    <li><a href="#links">官方連結總整理</a></li>
+  </ol>
+</nav>
+
+<!-- ==================== 1 ==================== -->
+<h2 class="section" id="intro"><span class="num">1</span>這兩個工具是什麼？</h2>
+
+<table>
+  <tr><th>工具</th><th>角色</th><th>一句話介紹</th></tr>
+  <tr>
+    <td><b>Wave Terminal</b></td>
+    <td>終端機（容器）</td>
+    <td>開源、跨平台的現代終端機，內建檔案預覽、網頁瀏覽、AI 助手等圖形化功能</td>
+  </tr>
+  <tr>
+    <td><b>Claude Code</b></td>
+    <td>AI 編程助手（住在終端機裡）</td>
+    <td>Anthropic 官方 CLI，在終端機裡用對話方式寫程式、改檔案、跑指令</td>
+  </tr>
+</table>
+
+<p>兩者關係：<b>Wave Terminal 是「房子」，Claude Code 是「住客」</b>。先裝哪個都可以，但建議先裝 Wave Terminal，之後所有指令都在它裡面執行，順便熟悉操作。</p>
+
+<!-- ==================== 2 ==================== -->
+<h2 class="section" id="wave"><span class="num">2</span>安裝 Wave Terminal</h2>
+
+<p>官方下載頁：<a href="https://www.waveterm.dev/download" target="_blank">https://www.waveterm.dev/download</a></p>
+
+<h3><span class="label win">Windows</span></h3>
+<p>方法 A — 直接下載安裝檔（最簡單）：</p>
+<ul>
+  <li>EXE 安裝程式（x64）：<a href="https://dl.waveterm.dev/releases-w2/Wave-win32-x64-0.14.5.exe" target="_blank">Wave-win32-x64-0.14.5.exe</a></li>
+  <li>MSI 安裝程式（x64）：<a href="https://dl.waveterm.dev/releases-w2/Wave-win32-x64-0.14.5.msi" target="_blank">Wave-win32-x64-0.14.5.msi</a></li>
+</ul>
+<p>下載後雙擊執行，一路下一步即可。</p>
+
+<p>方法 B — 用 winget（Windows 內建套件管理器），打開 PowerShell 輸入：</p>
+<pre><code>winget install CommandLine.Wave</code></pre>
+
+<h3><span class="label mac">macOS</span></h3>
+<p>方法 A — 直接下載 DMG：</p>
+<ul>
+  <li>Apple Silicon（M1～M4）：<a href="https://dl.waveterm.dev/releases-w2/Wave-darwin-arm64-0.14.5.dmg" target="_blank">Wave-darwin-arm64-0.14.5.dmg</a></li>
+  <li>Intel 晶片：<a href="https://dl.waveterm.dev/releases-w2/Wave-darwin-x64-0.14.5.dmg" target="_blank">Wave-darwin-x64-0.14.5.dmg</a></li>
+</ul>
+<p>方法 B — 用 Homebrew：</p>
+<pre><code>brew install --cask wave</code></pre>
+
+<h3><span class="label linux">Linux</span></h3>
+<table>
+  <tr><th>發行版</th><th>格式</th><th>下載 / 指令</th></tr>
+  <tr><td>Ubuntu / Debian</td><td>.deb</td><td><a href="https://dl.waveterm.dev/releases-w2/waveterm-linux-amd64-0.14.5.deb" target="_blank">waveterm-linux-amd64-0.14.5.deb</a></td></tr>
+  <tr><td>Fedora / CentOS</td><td>.rpm</td><td><a href="https://dl.waveterm.dev/releases-w2/waveterm-linux-x86_64-0.14.5.rpm" target="_blank">waveterm-linux-x86_64-0.14.5.rpm</a></td></tr>
+  <tr><td>各發行版通用</td><td>Snap</td><td><a href="https://snapcraft.io/waveterm" target="_blank">snapcraft.io/waveterm</a>（<code>snap install waveterm</code>）</td></tr>
+  <tr><td>Arch Linux</td><td>.pacman</td><td><a href="https://dl.waveterm.dev/releases-w2/waveterm-linux-x64-0.14.5.pacman" target="_blank">waveterm-linux-x64-0.14.5.pacman</a></td></tr>
+  <tr><td>可攜式</td><td>AppImage</td><td>在<a href="https://www.waveterm.dev/download" target="_blank">官方下載頁</a>選 AppImage（x64 / ARM64）</td></tr>
+</table>
+
+<div class="box info">
+  <div class="t">ℹ️ 版本號說明</div>
+  上面連結是查證當下（2026-06-05）的最新版 <b>0.14.5</b>。日後版本更新時，直接到 <a href="https://www.waveterm.dev/download" target="_blank">官方下載頁</a> 抓最新版即可，頁面永遠指向最新版本。
+</div>
+
+<p>裝好後打開 Wave Terminal，會看到分頁式介面＋側邊的圖形化區塊（widget）。它本質仍是終端機——接下來的所有指令都在這裡輸入。</p>
+
+<!-- ==================== 3 ==================== -->
+<h2 class="section" id="claude"><span class="num">3</span>安裝 Claude Code</h2>
+
+<p>官方安裝文件：<a href="https://code.claude.com/docs/en/setup" target="_blank">https://code.claude.com/docs/en/setup</a></p>
+
+<h3>系統需求</h3>
+<ul>
+  <li><b>作業系統</b>：macOS 13.0+、Windows 10 1809+ / Windows Server 2019+、Ubuntu 20.04+ / Debian 10+ / Alpine 3.19+</li>
+  <li><b>硬體</b>：4 GB+ RAM、x64 或 ARM64 處理器</li>
+  <li><b>網路</b>：需要網際網路連線</li>
+  <li><b>帳號</b>：Claude <b>Pro / Max / Team / Enterprise</b> 或 Console（API）帳號 —— <span style="color:var(--red)">免費版 Claude.ai 不能用 Claude Code</span></li>
+</ul>
+
+<h3>安裝方式（擇一即可）</h3>
+
+<p><span class="label win">Windows</span>　官方推薦的原生安裝器（Native Install），打開 PowerShell（或 Wave Terminal）輸入：</p>
+<pre><code>irm https://claude.ai/install.ps1 | iex</code></pre>
+
+<p>如果你用的是 CMD（命令提示字元），改用這行：</p>
+<pre><code>curl -fsSL https://claude.ai/install.cmd -o install.cmd &amp;&amp; install.cmd &amp;&amp; del install.cmd</code></pre>
+
+<div class="box warn">
+  <div class="t">⚠️ 怎麼分辨自己在 PowerShell 還是 CMD？</div>
+  提示符開頭有 <code>PS C:\</code> 就是 PowerShell；只有 <code>C:\</code> 就是 CMD。<br>
+  ・在 PowerShell 跑 CMD 的指令會出現 <code>The token '&amp;&amp;' is not a valid statement separator</code><br>
+  ・在 CMD 跑 PowerShell 的指令會出現 <code>'irm' is not recognized</code><br>
+  看到這兩種錯誤，代表你用錯指令了，換另一行即可。
+</div>
+
+<p><span class="label mac">macOS</span> <span class="label linux">Linux / WSL</span>　原生安裝器：</p>
+<pre><code>curl -fsSL https://claude.ai/install.sh | bash</code></pre>
+
+<p>其他安裝管道：</p>
+<table>
+  <tr><th>管道</th><th>指令</th><th>備註</th></tr>
+  <tr><td>winget（Windows）</td><td><code>winget install Anthropic.ClaudeCode</code></td><td>不會自動更新，需手動 <code>winget upgrade</code></td></tr>
+  <tr><td>Homebrew（macOS）</td><td><code>brew install --cask claude-code</code></td><td>不會自動更新，需手動 <code>brew upgrade</code></td></tr>
+  <tr><td>npm（需 Node.js 18+）</td><td><code>npm install -g @anthropic-ai/claude-code</code></td><td>切勿加 <code>sudo</code></td></tr>
+</table>
+
+<div class="box tip">
+  <div class="t">✅ 推薦用原生安裝器</div>
+  原生安裝（<code>install.ps1</code> / <code>install.sh</code>）會<b>自動在背景更新</b>，裝一次就不用管了。winget / brew / npm 裝的都要自己手動更新。
+</div>
+
+<div class="box info">
+  <div class="t">ℹ️ Windows 使用者建議加裝 Git for Windows</div>
+  官方建議在原生 Windows 上安裝 <a href="https://git-scm.com/downloads/win" target="_blank">Git for Windows</a>，這樣 Claude Code 可以使用 Bash 工具（功能較完整）；沒裝的話會改用 PowerShell 執行指令，也能正常運作。不需要管理員權限。
+</div>
+
+<h3>驗證安裝</h3>
+<pre><code>claude --version</code></pre>
+<p>有顯示版本號就成功了。想做更完整的健檢可以跑：</p>
+<pre><code>claude doctor</code></pre>
+
+<!-- ==================== 4 ==================== -->
+<h2 class="section" id="login"><span class="num">4</span>第一次啟動與登入</h2>
+
+<div class="step"><div class="n">1</div><div class="c">
+  <b>切到你的專案資料夾</b>（或任何想工作的資料夾）：
+  <pre><code>cd C:\你的專案資料夾</code></pre>
+</div></div>
+
+<div class="step"><div class="n">2</div><div class="c">
+  <b>輸入 <code>claude</code> 啟動</b>：
+  <pre><code>claude</code></pre>
+</div></div>
+
+<div class="step"><div class="n">3</div><div class="c">
+  <b>跟著畫面提示登入</b> —— 會自動打開瀏覽器，用你的 Claude 帳號（Pro / Max / Team）或 Console 帳號授權，完成後回到終端機就能開始對話。
+</div></div>
+
+<div class="step"><div class="n">4</div><div class="c">
+  <b>開始使用</b> —— 直接用自然語言下指令，例如「幫我看一下這個資料夾的結構」「寫一個 hello world 的 Python 程式」。
+</div></div>
+
+<!-- ==================== 5 ==================== -->
+<h2 class="section" id="combo"><span class="num">5</span>合體：在 Wave Terminal 裡跑 Claude Code</h2>
+
+<p>兩個都裝好後，組合方式非常簡單：</p>
+<ol>
+  <li>打開 <b>Wave Terminal</b></li>
+  <li>在終端機分頁輸入 <code>claude</code></li>
+  <li>完成 —— 你現在擁有「圖形化終端機 + AI 編程助手」的組合</li>
+</ol>
+
+<p>這個組合的實際好處：</p>
+<ul>
+  <li><b>分頁工作流</b>：一個分頁跑 Claude Code，另一個分頁自己下指令、看 log</li>
+  <li><b>檔案預覽 widget</b>：Claude Code 改完的檔案、生成的圖片，直接在 Wave 側邊預覽，不用切視窗</li>
+  <li><b>內建瀏覽器 widget</b>：查文件、看 Claude Code 生成的 HTML 都在同一個視窗內</li>
+</ul>
+
+<div class="box tip">
+  <div class="t">✅ 中文顯示亂碼？</div>
+  Wave Terminal 預設字型對 CJK（中日韓）支援不佳，中文可能變豆腐字。解法：到設定檔 <code>~/.config/waveterm/settings.json</code> 把字型改成支援中文的等寬字型（例如 <a href="https://github.com/be5invis/Sarasa-Gothic/releases" target="_blank">Sarasa Mono TC 更紗黑體</a>），設定 <code>"term:fontfamily": "Sarasa Mono TC"</code> 後重啟即可。
+</div>
+
+<!-- ==================== 6 ==================== -->
+<h2 class="section" id="faq"><span class="num">6</span>常見問題排除</h2>
+
+<table>
+  <tr><th>症狀</th><th>原因 / 解法</th></tr>
+  <tr>
+    <td><code>claude : 無法辨識</code> / <code>command not found</code></td>
+    <td>安裝後 PATH 還沒更新 → <b>關掉終端機重開</b>一次再試。還是不行就參考官方 <a href="https://code.claude.com/docs/en/troubleshoot-install" target="_blank">安裝疑難排解</a>。</td>
+  </tr>
+  <tr>
+    <td>登入時說帳號不能用</td>
+    <td>Claude Code 需要 <b>Pro / Max / Team / Enterprise / Console</b> 帳號，免費版不支援。先到 <a href="https://claude.ai" target="_blank">claude.ai</a> 升級方案。</td>
+  </tr>
+  <tr>
+    <td><code>'irm' is not recognized</code></td>
+    <td>你在 CMD 裡跑了 PowerShell 指令 → 改用 CMD 版安裝指令（見上方第 3 節）。</td>
+  </tr>
+  <tr>
+    <td><code>The token '&amp;&amp;' is not a valid...</code></td>
+    <td>你在 PowerShell 裡跑了 CMD 指令 → 改用 <code>irm https://claude.ai/install.ps1 | iex</code>。</td>
+  </tr>
+  <tr>
+    <td>npm 安裝時權限錯誤</td>
+    <td><b>不要用 <code>sudo npm install -g</code></b>（官方明確警告）。建議改用原生安裝器。</td>
+  </tr>
+  <tr>
+    <td>想手動立即更新 Claude Code</td>
+    <td>跑 <code>claude update</code>；原生安裝平常會自動背景更新。</td>
+  </tr>
+  <tr>
+    <td>不想用終端機</td>
+    <td>Claude Code 也有<a href="https://claude.com/download" target="_blank">桌面版 App</a>（圖形介面），以及 VS Code / JetBrains 外掛可選。</td>
+  </tr>
+</table>
+
+<!-- ==================== 7 ==================== -->
+<h2 class="section" id="links"><span class="num">7</span>官方連結總整理</h2>
+
+<table>
+  <tr><th>項目</th><th>連結</th></tr>
+  <tr><td>Claude Code 官方安裝文件</td><td><a href="https://code.claude.com/docs/en/setup" target="_blank">code.claude.com/docs/en/setup</a></td></tr>
+  <tr><td>Claude Code 快速上手（Quickstart）</td><td><a href="https://code.claude.com/docs/en/quickstart" target="_blank">code.claude.com/docs/en/quickstart</a></td></tr>
+  <tr><td>Claude Code 安裝疑難排解</td><td><a href="https://code.claude.com/docs/en/troubleshoot-install" target="_blank">code.claude.com/docs/en/troubleshoot-install</a></td></tr>
+  <tr><td>Claude 桌面版 App 下載</td><td><a href="https://claude.com/download" target="_blank">claude.com/download</a></td></tr>
+  <tr><td>Git for Windows（建議加裝）</td><td><a href="https://git-scm.com/downloads/win" target="_blank">git-scm.com/downloads/win</a></td></tr>
+  <tr><td>Wave Terminal 官網下載頁</td><td><a href="https://www.waveterm.dev/download" target="_blank">waveterm.dev/download</a></td></tr>
+  <tr><td>Wave Terminal 官方文件</td><td><a href="https://docs.waveterm.dev" target="_blank">docs.waveterm.dev</a></td></tr>
+  <tr><td>Wave Terminal GitHub</td><td><a href="https://github.com/wavetermdev/waveterm" target="_blank">github.com/wavetermdev/waveterm</a></td></tr>
+  <tr><td>Node.js（僅 npm 安裝法需要）</td><td><a href="https://nodejs.org/en/download" target="_blank">nodejs.org/en/download</a></td></tr>
+</table>
+
+<footer>
+  資料來源：Claude Code 官方文件（code.claude.com）、Wave Terminal 官網（waveterm.dev）｜查證日期 2026-06-05<br>
+  本文所有指令與連結均取自官方頁面，未經杜撰
+</footer>
+
+</div>
+</body>
+</html>
