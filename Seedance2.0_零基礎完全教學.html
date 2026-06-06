@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seedance 2.0 零基礎完全教學｜從買 Credit 到做出你想要的影片</title>
+<style>
+  :root{
+    --bg:#1c1814;
+    --bg-soft:#262019;
+    --card:#2d261e;
+    --card-deep:#241e17;
+    --ink:#f0e6d8;
+    --ink-soft:#c9bba6;
+    --ink-dim:#9a8c78;
+    --accent:#f0a04b;
+    --accent-soft:#ffc98a;
+    --accent-deep:#b96a26;
+    --green:#9dc88d;
+    --red:#e08a7a;
+    --blue:#8ab4d8;
+    --border:#4a3d2e;
+    --code-bg:#171310;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Microsoft JhengHei","Noto Sans TC","PingFang TC",sans-serif;
+    line-height:1.9;
+    font-size:17px;
+  }
+  .wrap{max-width:920px;margin:0 auto;padding:0 24px 120px;}
+  /* ── Hero ── */
+  .hero{
+    padding:90px 0 50px;
+    border-bottom:2px solid var(--border);
+    margin-bottom:48px;
+  }
+  .hero .kicker{
+    color:var(--accent);
+    font-size:15px;
+    letter-spacing:4px;
+    margin-bottom:18px;
+    font-weight:bold;
+  }
+  .hero h1{
+    font-size:42px;
+    line-height:1.35;
+    color:var(--accent-soft);
+    margin-bottom:20px;
+  }
+  .hero .sub{font-size:19px;color:var(--ink-soft);max-width:680px;}
+  .hero .meta{margin-top:28px;font-size:14px;color:var(--ink-dim);}
+  /* ── TOC ── */
+  .toc{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:28px 34px;
+    margin-bottom:56px;
+  }
+  .toc h2{font-size:18px;color:var(--accent);margin-bottom:14px;letter-spacing:2px;}
+  .toc ol{list-style:none;counter-reset:toc;}
+  .toc li{counter-increment:toc;padding:5px 0;}
+  .toc li::before{
+    content:counter(toc,decimal-leading-zero);
+    color:var(--accent);
+    font-weight:bold;
+    margin-right:14px;
+    font-size:14px;
+  }
+  .toc a{color:var(--ink);text-decoration:none;border-bottom:1px dashed transparent;}
+  .toc a:hover{color:var(--accent-soft);border-bottom-color:var(--accent);}
+  /* ── Sections ── */
+  section{margin-bottom:80px;}
+  h2.sec{
+    font-size:30px;
+    color:var(--accent-soft);
+    padding-bottom:14px;
+    border-bottom:2px solid var(--border);
+    margin-bottom:30px;
+    line-height:1.4;
+  }
+  h2.sec .num{
+    color:var(--accent);
+    font-size:18px;
+    display:block;
+    letter-spacing:3px;
+    margin-bottom:6px;
+  }
+  h3{font-size:22px;color:var(--accent);margin:42px 0 16px;}
+  h4{font-size:18px;color:var(--accent-soft);margin:30px 0 12px;}
+  p{margin-bottom:16px;color:var(--ink);}
+  p.dim{color:var(--ink-soft);}
+  strong{color:var(--accent-soft);}
+  ul,ol{margin:0 0 20px 28px;}
+  li{margin-bottom:8px;color:var(--ink);}
+  a{color:var(--blue);}
+  /* ── Boxes ── */
+  .box{
+    border-radius:12px;
+    padding:22px 26px;
+    margin:24px 0;
+    border:1px solid var(--border);
+    background:var(--card);
+  }
+  .box .box-title{font-weight:bold;margin-bottom:10px;font-size:16px;letter-spacing:1px;}
+  .box.tip{border-left:5px solid var(--green);}
+  .box.tip .box-title{color:var(--green);}
+  .box.warn{border-left:5px solid var(--red);}
+  .box.warn .box-title{color:var(--red);}
+  .box.idea{border-left:5px solid var(--accent);}
+  .box.idea .box-title{color:var(--accent);}
+  /* ── Prompt blocks ── */
+  .prompt{
+    background:var(--code-bg);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:20px 24px;
+    margin:18px 0 26px;
+    font-family:"Sarasa Mono TC","Consolas","Microsoft JhengHei",monospace;
+    font-size:15.5px;
+    line-height:1.85;
+    color:#e8d9bf;
+    white-space:pre-wrap;
+    position:relative;
+  }
+  .prompt::before{
+    content:"PROMPT 範例";
+    position:absolute;
+    top:-11px;
+    left:18px;
+    background:var(--accent-deep);
+    color:#fff;
+    font-size:11px;
+    letter-spacing:2px;
+    padding:2px 12px;
+    border-radius:20px;
+    font-family:"Microsoft JhengHei",sans-serif;
+  }
+  .prompt.bad::before{content:"❌ 不好的寫法";background:#8a4438;}
+  .prompt.good::before{content:"✅ 好的寫法";background:#5a7a4d;}
+  .ref{color:var(--accent);font-weight:bold;}
+  /* ── Tables ── */
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin:20px 0 30px;
+    font-size:15px;
+    background:var(--card-deep);
+    border-radius:10px;
+    overflow:hidden;
+  }
+  th{
+    background:#3a2f22;
+    color:var(--accent-soft);
+    text-align:left;
+    padding:12px 14px;
+    border-bottom:2px solid var(--border);
+    white-space:nowrap;
+  }
+  td{
+    padding:11px 14px;
+    border-bottom:1px solid #383023;
+    color:var(--ink);
+    vertical-align:top;
+  }
+  tr:last-child td{border-bottom:none;}
+  td .src{font-size:12.5px;color:var(--ink-dim);}
+  .best td{background:rgba(157,200,141,.08);}
+  .best td:first-child{border-left:4px solid var(--green);}
+  /* ── Cards ── */
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin:24px 0;}
+  .mini-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:20px 22px;
+  }
+  .mini-card .t{color:var(--accent);font-weight:bold;margin-bottom:8px;font-size:16px;}
+  .mini-card p{font-size:15px;color:var(--ink-soft);margin:0;}
+  /* ── Step flow ── */
+  .steps{counter-reset:step;margin:24px 0;}
+  .step{
+    display:flex;gap:18px;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:20px 24px;
+    margin-bottom:14px;
+  }
+  .step::before{
+    counter-increment:step;
+    content:counter(step);
+    flex-shrink:0;
+    width:38px;height:38px;
+    background:var(--accent-deep);
+    color:#fff;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:bold;font-size:18px;
+  }
+  .step .s-body{flex:1;}
+  .step .s-title{font-weight:bold;color:var(--accent-soft);margin-bottom:6px;}
+  .step p{margin:0;font-size:15.5px;color:var(--ink-soft);}
+  /* ── Checklist ── */
+  .check{list-style:none;margin-left:0;}
+  .check li{
+    padding:8px 0 8px 36px;
+    position:relative;
+    border-bottom:1px dashed #383023;
+  }
+  .check li::before{
+    content:"☐";
+    position:absolute;left:6px;
+    color:var(--accent);
+    font-size:19px;
+  }
+  /* ── Badges ── */
+  .badge{
+    display:inline-block;
+    font-size:12.5px;
+    padding:1px 10px;
+    border-radius:20px;
+    margin-right:6px;
+    font-weight:bold;
+    letter-spacing:1px;
+  }
+  .badge.g{background:rgba(157,200,141,.15);color:var(--green);border:1px solid var(--green);}
+  .badge.r{background:rgba(224,138,122,.15);color:var(--red);border:1px solid var(--red);}
+  .badge.o{background:rgba(240,160,75,.15);color:var(--accent);border:1px solid var(--accent);}
+  .badge.b{background:rgba(138,180,216,.15);color:var(--blue);border:1px solid var(--blue);}
+  /* ── divider ── */
+  .divider{text-align:center;color:var(--accent);font-size:20px;letter-spacing:14px;margin:50px 0;}
+  /* ── back to top ── */
+  .top-link{display:block;text-align:right;font-size:13px;margin-top:30px;}
+  .top-link a{color:var(--ink-dim);text-decoration:none;}
+  .top-link a:hover{color:var(--accent);}
+  footer{border-top:1px solid var(--border);padding-top:30px;color:var(--ink-dim);font-size:13.5px;}
+  @media(max-width:640px){
+    .hero h1{font-size:30px;}
+    h2.sec{font-size:24px;}
+    body{font-size:16px;}
+    table{font-size:13px;display:block;overflow-x:auto;}
+  }
+</style>
+</head>
+<body id="top">
+<div class="wrap">
+
+<!-- ════════ HERO ════════ -->
+<div class="hero">
+  <div class="kicker">AI 影片生成 · 新手完全指南</div>
+  <h1>Seedance 2.0 零基礎完全教學</h1>
+  <p class="sub">從「什麼是 AI 影片」開始，一路教到「在哪裡買 credit 最便宜」「prompt 怎麼寫」「怎麼做出 15 秒以上的完整作品」。讀完這份報告，你就能用 Seedance 2.0 做出任何你想做的影片。</p>
+  <div class="meta">撰寫日期：2026-06-06 ｜ 適合對象：完全沒接觸過 AI 工具的初學者 ｜ 閱讀時間：約 40 分鐘</div>
+</div>
+
+<!-- ════════ TOC ════════ -->
+<div class="toc">
+  <h2>📖 目錄</h2>
+  <ol>
+    <li><a href="#ch1">Seedance 2.0 是什麼？它能幫你做什麼？</a></li>
+    <li><a href="#ch2">在哪裡用最便宜？平台與價格完整比較</a></li>
+    <li><a href="#ch3">基本觀念：AI 影片生成的遊戲規則</a></li>
+    <li><a href="#ch4">寫出你的第一個 Prompt（萬用公式）</a></li>
+    <li><a href="#ch5">鏡頭語言入門：讓你的影片像電影</a></li>
+    <li><a href="#ch6">@ 引用系統：丟圖片、影片、音樂進去用</a></li>
+    <li><a href="#ch7">時間戳分鏡法：精準控制每一秒</a></li>
+    <li><a href="#ch8">超過 15 秒怎麼辦？長片製作流程</a></li>
+    <li><a href="#ch9">創意心法：為什麼你的影片沒人想看？</a></li>
+    <li><a href="#ch10">新手最常犯的 7 個錯誤 + 自檢清單</a></li>
+    <li><a href="#ch11">三個完整實戰案例（從想法到成品）</a></li>
+    <li><a href="#ch12">附錄：一頁速查表</a></li>
+  </ol>
+</div>
+
+<!-- ════════ CH 1 ════════ -->
+<section id="ch1">
+  <h2 class="sec"><span class="num">CHAPTER 01</span>Seedance 2.0 是什麼？它能幫你做什麼？</h2>
+
+  <p><strong>Seedance 2.0</strong> 是字節跳動（ByteDance，就是做 TikTok 的那家公司）推出的 AI 影片生成模型。簡單講：<strong>你用文字描述你想看到的畫面，它就生出一段影片給你</strong>。不用攝影機、不用演員、不用剪輯軟體。</p>
+
+  <p>它跟上一代工具最大的差別，是「<strong>可參考萬物</strong>」的多模態能力——你不只能打字，還能丟<strong>圖片、影片、音樂</strong>進去當參考：</p>
+
+  <div class="cards">
+    <div class="mini-card"><div class="t">📝 文字 → 影片</div><p>打一段描述，直接生出 4–15 秒的影片，還自動配音效和背景音樂。</p></div>
+    <div class="mini-card"><div class="t">🖼️ 圖片 → 影片</div><p>丟一張圖讓它「動起來」，或指定圖片當影片的第一格、最後一格畫面。</p></div>
+    <div class="mini-card"><div class="t">🎬 影片 → 影片</div><p>丟一段參考影片，叫它模仿裡面的運鏡、動作、特效、節奏，換成你的主角。</p></div>
+    <div class="mini-card"><div class="t">🎵 音樂卡點</div><p>丟一首音樂 + 幾張照片，它會自動跟著節拍切換畫面，做出卡點影片。</p></div>
+    <div class="mini-card"><div class="t">🗣️ 角色對白</div><p>寫好台詞和情緒，角色會開口講話、有表情，可以做迷你短劇。</p></div>
+    <div class="mini-card"><div class="t">✂️ 影片編輯 / 延長</div><p>把現有影片裡的東西換掉，或把影片往後（甚至往前）延長。</p></div>
+  </div>
+
+  <h3>實際上大家用它做什麼？</h3>
+  <ul>
+    <li><strong>電商產品廣告</strong>：漢堡在半空中分解再組合、產品 360 度旋轉展示</li>
+    <li><strong>社群短影音</strong>：IG Reels、TikTok、YouTube Shorts 的吸睛開頭</li>
+    <li><strong>音樂卡點影片</strong>：旅遊照片 + 音樂 → 自動卡點 montage</li>
+    <li><strong>迷你短劇</strong>：兩個角色吵架、寵物脫口秀，有台詞有情緒</li>
+    <li><strong>知識教學動畫</strong>：例如「血管裡的脂肪怎麼堆積」的醫學視覺化</li>
+    <li><strong>品牌形象片</strong>：電影感的 15 秒品牌開場</li>
+  </ul>
+
+  <div class="box tip">
+    <div class="box-title">💡 新手先知道這個就夠了</div>
+    <p style="margin:0">Seedance 2.0 = 「<strong>會聽話的 AI 攝影團隊</strong>」。你是導演，prompt（提示詞）就是你的劇本＋分鏡表。這份教學的核心，就是教你怎麼把「腦中的畫面」翻譯成「它聽得懂的劇本」。</p>
+  </div>
+  <div class="top-link"><a href="#top">↑ 回目錄</a></div>
+</section>
+
+<!-- ════════ CH 2 ════════ -->
+<section id="ch2">
+  <h2 class="sec"><span class="num">CHAPTER 02</span>在哪裡用最便宜？平台與價格完整比較</h2>
+
+  <p>Seedance 2.0 不是只有一個地方能用——官方 App、官方 API、第三方平台都有，<strong>價差可以到 10 倍以上</strong>。先搞懂行情，再決定在哪裡花錢。</p>
+
+  <h3>2-1. 先記住一個「官方錨點價」</h3>
+  <div class="box idea">
+    <div class="box-title">⚓ 官方基準：每秒約 US$0.14（¥1/秒）</div>
+    <p style="margin:0">字節跳動官方對 Seedance 2.0 Pro 的計價基準是 <strong>每秒約 $0.14 美元</strong>，也就是一支 5 秒影片成本約 <strong>$0.70</strong>、10 秒約 $1.40。任何平台宣稱「Seedance 2.0 一支只要 $0.05」之類遠低於這個數字的價格，<strong>幾乎都是拿 Seedance 1.5 或 Lite 版混充，或是引流話術</strong>，要特別小心。<br><span style="font-size:13px;color:var(--ink-dim)">來源：<a href="https://technode.com/2026/03/05/bytedances-seedance-2-0-video-model-costs-about-0-14-per-second/">TechNode</a></span></p>
+  </div>
+
+  <h3>2-2. 平台比較總表</h3>
+  <p class="dim">成本以「一支 5 秒、720p 影片」估算（720p 是目前多數平台 Seedance 2.0 的主力檔位）。價格為 2026 年 6 月調查結果，實際以各平台官網為準。</p>
+
+  <table>
+    <thead><tr><th>平台</th><th>方案 / 價格</th><th>每支 5 秒約多少</th><th>免費額度</th><th>適合誰</th></tr></thead>
+    <tbody>
+      <tr class="best">
+        <td><strong>Dreamina / 即夢</strong><br><span class="src">字節官方 App（<a href="https://dreamina.capcut.com">dreamina.capcut.com</a>）</span></td>
+        <td>免費版有每日額度；<br>付費 Standard / Advanced 約 $18–84/月（年付有大折扣）</td>
+        <td>付費約 <strong>$0.12–0.16</strong><br>免費額度內 <strong>$0</strong></td>
+        <td>✅ 每日免費 token，<br>約可做 1–2 支短片/日</td>
+        <td><strong>幾乎所有人的首選</strong>。官方出品、功能最完整、單價最低</td>
+      </tr>
+      <tr>
+        <td><strong>Freepik / Magnific</strong><br><span class="src"><a href="https://www.magnific.com/seedance-2">magnific.com/seedance-2</a></span></td>
+        <td>Premium 年付約 $14.5/月（24 萬 credit/年）</td>
+        <td>720p 約 75 credit/支，<br>月額度可做 <strong>260+ 支</strong></td>
+        <td>註冊送試用 credit</td>
+        <td>中量創作者第二選擇，順便用它的 30+ 其他模型</td>
+      </tr>
+      <tr>
+        <td><strong>BytePlus ModelArk</strong><br><span class="src">官方國際 API（<a href="https://docs.byteplus.com/en/docs/ModelArk/1544106">docs.byteplus.com</a>）</span></td>
+        <td>按秒計費，無月費</td>
+        <td>約 <strong>$0.70</strong>（官方基準價）</td>
+        <td>新註冊送 200 萬 token</td>
+        <td>工程師、要程式自動化量產的人</td>
+      </tr>
+      <tr>
+        <td><strong>Higgsfield AI</strong><br><span class="src"><a href="https://higgsfield.ai">higgsfield.ai</a></span></td>
+        <td>Ultra 年付約 $99–129/月（3000 credit）</td>
+        <td>25 credit/支 ≈ <strong>$0.75</strong>（720p）</td>
+        <td>低價方案 credit 極少</td>
+        <td>已訂 Ultra 的人順便用。⚠️ 注意：「無限生成」名單目前是 Seedance <em>1.5</em> Pro，<strong>2.0 仍要扣 credit</strong></td>
+      </tr>
+      <tr>
+        <td><strong>fal.ai</strong><br><span class="src"><a href="https://fal.ai/models/bytedance/seedance-2.0/text-to-video">fal.ai</a></span></td>
+        <td>純 API 按秒，無訂閱</td>
+        <td>720p 約 <strong>$1.52</strong>；<br>1080p 約 <strong>$3.41</strong>（最貴）</td>
+        <td>無</td>
+        <td>開發者快速接 API 測試，不適合量產</td>
+      </tr>
+      <tr>
+        <td><strong>Krea / Pollo / Replicate</strong></td>
+        <td>各有訂閱或按量方案</td>
+        <td>未查到 2.0 的精確扣點，部分走轉售線路</td>
+        <td>Krea 免費版每日 100 點（影片功能受限）</td>
+        <td>已經在用這些平台的人</td>
+      </tr>
+      <tr>
+        <td><strong>低價轉售 API</strong><br><span class="src">EvoLink、Atlas Cloud 等</span></td>
+        <td>宣稱低至 $0.022/秒</td>
+        <td>⚠️ 宣稱 $0.05–0.15/支</td>
+        <td>視平台</td>
+        <td><span class="badge r">不建議</span>多為 1.5/Lite 混充或引流價，品質與穩定性無保證</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>2-3. 三種人，三種最省錢的買法</h3>
+  <div class="cards">
+    <div class="mini-card">
+      <div class="t">🌱 嘗鮮型：每月 &lt;10 支</div>
+      <p><strong>推薦：Dreamina 免費版（$0）</strong><br>每日免費 token 約可做 1–2 支短片，一個月累積下來免費做 10 支以上綽綽有餘。先玩免費的，確定喜歡再付錢。</p>
+    </div>
+    <div class="mini-card">
+      <div class="t">🎨 創作者型：每月 30–100 支</div>
+      <p><strong>推薦：Dreamina Advanced 年付（約 $0.12/支）</strong><br>單價最低、功能最完整。次選 Freepik Premium 年付 $14.5/月，月額度夠做 260+ 支還附其他 AI 模型。</p>
+    </div>
+    <div class="mini-card">
+      <div class="t">🏭 量產型：每月 300+ 支</div>
+      <p><strong>推薦：BytePlus 官方 API（$0.14/秒）或 Dreamina Advanced</strong><br>API 可程式化批次跑、不綁訂閱；偏好介面操作就用 Dreamina。<strong>避開 fal.ai 量產</strong>（貴 2–5 倍）。</p>
+    </div>
+  </div>
+
+  <div class="box warn">
+    <div class="box-title">⚠️ 買 credit 前的三個防雷提醒</div>
+    <ul style="margin-bottom:0">
+      <li><strong>認明「2.0」</strong>：很多平台同時掛 Seedance 1.0 / 1.5 / 2.0，便宜的往往是舊版。生成前看清楚模型選單。</li>
+      <li><strong>年付折扣大但先試月付</strong>：Dreamina、Freepik 年付便宜很多，但建議先用免費額度或月付一個月確認工作流程順手。</li>
+      <li><strong>用「參考影片」會比較貴</strong>：上傳參考影片的生成，消耗會比純文字稍高，預算抓寬一點。</li>
+    </ul>
+  </div>
+
+  <p class="dim" style="font-size:14px">📌 本章價格查證日期為 2026-06-06，AI 平台價格變動很快，下單前請以官網即時價格為準。各數字來源連結已附在表格內。</p>
+  <div class="top-link"><a href="#top">↑ 回目錄</a></div>
+</section>
+
+<!-- ════════ CH 3 ════════ -->
+<section id="ch3">
+  <h2 class="sec"><span class="num">CHAPTER 03</span>基本觀念：AI 影片生成的遊戲規則</h2>
+
+  <p>開始寫 prompt 之前，先花 3 分鐘搞懂遊戲規則，可以幫你省下大量的 credit 和挫折。</p>
+
+  <h3>3-1. 什麼是 Prompt（提示詞）？</h3>
+  <p>Prompt 就是<strong>你寫給 AI 的指令文字</strong>。把 AI 想像成一個「超有才華、但完全不會通靈的攝影團隊」——你描述得越清楚，它拍得越接近你的想像；你描述得越模糊，它就自己亂猜。</p>
+
+  <div class="prompt bad">一隻貓在玩</div>
+  <div class="prompt good">一隻橘色虎斑貓在木地板客廳裡追逐紅色雷射光點，動作敏捷地撲跳轉身，午後陽光從落地窗灑進來，鏡頭低角度跟拍，背景音效：貓爪踩地板聲、輕快俏皮的背景音樂</div>
+
+  <p>看出差別了嗎？第二個 prompt 講清楚了 <strong>主角長相</strong>（橘色虎斑貓）、<strong>動作</strong>（追雷射光點、撲跳轉身）、<strong>場景</strong>（木地板客廳）、<strong>光線</strong>（午後陽光）、<strong>鏡頭</strong>（低角度跟拍）、<strong>聲音</strong>（貓爪聲＋音樂）。這六個元素就是下一章的萬用公式。</p>
+
+  <h3>3-2. 硬性限制（背起來，違反就白燒 credit）</h3>
+  <table>
+    <thead><tr><th>項目</th><th>限制</th><th>白話說明</th></tr></thead>
+    <tbody>
+      <tr><td><strong>單次影片長度</strong></td><td>4–15 秒</td><td>一次最多生 15 秒。想要更長 → 看第 8 章的「延長＋拼接」</td></tr>
+      <tr><td><strong>上傳圖片</strong></td><td>最多 9 張</td><td>jpeg/png/webp 等，每張 30MB 以內</td></tr>
+      <tr><td><strong>上傳影片</strong></td><td>最多 3 支</td><td>mp4/mov，每支 50MB 以內，總長 2–15 秒</td></tr>
+      <tr><td><strong>上傳音訊</strong></td><td>最多 3 個</td><td>mp3/wav，總長 15 秒以內</td></tr>
+      <tr><td><strong>檔案總數</strong></td><td>圖＋影＋音<strong>合計 ≤ 12 個</strong></td><td>超過會被擋</td></tr>
+      <tr><td><strong>真人臉部</strong></td><td><span class="badge r">禁止</span></td><td>上傳含寫實真人臉孔的圖片/影片會被平台自動攔截。用 AI 生成的人物圖、插畫、動物、產品都 OK</td></tr>
+    </tbody>
+  </table>
+
+  <h3>3-3. 它會自動配音！</h3>
+  <p>Seedance 2.0 生成的影片<strong>自帶音效和背景音樂</strong>。所以 prompt 裡面記得描述你要的聲音（「海浪聲」「緊張的弦樂」「角色台詞」），不寫的話它就自己配，常常配得不是你要的。</p>
+
+  <div class="box tip">
+    <div class="box-title">💡 省錢心法：先想清楚再按生成</div>
+    <p style="margin:0">每按一次「生成」就燒一次 credit。新手最浪費錢的行為是「寫個模糊 prompt → 生出來不滿意 → 改兩個字再生 → 還是不滿意」。正確做法：<strong>用本教學的公式把 prompt 寫完整、自檢一遍（第 10 章清單）、再按生成</strong>。一次到位率會高非常多。</p>
+  </div>
+  <div class="top-link"><a href="#top">↑ 回目錄</a></div>
+</section>
+
+<!-- ════════ CH 4 ════════ -->
+<section id="ch4">
+  <h2 class="sec"><span class="num">CHAPTER 04</span>寫出你的第一個 Prompt（萬用公式）</h2>
+
+  <h3>4-1. 六元素萬用公式</h3>
+  <p>幾乎所有短影片 prompt 都能套這個結構：</p>
+
+  <div class="prompt">[風格/色調]，[主體描述]，[動作序列]，[環境/光影]，[鏡頭語言]，[音效描述]</div>
+
+  <table>
+    <thead><tr><th>元素</th><th>回答的問題</th><th>例子</th></tr></thead>
+    <tbody>
+      <tr><td>① 風格/色調</td><td>整體看起來像什麼？</td><td>電影感寫實風格、日系清新、賽博龐克霓虹、水墨畫風</td></tr>
+      <tr><td>② 主體描述</td><td>主角是誰？長什麼樣？</td><td>一位穿米色風衣的長髮女子、一台復古紅色腳踏車</td></tr>
+      <tr><td>③ 動作序列</td><td>它在做什麼？按什麼順序？</td><td>先停下腳步、抬頭看天空、然後微笑轉身離開</td></tr>
+      <tr><td>④ 環境/光影</td><td>在哪裡？光從哪來？</td><td>黃昏的東京街頭，逆光，街燈剛亮起</td></tr>
+      <tr><td>⑤ 鏡頭語言</td><td>攝影機怎麼動？</td><td>鏡頭緩慢推近、低角度仰拍、環繞運鏡（詳見第 5 章）</td></tr>
+      <tr><td>⑥ 音效描述</td><td>聽起來是什麼？</td><td>背景音樂：溫暖的鋼琴；音效：街道環境音、腳步聲</td></tr>
+    </tbody>
+  </table>
+
+  <h3>4-2. 由淺入深三個範例</h3>
+
+  <h4>Level 1：最簡單的可用 prompt（新手第一支）</h4>
+  <div class="prompt">電影感寫實風格，一隻金毛獵犬在海邊沙灘上奔跑，浪花打在牠腳邊濺起水花，夕陽金色逆光，鏡頭低角度跟拍，音效：海浪聲、狗開心的喘氣聲，背景音樂輕快溫暖</div>
+  <p class="dim">六個元素全到位，AI 不用猜任何東西。這樣的 prompt 一次出片成功率很高。</p>
+
+  <h4>Level 2：加入動作順序與情緒</h4>
+  <div class="prompt">日系清新風格，一位穿白色洋裝的動畫風少女站在開滿櫻花的公園裡，先閉著眼感受風，櫻花瓣飄落在她肩上，她睜開眼露出驚喜的笑容，伸手接住一片花瓣，柔和的晨光，空氣中漂浮著花瓣，鏡頭從特寫她的睫毛緩慢拉遠到全身，音效：風聲、樹葉沙沙聲，背景音樂：溫柔的木吉他</div>
+  <p class="dim">注意「先…然後…」的動作順序、「驚喜的笑容」的情緒指示，以及「從特寫拉遠到全身」的鏡頭變化。</p>
+
+  <h4>Level 3：商業級品質錨定</h4>
+  <div class="prompt">15秒，Octane 渲染級畫質，8K 電影規格，好萊塢級 VFX，深色奢華氛圍，
+一瓶琥珀色威士忌酒瓶懸浮在純黑空間中緩慢旋轉，金色液體在瓶中流轉，光束掃過瓶身浮現品牌浮雕細節，最後酒瓶落定，背景浮現金色品牌字樣，
+光影：單一頂光源 + 液體焦散光斑 + 暖金色調，
+鏡頭全程緩慢環繞推近，音效：低沉大提琴 + 液體晃動聲 + 結尾一聲清脆冰塊聲</div>
+  <p class="dim">開頭的「Octane 渲染級畫質、8K 電影規格」叫做<strong>品質錨定</strong>——把渲染引擎和畫質等級寫在最前面，整支影片的質感會直接上一個檔次。這是進階玩家的固定起手式。</p>
+
+  <div class="box idea">
+    <div class="box-title">🎯 一個影片只做一件事</div>
+    <p style="margin:0">15 秒的影片<strong>只放一個核心概念</strong>。新手常想把「狗在沙灘跑、然後遇到貓、然後一起看夕陽、然後下雨了」全塞進 5 秒——結果每件事都拍不好。概念越簡單，成品越驚艷。</p>
+  </div>
+  <div class="top-link"><a href="#top">↑ 回目錄</a></div>
+</section>
+
+<!-- ════════ CH 5 ════════ -->
+<section id="ch5">
+  <h2 class="sec"><span class="num">CHAPTER 05</span>鏡頭語言入門：讓你的影片像電影</h2>
+
+  <p>同一個畫面，鏡頭怎麼動，感覺完全不同。這章把專業攝影術語翻成白話——學會這些詞，你的 prompt 立刻從「路人拍的」變「導演拍的」。</p>
+
+  <h3>5-1. 基礎運鏡（先學這 7 個就夠用）</h3>
+  <table>
+    <thead><tr><th>術語（寫進 prompt）</th><th>白話解釋</th><th>什麼時候用</th></tr></thead>
+    <tbody>
+      <tr><td><strong>推近</strong>（push in）</td><td>鏡頭慢慢靠近主角</td><td>聚焦情緒、營造緊張或親密感</td></tr>
+      <tr><td><strong>拉遠</strong>（pull back）</td><td>鏡頭慢慢遠離主角</td><td>揭曉環境、結尾收場、孤獨感</td></tr>
+      <tr><td><strong>橫搖</strong>（pan）</td><td>鏡頭原地左右轉頭</td><td>掃過場景、跟隨橫向移動</td></tr>
+      <tr><td><strong>直搖</strong>（tilt）</td><td>鏡頭原地上下點頭</td><td>由腳到頭介紹角色、仰望建築</td></tr>
+      <tr><td><strong>跟拍</strong>（follow shot）</td><td>鏡頭跟著主角移動</td><td>奔跑、行走、追逐戲</td></tr>
+      <tr><td><strong>環繞</strong>（orbit）</td><td>鏡頭繞著主角轉圈</td><td>產品展示、英雄登場時刻</td></tr>
+      <tr><td><strong>一鏡到底</strong>（one-take）</td><td>全程不剪接的連續鏡頭</td><td>沉浸感、炫技、空間導覽</td></tr>
+    </tbody>
+  </table>
+
+  <h3>5-2. 景別：鏡頭離多遠？</h3>
+  <table>
+    <thead><tr><th>景別</th><th>畫面裡有什麼</th><th>效果</th></tr></thead>
+    <tbody>
+      <tr><td><strong>大特寫</strong></td><td>只有眼睛、嘴唇或一個細節</td><td>極致情緒、懸疑</td></tr>
+      <tr><td><strong>特寫</strong></td><td>臉部填滿畫面</td><td>情緒表達</td></tr>
+      <tr><td><strong>中近景</strong></td><td>頭到肩膀/胸口</td><td>對話、訪談（最安全的預設）</td></tr>
+      <tr><td><strong>中景</strong></td><td>腰部以上</td><td>動作＋表情兼顧</td></tr>
+      <tr><td><strong>全景</strong></td><td>整個人入鏡</td><td>展示動作、舞蹈</td></tr>
+      <tr><td><strong>大遠景</strong></td><td>人很小，環境很大</td><td>史詩感、開場建立場景</td></tr>
+    </tbody>
+  </table>
+
+  <h3>5-3. 進階技巧（用了會被問「這怎麼拍的」）</h3>
+  <ul>
+    <li><strong>希區考克變焦</strong>（dolly zoom）：背景扭曲拉伸、主角不動——暈眩、恐懼感的經典手法。prompt 直接寫「希區考克變焦」即可。</li>
+    <li><strong>第一人稱視角</strong>（POV）：從主角眼睛看出去，沉浸感極強。</li>
+    <li><strong>甩鏡</strong>（whip pan）：超快速橫搖產生動態模糊，適合做場景切換。</li>
+    <li><strong>鳥瞰 / 俯視</strong>：從正上方往下拍，適合食物擺盤、城市街景。</li>
+    <li><strong>低角度仰拍</strong>：讓主角顯得高大有力量。</li>
+  </ul>
+
+  <h3>5-4. 兩條鐵律（違反 = 畫面崩壞）</h3>
+  <div class="box warn">
+    <div class="box-title">🚫 鐵律一：每個鏡頭最多「雙軸運動」</div>
+    <p style="margin:0">「推近＋環繞」OK，「推近＋環繞＋升高」三個動作同時來 = 畫面失控。一個鏡頭最多同時做兩種運動。</p>
+  </div>
+  <div class="box warn">
+    <div class="box-title">🚫 鐵律二：近距離特寫不要大幅度繞臉轉</div>
+    <p style="margin:0">特寫鏡頭＋大角度環繞 = <strong>臉部崩壞高風險組合</strong>（AI 在近距離旋轉時很容易把臉畫崩）。要環繞請退到中景以上。</p>
+  </div>
+
+  <div class="box tip">
+    <div class="box-title">💡 不知道怎麼選？用這組萬用預設</div>
+    <p style="margin:0"><strong>中近景＋平視角度＋四分之三側面＋50mm 鏡頭＋淺景深＋緩慢推近</strong>——這是最不會出錯的人像預設組合，直接抄進 prompt 就行。</p>
+  </div>
+
+  <div class="box idea">
+    <div class="box-title">🎬 運鏡要「全程聲明」</div>
+    <p style="margin:0">如果你要鏡頭從頭到尾持續移動，prompt 裡要寫「<strong>鏡頭全程緩慢環繞</strong>」而不是只寫「環繞」。不強調「全程」，AI 常常動兩秒就停了。</p>
+  </div>
+  <div class="top-link"><a href="#top">↑ 回目錄</a></div>
+</section>
+
+<!-- ════════ CH 6 ════════ -->
+<section id="ch6">
+  <h2 class="sec"><span class="num">CHAPTER 06</span>@ 引用系統：丟圖片、影片、音樂進去用</h2>
+
+  <p>這是 Seedance 2.0 <strong>最強大、也最重要的功能</strong>。你上傳的每個檔案都會自動得到一個編號，在 prompt 裡用 <span class="ref">@</span> 來指揮它們：</p>
+
+  <div class="prompt">圖片 → <span class="ref">@圖片1</span> ~ <span class="ref">@圖片9</span>
+影片 → <span class="ref">@視頻1</span> ~ <span class="ref">@視頻3</span>
+音訊 → <span class="ref">@音頻1</span> ~ <span class="ref">@音頻3</span>
+
+（英文介面則是 @Image1、@Video1、@Audio1）</div>
+
+  <h3>6-1. 最重要的觀念：講清楚「參考它的什麼」</h3>
+  <p>新手最大的錯誤是只寫「參考<span class="ref">@視頻1</span>」——參考它的什麼？運鏡？動作？特效？節奏？<strong>AI 不會通靈，要指名</strong>：</p>
+
+  <table>
+    <thead><tr><th>你想要什麼</th><th>就這樣寫</th></tr></thead>
+    <tbody>
+      <tr><td>用這張圖當第一格畫面</td><td><span class="ref">@圖片1</span> 作為首帧</td></tr>
+      <tr><td>用這張圖當最後一格</td><td><span class="ref">@圖片2</span> 作為尾帧</td></tr>
+      <tr><td>主角長這樣</td><td><span class="ref">@圖片1</span> 的角色作為主體</td></tr>
+      <tr><td>背景/場景長這樣</td><td>場景參考 <span class="ref">@圖片3</span></td></tr>
+      <tr><td>模仿這支影片的運鏡</td><td>參考 <span class="ref">@視頻1</span> 的運鏡</td></tr>
+      <tr><td>模仿這支影片的動作</td><td>參考 <span class="ref">@視頻1</span> 的動作編排</td></tr>
+      <tr><td>複製這支影片的特效轉場</td><td>完全參考 <span class="ref">@視頻1</span> 的特效和轉場</td></tr>
+      <tr><td>跟這支影片一樣的節奏</td><td>畫面節奏參考 <span class="ref">@視頻1</span></td></tr>
+      <tr><td>用這首音樂當配樂</td><td>BGM 參考 <span class="ref">@音頻1</span></td></tr>
+      <tr><td>角色穿這件衣服</td><td>穿著 <span class="ref">@圖片2</span> 的服裝</td></tr>
+      <tr><td>產品細節以這張圖為準</td><td>產品細節參考 <span class="ref">@圖片3</span></td></tr>
+    </tbody>
+  </table>
+
+  <h3>6-2. 十大能力模式速查（每個附範例）</h3>
+
+  <h4>① 角色一致性——讓同一個角色貫穿全片</h4>
+  <div class="prompt"><span class="ref">@圖片1</span> 的男子疲憊地走在公寓走廊，腳步漸慢，停在家門口。特寫他的臉——深吸一口氣，把疲憊換成放鬆的表情。特寫他掏出鑰匙插入門鎖。進門後，小女兒和寵物狗跑來擁抱他。室內溫馨，全程自然對話聲。</div>
+
+  <h4>② 運鏡複刻——抄電影的鏡頭，換成你的主角</h4>
+  <div class="prompt">參考 <span class="ref">@圖片1</span> 的男性角色，他在 <span class="ref">@圖片2</span> 的電梯裡。完全參考 <span class="ref">@視頻1</span> 的運鏡和主角的表情變化：恐懼時刻使用希區考克變焦，接著數個環繞鏡頭展示電梯內部。電梯門打開，跟拍走出，外部場景參考 <span class="ref">@圖片3</span>。</div>
+
+  <h4>③ 特效/創意模板複刻——把爆紅影片的梗換成你的內容</h4>
+  <div class="prompt">將 <span class="ref">@視頻1</span> 中的角色替換為 <span class="ref">@圖片1</span>，<span class="ref">@圖片1</span> 作為首帧。角色戴上 VR 眼鏡，參考 <span class="ref">@視頻1</span> 的運鏡——近距環繞鏡頭從第三人稱切換為主觀視角，穿越 VR 眼鏡進入 <span class="ref">@圖片2</span> 的深藍宇宙。</div>
+
+  <h4>④ 影片延長——把 15 秒接成 30 秒、60 秒</h4>
+  <div class="prompt">將 <span class="ref">@視頻1</span> 延長 15 秒。
+1-5秒：百葉窗光影緩緩滑過木桌和咖啡杯，樹影輕搖如呼吸；
+6-10秒：一顆咖啡豆從畫面上方輕輕飄落，鏡頭推近至豆子直到畫面全黑；
+11-15秒：浮現文字「Lucky Coffee」「Breakfast」「AM 7:00-10:00」。</div>
+  <p class="dim">⚠️ 延長幾秒，生成時長就選幾秒（延長 5 秒 → 選 5 秒生成）。也可以「向前延長」補拍開頭。</p>
+
+  <h4>⑤ 影片編輯——改掉現有影片裡的元素或劇情</h4>
+  <div class="prompt">將 <span class="ref">@視頻1</span> 中的紅色跑車換成 <span class="ref">@圖片1</span> 的白色重機，其餘畫面、運鏡、光影全部保持不變。</div>
+
+  <h4>⑥ 音樂卡點——照片＋音樂自動剪成卡點片</h4>
+  <div class="prompt"><span class="ref">@圖片1</span> <span class="ref">@圖片2</span> <span class="ref">@圖片3</span> <span class="ref">@圖片4</span> <span class="ref">@圖片5</span> <span class="ref">@圖片6</span>——對齊 <span class="ref">@視頻1</span> 的關鍵帧位置與整體節奏做卡點剪輯。人物動作更有動感，整體風格更夢幻、視覺張力強，根據音樂調整景別並加入光影變化。</div>
+
+  <h4>⑦ 對白短劇——角色開口演戲</h4>
+  <div class="prompt">「貓狗吐槽大會」喜劇片段，情緒誇張：
+貓主持人（舔爪子翻白眼）：「誰懂我的苦？旁邊這位除了搖尾巴拆沙發，就是用那種『摸我呀我可愛』的眼神騙人類零食……」
+狗主持人（歪頭搖尾巴）：「你好意思說？你一天睡18小時，醒來就為了蹭人類的腿討罐罐……」</div>
+  <p class="dim">格式重點：<strong>台詞用引號包住，並標明（角色，情緒/動作）</strong>。</p>
+
+  <h4>⑧ 一鏡到底——多張圖串成連續長鏡頭</h4>
+  <div class="prompt"><span class="ref">@圖片1</span> <span class="ref">@圖片2</span> <span class="ref">@圖片3</span> <span class="ref">@圖片4</span>——一鏡到底跟拍：跑者從街道上樓梯、穿過走廊、來到天台、最後俯瞰城市。全程不切鏡頭。</div>
+
+  <h4>⑨ 電商產品展示</h4>
+  <div class="prompt">固定鏡頭，漢堡懸浮在半空中旋轉，食材保持形狀比例精準地輕輕分離：金色芝麻麵包頂、翠綠生菜、帶露珠的紅番茄片、兩層厚實多汁的牛肉排與融化的金黃切達起司——然後全部緩緩下降、完美重組成一個完整的豪華雙層起司堡。全程起司持續融化滴落、蔬菜露珠閃爍，維持極致食慾美學。</div>
+
+  <h4>⑩ 知識/教學動畫</h4>
+  <div class="prompt">15秒健康衛教短片，4K 醫學 CGI 半透明視覺化風格。
+0-5秒：透明藍色人體上半身，鏡頭緩慢推進一條清澈的動脈，血流順暢；
+5-10秒：奶茶的糖分與脂肪顆粒進入血流，鏡頭跟隨血流，血液逐漸黏稠，血管壁出現黃色脂肪沉積；
+10-15秒：血管腔明顯變窄、流速下降，前後對比，整體色調轉暗。</div>
+
+  <div class="box warn">
+    <div class="box-title">⚠️ @ 引用三守則</div>
+    <ul style="margin-bottom:0">
+      <li>上傳了就要用到：傳 5 張圖，5 張都要在 prompt 裡有明確角色，不然 AI 會亂用。</li>
+      <li>講清楚是「<strong>參考</strong>」（模仿風格/運鏡）還是「<strong>編輯</strong>」（直接改這支影片）——兩者結果完全不同。</li>
+      <li>總檔案數 ≤ 12，影片總長 ≤ 15 秒，否則上傳會被擋。</li>
+    </ul>
+  </div>
+  <div class="top-link"><a href="#top">↑ 回目錄</a></div>
+</section>
+
+<!-- ════════ CH 7 ════════ -->
+<section id="ch7">
+  <h2 class="sec"><span class="num">CHAPTER 07</span>時間戳分鏡法：精準控制每一秒</h2>
+
+  <p>影片超過 8–10 秒時，光用一段話描述會讓 AI 自己決定節奏，常常前面拖、後面趕。解法：<strong>把時間切段，每段寫清楚畫面、鏡頭、音效</strong>——這叫時間戳分鏡法，是做 13–15 秒影片的必備技巧。</p>
+
+  <h3>結構模板</h3>
+  <div class="prompt">[總時長][風格總綱]，
+0-3秒：[畫面 + 鏡頭 + 音效]；
+4-8秒：[畫面 + 鏡頭 + 音效]；
+9-12秒：[畫面 + 鏡頭 + 音效]；
+13-15秒：[畫面 + 鏡頭 + 音效]。</div>
+
+  <h3>完整範例：15 秒香水廣告</h3>
+  <div class="prompt">15秒，電影級質感，法式優雅美學，奶油色與金色調，
+0-3秒：純白絲綢背景中，一滴金色液體以慢動作墜落，鏡頭大特寫跟隨液滴，音效：靜謐中一聲水滴；
+4-8秒：液滴落入香水瓶激起金色漣漪，瓶身浮現精緻雕花，鏡頭緩慢環繞瓶身，音效：弦樂漸入；
+9-12秒：白色花瓣從四周飄起環繞瓶身旋轉，逆光下花瓣半透明，鏡頭緩慢拉遠，音效：弦樂推向高點；
+13-15秒：花瓣定格懸浮，品牌金色字樣浮現，鏡頭定機收尾，音效：一聲清脆鈴音後靜默。</div>
+
+  <div class="box tip">
+    <div class="box-title">💡 時間戳的三個訣竅</div>
+    <ul style="margin-bottom:0">
+      <li><strong>時間要覆蓋完整</strong>：選了 15 秒就要寫到 15 秒，留空白段 AI 會自由發揮。</li>
+      <li><strong>每段一件事</strong>：一個時間段塞兩個場景，等於沒分鏡。</li>
+      <li><strong>動作量要符合物理</strong>：3 秒內人最多「轉身＋邁兩步」，別要求 3 秒跑完一條街。</li>
+    </ul>
+  </div>
+  <div class="top-link"><a href="#top">↑ 回目錄</a></div>
+</section>
+
+<!-- ════════ CH 8 ════════ -->
+<section id="ch8">
+  <h2 class="sec"><span class="num">CHAPTER 08</span>超過 15 秒怎麼辦？長片製作流程</h2>
+
+  <p>單次生成上限 15 秒，但 30 秒廣告、1 分鐘短劇照樣做得出來——靠的是<strong>正確的工作流程</strong>，而不是一條超長 prompt。</p>
+
+  <h3>8-1. 方法一：延長接龍（適合 15–45 秒）</h3>
+  <div class="steps">
+    <div class="step"><div class="s-body"><div class="s-title">正常生成第一段（≤15 秒）</div><p>用前面學的方法把第一段做到滿意為止。</p></div></div>
+    <div class="step"><div class="s-body"><div class="s-title">把成品傳回去，用「延長」指令接續</div><p>「將 <span class="ref">@視頻1</span> 延長 10 秒：……」並在 prompt 裡<strong>重複宣告風格、角色、場景</strong>（風格鎖定），否則接出來的段落會變調。</p></div></div>
+    <div class="step"><div class="s-body"><div class="s-title">每段開頭保留 0.8–1.5 秒「橋接鏡頭」</div><p>延長段開頭安排一個和上一段結尾銜接的緩衝畫面，剪接時才不會跳。</p></div></div>
+    <div class="step"><div class="s-body"><div class="s-title">重複直到夠長，最後剪輯軟體拼接</div><p>用 CapCut（剪映）等免費剪輯工具把各段串起來、修剪接縫。</p></div></div>
+  </div>
+
+  <h3>8-2. 方法二：分鏡流水線（適合 45 秒以上 / 有劇情的片）</h3>
+  <p>真正的長片不要指望「一條 prompt 一步到位」，要走前期流程，就像真的拍片一樣：</p>
+  <div class="steps">
+    <div class="step"><div class="s-body"><div class="s-title">設計角色 → 做「角色卡片圖」</div><p>先用 AI 生圖工具（如即夢圖片生成、NanoBanana）做出角色的標準照，之後每個鏡頭都用它當 <span class="ref">@圖片</span> 參考，角色才不會每個鏡頭長得不一樣。</p></div></div>
+    <div class="step"><div class="s-body"><div class="s-title">寫分鏡腳本</div><p>把故事拆成一個個 5–15 秒的鏡頭，每個鏡頭寫清楚：畫面內容、運鏡、台詞、音效。</p></div></div>
+    <div class="step"><div class="s-body"><div class="s-title">做每個分鏡的參考圖（首帧圖）</div><p>替關鍵鏡頭先生成靜態圖，當作該鏡頭的首帧。<strong>大部分高品質 AI 影片都不是純文字生的</strong>——先有好的首帧圖，成功率翻倍。</p></div></div>
+    <div class="step"><div class="s-body"><div class="s-title">逐鏡頭生成影片</div><p>每個鏡頭一條 prompt：角色卡圖鎖角色＋首帧圖鎖畫面＋文字描述動作。</p></div></div>
+    <div class="step"><div class="s-body"><div class="s-title">後期剪輯拼接</div><p>按下一節的剪輯節奏公式組裝成片。</p></div></div>
+  </div>
+
+  <h3>8-3. 剪輯節奏：六套公式</h3>
+  <p>素材都生好了，怎麼剪才好看？挑一套節奏公式照做：</p>
+  <table>
+    <thead><tr><th>公式</th><th>節奏感覺</th><th>適合</th><th>難度</th></tr></thead>
+    <tbody>
+      <tr><td>① 呼吸式</td><td>快快快～慢……（密集短鏡頭後接一個長鏡頭喘息）</td><td>80% 的日常影片，新手首選</td><td>⭐</td></tr>
+      <tr><td>② 心跳式</td><td>咚—哒—咚—哒（規律交替）</td><td>懸疑、運動</td><td>⭐⭐</td></tr>
+      <tr><td>③ 海浪式</td><td>小浪～大浪～更大浪～平靜</td><td>情感故事、MV</td><td>⭐⭐</td></tr>
+      <tr><td>④ 子彈時間</td><td>正常→慢動作→砰！爆發</td><td>高潮段、產品揭曉</td><td>⭐⭐⭐</td></tr>
+      <tr><td>⑤ 脈衝式</td><td>哒哒哒—哒哒哒哒—轟！</td><td>預告片、快閃</td><td>⭐⭐</td></tr>
+      <tr><td>⑥ 靜默錘擊</td><td>安靜……砰！更安靜……砰！</td><td>奢侈品、恐怖片</td><td>⭐⭐⭐</td></tr>
+    </tbody>
+  </table>
+
+  <h3>8-4. AI 素材剪輯的五個專屬對策</h3>
+  <ul>
+    <li><strong>每條素材頭尾剪掉 0.5–1 秒</strong>：AI 影片的開頭結尾常有微妙的「定格感」，剪掉最乾淨。</li>
+    <li><strong>色彩統一是最大陷阱</strong>：不同批次生成的素材色調會飄，選一條當基準片，其他全部向它調色。</li>
+    <li><strong>動作不連貫用轉場弥合</strong>：兩段接不上時，加一個甩鏡或閃白轉場帶過去。</li>
+    <li><strong>AI 微妙畸變用快節奏遮掩</strong>：哪裡有點崩，那段就剪短一點、節奏切快一點。</li>
+    <li><strong>素材抓 2–3 倍量</strong>：預計用 10 條就生 20–30 條，AI 生成有抽卡成分，多備料才有得挑。</li>
+  </ul>
+  <div class="top-link"><a href="#top">↑ 回目錄</a></div>
+</section>
+
+<!-- ════════ CH 9 ════════ -->
+<section id="ch9">
+  <h2 class="sec"><span class="num">CHAPTER 09</span>創意心法：為什麼你的影片沒人想看？</h2>
+
+  <p>前面教的是「怎麼寫」，這章講「<strong>寫什麼</strong>」——這其實更重要。提示詞寫得再精緻，概念本身不吸引人，出來也只是「技術上正確的平庸」。</p>
+
+  <h3>9-1. 前 2 秒是生死線</h3>
+  <p>在短影音平台，觀眾給你的時間只有 2 秒。<strong>最震撼的畫面必須放在開頭</strong>，不要做「鋪陳→發展→高潮」的傳統結構——先放高潮，再解釋。</p>
+
+  <h3>9-2. ≤15 秒：不要講故事，做一個「不可能的瞬間」</h3>
+  <p>15 秒塞不下一個故事，但塞得下一個讓人「蛤？！」的瞬間：</p>
+  <ul>
+    <li>漢堡在半空中自己分解再組合 ✅</li>
+    <li>城市街道像地毯一樣被捲起來 ✅</li>
+    <li>「小明早上起床刷牙出門上學遇到朋友」 ❌（這是流水帳，不是創意）</li>
+  </ul>
+
+  <h3>9-3. 靜 → 動的突變，比持續運動更有衝擊力</h3>
+  <p>全片都在動 = 觀眾麻痺。先讓畫面安靜 1–2 秒，然後「砰！」一個爆發——對比才是衝擊力的來源。</p>
+
+  <h3>9-4. 丟圖片進來做影片時：放大「最有戲的一個點」</h3>
+  <p>很多人丟一張照片然後寫「讓畫面動起來」——這是最浪費的用法，出來就是無聊的平均運動。正確做法：<strong>看著圖找出最有戲的一個元素，極致放大它</strong>。例如一張咖啡店照片，與其「整體動起來」，不如「咖啡杯的熱氣升起凝聚成一隻迷你龍，繞著吊燈飛一圈」。</p>
+
+  <h3>9-5. 其他高手習慣</h3>
+  <ul>
+    <li><strong>品質錨定開頭</strong>：「Octane 渲染、8K 電影規格、好萊塢級 VFX」放 prompt 最前面。</li>
+    <li><strong>光影三層結構</strong>：依序描述 ①光源（夕陽/霓虹/燭光）→ ②光的行為（穿過百葉窗/在水面反射）→ ③色調（暖金/冷藍）。</li>
+    <li><strong>鏡頭污染增加真實感</strong>：「雨滴附著鏡頭」「霧氣沾鏡」會讓畫面更像實拍。</li>
+    <li><strong>人物不能是石像</strong>：就算主角站著不動，也要寫「髮絲被風吹動、眼神微微移動、呼吸起伏」。</li>
+    <li><strong>特效不能是貼圖</strong>：寫特效時順便寫它對環境的影響——「火焰照亮了周圍的牆壁、在地面投下跳動的橘色光影」，特效才會「長在」畫面裡。</li>
+    <li><strong>結尾留一個「想看第二遍」的鉤子</strong>：一個彩蛋、一個未解的細節、一個神轉折。</li>
+  </ul>
+  <div class="top-link"><a href="#top">↑ 回目錄</a></div>
+</section>
+
+<!-- ════════ CH 10 ════════ -->
+<section id="ch10">
+  <h2 class="sec"><span class="num">CHAPTER 10</span>新手最常犯的 7 個錯誤 + 自檢清單</h2>
+
+  <h3>10-1. 七大常見錯誤</h3>
+  <table>
+    <thead><tr><th>#</th><th>錯誤</th><th>正確做法</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>模糊引用：「參考@視頻1」</td><td>指名參考什麼：運鏡？動作？特效？節奏？</td></tr>
+      <tr><td>2</td><td>指令互相矛盾：「固定鏡頭」+「環繞拍攝」寫在同一段</td><td>一個時間段一種鏡頭指令</td></tr>
+      <tr><td>3</td><td>5 秒塞 5 個場景</td><td>動作量符合物理現實，一段一件事</td></tr>
+      <tr><td>4</td><td>傳了 5 張圖只用到 2 張</td><td>每個上傳檔案都要有明確的 @ 角色</td></tr>
+      <tr><td>5</td><td>完全不寫聲音</td><td>音效＋BGM＋台詞都描述，聲音是質感的一半</td></tr>
+      <tr><td>6</td><td>選 15 秒生成卻只寫 5 秒的內容</td><td>prompt 複雜度要匹配選擇的時長</td></tr>
+      <tr><td>7</td><td>上傳真人照片</td><td>會被平台攔截。改用 AI 生成人物圖或插畫風格</td></tr>
+    </tbody>
+  </table>
+
+  <h3>10-2. 按下「生成」之前的自檢清單</h3>
+  <p class="dim">每次生成前花 30 秒檢查一遍，省下的 credit 比什麼都多：</p>
+  <ul class="check">
+    <li>@ 引用編號和我上傳的素材一一對應，每個素材都有明確用途</li>
+    <li>總檔案數 ≤ 12（圖 ≤9、影片 ≤3、音訊 ≤3）</li>
+    <li>沒有包含寫實真人臉部素材</li>
+    <li>10 秒以上的影片用了時間戳分鏡，且覆蓋完整時長</li>
+    <li>台詞用引號包住，標了角色和情緒</li>
+    <li>音效描述和畫面描述分開寫</li>
+    <li>每個鏡頭最多雙軸運動</li>
+    <li>特寫景別沒有搭配大幅環繞</li>
+    <li>前 2 秒有視覺鉤子</li>
+    <li>寫了「參考」還是「編輯」，沒有混用</li>
+    <li>生成時長的選擇和 prompt 內容量匹配</li>
+  </ul>
+  <div class="top-link"><a href="#top">↑ 回目錄</a></div>
+</section>
+
+<!-- ════════ CH 11 ════════ -->
+<section id="ch11">
+  <h2 class="sec"><span class="num">CHAPTER 11</span>三個完整實戰案例（從想法到成品）</h2>
+  <p>最後，把整套流程跑三遍給你看。每個案例都是「想法 → 素材準備 → 完整 prompt → 設定 → 下一步」的完整紀錄，照抄改詞就能用。</p>
+
+  <h3>案例 A：寵物搞笑短片（最簡單，純文字，5 秒）</h3>
+  <p><strong>想法</strong>：柯基狗狗偷吃東西被抓包的瞬間。<br><strong>素材</strong>：不需要，純文字生成。<strong>設定</strong>：5 秒、直式 9:16（適合 Reels/TikTok）。</p>
+  <div class="prompt">寫實風格，廚房流理台前，一隻柯基後腿站立、前爪扒著檯面正叼起一片培根，突然定格——慢慢轉頭看向鏡頭，眼神心虛，培根還叼在嘴上，耳朵緩緩垂下。暖色廚房燈光，鏡頭從牠側面快速推近到牠心虛的臉部特寫。音效：偷吃的咀嚼聲突然停止、一聲「嗯哼？」的人聲清嗓、滑稽的音效重音。</div>
+  <p class="dim">用到的技巧：靜→動反轉（偷吃→定格）、前 2 秒鉤子（後腿站立偷培根）、表情指示（心虛、耳朵垂下）、聲音設計（清嗓聲製造「被抓包」情境）。</p>
+
+  <h3>案例 B：手工皂品牌廣告（圖片驅動，15 秒）</h3>
+  <p><strong>想法</strong>：天然手工皂的療癒系廣告。<br><strong>素材</strong>：產品照 1 張（<span class="ref">@圖片1</span>）、想模仿的競品廣告影片 1 支（<span class="ref">@視頻1</span>）。<strong>設定</strong>：15 秒、橫式 16:9。</p>
+  <div class="prompt">15秒，電影級質感，柔和奶油色調，療癒系美學，
+參考 <span class="ref">@視頻1</span> 的剪輯風格和鏡頭轉場，將其中的產品替換為 <span class="ref">@圖片1</span> 的手工皂，產品細節以 <span class="ref">@圖片1</span> 為準。
+0-3秒：手工皂從畫面上方緩緩落入清澈水面，慢動作激起乳白色漣漪，大特寫，音效：靜謐中一聲輕柔水聲；
+4-8秒：水下視角，皂體周圍升起細緻泡沫與洋甘菊花瓣，光從水面灑下形成光柱，鏡頭緩慢環繞，音效：木吉他輕柔進入；
+9-12秒：切換到浴室場景，晨光透過白紗窗簾，手工皂放在原木皂架上冒著微小泡沫，鏡頭緩慢推近，音效：鳥鳴與流水聲；
+13-15秒：品牌字樣以手寫體浮現，畫面定格，音效：音樂溫柔收尾。</div>
+  <p class="dim">用到的技巧：特效複刻（抄競品的剪輯風格）＋產品替換、時間戳分鏡、光影三層結構、聲音分段設計。</p>
+
+  <h3>案例 C：旅遊回憶卡點影片（多圖＋音樂，13 秒）</h3>
+  <p><strong>想法</strong>：把日本旅遊的 6 張照片剪成音樂卡點片。<br><strong>素材</strong>：風景照 6 張（<span class="ref">@圖片1-6</span>，注意：避開有清楚人臉的照片）、喜歡的卡點參考影片 1 支（<span class="ref">@視頻1</span>）。<strong>設定</strong>：13 秒、直式 9:16。</p>
+  <div class="prompt"><span class="ref">@圖片1</span> <span class="ref">@圖片2</span> <span class="ref">@圖片3</span> <span class="ref">@圖片4</span> <span class="ref">@圖片5</span> <span class="ref">@圖片6</span>——日本旅行風景照。
+對齊 <span class="ref">@視頻1</span> 的畫面節奏、轉場方式、視覺風格和音樂節拍做卡點剪輯。
+每張照片的場景要有自然的動態：櫻花飄落、電車駛過、霓虹閃爍、雲層流動。
+整體色調日系清新偏暖，根據音樂強弱調整景別切換，節拍重音處使用快速甩鏡轉場，結尾最後一拍畫面拉遠定格。</div>
+  <p class="dim">用到的技巧：音樂卡點模式、多圖引用、「照片要有動態」防止變幻燈片、甩鏡轉場呼應節拍。</p>
+
+  <div class="box tip">
+    <div class="box-title">🎓 接下來的練習路線</div>
+    <p style="margin:0">① 先用 Dreamina 免費額度照抄案例 A，改成你家的寵物 → ② 找一張自己拍的照片（無人臉），用第 9 章「放大最有戲的點」做一支 → ③ 挑一支你喜歡的廣告當 <span class="ref">@視頻1</span>，複刻它的運鏡 → ④ 挑戰 30 秒延長接龍。四關打完，你就是朋友圈裡最會用 AI 做影片的人。</p>
+  </div>
+  <div class="top-link"><a href="#top">↑ 回目錄</a></div>
+</section>
+
+<!-- ════════ CH 12 ════════ -->
+<section id="ch12">
+  <h2 class="sec"><span class="num">CHAPTER 12</span>附錄：一頁速查表</h2>
+
+  <div class="cards">
+    <div class="mini-card"><div class="t">📐 萬用公式</div><p>[風格] + [主體] + [動作] + [環境光影] + [鏡頭] + [音效]</p></div>
+    <div class="mini-card"><div class="t">⏱️ 硬限制</div><p>單次 4–15 秒｜圖 ≤9｜影片 ≤3｜音訊 ≤3｜總檔案 ≤12｜禁真人臉</p></div>
+    <div class="mini-card"><div class="t">🔗 @ 引用</div><p>@圖片1-9／@視頻1-3／@音頻1-3，每個都要講清楚「參考它的什麼」</p></div>
+    <div class="mini-card"><div class="t">🎥 安全預設鏡頭</div><p>中近景＋平視＋四分之三側＋50mm＋淺景深＋緩慢推近</p></div>
+    <div class="mini-card"><div class="t">🚫 兩條鐵律</div><p>每鏡頭最多雙軸運動｜特寫不搭大幅環繞（會崩臉）</p></div>
+    <div class="mini-card"><div class="t">⏰ 10 秒以上</div><p>必用時間戳分鏡：「0-3秒：…；4-8秒：…」覆蓋完整時長</p></div>
+    <div class="mini-card"><div class="t">📏 超過 15 秒</div><p>延長接龍（重複宣告風格/角色/場景）或分鏡流水線＋後期拼接</p></div>
+    <div class="mini-card"><div class="t">💡 創意三句訣</div><p>前 2 秒生死線｜一個影片一件事｜做「不可能的瞬間」不是講故事</p></div>
+    <div class="mini-card"><div class="t">💰 最省錢路線</div><p>嘗鮮：Dreamina 免費｜創作者：Dreamina Advanced 年付（~$0.12/支）｜量產：BytePlus API（$0.14/秒）</p></div>
+    <div class="mini-card"><div class="t">⚓ 防雷錨點價</div><p>官方 $0.14/秒（5秒≈$0.70），遠低於此的「2.0」報價多半是 1.5 混充</p></div>
+  </div>
+
+  <div class="divider">· · ·</div>
+
+  <footer>
+    <p><strong>資料來源說明</strong>：本報告 prompt 技巧整理自 Seedance 2.0 官方使用規範與社群實戰提示詞工程方法（含 MapleShaw seedance2.0-prompt-skill 的相機編碼與剪輯節奏體系）；價格資料為 2026-06-06 透過網路公開來源調查，主要來源：TechNode、fal.ai 官方文件、Magnific/Freepik 官網、BytePlus 文件、Atlas Cloud 產業分析等，連結附於第 2 章表格內。價格隨時變動，下單前請以各平台官網為準。</p>
+    <p style="margin-top:10px">Seedance 2.0 零基礎完全教學 · 2026-06-06</p>
+  </footer>
+</section>
+
+</div>
+</body>
+</html>
