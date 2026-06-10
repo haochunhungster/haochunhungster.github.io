@@ -10,7 +10,6 @@
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans TC",sans-serif;line-height:1.7;
     background-image:radial-gradient(120% 80% at 50% -10%, rgba(224,176,106,.10), transparent 60%);}
-  .serif{font-family:"Noto Serif TC",serif}
   .wrap{max-width:660px;margin:0 auto;padding:0 22px 90px}
   .cover{text-align:center;padding:64px 0 26px}
   .disc{width:150px;height:150px;margin:0 auto 22px;border-radius:50%;
@@ -24,8 +23,6 @@
   h1{font-family:"Noto Serif TC",serif;font-size:44px;font-weight:900;letter-spacing:6px;margin:8px 0 6px;color:var(--gold2)}
   .cover .sub{color:var(--muted);font-size:14.5px;letter-spacing:1px}
   .cover .meta{color:#7d7263;font-size:12px;letter-spacing:2px;margin-top:10px}
-  .draftnote{background:var(--bg2);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;
-    padding:10px 14px;margin:6px 0 18px;color:var(--muted);font-size:12.5px;line-height:1.7}
   .track{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:14px 0;box-shadow:0 2px 14px rgba(0,0,0,.25)}
   .track .top{display:flex;align-items:baseline;gap:12px}
   .track .no{font-family:"Noto Serif TC",serif;font-size:24px;color:var(--gold);line-height:1;min-width:30px}
@@ -33,28 +30,24 @@
   .track .en{color:#80766a;font-size:12px;letter-spacing:1px;margin-top:2px}
   .track .dur{margin-left:auto;color:#80766a;font-size:12px;font-variant-numeric:tabular-nums}
   audio{width:100%;margin-top:12px;border-radius:8px}
-  .lyrics{margin-top:12px;height:120px;overflow:hidden;position:relative;
+  .lyrics{margin-top:12px;height:132px;overflow:hidden;position:relative;
     -webkit-mask-image:linear-gradient(180deg,transparent,#000 22%,#000 78%,transparent);
     mask-image:linear-gradient(180deg,transparent,#000 22%,#000 78%,transparent);text-align:center}
-  .ly-line{padding:5px 4px;color:#6f655a;font-size:15px;transition:color .25s,transform .25s,opacity .25s;opacity:.6}
-  .ly-line.on{color:var(--gold2);opacity:1;transform:scale(1.06);font-weight:700;text-shadow:0 0 18px rgba(224,176,106,.25)}
-  .ly-empty{height:100%;display:flex;align-items:center;justify-content:center;color:#80766a;font-size:13.5px;text-align:center;padding:0 10px}
+  .ly-line{padding:6px 4px;color:#6f655a;font-size:15px;transition:color .25s,transform .25s,opacity .25s;opacity:.55}
+  .ly-line.on{color:var(--gold2);opacity:1;transform:scale(1.07);font-weight:700;text-shadow:0 0 18px rgba(224,176,106,.3)}
   .foot{color:#7d7263;font-size:12.5px;text-align:center;margin-top:30px;line-height:1.9}
   a{color:var(--gold2)}
 </style>
 </head>
 <body>
 <div class="wrap">
-
   <div class="cover">
-    <div class="disc" id="disc"></div>
+    <div class="disc paused" id="disc"></div>
     <div class="kick">YONGXIA · A SUMMER EP</div>
     <h1>詠夏專輯</h1>
     <div class="sub">玻璃屋・二十八度・永遠的夏天</div>
     <div class="meta">5 TRACKS · 2026</div>
   </div>
-
-  <div class="draftnote">📝 字幕為 <b>AI（Whisper）聽寫草稿</b>，可能有錯字（簡體）；台語/演奏曲尤其不準。正確歌詞校好後可替換、同步更精準。播放任一首會自動暫停其他、播完自動接下一首。</div>
 
   <div class="track">
     <div class="top"><div class="no">01</div><div><div class="ti">玻璃屋海水溫</div><div class="en">Glasshouse, Sea-Warm</div></div><div class="dur" id="dur-t1"></div></div>
@@ -81,57 +74,31 @@
     <audio controls preload="metadata" data-k="t5" src="t5.mp3"></audio>
     <div class="lyrics" id="ly-t5"></div>
   </div>
-
   <div class="foot">
-    詠夏 Villa · 礁溪 ｜ 點播放鍵即可在頁面上聆聽<br>
-    （MP3 256kbps，行動裝置也能播）
+    詠夏 Villa · 礁溪 ｜ 點播放鍵，歌詞會跟著亮<br>
+    （歌詞為官方版，時間軸自動對齊，可能略有偏移）
   </div>
-
 </div>
-
 <script>
-const LY = {"t1": [[0.0, "关掉手机 关掉那些应该"], [6.68, "让山的味道慢慢飘进来"], [13.24, "我把星辰飙折成只飞机"], [19.48, "丢给风看它愿不愿意听"], [25.94, "潇湿的雾很轻很温柔"], [32.94, "落在肩上想有人说别怕"], [39.94, "不用很好不用很慢"], [43.94, "只要这一刻够很紧"], [48.94, "把城市留在门外"], [54.94, "玻璃屋里睡问刚刚好的海"], [61.94, "慢慢呼吸慢慢就好"], [67.94, "把城市留在门外"], [73.94, "清晨五点半午还没醒"], [80.94, "泡在温水里看天慢慢凉"], [86.94, "没有人在等"], [93.94, "原来放空也是一种勇敢"], [99.94, "把城市留在门外"], [106.94, "玻璃屋里四季都不冷的海"], [112.94, "慢慢呼吸慢慢就好"], [118.94, "把城市留在门外"], [127.94, "你不用赶时间在这里释然的"], [133.94, "你不用懂就让水拖着你"], [139.94, "那些放不下的线放在岸边"], [146.94, "等天亮了再说"], [152.94, "把城市留在门外"], [158.94, "我把自己还给这片海"], [164.94, "慢慢呼吸慢慢就好"], [171.94, "夏天一直都在"], [177.94, "回去的时候叫不清了"], [183.94, "门外的城市好像也没那么重"], [189.94, "等一会儿"], [192.94, "期待来"]], "t2": [[9.0, "总按下来"], [11.0, "几个房间都是我们的"], [17.0, "Tonight"], [18.0, "包下整片叶"], [27.0, "包下这片光"], [29.0, "喇叭一响"], [31.0, "没有人想离场"], [33.0, "香槟开了花"], [35.0, "刀进这场下"], [37.0, "别问几点"], [38.0, "今天没有早上"], [40.0, "睡眠的发烫"], [42.0, "心跳的加速"], [44.0, "三二一"], [47.0, "今晚不睡"], [49.0, "夏天不退"], [51.0, "跳进来"], [53.0, "Summer never ends"], [55.0, "二十八度的睡"], [56.0, "笑到天微微亮"], [58.0, "今晚不睡"], [60.0, "夏天不退"], [64.0, "雨量泡在池里"], [65.0, "被我们提飞"], [67.0, "石头的笑"], [68.0, "比白天都美"], [71.0, "谁的尖叫变成了街"], [74.0, "海"], [75.0, "这一致的人都是同类"], [78.0, "今晚不睡"], [80.0, "夏天不退"], [82.0, "跳进来"], [83.0, "Summer never ends"], [85.0, "玻璃屋"], [86.0, "玻璃屋的公亮"], [87.0, "成一场梦"], [89.0, "今晚不睡"], [91.0, "夏天不退"], [93.0, "Hu"], [103.0, "Hu"], [105.0, "Hu"], [106.0, "Hu"], [107.0, "Hu"], [109.0, "Hu"], [111.0, "Hu"], [113.0, "投下来今晚不睡"], [118.18, "今晚不睡"], [125.92, "今晚不睡"], [133.56, "夏天不睡"], [135.52, "跳进来"], [137.34, "Summer never ends"], [139.28, "夏天亮也不寒冷"], [142.98, "今晚不睡"], [144.98, "夏天不睡"], [146.98, "天亮了"], [148.98, "但夏天还没走"], [151.98, "当夏"], [154.8, "See you next summer"]], "t3": [[0.0, "汤水往后退 把日子刁囊"], [4.88, "雪山隧道那头有人在等"], [9.52, "推开那身门线"], [13.06, "就站在窗边 几个房间的灯"], [18.1, "一盏一盏亮起来"], [21.1, "心里还没拆笑声线到齐"], [24.8, "浇熄的风把肩膀放进"], [29.92, "不用看时间 不用回讯息"], [35.86, "跳进那片蓝水室温的心"], [40.18, "是暖的"], [42.12, "婴下把夏天留下来"], [45.62, "玻璃雾里二十八度的海"], [50.38, "你笑着我就不想离开"], [56.38, "婴下把夏天留下来"], [61.38, "谁想下水 谁煮了咖啡"], [64.38, "小孩在前前笑成一片"], [67.5, "大人靠着把他把心事晒干"], [69.5, "这一晚谁都不勇敢"], [72.38, "不勇敢 下把夏天留下来"], [77.38, "玻璃雾里二十八度的海"], [83.38, "你在夏天 就还在"], [88.38, "婴下把夏天留下来"], [92.38, "就算窗外下起整夜的雨"], [95.38, "玻璃雾里还是那片晴"], [98.38, "自己都关不掉的这一只温暖"], [103.38, "原来夏天是有你"], [108.38, "红下把夏天留下来"], [112.38, "我们把笑声留在这片海"], [117.38, "明年此时还要再回来"], [123.38, "婴下把夏天留下来"], [128.38, "茶窗往前开"], [130.38, "夏天没有伞"], [133.38, "她在心里还吻着"]], "t4": [], "t5": []};
-const NEED = {"t4": "台語歌・AI 聽寫不準，待貼正確歌詞", "t5": "AI 未偵測到清晰人聲（演奏曲？），待確認"};
-const players = [...document.querySelectorAll('audio')];
-const disc = document.getElementById('disc');
-
-players.forEach((audio, i) => {
-  const k = audio.dataset.k;
-  const panel = document.getElementById('ly-' + k);
-  const lines = LY[k] || [];
-  if (lines.length === 0) {
-    panel.innerHTML = '<div class="ly-empty">♪ ' + (NEED[k] || '此首待補歌詞') + ' ♪</div>';
-  } else {
-    panel.innerHTML = lines.map((l, idx) => '<div class="ly-line" data-i="' + idx + '">' + l[1] + '</div>').join('');
-    const els = [...panel.querySelectorAll('.ly-line')];
-    let last = -1;
-    audio.addEventListener('timeupdate', () => {
-      const t = audio.currentTime;
-      let idx = -1;
-      for (let j = 0; j < lines.length; j++) { if (lines[j][0] <= t + 0.15) idx = j; else break; }
-      if (idx !== last) {
-        last = idx;
-        els.forEach((e, j) => e.classList.toggle('on', j === idx));
-        if (idx >= 0 && els[idx]) panel.scrollTop = els[idx].offsetTop - panel.clientHeight/2 + els[idx].clientHeight/2;
-      }
-    });
-  }
-  // 時長
-  audio.addEventListener('loadedmetadata', () => {
-    const d = audio.duration; if (!isFinite(d)) return;
-    document.getElementById('dur-' + k).textContent =
-      Math.floor(d/60) + ':' + String(Math.floor(d%60)).padStart(2,'0');
+const LY={"t1": [[0.0, "關掉手機　關掉那些應該"], [6.68, "讓山的味道　慢慢飄進來"], [13.08, "我把行程表　摺成紙飛機"], [19.48, "丟給風　看它願不願意停"], [25.94, "礁溪的霧　很輕　很溫柔"], [32.94, "落在肩上　像有人說別怕"], [39.94, "不用很好　不用很滿"], [43.94, "只要這一刻　夠安靜"], [48.94, "把城市　留在門外"], [54.94, "玻璃屋裡　水溫剛剛好的海"], [61.94, "慢慢呼吸　慢慢就好"], [67.94, "把城市　留在門外"], [73.94, "清晨五點半　霧還沒醒"], [80.94, "泡在溫水裡　看天慢慢亮"], [86.94, "沒有人催我　沒有人在等"], [93.94, "原來放空　也是一種勇敢"], [99.94, "把城市　留在門外"], [106.94, "玻璃屋裡　四季都不冷的海"], [112.94, "慢慢呼吸　慢慢就好"], [118.94, "把城市　留在門外"], [127.94, "你不用趕　時間在這裡是軟的"], [133.94, "你不用懂　就讓水托著你"], [139.94, "那些放不下的　先放在岸邊"], [146.94, "等天亮了　再說"], [152.94, "把城市　留在門外"], [158.94, "我把自己　還給這片海"], [164.94, "慢慢呼吸　慢慢就好"], [171.94, "夏天　一直都在"], [177.94, "回去的時候　腳步輕了"], [183.94, "門外的城市　好像也沒那麼重"]], "t2": [[0.0, "燈　暗下來"], [4.84, "七個房間　都是我們的"], [9.68, "Tonight"], [14.51, "包下整片夜　包下這片光"], [19.35, "喇叭一響　沒有人想離場"], [24.19, "香檳開了花　倒進這場夏"], [29.03, "別問幾點　今天沒有早上"], [33.86, "水面在發燙　心跳在加速"], [38.7, "三　二　一——"], [43.54, "今晚不睡　夏天不退"], [48.38, "跳進來　Summer never ends"], [53.21, "二十八度的水　燒到天微微亮"], [58.05, "今晚不睡　夏天不退"], [62.89, "月亮泡在池裡　被我們踢碎"], [67.73, "濕透的笑　比白天都美"], [72.56, "誰的尖叫　變成了節拍"], [77.4, "這一池的人　都是同類"], [82.24, "今晚不睡　夏天不退"], [87.08, "跳進來　Summer never ends"], [91.91, "玻璃屋的燈　亮成一場夢"], [96.75, "今晚不睡　夏天不退"], [101.59, "就剩水聲　和心跳"], [106.43, "看著彼此　誰都沒走"], [111.26, "這一夜　我們把它"], [116.1, "偷　下　來——"], [120.94, "今晚不睡　夏天不退"], [125.78, "跳進來　Summer never ends"], [130.61, "燒到天亮　也不喊累"], [135.45, "今晚不睡——夏天　不退"], [140.29, "天亮了"], [145.12, "但夏天　還沒走"], [149.96, "詠夏　see you next summer"]], "t3": [[0.0, "車窗往後退　把日子調慢"], [4.88, "雪山隧道那頭　有人在等"], [13.06, "推開那扇門　山就站在窗邊"], [18.1, "七個房間的燈　一盞一盞亮起來"], [21.45, "行李還沒拆　笑聲先到齊"], [24.8, "礁溪的風　把肩膀放輕"], [29.92, "不用看時間　不用回訊息"], [40.18, "跳進那片藍　水是溫的　心是暖的"], [42.12, "詠夏　把夏天留下來"], [45.62, "玻璃屋裡　二十八度的海"], [50.38, "你笑著　我就不想離開"], [56.38, "詠夏　把夏天留下來"], [61.38, "誰先下水　誰煮了咖啡"], [64.38, "小孩在淺池　笑成一片"], [67.5, "大人靠著吧檯　把心事曬乾"], [69.5, "這一晚　誰都不用趕"], [72.38, "詠夏　把夏天留下來"], [77.38, "玻璃屋裡　二十八度的海"], [83.38, "你在　夏天就還在"], [88.38, "詠夏　把夏天留下來"], [92.38, "就算窗外　下起整夜的雨"], [95.38, "玻璃屋裡　還是那片晴"], [98.38, "四季都關不掉的　這一池溫暖"], [103.38, "原來夏天　是有你"], [108.38, "詠夏　把夏天留下來"], [112.38, "我們把笑聲　留在這片海"], [117.38, "明年此時　還要再回來"], [123.38, "詠夏　把夏天　留下來"], [128.38, "車窗往前開　夏天沒有散"], [133.38, "它在心裡　還溫著"]], "t4": [[0.0, "車窗向後退　日子放較慢"], [7.0, "雪隧彼頭　有人咧等"], [16.0, "門一下推開　山就徛佇窗仔邊"], [25.0, "七間房間的火　一葩一葩著起來"], [30.33, "行李猶未拍開　笑聲先到齊"], [35.67, "礁溪的風　共肩胛頭放予鬆"], [41.0, "免看時間　免回訊息"], [46.0, "跳落彼片藍　水是燒的　心是暖的"], [51.0, "詠夏　共夏天留落來"], [57.0, "玻璃厝內　二十八度的海"], [62.0, "你笑　我就毋甘離開"], [67.0, "詠夏　共夏天留落來"], [73.0, "啥人先落水　啥人煮咖啡"], [89.22, "囡仔佇淺池　笑甲歸陣"], [105.44, "大人倚佇吧檯　共煩惱曝予焦"], [121.66, "這暝　逐家攏免趕"], [137.88, "詠夏　共夏天留落來"], [145.66, "玻璃厝內　二十八度的海"], [153.44, "你佇咧　夏天就佇咧"], [155.22, "詠夏　共夏天留落來"], [157.0, "就算窗外　落歸暝的雨"], [158.77, "玻璃厝內　猶原是好天"], [160.55, "四季攏關袂掉　這池的溫暖"], [162.33, "原來夏天　是有你"], [164.11, "詠夏　共夏天留落來"], [165.89, "咱共笑聲　留佇這片海"], [167.67, "明年此時　閣欲轉來"], [169.44, "詠夏　共夏天　留落來"], [171.22, "車窗向前行　夏天無散去"], [173.0, "伊佇心肝內　猶咧燒"]], "t5": [[20.28, "The city fades behind us, slowing down the day"], [24.6, "Past the long dark tunnel, someone waits our way"], [35.4, "Push the door wide open, mountains at the glass"], [43.26, "Seven little windows lighting up at last"], [51.1, "Bags still by the doorway, laughter fills the air"], [56.42, "The Yilan wind is gentle, lifting every care"], [58.88, "No clocks here to follow, no replies to send"], [65.54, "Dive into the water, warm from end to end"], [73.1, "Yongxia, stay here for the summer"], [77.48, "Inside the glass house, a sea at twenty-eight"], [88.2, "You're smiling, and I never want to leave at all"], [104.74, "Yongxia, stay here for the summer"], [109.06, "Someone slips in the water, someone brews us coffee"], [117.2, "Kids in the shallow end, laughing wild and free"], [122.32, "Grown-ups by the counter, drying out their cares"], [127.8, "Tonight there is no rushing, no one even dares"], [133.14, "Even when the rain falls all night on the pane"], [138.4, "Inside this glass house, the summer still remains"], [143.68, "Four seasons cannot switch this warm and glowing pool"], [148.14, "Turns out summer's only summer here with you"], [157.74, "Yongxia, stay here for the summer"], [162.74, "We'll leave our laughter floating on this sea"], [172.74, "Same time next year, come back, you and me"], [189.08, "Yongxia, stay here for the summer"], [194.08, "The city rolls back toward us, but the summer stays"], [205.04, "It's still warm inside me, all the way"]]};
+const players=[...document.querySelectorAll('audio')];
+const disc=document.getElementById('disc');
+players.forEach((audio,i)=>{
+  const k=audio.dataset.k, panel=document.getElementById('ly-'+k), lines=LY[k]||[];
+  panel.innerHTML=lines.map((l,idx)=>'<div class="ly-line" data-i="'+idx+'">'+l[1]+'</div>').join('');
+  const els=[...panel.querySelectorAll('.ly-line')]; let last=-1;
+  audio.addEventListener('timeupdate',()=>{
+    const t=audio.currentTime; let idx=-1;
+    for(let j=0;j<lines.length;j++){ if(lines[j][0]<=t+0.2) idx=j; else break; }
+    if(idx!==last){ last=idx; els.forEach((e,j)=>e.classList.toggle('on',j===idx));
+      if(idx>=0&&els[idx]) panel.scrollTop=els[idx].offsetTop-panel.clientHeight/2+els[idx].clientHeight/2; }
   });
-  // 播放任一首 → 暫停其他 + 唱片轉
-  audio.addEventListener('play', () => {
-    players.forEach(o => { if (o !== audio) o.pause(); });
-    disc.classList.remove('paused');
-  });
-  audio.addEventListener('pause', () => { if (players.every(p => p.paused)) disc.classList.add('paused'); });
-  // 播完自動接下一首
-  audio.addEventListener('ended', () => { if (players[i+1]) players[i+1].play(); });
+  audio.addEventListener('loadedmetadata',()=>{ const d=audio.duration; if(isFinite(d))
+    document.getElementById('dur-'+k).textContent=Math.floor(d/60)+':'+String(Math.floor(d%60)).padStart(2,'0'); });
+  audio.addEventListener('play',()=>{ players.forEach(o=>{if(o!==audio)o.pause();}); disc.classList.remove('paused'); });
+  audio.addEventListener('pause',()=>{ if(players.every(p=>p.paused)) disc.classList.add('paused'); });
+  audio.addEventListener('ended',()=>{ if(players[i+1]) players[i+1].play(); });
 });
-disc.classList.add('paused');
 </script>
 </body>
 </html>
