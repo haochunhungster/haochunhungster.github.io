@@ -1,25 +1,216 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>詠夏 Villa 格局決策 - Slidev</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@200;400;600&family=Noto+Serif+TC:wght@200;400;600&family=Fira+Code:wght@200;400;600&display=swap" type="text/css">
-<link rel="icon" href="https://cdn.jsdelivr.net/gh/slidevjs/slidev/assets/favicon.png">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta property="slidev:version" content="52.16.0">
-<meta name="description" content="&quot;礁溪瑪僯路 7 房包棟精品民宿 · 格局決策簡報&quot;">
-<meta property="og:title" content="詠夏 Villa 格局決策 - Slidev">
-<meta property="og:description" content="&quot;礁溪瑪僯路 7 房包棟精品民宿 · 格局決策簡報&quot;">  <script type="module" crossorigin src="/yongxia-deck/assets/index-BnIhZwP9.js"></script>
-  <link rel="modulepreload" crossorigin href="/yongxia-deck/assets/rolldown-runtime-QTnfLwEv.js">
-  <link rel="modulepreload" crossorigin href="/yongxia-deck/assets/modules/shiki-DB9HpJnJ.js">
-  <link rel="modulepreload" crossorigin href="/yongxia-deck/assets/modules/vue-DQO-h69v.js">
-  <link rel="stylesheet" crossorigin href="/yongxia-deck/assets/modules/shiki-BrmBd2_v.css">
-  <link rel="stylesheet" crossorigin href="/yongxia-deck/assets/index-CQqZv9UR.css">
+<title>詠夏 Villa 格局決策（單頁版）</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#1a1714;--bg2:#241f1a;--ink:#f3ece2;--muted:#b8aa97;--gold:#d9a566;--gold2:#e8c79a;--line:#3a332b;--green:#82c99a;--blue:#7fb3d5;--amber:#f0b27a;--flag:#f4d03f;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans TC",sans-serif;line-height:1.85;font-size:16px}
+  .serif{font-family:"Noto Serif TC",serif}
+  .wrap{max-width:900px;margin:0 auto;padding:0 24px 100px}
+  .cover{text-align:center;padding:84px 0 44px;border-bottom:2px solid var(--gold)}
+  .cover .k{font-size:13px;letter-spacing:6px;color:var(--gold)}
+  .cover h1{font-family:"Noto Serif TC",serif;font-size:clamp(40px,9vw,76px);color:var(--gold2);margin:10px 0 4px;font-weight:900;letter-spacing:3px}
+  .cover h2{font-size:clamp(20px,4vw,30px);color:var(--ink);font-weight:500;letter-spacing:4px;margin:0}
+  .cover .sub{color:var(--muted);margin-top:18px;font-size:15px}
+  section{padding:40px 0;border-bottom:1px solid var(--line)}
+  h3{font-family:"Noto Serif TC",serif;font-size:24px;color:var(--gold2);margin:0 0 6px}
+  .tag{display:inline-block;font-size:12px;letter-spacing:3px;color:var(--gold);border:1px solid var(--line);padding:2px 12px;border-radius:20px;margin-bottom:12px}
+  p{margin:9px 0} b{color:var(--gold2)}
+  table{width:100%;border-collapse:collapse;font-size:14px;margin:14px 0}
+  th{background:#2c2620;color:var(--gold);text-align:left;padding:8px 11px;border-bottom:2px solid var(--gold)}
+  td{padding:8px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+  tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+  .cols2{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:8px}
+  @media(max-width:680px){.cols2{grid-template-columns:1fr}}
+  .cols2 ul{padding-left:18px;margin:6px 0} .cols2 li{margin:5px 0}
+  .card{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:16px 18px;font-size:14.5px}
+  .card.main{border-color:var(--gold)} .card h4{margin:0 0 6px;color:var(--gold2)} .card p{color:var(--muted);margin:5px 0}
+  .pill{display:inline-block;background:#322a20;color:var(--gold);padding:1px 9px;border-radius:6px;font-size:12px;margin:.4em .3em .2em 0;font-weight:700}
+  .statement{text-align:center;background:linear-gradient(135deg,#2a2218,#15120f);border:none}
+  .statement h3{font-size:30px}
+  .big{font-size:1.35em;margin:.5em 0;line-height:1.6}
+  .foot{color:var(--muted);font-size:13px;margin-top:12px;border-top:1px solid var(--line);padding-top:8px}
+  .risks{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:8px}
+  @media(max-width:680px){.risks{grid-template-columns:1fr}}
+  .risk{background:var(--bg2);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:8px;padding:12px 14px;font-size:13.5px}
+  .risk b{color:var(--green)} .end{text-align:center;padding:70px 0 30px;border:none}
+  .end .l{font-family:"Noto Serif TC",serif;font-size:26px;color:var(--gold2);font-weight:700;letter-spacing:3px;margin:10px 0}
+</style>
 </head>
 <body>
-  <div id="app"></div>
-  <div id="mermaid-rendering-container"></div>
-  
+<div class="wrap">
+
+<div class="cover">
+  <div class="k">CODEX · 詠夏 VILLA</div>
+  <h1 class="serif">詠夏 Villa</h1>
+  <h2>礁溪・永遠的夏天</h2>
+  <div class="sub">玻璃屋恆溫泳池 · 7 房包棟精品民宿 · 格局決策（客群 / 房型 / 風格 / 營運 / 定價）</div>
+</div>
+
+<section>
+  <h3>一頁拍板總表</h3>
+  <table>
+    <tr><th>維度</th><th>決策</th></tr>
+    <tr><td><b>主客群</b></td><td>高預算三代同堂家族（含親子）8–16 人</td></tr>
+    <tr><td><b>次客群</b></td><td>平日 B2B 企業團建／求婚婚攝 · 朋友揪團（18 人+／旺季）</td></tr>
+    <tr><td><b>定位</b></td><td>礁溪・永遠的夏天 — 玻璃屋恆溫泳池，一棟容下你最重要的人</td></tr>
+    <tr><td><b>房型</b></td><td><b>4 四人房 + 3 雙人房 = 22 人</b>（不塞 28，加床上限 26）</td></tr>
+    <tr><td><b>風格</b></td><td>整棟統一：純白現代極簡 + Japandi + 南洋僅點綴</td></tr>
+    <tr><td><b>營運</b></td><td>假日/旺季只接包棟 · 平日拆單間／接活動</td></tr>
+    <tr><td><b>定價</b></td><td>每房 1 萬、週末包棟 <b>6–8 萬</b>（同級 mid-premium）</td></tr>
+  </table>
+</section>
+
+<section>
+  <span class="tag">證據基礎</span>
+  <h3>這份決策不是憑感覺</h3>
+  <div class="cols2">
+    <div>
+      <ul>
+        <li><b>2 支多 agent 研究工作流</b>（28 agent、230 萬 token）：市場需求／房型／風格／營運 + 對抗式驗證</li>
+        <li><b>3 個競品對標 agent</b>：12 家台灣 + 7 國際同級 villa</li>
+        <li><b>2 個事實查證 agent</b>：14 家包棟房型普查、原始負評報導、官方統計，全附 URL</li>
+        <li><b>物件放樣判讀</b>：澳石 LLX IE-14</li>
+      </ul>
+    </div>
+    <div>
+      <p>每個結論皆「<b>結論 → 具名來源/URL → 推論鏈 → 信心水準</b>」，可攤開查證。</p>
+      <p class="foot">分「已查證／推論／假設」三層，查不到一律留白不編造。完整來源見《論證與來源附錄》。</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h3>客群定位｜三層結構</h3>
+  <div class="cols2">
+    <div class="card main"><h4>主客群</h4><b>高預算三代同堂家族</b><p>8–16 人。唯一吃滿全部硬體：恆溫泳池顧小孩、電梯顧長輩、公共空間全齡同樂。靠口碑回訪、撐高客單。</p></div>
+    <div class="card"><h4>次客群</h4><b>① 平日 B2B</b><p>企業團建／求婚婚攝，可開統編，補週日–週四空檔。</p><b>② 朋友揪團</b><p>18 人+／旺季限定，IG 免費擴散。</p></div>
+  </div>
+  <p class="foot"><b>明確排除</b>：2 人蜜月成棟 · 28 人純大團 · 預算型散客 · 純網美短流量。多語：日文積極追、英文次之。</p>
+</section>
+
+<section>
+  <h3>房型配置｜4 四人 + 3 雙人 = 22 人</h3>
+  <table>
+    <tr><th>房</th><th>房型</th><th>角色</th></tr>
+    <tr><td>2F-A 主套房</td><td>四人(+1)</td><td>親子核心房 · 無障礙友善尊貴主臥</td></tr>
+    <tr><td>2F-B / 2F-C</td><td>四人</td><td>家庭房骨幹</td></tr>
+    <tr><td>2F-D</td><td><b>雙人</b></td><td>大房溢價 +30%</td></tr>
+    <tr><td>3F-E</td><td>四人</td><td>3F 務實家庭房</td></tr>
+    <tr><td><b>3F-F 戶外浴缸房</b></td><td><b>雙人旗艦</b></td><td>全棟封面 · 溢價 +50–60% · 不接孩童</td></tr>
+    <tr><td>3F-G</td><td><b>雙人</b></td><td>品牌核心景觀房</td></tr>
+  </table>
+  <p class="foot">主賣 12–18 人 · 加床上限 26 · <b>絕不賣 28 人純大團</b> · 1F 純公共靠電梯、不設孝親房。實證：查證 14 家宜蘭包棟全混搭、無一全四人房（負評有華視/東森原始報導）。</p>
+</section>
+
+<section>
+  <h3>裝修風格｜整棟統一一套到底</h3>
+  <div class="cols2">
+    <div>
+      <h4 style="color:var(--gold)">為什麼整棟統一</h4>
+      <ul><li>你是<b>單一強賣點品牌</b>，視覺分裂＝自毀定位</li><li>一房一風格＝七套設計、品牌模糊、成本高</li><li>統一＝批量採購、攝影一次到位、記憶點銳利</li></ul>
+    </div>
+    <div>
+      <h4 style="color:var(--gold)">主風格</h4>
+      <p><b>純白現代極簡（骨）＋ Japandi 日式北歐（底）＋ 南洋僅泳池畔點綴</b></p>
+      <span class="pill">手法</span> 色票/建材全棟鎖死，只做「1F 度假濃 → 樓上靜謐淡」漸層<br>
+      <span class="pill">淘汰</span> 工業風 · 台式懷舊 · 韓系奶油網美
+    </div>
+  </div>
+  <p class="foot">玻璃屋泳池＝封面武器：大面玻璃 + 全白 + 日夜雙封面。</p>
+</section>
+
+<section>
+  <h3>營運模式｜時段分流</h3>
+  <div class="cols2">
+    <div>
+      <h4 style="color:var(--gold)">主 + 輔（優先序定死）</h4>
+      <ul><li><b>主引擎</b>：假日/旺季 整棟包棟</li><li><b>輔 1</b>：平日 拆單間散賣（淡季去化）</li><li><b>輔 2</b>：平日白天 場地活動變現</li></ul>
+      <span class="pill">賣單間三閘門</span> ① 上 PMS 防爆房 ② 契約寫死公共空間 ③ 只在平日啟用
+    </div>
+    <div>
+      <h4 style="color:var(--gold)">行事曆四象限</h4>
+      <table style="font-size:13px"><tr><th></th><th>假日</th><th>平日</th></tr>
+      <tr><td><b>旺季</b></td><td>只接包棟<br>吃最高價</td><td>包棟為主<br>企業 retreat</td></tr>
+      <tr><td><b>淡季</b></td><td>包棟+折扣<br>放寬門檻</td><td>單間/商攝<br>求婚/靜修</td></tr></table>
+      <p class="foot">恆溫泳池做 35–40°C「類溫泉」撐冬季平日。</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h3>定價｜6–8 萬站對賽道</h3>
+  <div class="cols2">
+    <div>
+      <h4 style="color:var(--gold)">同級對標（週末包棟）</h4>
+      <table style="font-size:13px"><tr><th>Villa</th><th>房/人</th><th>週末</th></tr>
+      <tr><td><b>灣臥</b> 恆春</td><td>7房/14</td><td><b>8.6–11.3 萬</b></td></tr>
+      <tr><td>W Villa 礁溪</td><td>4房/17</td><td>4.5 萬</td></tr>
+      <tr><td>Party Me 冬山</td><td>6房/16</td><td>~5 萬多</td></tr>
+      <tr><td>田中宿 墾丁</td><td>26人</td><td>2.6–3.2 萬</td></tr></table>
+    </div>
+    <div>
+      <h4 style="color:var(--gold)">定位結論</h4>
+      <ul><li>6–8 萬在 <b>7 房同級的灣臥（天花板）之下</b>、W Villa／Party Me 之上</li><li>合理 <b>mid-premium，還有往上空間</b></li><li>per-person 比 Party Me 更划算</li></ul>
+      <span class="pill">守價三命脈</span> 產品力+專業攝影 · 客群往高預算家族/B2B · 官網直訂壓 OTA 佣金
+    </div>
+  </div>
+</section>
+
+<section class="statement">
+  <h3>玻璃屋恆溫泳池＝獨佔王牌</h3>
+  <div class="big">全競品幾乎都是<b>露天非恆溫</b></div>
+  <div class="big">礁溪冬冷多雨，別人泳池停開 — <b>你還能賣</b></div>
+  <p class="foot" style="border:none">全年 28°C · 室內玻璃屋 · 一池打三客（家族戲水／朋友派對／求婚婚攝）</p>
+</section>
+
+<section>
+  <h3>財務速算（以 7 萬/晚 ADR）</h3>
+  <table>
+    <tr><th>情境</th><th>包棟夜/年</th><th>包棟毛收</th><th>vs 房貸 139.7 萬</th></tr>
+    <tr><td>覆蓋房貸線</td><td>~20 夜</td><td>140 萬</td><td>打平房貸</td></tr>
+    <tr><td>保守</td><td>50 夜</td><td>350 萬</td><td>房貸+營運後獲利</td></tr>
+    <tr><td>基準</td><td>80 夜</td><td>560 萬</td><td>健康獲利</td></tr>
+    <tr><td>樂觀</td><td>100 夜 + 活動</td><td>800 萬+</td><td>強勁</td></tr>
+  </table>
+  <p class="foot"><b>關鍵不是夜數，是能否在這個價位把房賣掉</b> — 產品力／攝影／品牌／直訂渠道是命脈。（情境推估，泳池能耗/人力/稅待實際成本表覆核）</p>
+</section>
+
+<section>
+  <h3>三大營運風險</h3>
+  <div class="risks">
+    <div class="risk"><h4>噪音擾鄰</h4><p>宜蘭全國最嚴：夜 10–晨 8 禁喧嘩，2 次可撤照。</p><b>→ 有聲活動只白天辦、夜間不接</b></div>
+    <div class="risk"><h4>爆房 + OTA 侵蝕</h4><p>並掛單間無同步必爆房；OTA 比價傷高單價。</p><b>→ 上 PMS、主推官網/LINE 直訂</b></div>
+    <div class="risk"><h4>隱私 + 活動法規</h4><p>散客同棟爆隱私；對外活動觸食安/稅。</p><b>→ 契約寫死、餐飲代訂外燴、另投保活動險</b></div>
+  </div>
+</section>
+
+<section>
+  <h3>下一步</h3>
+  <div class="cols2">
+    <div>
+      <h4 style="color:var(--gold)">已敲定</h4>
+      <ul><li>✓ 4 四 + 3 雙 = 22 人</li><li>✓ 整棟 Japandi 純白</li><li>✓ 定價 6–8 萬（週末目標）</li><li>✓ 1F 純公共、靠電梯、不設孝親房</li><li>✓ 泳池 ~4×9.5m 長池</li></ul>
+    </div>
+    <div>
+      <h4 style="color:var(--gold)">待確認 / 待做</h4>
+      <ul><li>電梯最終保留（支撐動線）</li><li>外推後新 2F/3F 放樣（澳石）</li><li>熱能/熱水改算（每房獨立熱水）</li><li>Step 2 視覺化：白模✓ → 擬真渲染（待點頭）</li></ul>
+    </div>
+  </div>
+</section>
+
+<div class="end">
+  <div class="cover" style="border:none;padding:0">
+    <h1 class="serif" style="font-size:48px">詠夏 Villa</h1>
+  </div>
+  <div class="l">永遠是夏天的家族度假島</div>
+  <div class="sub" style="color:var(--muted)">玻璃屋恆溫泳池 · 7 房 22 人 · 整棟 Japandi · 礁溪</div>
+</div>
+
+</div>
 </body>
 </html>
