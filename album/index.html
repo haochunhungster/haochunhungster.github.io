@@ -6,36 +6,40 @@
 <title>詠夏專輯</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-  :root{--bg:#161311;--bg2:#221d18;--ink:#f3ece2;--muted:#b3a690;--gold:#e0b06a;--gold2:#f0d29a;--line:#39322a;--sea:#6fb6c9;}
+  :root{--bg:#161311;--bg2:#221d18;--ink:#f3ece2;--muted:#b3a690;--gold:#e0b06a;--gold2:#f0d29a;--line:#39322a;}
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans TC",sans-serif;line-height:1.7;
     background-image:radial-gradient(120% 80% at 50% -10%, rgba(224,176,106,.10), transparent 60%);}
   .serif{font-family:"Noto Serif TC",serif}
-  .wrap{max-width:640px;margin:0 auto;padding:0 22px 90px}
-
-  .cover{text-align:center;padding:66px 0 30px}
-  .disc{width:160px;height:160px;margin:0 auto 24px;border-radius:50%;
+  .wrap{max-width:660px;margin:0 auto;padding:0 22px 90px}
+  .cover{text-align:center;padding:64px 0 26px}
+  .disc{width:150px;height:150px;margin:0 auto 22px;border-radius:50%;
     background:radial-gradient(circle at 50% 50%, #2a2218 0 18%, var(--gold) 19% 20%, #1e1814 21% 47%, #2c241b 48% 49%, #1a1511 50% 100%);
-    box-shadow:0 14px 50px rgba(0,0,0,.55), inset 0 0 0 1px rgba(224,176,106,.25);
-    position:relative;animation:spin 14s linear infinite}
+    box-shadow:0 14px 50px rgba(0,0,0,.55), inset 0 0 0 1px rgba(224,176,106,.25);position:relative;animation:spin 14s linear infinite}
+  .disc.paused{animation-play-state:paused}
   .disc::after{content:"夏";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-    font-family:"Noto Serif TC",serif;font-weight:900;font-size:30px;color:var(--gold2)}
+    font-family:"Noto Serif TC",serif;font-weight:900;font-size:28px;color:var(--gold2)}
   @keyframes spin{to{transform:rotate(360deg)}}
   .kick{font-size:12px;letter-spacing:6px;color:var(--gold)}
-  h1{font-family:"Noto Serif TC",serif;font-size:46px;font-weight:900;letter-spacing:6px;margin:8px 0 6px;color:var(--gold2)}
+  h1{font-family:"Noto Serif TC",serif;font-size:44px;font-weight:900;letter-spacing:6px;margin:8px 0 6px;color:var(--gold2)}
   .cover .sub{color:var(--muted);font-size:14.5px;letter-spacing:1px}
   .cover .meta{color:#7d7263;font-size:12px;letter-spacing:2px;margin-top:10px}
-
-  .track{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:14px 0;
-    box-shadow:0 2px 14px rgba(0,0,0,.25)}
+  .draftnote{background:var(--bg2);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;
+    padding:10px 14px;margin:6px 0 18px;color:var(--muted);font-size:12.5px;line-height:1.7}
+  .track{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:14px 0;box-shadow:0 2px 14px rgba(0,0,0,.25)}
   .track .top{display:flex;align-items:baseline;gap:12px}
-  .track .no{font-family:"Noto Serif TC",serif;font-size:26px;color:var(--gold);line-height:1;min-width:34px}
-  .track .ti{font-family:"Noto Serif TC",serif;font-size:19px;color:var(--ink);font-weight:700;letter-spacing:1px}
+  .track .no{font-family:"Noto Serif TC",serif;font-size:24px;color:var(--gold);line-height:1;min-width:30px}
+  .track .ti{font-family:"Noto Serif TC",serif;font-size:18px;color:var(--ink);font-weight:700;letter-spacing:1px}
   .track .en{color:#80766a;font-size:12px;letter-spacing:1px;margin-top:2px}
+  .track .dur{margin-left:auto;color:#80766a;font-size:12px;font-variant-numeric:tabular-nums}
   audio{width:100%;margin-top:12px;border-radius:8px}
-  audio::-webkit-media-controls-panel{background:#2c2620}
-
-  .foot{color:#7d7263;font-size:12.5px;text-align:center;margin-top:34px;line-height:1.9}
+  .lyrics{margin-top:12px;height:120px;overflow:hidden;position:relative;
+    -webkit-mask-image:linear-gradient(180deg,transparent,#000 22%,#000 78%,transparent);
+    mask-image:linear-gradient(180deg,transparent,#000 22%,#000 78%,transparent);text-align:center}
+  .ly-line{padding:5px 4px;color:#6f655a;font-size:15px;transition:color .25s,transform .25s,opacity .25s;opacity:.6}
+  .ly-line.on{color:var(--gold2);opacity:1;transform:scale(1.06);font-weight:700;text-shadow:0 0 18px rgba(224,176,106,.25)}
+  .ly-empty{height:100%;display:flex;align-items:center;justify-content:center;color:#80766a;font-size:13.5px;text-align:center;padding:0 10px}
+  .foot{color:#7d7263;font-size:12.5px;text-align:center;margin-top:30px;line-height:1.9}
   a{color:var(--gold2)}
 </style>
 </head>
@@ -43,36 +47,39 @@
 <div class="wrap">
 
   <div class="cover">
-    <div class="disc"></div>
+    <div class="disc" id="disc"></div>
     <div class="kick">YONGXIA · A SUMMER EP</div>
     <h1>詠夏專輯</h1>
     <div class="sub">玻璃屋・二十八度・永遠的夏天</div>
     <div class="meta">5 TRACKS · 2026</div>
   </div>
 
-  <div class="track">
-    <div class="top"><div class="no">01</div><div><div class="ti">玻璃屋海水溫</div><div class="en">Glasshouse, Sea-Warm</div></div></div>
-    <audio controls preload="metadata" src="t1.mp3"></audio>
-  </div>
+  <div class="draftnote">📝 字幕為 <b>AI（Whisper）聽寫草稿</b>，可能有錯字（簡體）；台語/演奏曲尤其不準。正確歌詞校好後可替換、同步更精準。播放任一首會自動暫停其他、播完自動接下一首。</div>
 
   <div class="track">
-    <div class="top"><div class="no">02</div><div><div class="ti">二十八度水燒天微亮</div><div class="en">28°C, Water Aglow at Dawn</div></div></div>
-    <audio controls preload="metadata" src="t2.mp3"></audio>
+    <div class="top"><div class="no">01</div><div><div class="ti">玻璃屋海水溫</div><div class="en">Glasshouse, Sea-Warm</div></div><div class="dur" id="dur-t1"></div></div>
+    <audio controls preload="metadata" data-k="t1" src="t1.mp3"></audio>
+    <div class="lyrics" id="ly-t1"></div>
   </div>
-
   <div class="track">
-    <div class="top"><div class="no">03</div><div><div class="ti">玻璃屋二十八度海</div><div class="en">Glasshouse, A 28° Sea</div></div></div>
-    <audio controls preload="metadata" src="t3.mp3"></audio>
+    <div class="top"><div class="no">02</div><div><div class="ti">二十八度水燒天微亮</div><div class="en">28°C, Water Aglow at Dawn</div></div><div class="dur" id="dur-t2"></div></div>
+    <audio controls preload="metadata" data-k="t2" src="t2.mp3"></audio>
+    <div class="lyrics" id="ly-t2"></div>
   </div>
-
   <div class="track">
-    <div class="top"><div class="no">04</div><div><div class="ti">雪隧彼頭</div><div class="en">The Other End of the Tunnel</div></div></div>
-    <audio controls preload="metadata" src="t4.mp3"></audio>
+    <div class="top"><div class="no">03</div><div><div class="ti">玻璃屋二十八度海</div><div class="en">Glasshouse, A 28° Sea</div></div><div class="dur" id="dur-t3"></div></div>
+    <audio controls preload="metadata" data-k="t3" src="t3.mp3"></audio>
+    <div class="lyrics" id="ly-t3"></div>
   </div>
-
   <div class="track">
-    <div class="top"><div class="no">05</div><div><div class="ti">宜蘭風輕</div><div class="en">Yilan Wind Gentle</div></div></div>
-    <audio controls preload="metadata" src="t5.mp3"></audio>
+    <div class="top"><div class="no">04</div><div><div class="ti">雪隧彼頭</div><div class="en">The Other End of the Tunnel</div></div><div class="dur" id="dur-t4"></div></div>
+    <audio controls preload="metadata" data-k="t4" src="t4.mp3"></audio>
+    <div class="lyrics" id="ly-t4"></div>
+  </div>
+  <div class="track">
+    <div class="top"><div class="no">05</div><div><div class="ti">宜蘭風輕</div><div class="en">Yilan Wind Gentle</div></div><div class="dur" id="dur-t5"></div></div>
+    <audio controls preload="metadata" data-k="t5" src="t5.mp3"></audio>
+    <div class="lyrics" id="ly-t5"></div>
   </div>
 
   <div class="foot">
@@ -83,11 +90,48 @@
 </div>
 
 <script>
-  // 播放任一首時，自動暫停其他正在播的歌（一次只播一首）
-  const players = document.querySelectorAll('audio');
-  players.forEach(a => a.addEventListener('play', () => {
-    players.forEach(o => { if (o !== a) o.pause(); });
-  }));
+const LY = {"t1": [[0.0, "关掉手机 关掉那些应该"], [6.68, "让山的味道慢慢飘进来"], [13.24, "我把星辰飙折成只飞机"], [19.48, "丢给风看它愿不愿意听"], [25.94, "潇湿的雾很轻很温柔"], [32.94, "落在肩上想有人说别怕"], [39.94, "不用很好不用很慢"], [43.94, "只要这一刻够很紧"], [48.94, "把城市留在门外"], [54.94, "玻璃屋里睡问刚刚好的海"], [61.94, "慢慢呼吸慢慢就好"], [67.94, "把城市留在门外"], [73.94, "清晨五点半午还没醒"], [80.94, "泡在温水里看天慢慢凉"], [86.94, "没有人在等"], [93.94, "原来放空也是一种勇敢"], [99.94, "把城市留在门外"], [106.94, "玻璃屋里四季都不冷的海"], [112.94, "慢慢呼吸慢慢就好"], [118.94, "把城市留在门外"], [127.94, "你不用赶时间在这里释然的"], [133.94, "你不用懂就让水拖着你"], [139.94, "那些放不下的线放在岸边"], [146.94, "等天亮了再说"], [152.94, "把城市留在门外"], [158.94, "我把自己还给这片海"], [164.94, "慢慢呼吸慢慢就好"], [171.94, "夏天一直都在"], [177.94, "回去的时候叫不清了"], [183.94, "门外的城市好像也没那么重"], [189.94, "等一会儿"], [192.94, "期待来"]], "t2": [[9.0, "总按下来"], [11.0, "几个房间都是我们的"], [17.0, "Tonight"], [18.0, "包下整片叶"], [27.0, "包下这片光"], [29.0, "喇叭一响"], [31.0, "没有人想离场"], [33.0, "香槟开了花"], [35.0, "刀进这场下"], [37.0, "别问几点"], [38.0, "今天没有早上"], [40.0, "睡眠的发烫"], [42.0, "心跳的加速"], [44.0, "三二一"], [47.0, "今晚不睡"], [49.0, "夏天不退"], [51.0, "跳进来"], [53.0, "Summer never ends"], [55.0, "二十八度的睡"], [56.0, "笑到天微微亮"], [58.0, "今晚不睡"], [60.0, "夏天不退"], [64.0, "雨量泡在池里"], [65.0, "被我们提飞"], [67.0, "石头的笑"], [68.0, "比白天都美"], [71.0, "谁的尖叫变成了街"], [74.0, "海"], [75.0, "这一致的人都是同类"], [78.0, "今晚不睡"], [80.0, "夏天不退"], [82.0, "跳进来"], [83.0, "Summer never ends"], [85.0, "玻璃屋"], [86.0, "玻璃屋的公亮"], [87.0, "成一场梦"], [89.0, "今晚不睡"], [91.0, "夏天不退"], [93.0, "Hu"], [103.0, "Hu"], [105.0, "Hu"], [106.0, "Hu"], [107.0, "Hu"], [109.0, "Hu"], [111.0, "Hu"], [113.0, "投下来今晚不睡"], [118.18, "今晚不睡"], [125.92, "今晚不睡"], [133.56, "夏天不睡"], [135.52, "跳进来"], [137.34, "Summer never ends"], [139.28, "夏天亮也不寒冷"], [142.98, "今晚不睡"], [144.98, "夏天不睡"], [146.98, "天亮了"], [148.98, "但夏天还没走"], [151.98, "当夏"], [154.8, "See you next summer"]], "t3": [[0.0, "汤水往后退 把日子刁囊"], [4.88, "雪山隧道那头有人在等"], [9.52, "推开那身门线"], [13.06, "就站在窗边 几个房间的灯"], [18.1, "一盏一盏亮起来"], [21.1, "心里还没拆笑声线到齐"], [24.8, "浇熄的风把肩膀放进"], [29.92, "不用看时间 不用回讯息"], [35.86, "跳进那片蓝水室温的心"], [40.18, "是暖的"], [42.12, "婴下把夏天留下来"], [45.62, "玻璃雾里二十八度的海"], [50.38, "你笑着我就不想离开"], [56.38, "婴下把夏天留下来"], [61.38, "谁想下水 谁煮了咖啡"], [64.38, "小孩在前前笑成一片"], [67.5, "大人靠着把他把心事晒干"], [69.5, "这一晚谁都不勇敢"], [72.38, "不勇敢 下把夏天留下来"], [77.38, "玻璃雾里二十八度的海"], [83.38, "你在夏天 就还在"], [88.38, "婴下把夏天留下来"], [92.38, "就算窗外下起整夜的雨"], [95.38, "玻璃雾里还是那片晴"], [98.38, "自己都关不掉的这一只温暖"], [103.38, "原来夏天是有你"], [108.38, "红下把夏天留下来"], [112.38, "我们把笑声留在这片海"], [117.38, "明年此时还要再回来"], [123.38, "婴下把夏天留下来"], [128.38, "茶窗往前开"], [130.38, "夏天没有伞"], [133.38, "她在心里还吻着"]], "t4": [], "t5": []};
+const NEED = {"t4": "台語歌・AI 聽寫不準，待貼正確歌詞", "t5": "AI 未偵測到清晰人聲（演奏曲？），待確認"};
+const players = [...document.querySelectorAll('audio')];
+const disc = document.getElementById('disc');
+
+players.forEach((audio, i) => {
+  const k = audio.dataset.k;
+  const panel = document.getElementById('ly-' + k);
+  const lines = LY[k] || [];
+  if (lines.length === 0) {
+    panel.innerHTML = '<div class="ly-empty">♪ ' + (NEED[k] || '此首待補歌詞') + ' ♪</div>';
+  } else {
+    panel.innerHTML = lines.map((l, idx) => '<div class="ly-line" data-i="' + idx + '">' + l[1] + '</div>').join('');
+    const els = [...panel.querySelectorAll('.ly-line')];
+    let last = -1;
+    audio.addEventListener('timeupdate', () => {
+      const t = audio.currentTime;
+      let idx = -1;
+      for (let j = 0; j < lines.length; j++) { if (lines[j][0] <= t + 0.15) idx = j; else break; }
+      if (idx !== last) {
+        last = idx;
+        els.forEach((e, j) => e.classList.toggle('on', j === idx));
+        if (idx >= 0 && els[idx]) panel.scrollTop = els[idx].offsetTop - panel.clientHeight/2 + els[idx].clientHeight/2;
+      }
+    });
+  }
+  // 時長
+  audio.addEventListener('loadedmetadata', () => {
+    const d = audio.duration; if (!isFinite(d)) return;
+    document.getElementById('dur-' + k).textContent =
+      Math.floor(d/60) + ':' + String(Math.floor(d%60)).padStart(2,'0');
+  });
+  // 播放任一首 → 暫停其他 + 唱片轉
+  audio.addEventListener('play', () => {
+    players.forEach(o => { if (o !== audio) o.pause(); });
+    disc.classList.remove('paused');
+  });
+  audio.addEventListener('pause', () => { if (players.every(p => p.paused)) disc.classList.add('paused'); });
+  // 播完自動接下一首
+  audio.addEventListener('ended', () => { if (players[i+1]) players[i+1].play(); });
+});
+disc.classList.add('paused');
 </script>
 </body>
 </html>
