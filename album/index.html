@@ -47,7 +47,7 @@
     <div class="kick">YONGXIA · A SUMMER EP</div>
     <h1>詠夏專輯</h1>
     <div class="sub">玻璃屋・二十八度・永遠的夏天</div>
-    <div class="meta">3 TRACKS · 2026</div>
+    <div class="meta">5 TRACKS · 2026</div>
   </div>
 
   <div class="track">
@@ -65,11 +65,29 @@
     <audio controls preload="metadata" src="t3.mp3"></audio>
   </div>
 
+  <div class="track">
+    <div class="top"><div class="no">04</div><div><div class="ti">雪隧彼頭</div><div class="en">The Other End of the Tunnel</div></div></div>
+    <audio controls preload="metadata" src="t4.mp3"></audio>
+  </div>
+
+  <div class="track">
+    <div class="top"><div class="no">05</div><div><div class="ti">宜蘭風輕</div><div class="en">Yilan Wind Gentle</div></div></div>
+    <audio controls preload="metadata" src="t5.mp3"></audio>
+  </div>
+
   <div class="foot">
     詠夏 Villa · 礁溪 ｜ 點播放鍵即可在頁面上聆聽<br>
     （MP3 256kbps，行動裝置也能播）
   </div>
 
 </div>
+
+<script>
+  // 播放任一首時，自動暫停其他正在播的歌（一次只播一首）
+  const players = document.querySelectorAll('audio');
+  players.forEach(a => a.addEventListener('play', () => {
+    players.forEach(o => { if (o !== a) o.pause(); });
+  }));
+</script>
 </body>
 </html>
