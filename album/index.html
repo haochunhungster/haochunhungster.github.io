@@ -417,7 +417,7 @@ body{transition:background .5s ease,color .4s ease}
           </div>
         </div>
         <div class="np-mini">
-          <span class="demo">◷ 正在聆聽 · NOW PLAYING</span>
+          <span class="demo">◷ 預覽播放 · 示意（無音檔）</span>
           <div class="np-title" id="npTitle">玻璃屋海水溫</div>
           <div class="np-en" id="npEn">Glasshouse, Sea-Warm</div>
         </div>
@@ -441,7 +441,7 @@ body{transition:background .5s ease,color .4s ease}
         <div class="lyrics-wrap">
           <div class="lyrics-head">
             <span class="lbl">歌詞 · 同步亮起</span>
-            <span class="note">＊官方歌詞 · 隨播放同步</span>
+            <span class="note">＊示意詞 · 隨播放捲動</span>
           </div>
           <div class="lyrics" id="lyrics"><ul id="lyricList"></ul></div>
         </div>
@@ -512,59 +512,182 @@ body{transition:background .5s ease,color .4s ease}
 
 <script>
 (function(){
-const IP='<path d="M8 5v14l11-7z"/>', IPA='<path d="M7 5h4v14H7zM13 5h4v14h-4z"/>';
-const TRACKS=[{"file": "t1.mp3", "zh": "玻璃屋海水溫", "en": "Glasshouse, Sea-Warm", "hue": 165, "dur": 191, "lyric": [[0.0, "關掉手機　關掉那些應該"], [6.68, "讓山的味道　慢慢飄進來"], [13.08, "我把行程表　摺成紙飛機"], [19.48, "丟給風　看它願不願意停"], [25.94, "礁溪的霧　很輕　很溫柔"], [32.94, "落在肩上　像有人說別怕"], [39.94, "不用很好　不用很滿"], [43.94, "只要這一刻　夠安靜"], [48.94, "把城市　留在門外"], [54.94, "玻璃屋裡　水溫剛剛好的海"], [61.94, "慢慢呼吸　慢慢就好"], [67.94, "把城市　留在門外"], [73.94, "清晨五點半　霧還沒醒"], [80.94, "泡在溫水裡　看天慢慢亮"], [86.94, "沒有人催我　沒有人在等"], [93.94, "原來放空　也是一種勇敢"], [99.94, "把城市　留在門外"], [106.94, "玻璃屋裡　四季都不冷的海"], [112.94, "慢慢呼吸　慢慢就好"], [118.94, "把城市　留在門外"], [127.94, "你不用趕　時間在這裡是軟的"], [133.94, "你不用懂　就讓水托著你"], [139.94, "那些放不下的　先放在岸邊"], [146.94, "等天亮了　再說"], [152.94, "把城市　留在門外"], [158.94, "我把自己　還給這片海"], [164.94, "慢慢呼吸　慢慢就好"], [171.94, "夏天　一直都在"], [177.94, "回去的時候　腳步輕了"], [183.94, "門外的城市　好像也沒那麼重"]]}, {"file": "t2.mp3", "zh": "二十八度水燒天微亮", "en": "28°C, Water Aglow at Dawn", "hue": 150, "dur": 165, "lyric": [[0.0, "燈　暗下來"], [4.84, "七個房間　都是我們的"], [9.68, "Tonight"], [14.51, "包下整片夜　包下這片光"], [19.35, "喇叭一響　沒有人想離場"], [24.19, "香檳開了花　倒進這場夏"], [29.03, "別問幾點　今天沒有早上"], [33.86, "水面在發燙　心跳在加速"], [38.7, "三　二　一——"], [43.54, "今晚不睡　夏天不退"], [48.38, "跳進來　Summer never ends"], [53.21, "二十八度的水　燒到天微微亮"], [58.05, "今晚不睡　夏天不退"], [62.89, "月亮泡在池裡　被我們踢碎"], [67.73, "濕透的笑　比白天都美"], [72.56, "誰的尖叫　變成了節拍"], [77.4, "這一池的人　都是同類"], [82.24, "今晚不睡　夏天不退"], [87.08, "跳進來　Summer never ends"], [91.91, "玻璃屋的燈　亮成一場夢"], [96.75, "今晚不睡　夏天不退"], [101.59, "就剩水聲　和心跳"], [106.43, "看著彼此　誰都沒走"], [111.26, "這一夜　我們把它"], [116.1, "偷　下　來——"], [120.94, "今晚不睡　夏天不退"], [125.78, "跳進來　Summer never ends"], [130.61, "燒到天亮　也不喊累"], [135.45, "今晚不睡——夏天　不退"], [140.29, "天亮了"], [145.12, "但夏天　還沒走"], [149.96, "詠夏　see you next summer"]]}, {"file": "t3.mp3", "zh": "玻璃屋二十八度海", "en": "Glasshouse, A 28° Sea", "hue": 185, "dur": 142, "lyric": [[0.0, "車窗往後退　把日子調慢"], [4.88, "雪山隧道那頭　有人在等"], [13.06, "推開那扇門　山就站在窗邊"], [18.1, "七個房間的燈　一盞一盞亮起來"], [21.45, "行李還沒拆　笑聲先到齊"], [24.8, "礁溪的風　把肩膀放輕"], [29.92, "不用看時間　不用回訊息"], [40.18, "跳進那片藍　水是溫的　心是暖的"], [42.12, "詠夏　把夏天留下來"], [45.62, "玻璃屋裡　二十八度的海"], [50.38, "你笑著　我就不想離開"], [56.38, "詠夏　把夏天留下來"], [61.38, "誰先下水　誰煮了咖啡"], [64.38, "小孩在淺池　笑成一片"], [67.5, "大人靠著吧檯　把心事曬乾"], [69.5, "這一晚　誰都不用趕"], [72.38, "詠夏　把夏天留下來"], [77.38, "玻璃屋裡　二十八度的海"], [83.38, "你在　夏天就還在"], [88.38, "詠夏　把夏天留下來"], [92.38, "就算窗外　下起整夜的雨"], [95.38, "玻璃屋裡　還是那片晴"], [98.38, "四季都關不掉的　這一池溫暖"], [103.38, "原來夏天　是有你"], [108.38, "詠夏　把夏天留下來"], [112.38, "我們把笑聲　留在這片海"], [117.38, "明年此時　還要再回來"], [123.38, "詠夏　把夏天　留下來"], [128.38, "車窗往前開　夏天沒有散"], [133.38, "它在心裡　還溫著"]]}, {"file": "t4.mp3", "zh": "雪隧彼頭", "en": "The Other End of the Tunnel", "hue": 210, "dur": 190, "lyric": [[0.0, "車窗向後退　日子放較慢"], [7.0, "雪隧彼頭　有人咧等"], [16.0, "門一下推開　山就徛佇窗仔邊"], [25.0, "七間房間的火　一葩一葩著起來"], [30.33, "行李猶未拍開　笑聲先到齊"], [35.67, "礁溪的風　共肩胛頭放予鬆"], [41.0, "免看時間　免回訊息"], [46.0, "跳落彼片藍　水是燒的　心是暖的"], [51.0, "詠夏　共夏天留落來"], [57.0, "玻璃厝內　二十八度的海"], [62.0, "你笑　我就毋甘離開"], [67.0, "詠夏　共夏天留落來"], [73.0, "啥人先落水　啥人煮咖啡"], [89.22, "囡仔佇淺池　笑甲歸陣"], [105.44, "大人倚佇吧檯　共煩惱曝予焦"], [121.66, "這暝　逐家攏免趕"], [137.88, "詠夏　共夏天留落來"], [145.66, "玻璃厝內　二十八度的海"], [153.44, "你佇咧　夏天就佇咧"], [155.22, "詠夏　共夏天留落來"], [157.0, "就算窗外　落歸暝的雨"], [158.77, "玻璃厝內　猶原是好天"], [160.55, "四季攏關袂掉　這池的溫暖"], [162.33, "原來夏天　是有你"], [164.11, "詠夏　共夏天留落來"], [165.89, "咱共笑聲　留佇這片海"], [167.67, "明年此時　閣欲轉來"], [169.44, "詠夏　共夏天　留落來"], [171.22, "車窗向前行　夏天無散去"], [173.0, "伊佇心肝內　猶咧燒"]]}, {"file": "t5.mp3", "zh": "宜蘭風輕", "en": "Yilan Wind Gentle", "hue": 135, "dur": 229, "lyric": [[20.28, "The city fades behind us, slowing down the day"], [24.6, "Past the long dark tunnel, someone waits our way"], [35.4, "Push the door wide open, mountains at the glass"], [43.26, "Seven little windows lighting up at last"], [51.1, "Bags still by the doorway, laughter fills the air"], [56.42, "The Yilan wind is gentle, lifting every care"], [58.88, "No clocks here to follow, no replies to send"], [65.54, "Dive into the water, warm from end to end"], [73.1, "Yongxia, stay here for the summer"], [77.48, "Inside the glass house, a sea at twenty-eight"], [88.2, "You're smiling, and I never want to leave at all"], [104.74, "Yongxia, stay here for the summer"], [109.06, "Someone slips in the water, someone brews us coffee"], [117.2, "Kids in the shallow end, laughing wild and free"], [122.32, "Grown-ups by the counter, drying out their cares"], [127.8, "Tonight there is no rushing, no one even dares"], [133.14, "Even when the rain falls all night on the pane"], [138.4, "Inside this glass house, the summer still remains"], [143.68, "Four seasons cannot switch this warm and glowing pool"], [148.14, "Turns out summer's only summer here with you"], [157.74, "Yongxia, stay here for the summer"], [162.74, "We'll leave our laughter floating on this sea"], [172.74, "Same time next year, come back, you and me"], [189.08, "Yongxia, stay here for the summer"], [194.08, "The city rolls back toward us, but the summer stays"], [205.04, "It's still warm inside me, all the way"]]}];
-let idx=0,t=0; const audio=new Audio(); audio.preload='metadata';
-const $=s=>document.querySelector(s);
-const fill=$('#fill'),knob=$('#knob'),bar=$('#bar'),curEl=$('#cur'),durEl=$('#dur');
-const npTitle=$('#npTitle'),npEn=$('#npEn'),npCover=$('#npCover'),heroCover=$('#heroCover'),dockCover=$('#dockCover');
-const lyricList=$('#lyricList'),playIcon=$('#playIcon'),dockIcon=$('#dockIcon');
-const dock=$('#dock'),dockTitle=$('#dockTitle'),dockSub=$('#dockSub'),trackList=$('#trackList');
-const fmt=s=>{s=Math.max(0,Math.floor(s||0));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0');};
-const curDur=()=> (isFinite(audio.duration)&&audio.duration)?audio.duration:TRACKS[idx].dur;
-TRACKS.forEach((tr,i)=>{const row=document.createElement('div');row.className='track';row.dataset.i=i;
-  row.innerHTML='<div class="num"><span class="idx">'+String(i+1).padStart(2,'0')+'</span><span class="eq"><i></i><i></i><i></i></span></div>'+
-   '<div class="meta"><div class="zh">'+tr.zh+'</div><div class="en">'+tr.en+'</div></div>'+
-   '<div class="dur">'+fmt(tr.dur)+'</div>'+
-   '<div class="pin"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>';
-  row.addEventListener('click',()=>{ i===idx?togglePlay():load(i,true); });
-  trackList.appendChild(row);});
-const rows=[...document.querySelectorAll('.track')];
-function buildLyrics(){lyricList.innerHTML='';TRACKS[idx].lyric.forEach(ln=>{const li=document.createElement('li');
-  li.textContent=ln[1];li.dataset.t=ln[0];li.addEventListener('click',()=>{audio.currentTime=ln[0];if(audio.paused)start();});
-  lyricList.appendChild(li);});}
-function load(i,ap){idx=(i+TRACKS.length)%TRACKS.length;t=0;const tr=TRACKS[idx];
-  audio.src=tr.file;npTitle.textContent=tr.zh;npEn.textContent=tr.en;durEl.textContent=fmt(tr.dur);dockTitle.textContent=tr.zh;
-  [npCover,heroCover,dockCover].forEach(c=>c.style.setProperty('--hue',tr.hue));
-  rows.forEach((r,j)=>r.classList.toggle('active',j===idx));buildLyrics();tick(true);paintPlay();if(ap)start();}
-function start(){audio.play().catch(()=>{});}
-function stop(){audio.pause();}
-function togglePlay(){audio.paused?start():stop();}
-function next(){load(idx+1,true);}
-function prev(){ if(audio.currentTime>3){audio.currentTime=0;} else load(idx-1,true); }
-function paintPlay(){const ic=audio.paused?IP:IPA;playIcon.innerHTML=ic;dockIcon.innerHTML=ic;
-  rows.forEach((r,j)=>r.classList.toggle('playing',j===idx&&!audio.paused));if(!audio.paused)dock.classList.add('show');}
-function tick(seek){const d=curDur(),pct=Math.min(100,t/d*100);
-  fill.style.width=pct+'%';knob.style.left=pct+'%';curEl.textContent=fmt(t);dockSub.textContent='詠夏 · '+fmt(t)+' / '+fmt(d);
-  const tr=TRACKS[idx],lis=lyricList.children;let a=-1;
-  for(let i=0;i<tr.lyric.length;i++){if(t>=tr.lyric[i][0]-0.15)a=i;}
-  for(let i=0;i<lis.length;i++){lis[i].classList.toggle('on',i===a);lis[i].classList.toggle('done',i<a);}
-  if(a>=0&&lis[0])lyricList.style.transform='translateY('+(-a*lis[0].offsetHeight)+'px)';else lyricList.style.transform='translateY(0)';}
-audio.addEventListener('timeupdate',()=>{t=audio.currentTime;tick();});
-audio.addEventListener('play',paintPlay);audio.addEventListener('pause',paintPlay);audio.addEventListener('ended',next);
-audio.addEventListener('loadedmetadata',()=>{durEl.textContent=fmt(curDur());tick();});
-function seekTo(x){const r=bar.getBoundingClientRect(),p=Math.min(1,Math.max(0,(x-r.left)/r.width));audio.currentTime=p*curDur();t=audio.currentTime;tick(true);}
-let drag=false;
-bar.addEventListener('pointerdown',e=>{drag=true;bar.setPointerCapture(e.pointerId);seekTo(e.clientX);});
-bar.addEventListener('pointermove',e=>{if(drag)seekTo(e.clientX);});
-bar.addEventListener('pointerup',()=>drag=false);
-$('#play').addEventListener('click',togglePlay);$('#dockPlay').addEventListener('click',togglePlay);
-$('#next').addEventListener('click',next);$('#prev').addEventListener('click',prev);
-$('#heroPlay').addEventListener('click',()=>load(0,true));
-document.addEventListener('keydown',e=>{if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA')return;
-  if(e.code==='Space'){e.preventDefault();togglePlay();}else if(e.key==='ArrowRight')next();else if(e.key==='ArrowLeft')prev();});
-new IntersectionObserver(es=>es.forEach(en=>{if(en.target.id==='tracks'&&en.isIntersecting)dock.classList.add('show');}),{threshold:.1}).observe($('#tracks'));
-load(0,false);
+  // ---------- 資料：五首真實曲目 + 示意歌詞時間軸 ----------
+  const ICON_PLAY  = '<path d="M8 5v14l11-7z"/>';
+  const ICON_PAUSE = '<path d="M7 5h4v14H7zM13 5h4v14h-4z"/>';
+
+  const TRACKS = [{"zh": "玻璃屋海水溫", "en": "Glasshouse, Sea-Warm", "hue": 165, "src": "t1.mp3", "dur": 191, "lyric": [[0.0, "關掉手機　關掉那些應該"], [6.68, "讓山的味道　慢慢飄進來"], [13.08, "我把行程表　摺成紙飛機"], [19.48, "丟給風　看它願不願意停"], [25.94, "礁溪的霧　很輕　很溫柔"], [32.94, "落在肩上　像有人說別怕"], [39.94, "不用很好　不用很滿"], [43.94, "只要這一刻　夠安靜"], [48.94, "把城市　留在門外"], [54.94, "玻璃屋裡　水溫剛剛好的海"], [61.94, "慢慢呼吸　慢慢就好"], [67.94, "把城市　留在門外"], [73.94, "清晨五點半　霧還沒醒"], [80.94, "泡在溫水裡　看天慢慢亮"], [86.94, "沒有人催我　沒有人在等"], [93.94, "原來放空　也是一種勇敢"], [99.94, "把城市　留在門外"], [106.94, "玻璃屋裡　四季都不冷的海"], [112.94, "慢慢呼吸　慢慢就好"], [118.94, "把城市　留在門外"], [127.94, "你不用趕　時間在這裡是軟的"], [133.94, "你不用懂　就讓水托著你"], [139.94, "那些放不下的　先放在岸邊"], [146.94, "等天亮了　再說"], [152.94, "把城市　留在門外"], [158.94, "我把自己　還給這片海"], [164.94, "慢慢呼吸　慢慢就好"], [171.94, "夏天　一直都在"], [177.94, "回去的時候　腳步輕了"], [183.94, "門外的城市　好像也沒那麼重"]], "story": {"scene": "清晨 · 06:14 · 玻璃屋", "quote": "第一首歌，是把手伸進剛被太陽曬暖的水面那一秒。", "body": "整張 EP 的起點。沒有前奏的鋪陳，就讓溫度先到——水是暖的，光是斜的，時間還很慢。它定義了整張專輯的體感：二十八度，剛剛好，不冷不燙的那種安全感。"}}, {"zh": "二十八度水燒天微亮", "en": "28°C, Water Aglow at Dawn", "hue": 150, "src": "t2.mp3", "dur": 165, "lyric": [[0.0, "燈　暗下來"], [4.84, "七個房間　都是我們的"], [9.68, "Tonight"], [14.51, "包下整片夜　包下這片光"], [19.35, "喇叭一響　沒有人想離場"], [24.19, "香檳開了花　倒進這場夏"], [29.03, "別問幾點　今天沒有早上"], [33.86, "水面在發燙　心跳在加速"], [38.7, "三　二　一——"], [43.54, "今晚不睡　夏天不退"], [48.38, "跳進來　Summer never ends"], [53.21, "二十八度的水　燒到天微微亮"], [58.05, "今晚不睡　夏天不退"], [62.89, "月亮泡在池裡　被我們踢碎"], [67.73, "濕透的笑　比白天都美"], [72.56, "誰的尖叫　變成了節拍"], [77.4, "這一池的人　都是同類"], [82.24, "今晚不睡　夏天不退"], [87.08, "跳進來　Summer never ends"], [91.91, "玻璃屋的燈　亮成一場夢"], [96.75, "今晚不睡　夏天不退"], [101.59, "就剩水聲　和心跳"], [106.43, "看著彼此　誰都沒走"], [111.26, "這一夜　我們把它"], [116.1, "偷　下　來——"], [120.94, "今晚不睡　夏天不退"], [125.78, "跳進來　Summer never ends"], [130.61, "燒到天亮　也不喊累"], [135.45, "今晚不睡——夏天　不退"], [140.29, "天亮了"], [145.12, "但夏天　還沒走"], [149.96, "詠夏　see you next summer"]], "story": {"scene": "破曉 · 天光未滿", "quote": "水比天先亮起來，像夏天從水裡被輕輕點燃。", "body": "這首是整張裡溫度最高的一刻。熱氣從水面升起，晨光把雲染成奶白。我們刻意不放人聲對話，只留環境的呼吸聲——因為最好的清晨，是不需要說話的清晨。"}}, {"zh": "玻璃屋二十八度海", "en": "Glasshouse, A 28° Sea", "hue": 185, "src": "t3.mp3", "dur": 142, "lyric": [[0.0, "車窗往後退　把日子調慢"], [4.88, "雪山隧道那頭　有人在等"], [13.06, "推開那扇門　山就站在窗邊"], [18.1, "七個房間的燈　一盞一盞亮起來"], [21.45, "行李還沒拆　笑聲先到齊"], [24.8, "礁溪的風　把肩膀放輕"], [29.92, "不用看時間　不用回訊息"], [40.18, "跳進那片藍　水是溫的　心是暖的"], [42.12, "詠夏　把夏天留下來"], [45.62, "玻璃屋裡　二十八度的海"], [50.38, "你笑著　我就不想離開"], [56.38, "詠夏　把夏天留下來"], [61.38, "誰先下水　誰煮了咖啡"], [64.38, "小孩在淺池　笑成一片"], [67.5, "大人靠著吧檯　把心事曬乾"], [69.5, "這一晚　誰都不用趕"], [72.38, "詠夏　把夏天留下來"], [77.38, "玻璃屋裡　二十八度的海"], [83.38, "你在　夏天就還在"], [88.38, "詠夏　把夏天留下來"], [92.38, "就算窗外　下起整夜的雨"], [95.38, "玻璃屋裡　還是那片晴"], [98.38, "四季都關不掉的　這一池溫暖"], [103.38, "原來夏天　是有你"], [108.38, "詠夏　把夏天留下來"], [112.38, "我們把笑聲　留在這片海"], [117.38, "明年此時　還要再回來"], [123.38, "詠夏　把夏天　留下來"], [128.38, "車窗往前開　夏天沒有散"], [133.38, "它在心裡　還溫著"]], "story": {"scene": "上午 · 玻璃屋望海", "quote": "海是一塊溫熱的玻璃，光在裡面折成碎銀。", "body": "EP 的中段，視線從水面往外推到整片海。這首的編曲最稀薄，留白最多——是給聽的人放心事的地方。把重的東西放進浪裡，它就被曬得很輕很輕。"}}, {"zh": "雪隧彼頭", "en": "The Other End of the Tunnel", "hue": 210, "src": "t4.mp3", "dur": 190, "lyric": [[0.0, "車窗向後退　日子放較慢"], [7.0, "雪隧彼頭　有人咧等"], [16.0, "門一下推開　山就徛佇窗仔邊"], [25.0, "七間房間的火　一葩一葩著起來"], [30.33, "行李猶未拍開　笑聲先到齊"], [35.67, "礁溪的風　共肩胛頭放予鬆"], [41.0, "免看時間　免回訊息"], [46.0, "跳落彼片藍　水是燒的　心是暖的"], [51.0, "詠夏　共夏天留落來"], [57.0, "玻璃厝內　二十八度的海"], [62.0, "你笑　我就毋甘離開"], [67.0, "詠夏　共夏天留落來"], [73.0, "啥人先落水　啥人煮咖啡"], [89.22, "囡仔佇淺池　笑甲歸陣"], [105.44, "大人倚佇吧檯　共煩惱曝予焦"], [121.66, "這暝　逐家攏免趕"], [137.88, "詠夏　共夏天留落來"], [145.66, "玻璃厝內　二十八度的海"], [153.44, "你佇咧　夏天就佇咧"], [155.22, "詠夏　共夏天留落來"], [157.0, "就算窗外　落歸暝的雨"], [158.77, "玻璃厝內　猶原是好天"], [160.55, "四季攏關袂掉　這池的溫暖"], [162.33, "原來夏天　是有你"], [164.11, "詠夏　共夏天留落來"], [165.89, "咱共笑聲　留佇這片海"], [167.67, "明年此時　閣欲轉來"], [169.44, "詠夏　共夏天　留落來"], [171.22, "車窗向前行　夏天無散去"], [173.0, "伊佇心肝內　猶咧燒"]], "story": {"scene": "抵達 · 雪山隧道出口", "quote": "城市的重量留在隧道那一端，這一端只有夏天和你。", "body": "全 EP 最長、情緒起伏最大的一首。前段是隧道裡的悶與暗，中段海風灌進來，整個宜蘭朝你打開。它講的是「離開」與「抵達」之間，那段會發光的轉折。"}}, {"zh": "宜蘭風輕", "en": "Yilan Wind Gentle", "hue": 135, "src": "t5.mp3", "dur": 229, "lyric": [[20.28, "The city fades behind us, slowing down the day"], [24.6, "Past the long dark tunnel, someone waits our way"], [35.4, "Push the door wide open, mountains at the glass"], [43.26, "Seven little windows lighting up at last"], [51.1, "Bags still by the doorway, laughter fills the air"], [56.42, "The Yilan wind is gentle, lifting every care"], [58.88, "No clocks here to follow, no replies to send"], [65.54, "Dive into the water, warm from end to end"], [73.1, "Yongxia, stay here for the summer"], [77.48, "Inside the glass house, a sea at twenty-eight"], [88.2, "You're smiling, and I never want to leave at all"], [104.74, "Yongxia, stay here for the summer"], [109.06, "Someone slips in the water, someone brews us coffee"], [117.2, "Kids in the shallow end, laughing wild and free"], [122.32, "Grown-ups by the counter, drying out their cares"], [127.8, "Tonight there is no rushing, no one even dares"], [133.14, "Even when the rain falls all night on the pane"], [138.4, "Inside this glass house, the summer still remains"], [143.68, "Four seasons cannot switch this warm and glowing pool"], [148.14, "Turns out summer's only summer here with you"], [157.74, "Yongxia, stay here for the summer"], [162.74, "We'll leave our laughter floating on this sea"], [172.74, "Same time next year, come back, you and me"], [189.08, "Yongxia, stay here for the summer"], [194.08, "The city rolls back toward us, but the summer stays"], [205.04, "It's still warm inside me, all the way"]], "story": {"scene": "夜晚 · 收束 · 晚安", "quote": "夏天沒有結束，它只是睡了；明天醒來，它還在這裡。", "body": "EP 的句點，也是夜泳模式的主題曲。白天的熱被晚風慢慢收走，整張專輯在一句晚安裡降溫。它不說再見，只說晚安——因為這個夏天，本來就不打算結束。"}}];
+
+  // ---------- 狀態 ----------
+  let idx = 0, t = 0, playing = false, timer = null;
+
+  // ---------- DOM ----------
+  const $ = s => document.querySelector(s);
+  const fill=$('#fill'), knob=$('#knob'), bar=$('#bar');
+  const curEl=$('#cur'), durEl=$('#dur');
+  const npTitle=$('#npTitle'), npEn=$('#npEn');
+  const npCover=$('#npCover'), heroCover=$('#heroCover'), dockCover=$('#dockCover');
+  const lyricList=$('#lyricList'), lyricsBox=$('#lyrics');
+  const playIcon=$('#playIcon'), dockIcon=$('#dockIcon');
+  const dock=$('#dock'), dockTitle=$('#dockTitle'), dockSub=$('#dockSub');
+  const trackList=$('#trackList');
+  const audio=$('#audio'), demoLabel=document.querySelector('.np-mini .demo');
+
+  const fmt = s => { s=Math.max(0,Math.floor(s)); return Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); };
+  const hasAudio = () => !!TRACKS[idx].src;
+  const trackDur = () => (hasAudio() && audio.duration) ? audio.duration : TRACKS[idx].dur;
+
+  // ---------- 建立曲目清單 ----------
+  TRACKS.forEach((tr,i)=>{
+    const wrap=document.createElement('div');
+    wrap.className='track-wrap'; wrap.dataset.i=i;
+    const s=tr.story||{};
+    wrap.innerHTML=
+      '<div class="track" data-i="'+i+'">'+
+        '<div class="num"><span class="idx">'+String(i+1).padStart(2,'0')+'</span>'+
+          '<span class="eq"><i></i><i></i><i></i></span></div>'+
+        '<div class="meta"><div class="zh">'+tr.zh+'</div><div class="en">'+tr.en+'</div></div>'+
+        '<div class="dur">'+fmt(tr.dur)+'</div>'+
+        '<button class="info" aria-label="展開故事" title="這首的故事"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>'+
+        '<div class="pin"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>'+
+      '</div>'+
+      '<div class="track-story"><div class="track-story-inner"><div class="track-story-pad">'+
+        '<div class="scene">'+(s.scene||'')+'</div>'+
+        '<div class="quote">'+(s.quote||'')+'</div>'+
+        '<div class="body">'+(s.body||'')+'</div>'+
+      '</div></div></div>';
+    const row=wrap.querySelector('.track');
+    const info=wrap.querySelector('.info');
+    row.addEventListener('click',e=>{
+      if(e.target.closest('.info')) return;
+      if(i===idx){ togglePlay(); } else { load(i,true); }
+    });
+    info.addEventListener('click',e=>{ e.stopPropagation(); wrap.classList.toggle('open'); });
+    trackList.appendChild(wrap);
+  });
+  const rows = [...document.querySelectorAll('.track')];
+
+  // ---------- 建立歌詞 ----------
+  function buildLyrics(){
+    lyricList.innerHTML='';
+    TRACKS[idx].lyric.forEach((ln,i)=>{
+      const li=document.createElement('li');
+      li.textContent=ln[1]; li.dataset.t=ln[0];
+      li.addEventListener('click',()=>{ t=ln[0]; if(hasAudio()) audio.currentTime=t; tick(true); });
+      lyricList.appendChild(li);
+    });
+  }
+
+  // ---------- 載入曲目 ----------
+  function load(i, autoplay){
+    idx=(i+TRACKS.length)%TRACKS.length; t=0;
+    const tr=TRACKS[idx];
+    npTitle.textContent=tr.zh; npEn.textContent=tr.en;
+    durEl.textContent=fmt(tr.dur);
+    dockTitle.textContent=tr.zh;
+    if(tr.src){ audio.src=tr.src; demoLabel.textContent='♪ 正在播放'; }
+    else { audio.removeAttribute('src'); demoLabel.textContent='◷ 預覽播放 · 示意（無音檔）'; }
+    [npCover,heroCover,dockCover].forEach(c=>c.style.setProperty('--hue',tr.hue));
+    rows.forEach((r,j)=>r.classList.toggle('active',j===idx));
+    buildLyrics();
+    tick(true);
+    if(autoplay) start(); else paintPlay();
+  }
+
+  // ---------- 播放控制 ----------
+  function start(){
+    playing=true; clearInterval(timer);
+    if(hasAudio()){ audio.play().catch(()=>{}); }
+    else { timer=setInterval(()=>{ t+=0.25; if(t>=TRACKS[idx].dur){ next(); return;} tick(); },250); }
+    paintPlay();
+  }
+  function stop(){ playing=false; clearInterval(timer); if(hasAudio()) audio.pause(); paintPlay(); }
+  function togglePlay(){ playing?stop():start(); }
+  function next(){ load(idx+1,true); }
+  function prev(){ if(t>3){ t=0; if(hasAudio()) audio.currentTime=0; tick(true); } else load(idx-1,true); }
+
+  // 真實音檔事件（src 為 null 時不觸發）
+  audio.addEventListener('timeupdate',()=>{ if(hasAudio()){ t=audio.currentTime; tick(); } });
+  audio.addEventListener('ended',()=>{ next(); });
+  audio.addEventListener('loadedmetadata',()=>{ if(hasAudio()&&audio.duration){ durEl.textContent=fmt(audio.duration); tick(); } });
+
+  function paintPlay(){
+    const ic = playing?ICON_PAUSE:ICON_PLAY;
+    playIcon.innerHTML=ic; dockIcon.innerHTML=ic;
+    rows.forEach((r,j)=>r.classList.toggle('playing', j===idx && playing));
+    if(playing) dock.classList.add('show');
+  }
+
+  // ---------- 每幀更新 ----------
+  function tick(seek){
+    const tr=TRACKS[idx];
+    const D=trackDur();
+    const pct=Math.min(100, t/D*100);
+    fill.style.width=pct+'%'; knob.style.left=pct+'%';
+    curEl.textContent=fmt(t);
+    dockSub.textContent='詠夏 · '+fmt(t)+' / '+fmt(D);
+    // 歌詞高亮
+    const lis=lyricList.children; let active=-1;
+    for(let i=0;i<tr.lyric.length;i++){ if(t>=tr.lyric[i][0]) active=i; }
+    for(let i=0;i<lis.length;i++){
+      lis[i].classList.toggle('on', i===active);
+      lis[i].classList.toggle('done', i<active);
+    }
+    if(active>=0){
+      const lineH=lis[0].offsetHeight;
+      lyricList.style.transform='translateY('+(- active*lineH)+'px)';
+    } else { lyricList.style.transform='translateY(0)'; }
+    if(seek) paintPlay();
+  }
+
+  // ---------- 進度條拖曳／點擊 ----------
+  function seekTo(clientX){
+    const rect=bar.getBoundingClientRect();
+    const p=Math.min(1,Math.max(0,(clientX-rect.left)/rect.width));
+    t=p*trackDur(); if(hasAudio()) audio.currentTime=t; tick(true);
+  }
+  let dragging=false;
+  bar.addEventListener('pointerdown',e=>{ dragging=true; bar.setPointerCapture(e.pointerId); seekTo(e.clientX); });
+  bar.addEventListener('pointermove',e=>{ if(dragging) seekTo(e.clientX); });
+  bar.addEventListener('pointerup',()=>dragging=false);
+
+  // ---------- 綁定按鈕 ----------
+  $('#play').addEventListener('click',togglePlay);
+  $('#dockPlay').addEventListener('click',togglePlay);
+  $('#next').addEventListener('click',next);
+  $('#prev').addEventListener('click',prev);
+  $('#heroPlay').addEventListener('click',()=>{ load(0,true); });
+
+  // 鍵盤：空白鍵播放／暫停、左右切歌
+  document.addEventListener('keydown',e=>{
+    if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA') return;
+    if(e.code==='Space'){ e.preventDefault(); togglePlay(); }
+    else if(e.key==='ArrowRight') next();
+    else if(e.key==='ArrowLeft') prev();
+  });
+
+  // 捲到曲目區才顯示浮動播放列
+  const io=new IntersectionObserver(es=>{
+    es.forEach(en=>{ if(en.target.id==='tracks'){ if(en.isIntersecting) dock.classList.add('show'); } });
+  },{threshold:.1});
+  io.observe($('#tracks'));
+
+  // ---------- 夜泳深色模式 ----------
+  const NIGHT_KEY='yongxia:night';
+  const nightToggle=$('#nightToggle');
+  function applyNight(on){
+    document.body.classList.toggle('night',on);
+    nightToggle.setAttribute('title', on?'回到清晨':'夜泳模式');
+  }
+  try{ applyNight(localStorage.getItem(NIGHT_KEY)==='1'); }catch(_){}
+  nightToggle.addEventListener('click',()=>{
+    const on=!document.body.classList.contains('night');
+    applyNight(on);
+    try{ localStorage.setItem(NIGHT_KEY, on?'1':'0'); }catch(_){}
+  });
+
+  // ---------- 初始化 ----------
+  load(0,false);
 })();
 </script>
 </body>
