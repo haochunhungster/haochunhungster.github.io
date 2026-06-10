@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>詠夏專輯</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#161311;--bg2:#221d18;--ink:#f3ece2;--muted:#b3a690;--gold:#e0b06a;--gold2:#f0d29a;--line:#39322a;--sea:#6fb6c9;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans TC",sans-serif;line-height:1.7;
+    background-image:radial-gradient(120% 80% at 50% -10%, rgba(224,176,106,.10), transparent 60%);}
+  .serif{font-family:"Noto Serif TC",serif}
+  .wrap{max-width:640px;margin:0 auto;padding:0 22px 90px}
+
+  .cover{text-align:center;padding:66px 0 30px}
+  .disc{width:160px;height:160px;margin:0 auto 24px;border-radius:50%;
+    background:radial-gradient(circle at 50% 50%, #2a2218 0 18%, var(--gold) 19% 20%, #1e1814 21% 47%, #2c241b 48% 49%, #1a1511 50% 100%);
+    box-shadow:0 14px 50px rgba(0,0,0,.55), inset 0 0 0 1px rgba(224,176,106,.25);
+    position:relative;animation:spin 14s linear infinite}
+  .disc::after{content:"夏";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    font-family:"Noto Serif TC",serif;font-weight:900;font-size:30px;color:var(--gold2)}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .kick{font-size:12px;letter-spacing:6px;color:var(--gold)}
+  h1{font-family:"Noto Serif TC",serif;font-size:46px;font-weight:900;letter-spacing:6px;margin:8px 0 6px;color:var(--gold2)}
+  .cover .sub{color:var(--muted);font-size:14.5px;letter-spacing:1px}
+  .cover .meta{color:#7d7263;font-size:12px;letter-spacing:2px;margin-top:10px}
+
+  .track{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:14px 0;
+    box-shadow:0 2px 14px rgba(0,0,0,.25)}
+  .track .top{display:flex;align-items:baseline;gap:12px}
+  .track .no{font-family:"Noto Serif TC",serif;font-size:26px;color:var(--gold);line-height:1;min-width:34px}
+  .track .ti{font-family:"Noto Serif TC",serif;font-size:19px;color:var(--ink);font-weight:700;letter-spacing:1px}
+  .track .en{color:#80766a;font-size:12px;letter-spacing:1px;margin-top:2px}
+  audio{width:100%;margin-top:12px;border-radius:8px}
+  audio::-webkit-media-controls-panel{background:#2c2620}
+
+  .foot{color:#7d7263;font-size:12.5px;text-align:center;margin-top:34px;line-height:1.9}
+  a{color:var(--gold2)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="cover">
+    <div class="disc"></div>
+    <div class="kick">YONGXIA · A SUMMER EP</div>
+    <h1>詠夏專輯</h1>
+    <div class="sub">玻璃屋・二十八度・永遠的夏天</div>
+    <div class="meta">3 TRACKS · 2026</div>
+  </div>
+
+  <div class="track">
+    <div class="top"><div class="no">01</div><div><div class="ti">玻璃屋海水溫</div><div class="en">Glasshouse, Sea-Warm</div></div></div>
+    <audio controls preload="metadata" src="t1.mp3"></audio>
+  </div>
+
+  <div class="track">
+    <div class="top"><div class="no">02</div><div><div class="ti">二十八度水燒天微亮</div><div class="en">28°C, Water Aglow at Dawn</div></div></div>
+    <audio controls preload="metadata" src="t2.mp3"></audio>
+  </div>
+
+  <div class="track">
+    <div class="top"><div class="no">03</div><div><div class="ti">玻璃屋二十八度海</div><div class="en">Glasshouse, A 28° Sea</div></div></div>
+    <audio controls preload="metadata" src="t3.mp3"></audio>
+  </div>
+
+  <div class="foot">
+    詠夏 Villa · 礁溪 ｜ 點播放鍵即可在頁面上聆聽<br>
+    （MP3 256kbps，行動裝置也能播）
+  </div>
+
+</div>
+</body>
+</html>
