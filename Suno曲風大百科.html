@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suno 曲風大百科 · Style Prompt Library</title>
+<style>
+:root{
+  --bg:#14100c; --card:#221b13; --card2:#1b1610; --line:rgba(240,195,137,.16);
+  --line2:rgba(240,195,137,.3); --text:#f3ead9; --dim:#b6a384; --faint:#7c6e58;
+  --amber:#f0c389; --amber-b:#ffdba6; --cyan:#9ecadf; --code-bg:#0e0b07;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;
+  background:radial-gradient(120% 60% at 50% -10%, rgba(240,195,137,.10), transparent 60%),
+    linear-gradient(180deg,#14100c,#1a140d 60%,#0f0c08);
+  color:var(--text);line-height:1.7;min-height:100vh;-webkit-font-smoothing:antialiased;padding:0 0 90px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+header{text-align:center;padding:46px 0 16px}
+.kicker{font-size:13px;letter-spacing:.28em;color:var(--amber);text-transform:uppercase;margin-bottom:12px}
+h1{font-size:clamp(26px,4.6vw,40px);font-weight:900;line-height:1.2;
+  background:linear-gradient(120deg,var(--amber-b),var(--amber) 55%,var(--cyan));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.sub{color:var(--dim);margin-top:12px;font-size:14.5px}
+
+.controls{position:sticky;top:0;z-index:20;padding:16px 0 14px;margin-top:14px;
+  background:linear-gradient(180deg,#14100c 70%,rgba(20,16,12,0));backdrop-filter:blur(4px)}
+#search{width:100%;padding:13px 17px;font-size:15px;font-family:inherit;color:var(--text);
+  background:var(--card);border:1px solid var(--line2);border-radius:12px;outline:none}
+#search:focus{border-color:var(--amber)}
+#search::placeholder{color:var(--faint)}
+.cats{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.cat-chip{font-size:13px;color:var(--dim);border:1px solid var(--line);border-radius:999px;
+  padding:6px 14px;cursor:pointer;transition:.15s;white-space:nowrap;background:var(--card2)}
+.cat-chip:hover{color:var(--amber);border-color:var(--line2)}
+.cat-chip.active{background:rgba(240,195,137,.16);color:var(--amber-b);border-color:var(--line2)}
+.count{color:var(--faint);font-size:13px;margin-top:10px;text-align:center}
+
+.cat-head{font-size:14px;letter-spacing:.14em;color:var(--amber-b);text-transform:uppercase;
+  font-weight:800;margin:36px 0 14px;padding-bottom:9px;border-bottom:1px solid var(--line)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:14px}
+.style-card{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:16px 17px;
+  display:flex;flex-direction:column;transition:.15s}
+.style-card:hover{border-color:var(--line2)}
+.sc-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:3px}
+.sc-name{font-size:16.5px;font-weight:800;color:var(--amber-b);line-height:1.3}
+.sc-en{font-size:12.5px;color:var(--faint);font-weight:400}
+.sc-bpm{flex:0 0 auto;font-size:11.5px;color:var(--cyan);border:1px solid rgba(158,202,223,.3);
+  border-radius:6px;padding:2px 8px;white-space:nowrap;margin-top:2px}
+.sc-desc{font-size:13px;color:var(--dim);margin:4px 0 10px}
+.sc-prompt{background:var(--code-bg);border:1px solid var(--line);border-radius:9px;padding:11px 12px;
+  font-family:"JetBrains Mono",Consolas,monospace;font-size:11.5px;line-height:1.55;color:var(--cyan);
+  flex:1;margin-bottom:10px}
+.copy-btn{font-family:inherit;cursor:pointer;border:1px solid var(--line2);background:rgba(240,195,137,.08);
+  color:var(--amber);border-radius:8px;padding:8px 0;font-size:13px;font-weight:600;transition:.15s;width:100%}
+.copy-btn:hover{background:rgba(240,195,137,.18)}
+.copy-btn.done{background:rgba(150,220,150,.16);border-color:rgba(150,220,150,.4);color:#9fe0a0}
+.btn-row{display:flex;gap:8px}
+.btn-row .copy-btn{flex:1}
+.play-btn{flex:0 0 auto;cursor:pointer;border:1px solid rgba(255,120,120,.35);background:rgba(255,90,90,.1);
+  color:#ff9b9b;border-radius:8px;padding:8px 13px;font-size:13px;font-weight:600;font-family:inherit;transition:.15s;white-space:nowrap}
+.play-btn:hover{background:rgba(255,90,90,.2)}
+.sc-rep{font-size:12.5px;color:var(--amber);margin:0 0 10px;line-height:1.4}
+.sc-rep b{color:var(--amber-b);font-weight:600}
+.empty{text-align:center;color:var(--faint);padding:50px 0;font-size:15px}
+footer{text-align:center;color:var(--faint);font-size:13px;margin-top:50px}
+.player{position:fixed;left:0;right:0;bottom:0;z-index:60;transform:translateY(115%);transition:.32s cubic-bezier(.4,0,.2,1);
+  background:#1b1610;border-top:1px solid var(--line2);box-shadow:0 -12px 44px rgba(0,0,0,.65)}
+.player.show{transform:translateY(0)}
+.player-inner{max-width:1080px;margin:0 auto;padding:12px 18px;display:flex;align-items:center;gap:16px}
+.player iframe{width:240px;height:135px;border:0;border-radius:9px;flex:0 0 auto;background:#000}
+.player-meta{flex:1;min-width:0}
+.pl-now{font-size:11px;letter-spacing:.18em;color:var(--faint);text-transform:uppercase}
+.pl-label{font-size:15.5px;color:var(--amber-b);font-weight:700;margin:3px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pl-yt{font-size:13px;color:var(--cyan);text-decoration:none}
+.pl-yt:hover{text-decoration:underline}
+.pl-close{flex:0 0 auto;background:none;border:1px solid var(--line2);color:var(--dim);border-radius:8px;
+  width:36px;height:36px;cursor:pointer;font-size:16px;transition:.15s}
+.pl-close:hover{color:var(--text);background:rgba(255,255,255,.06)}
+@media(max-width:560px){.player iframe{width:128px;height:72px}.player-inner{padding:10px 12px;gap:11px}.pl-label{font-size:13.5px}}
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);
+  background:#2a2014;border:1px solid var(--line2);color:var(--amber-b);padding:11px 22px;
+  border-radius:999px;font-size:14px;font-weight:600;opacity:0;pointer-events:none;transition:.25s;
+  z-index:50;box-shadow:0 8px 30px rgba(0,0,0,.5)}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="kicker">Suno · Style Prompt Library</div>
+  <h1>曲風大百科</h1>
+  <p class="sub">點「複製」直接貼進 Suno 的 Style of Music 欄。搜尋框可打中英關鍵字（如 disco、爵士、80s、抒情、city pop）。<br><span style="font-size:13px;color:var(--faint)">▶ YouTube 聽＝跳到該曲風「公認經典代表作」的搜尋結果，點第一個就能聽真歌感受曲風。</span></p>
+</header>
+
+<div class="controls">
+  <input id="search" type="text" placeholder="🔍 搜尋曲風 / 樂器 / 情緒（中英都可）…" oninput="render()">
+  <div class="cats" id="cats"></div>
+  <div class="count" id="count"></div>
+</div>
+
+<div id="list"></div>
+
+<footer>made with ♥ · Suno 曲風大百科 · 複製即用</footer>
+</div>
+
+<div class="player" id="player">
+  <div class="player-inner">
+    <iframe id="pframe" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    <div class="player-meta">
+      <div class="pl-now">正在播放 · 曲風代表作</div>
+      <div class="pl-label" id="plabel"></div>
+      <a id="pyt" class="pl-yt" target="_blank">無法播放？在 YouTube 開啟 ↗</a>
+    </div>
+    <button class="pl-close" onclick="closePlayer()" title="關閉">✕</button>
+  </div>
+</div>
+
+<div class="toast" id="toast">已複製，去 Suno 貼上 ✓</div>
+
+<script>
+const DATA = [
+{cat:"流行 Pop", items:[
+ {zh:"主流流行", en:"Mainstream Pop", bpm:"100-120", desc:"電台主打、廣告感、人人能哼", p:"Modern mainstream pop, 110 BPM, bright confident female lead vocal, catchy hook, polished radio production, punchy drums, warm synth bass, layered backing vocals, shiny synths, big sing-along chorus, clean and commercial, uplifting and energetic."},
+ {zh:"電子流行", en:"Electropop", bpm:"110-128", desc:"合成器主導、現代、舞曲感", p:"Electropop, 120 BPM, sweet female vocal, sparkling synth arpeggios, punchy electronic drums, deep synth bass, vocal chops, glossy modern production, danceable and catchy, energetic and youthful, bright euphoric chorus."},
+ {zh:"夢幻流行", en:"Dream Pop", bpm:"90-110", desc:"飄渺、空間混響、唯美", p:"Dream pop, 100 BPM, ethereal breathy female vocal drenched in reverb, shimmering guitars, lush synth pads, soft steady drums, hazy atmospheric production, nostalgic and dreamy, spacious and emotional, gentle and floating."},
+ {zh:"臥室流行", en:"Bedroom Pop", bpm:"80-100", desc:"DIY 質感、親密、慵懶", p:"Bedroom pop, 90 BPM, soft intimate young vocal, lo-fi warmth, mellow electric guitar, simple drum machine, warm bass, subtle tape noise, cozy DIY aesthetic, honest and tender, laid-back and personal."},
+ {zh:"合成器流行", en:"Synth Pop", bpm:"110-128", desc:"80 年代合成器、復古未來", p:"Synth pop, 118 BPM, catchy male/female vocal, retro analog synthesizers, gated reverb drums, driving synth bassline, bright lead synths, 80s-inspired but modern, nostalgic and danceable, euphoric chorus."},
+]},
+{cat:"亞洲流行 Asian Pop", items:[
+ {zh:"日系都會 City Pop", en:"Japanese City Pop", bpm:"90-110", desc:"昭和都會、放克吉他、懷舊", p:"Warm Japanese city pop, 96 BPM, sweet smooth female vocal, Rhodes electric piano, clean funky guitar, warm groovy bass, light percussion, airy synth pads, nostalgic golden mood, sophisticated and breezy, no EDM."},
+ {zh:"J-Pop", en:"J-Pop", bpm:"120-150", desc:"明亮、動感、動漫主題曲感", p:"Bright energetic J-pop, 140 BPM, sweet powerful female vocal, fast catchy melody, punchy band with electric guitar and synths, driving drums, anthemic emotional chorus, polished anime-opening energy, uplifting and dramatic."},
+ {zh:"K-Pop", en:"K-Pop", bpm:"100-130", desc:"偶像團體、層次編曲、強 hook", p:"Modern K-pop, 118 BPM, mixed group vocals with rap and sung verses, slick trap-influenced beat, heavy 808 bass, sharp synth stabs, dynamic section changes, addictive hook, glossy idol-pop production, confident and trendy."},
+ {zh:"華語流行", en:"Mandopop", bpm:"70-110", desc:"華語金曲、情感、KTV 必點", p:"Mandarin pop ballad, 80 BPM, warm sincere female vocal, piano and lush strings, soft acoustic guitar, gentle building drums, emotional heartfelt chorus, cinematic and nostalgic, karaoke-worthy, organic production."},
+ {zh:"中國風 / 古風", en:"Chinese Style / Guofeng", bpm:"70-95", desc:"古箏笛簫、東方五聲、武俠感", p:"Chinese guofeng style, 85 BPM, delicate female vocal, guzheng, bamboo flute (dizi), erhu, pipa, subtle modern beat under traditional instruments, pentatonic melody, poetic and elegant, ancient-meets-modern, cinematic wuxia mood."},
+ {zh:"粵語流行", en:"Cantopop", bpm:"70-100", desc:"港式情歌、都會、深情", p:"Cantonese pop ballad, 85 BPM, emotive smooth vocal, rich piano, warm strings, tasteful electric guitar, steady gentle drums, sophisticated Hong Kong pop production, romantic and heartfelt, polished and mature."},
+ {zh:"台語歌", en:"Taiwanese Hokkien", bpm:"80-120", desc:"在地、親切、長輩共鳴", p:"Warm pop sung entirely in Taiwanese Hokkien (Taigi), 100 BPM, sincere vocal singing in Taiwanese Hokkien language NOT Mandarin, warm band with keys and guitar, melodic and heartfelt, local nostalgic flavor, family-friendly sing-along."},
+]},
+{cat:"抒情 Ballad", items:[
+ {zh:"抒情芭樂", en:"Power Ballad", bpm:"60-75", desc:"鋼琴起、弦樂炸、婚禮催淚", p:"Emotional power ballad, 68 BPM, warm sincere vocal, intimate piano intro, lush cinematic strings building through the song, soft guitar, drums entering at chorus, big emotional climax with layered harmonies, wedding-worthy tearjerker, heartfelt."},
+ {zh:"鋼琴抒情", en:"Piano Ballad", bpm:"60-72", desc:"極簡鋼琴+人聲、純粹", p:"Stripped piano ballad, 66 BPM, tender expressive vocal, solo grand piano, minimal arrangement, occasional soft strings, lots of space and emotion, intimate and raw, cinematic and vulnerable, no drums or very subtle."},
+ {zh:"R&B 抒情", en:"R&B Ballad", bpm:"60-80", desc:"靈魂轉音、深情、慢板", p:"Slow R&B ballad, 70 BPM, smooth soulful vocal with melismatic runs, warm electric piano, deep mellow bass, soft hip-hop drums, lush pads, intimate late-night mood, sensual and emotional, modern neo-soul production."},
+]},
+{cat:"嘻哈 R&B Hip-hop / R&B", items:[
+ {zh:"嘻哈 / 饒舌", en:"Hip-hop / Rap", bpm:"80-100", desc:"節奏感、態度、口白流", p:"Modern hip-hop, 90 BPM, confident rap flow, hard-hitting boom-bap or trap drums, deep bass, atmospheric sample-based melody, head-nodding groove, urban and bold, clean punchy production."},
+ {zh:"Trap", en:"Trap", bpm:"130-150 (half 65-75)", desc:"808 重低音、hi-hat 滾奏", p:"Trap, 140 BPM, melodic rap and sung hooks, booming 808 bass, rapid hi-hat rolls, dark atmospheric synths, snappy snares, moody and modern, hard-hitting urban production, autotuned melodic vocals."},
+ {zh:"Lo-fi 嘻哈", en:"Lo-fi Hip-hop", bpm:"70-90", desc:"讀書放鬆、爵士取樣、雜訊", p:"Lo-fi hip-hop, 82 BPM, mostly instrumental or soft mellow vocal, jazzy electric piano chords, dusty boom-bap drums, warm vinyl crackle, mellow bass, relaxing study-beats mood, nostalgic and cozy, no aggressive elements."},
+ {zh:"R&B / 新靈魂", en:"R&B / Neo-Soul", bpm:"70-95", desc:"絲滑、和聲層、都會夜感", p:"Smooth neo-soul R&B, 84 BPM, silky expressive vocal with rich harmonies, warm Rhodes piano, groovy bass, crisp laid-back drums, jazzy chords, late-night urban mood, sophisticated and sensual, organic and warm."},
+ {zh:"Chill R&B", en:"Chill R&B", bpm:"75-90", desc:"慵懶、抖音感、現代", p:"Modern chill R&B with subtle trap influence, 78 BPM, smooth young vocal with melodic flow, mellow electric piano, deep 808 bass, crisp hi-hats, atmospheric pads, vocal chops, cool laid-back mood, short-form video friendly, warm and melodic."},
+ {zh:"Drill", en:"Drill", bpm:"140-145", desc:"暗黑滑音貝斯、英式/紐約", p:"Drill, 142 BPM, aggressive confident rap flow, sliding 808 bass, dark eerie piano or bell melody, syncopated hi-hats, hard snappy drums, menacing and modern, gritty urban production."},
+]},
+{cat:"電子 Electronic", items:[
+ {zh:"House", en:"House", bpm:"120-128", desc:"四四拍、舞池基本款", p:"Classic house, 124 BPM, soulful vocal or instrumental, four-on-the-floor kick, groovy bassline, warm chord stabs, hi-hats and claps, uplifting piano riffs, danceable and feel-good, club-ready production."},
+ {zh:"Deep House", en:"Deep House", bpm:"118-124", desc:"深沉、慵懶、氛圍舞曲", p:"Deep house, 122 BPM, smooth atmospheric vocal, deep rolling bassline, warm mellow chords, soft four-on-the-floor groove, subtle pads, hypnotic and laid-back, sophisticated late-night club mood, smooth production."},
+ {zh:"Future House", en:"Future House", bpm:"122-128", desc:"金屬感 drop、現代舞曲", p:"Future house, 125 BPM, energetic vocal with catchy topline, pluck synth lead, punchy four-on-the-floor kick, deep rolling bass, bright risers, vocal chops, big euphoric drop, glossy modern festival sound, confident and fun."},
+ {zh:"Techno", en:"Techno", bpm:"125-135", desc:"工業、催眠、地下", p:"Techno, 130 BPM, mostly instrumental, driving relentless kick, hypnotic synth arpeggios, dark atmospheric pads, industrial textures, sparse vocal samples, raw underground club energy, hypnotic and intense."},
+ {zh:"Trance", en:"Trance", bpm:"132-140", desc:"史詩 build、情緒高昂", p:"Uplifting trance, 138 BPM, ethereal female vocal, soaring supersaw leads, driving bassline, epic build-ups and breakdowns, lush emotional pads, euphoric climactic drop, anthemic and uplifting, festival main-stage energy."},
+ {zh:"Drum & Bass", en:"Drum & Bass", bpm:"170-175", desc:"高速碎拍、低音轟鳴", p:"Drum and bass, 174 BPM, energetic vocal or instrumental, fast breakbeat drums, deep heavy sub bass, atmospheric pads, rolling momentum, energetic and futuristic, clean powerful production."},
+ {zh:"Dubstep", en:"Dubstep", bpm:"140 (half 70)", desc:"暴力 wobble、爆裂 drop", p:"Dubstep, 140 BPM, aggressive vocal chops, massive wobble bass, half-time drums, screeching synth growls, huge tension build into a heavy drop, dark and powerful, modern bass-music production."},
+ {zh:"Synthwave / 復古電子", en:"Synthwave / Retrowave", bpm:"80-118", desc:"80s 賽博、霓虹夜駕", p:"Synthwave, 100 BPM, dreamy vocal or instrumental, retro analog synths, gated reverb drums, pulsing arpeggiated bass, neon nostalgic 80s mood, cinematic night-drive atmosphere, lush and moody."},
+ {zh:"環境 Ambient", en:"Ambient", bpm:"free / 60-80", desc:"無節拍、冥想、空間", p:"Ambient, very slow and beatless, ethereal evolving synth pads, soft drones, gentle field-recording textures, deep reverb, meditative and spacious, calming and atmospheric, no drums, cinematic and weightless."},
+ {zh:"Chillout / 慢板電子", en:"Chillout / Downtempo", bpm:"85-105", desc:"度假吧、慵懶電子", p:"Downtempo chillout, 95 BPM, soft smooth vocal, mellow electronic beat, warm bass, lush atmospheric synths, organic percussion, sunset beach-bar mood, relaxing and sophisticated, smooth lounge production."},
+]},
+{cat:"搖滾 Rock", items:[
+ {zh:"流行搖滾", en:"Pop Rock", bpm:"110-140", desc:"吉他驅動、明亮、好上口", p:"Pop rock, 128 BPM, energetic vocal, bright electric guitars, driving bass, punchy live drums, big catchy anthemic chorus, polished but raw, uplifting and confident, radio-friendly rock production."},
+ {zh:"獨立搖滾", en:"Indie Rock", bpm:"110-140", desc:"文青、jangly 吉他、真誠", p:"Indie rock, 124 BPM, earnest emotive vocal, jangly reverby guitars, melodic bass, organic drums, slightly lo-fi authentic production, nostalgic and heartfelt, anthemic but understated, festival indie energy."},
+ {zh:"另類搖滾", en:"Alternative Rock", bpm:"100-135", desc:"90s 質感、情緒張力", p:"Alternative rock, 120 BPM, expressive vocal, distorted dynamic guitars going soft-to-loud, driving bass, powerful drums, emotional intensity, 90s-inspired but modern, raw and cathartic."},
+ {zh:"龐克 / 流行龐克", en:"Punk / Pop-Punk", bpm:"150-190", desc:"快速、青春、嘶吼", p:"Pop-punk, 170 BPM, youthful energetic vocal with attitude, fast power-chord guitars, driving punchy bass, fast aggressive drums, gang vocals in chorus, rebellious and catchy, energetic early-2000s vibe."},
+ {zh:"硬搖滾", en:"Hard Rock", bpm:"110-140", desc:"riff 重、力量、舞台感", p:"Hard rock, 130 BPM, powerful gritty vocal, heavy distorted guitar riffs, thick bass, hard-hitting drums, screaming guitar solo, big arena energy, raw and powerful, classic-meets-modern rock production."},
+ {zh:"Emo / 情緒搖滾", en:"Emo", bpm:"120-150", desc:"脆弱→爆發、青春痛感", p:"Emo rock, 135 BPM, vulnerable vocal building to raspy emotional explosion, clean-to-distorted guitars, melodic bass, dynamic drums, confessional intense lyrics mood, cathartic and heartfelt, modern emo production."},
+ {zh:"瞪鞋 Shoegaze", en:"Shoegaze", bpm:"95-130", desc:"牆式破音、朦朧人聲", p:"Shoegaze, 115 BPM, hazy buried vocal, walls of distorted reverb-drenched guitars, dreamy noise textures, steady drums, melodic bass, immersive wall-of-sound, nostalgic and overwhelming, ethereal and heavy."},
+]},
+{cat:"爵士 靈魂 放克 Jazz / Soul / Funk", items:[
+ {zh:"爵士", en:"Jazz", bpm:"90-140", desc:"即興、煙燻嗓、小酒館", p:"Smooth jazz, 110 BPM, warm sultry vocal, swinging upright bass, brushed drums, tasteful piano comping, muted trumpet or saxophone solos, intimate jazz-club mood, sophisticated and timeless, organic acoustic production."},
+ {zh:"Bossa Nova", en:"Bossa Nova", bpm:"85-100", desc:"巴西慵懶、尼龍弦吉他", p:"Relaxed bossa nova, 92 BPM, smooth breathy vocal, nylon-string guitar, soft brushed drums, warm upright bass, subtle vibraphone, gentle saxophone, poolside cocktail mood, sophisticated and warm, sunny lazy elegance."},
+ {zh:"搖擺 Swing", en:"Swing / Big Band", bpm:"120-180", desc:"大樂團、復古爵士、活潑", p:"Swing big band, 160 BPM, charismatic vocal, full brass section, walking upright bass, swinging drums, piano, lively horn riffs, vintage 1940s ballroom energy, upbeat and joyful, classic jazz production."},
+ {zh:"藍調 Blues", en:"Blues", bpm:"60-110", desc:"吉他哭腔、滄桑、靈魂", p:"Blues, 80 BPM, soulful gritty vocal, expressive electric guitar with bends, walking bass, shuffling drums, Hammond organ, raw emotional delivery, smoky bar mood, authentic and heartfelt."},
+ {zh:"靈魂樂 Soul", en:"Soul", bpm:"70-110", desc:"Motown、銅管、教堂和聲", p:"Classic soul, 95 BPM, powerful emotive vocal, warm bass, tight drums, punchy horn section, Hammond organ, gospel-influenced backing vocals, Motown-era warmth, heartfelt and uplifting, vintage analog production."},
+ {zh:"放克 Funk", en:"Funk", bpm:"100-120", desc:"slap bass、節奏緊、超 groovy", p:"Funk, 112 BPM, charismatic vocal with call-and-response, slap bass groove, wah-wah rhythm guitar, tight punchy drums, brass stabs, clavinet, irresistibly groovy and danceable, energetic 70s funk flavor."},
+ {zh:"迪斯可 Disco", en:"Disco", bpm:"110-125", desc:"舞池、弦樂掃弦、閃亮", p:"Retro disco, 120 BPM, joyful vocal with group backing, four-on-the-floor kick, slap bass, string stabs, wah funk guitar, brass section, shimmering synths, glittering dance-floor energy, feel-good and uplifting."},
+]},
+{cat:"民謠 原聲 Folk / Acoustic", items:[
+ {zh:"原聲民謠", en:"Acoustic Folk", bpm:"75-110", desc:"木吉他、純粹、療癒", p:"Acoustic folk, 95 BPM, warm sincere vocal, fingerpicked acoustic guitar, soft harmonies, subtle upright bass, gentle brushed percussion, occasional strings, intimate and heartfelt, organic and warm, campfire storytelling mood."},
+ {zh:"獨立民謠", en:"Indie Folk", bpm:"80-120", desc:"層次和聲、空間、文青", p:"Indie folk, 105 BPM, earnest layered vocals with rich harmonies, acoustic guitar, banjo or mandolin, warm bass, organic drums, building dynamic arrangement, nostalgic and emotional, cinematic and uplifting, Mumford-style energy."},
+ {zh:"鄉村 Country", en:"Country", bpm:"90-130", desc:"美式、滑音吉他、敘事", p:"Modern country, 110 BPM, warm storytelling vocal with twang, acoustic and electric guitars, pedal steel, fiddle, steady drums, walking bass, heartfelt and down-to-earth, polished Nashville production, singalong chorus."},
+ {zh:"創作歌手", en:"Singer-Songwriter", bpm:"70-110", desc:"一人一吉他、私密敘事", p:"Singer-songwriter, 88 BPM, intimate honest vocal, fingerpicked acoustic guitar or soft piano, minimal tasteful arrangement, subtle strings, confessional and personal, raw and emotional, warm organic production, lots of space."},
+ {zh:"搖籃曲", en:"Lullaby", bpm:"60-75", desc:"哄睡、音樂盒、極輕柔", p:"Gentle lullaby, 66 BPM, soft tender humming or wordless vocal, music box, soft piano, warm pads, delicate glockenspiel, extremely soothing and peaceful, sleepy and dreamy, minimal and calming, no percussion."},
+]},
+{cat:"影視 古典 Cinematic / Classical", items:[
+ {zh:"史詩管弦", en:"Epic Orchestral", bpm:"varies", desc:"電影預告、磅礡、英雄感", p:"Epic cinematic orchestral, dramatic dynamics, full symphony orchestra, powerful brass, sweeping strings, thunderous timpani and percussion, choir, huge emotional climax, heroic and grand, film-trailer intensity, Hans Zimmer style."},
+ {zh:"電影配樂", en:"Film Score", bpm:"free", desc:"敘事氛圍、細膩情緒鋪陳", p:"Emotional film score, instrumental, delicate piano motif, warm evolving strings, subtle woodwinds, soft ambient textures, slow cinematic build, introspective and moving, atmospheric and tender, narrative underscore mood."},
+ {zh:"古典鋼琴", en:"Classical Piano", bpm:"free", desc:"獨奏鋼琴、優雅、靜謐", p:"Solo classical piano, expressive and dynamic, romantic-era style, flowing melodic lines, rich harmonies, intimate and emotional, recorded close and warm, reflective and elegant, no other instruments."},
+ {zh:"預告片音樂", en:"Trailer Music", bpm:"varies", desc:"張力堆疊、爆點、宣傳片", p:"Cinematic trailer music, instrumental, tense rising strings, deep braams, pounding hybrid percussion, ticking tension elements, massive impactful hits, epic build to a powerful climax, dramatic and modern hybrid-orchestral."},
+]},
+{cat:"世界 與 節慶 World / Seasonal", items:[
+ {zh:"拉丁流行", en:"Latin Pop", bpm:"90-110", desc:"熱情、律動、陽光", p:"Latin pop, 100 BPM, passionate vocal, nylon guitar, vibrant Latin percussion (congas, bongos), warm bass, brass accents, infectious danceable rhythm, sunny and romantic, festive and energetic production."},
+ {zh:"雷鬼動 Reggaeton", en:"Reggaeton", bpm:"90-100", desc:"dembow 節奏、派對、潮", p:"Reggaeton, 95 BPM, confident catchy vocal, signature dembow rhythm, deep booming bass, syncopated percussion, modern synths, sensual party energy, danceable and addictive, glossy urban-latin production."},
+ {zh:"雷鬼 Reggae", en:"Reggae", bpm:"60-90", desc:"放鬆、offbeat、島嶼", p:"Reggae, 75 BPM, laid-back warm vocal, offbeat guitar skank, deep dub bass, relaxed drums with rimshots, organ bubble, sunny island mood, chilled and positive, organic warm production."},
+ {zh:"非洲節拍 Afrobeat", en:"Afrobeats", bpm:"100-115", desc:"當代非洲、律動、全球流行", p:"Afrobeats, 108 BPM, smooth melodic vocal, infectious syncopated percussion, warm bass, bright guitar licks, log drum, sunny danceable groove, modern Afro-pop production, feel-good and rhythmic."},
+ {zh:"福音 Gospel", en:"Gospel", bpm:"70-130", desc:"教堂、合唱、激昂", p:"Gospel, 100 BPM, powerful soulful lead vocal, full choir with rich harmonies, Hammond organ, piano, warm bass, dynamic drums, hand-claps, uplifting spiritual energy, building to a joyful climax, heartfelt and rousing."},
+ {zh:"耶誕節慶", en:"Christmas / Holiday", bpm:"90-130", desc:"溫馨、雪鈴、歡樂節日", p:"Festive Christmas song, 115 BPM, warm cheerful vocal, sleigh bells, jingle bells, warm piano, brushed drums, rich strings, cozy holiday harmonies, nostalgic and joyful, classic Christmas-album warmth."},
+]},
+];
+
+const cats = ['全部', ...DATA.map(d=>d.cat)];
+let activeCat = '全部';
+const catsEl = document.getElementById('cats');
+cats.forEach(c=>{
+  const b=document.createElement('div'); b.className='cat-chip'+(c==='全部'?' active':'');
+  b.textContent=c.split(' ')[0]; b.title=c;
+  b.onclick=()=>{activeCat=c;document.querySelectorAll('.cat-chip').forEach(x=>x.classList.remove('active'));b.classList.add('active');render();};
+  catsEl.appendChild(b);
+});
+
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+function render(){
+  const q=document.getElementById('search').value.trim().toLowerCase();
+  const list=document.getElementById('list'); list.innerHTML='';
+  let n=0;
+  DATA.forEach(group=>{
+    if(activeCat!=='全部' && group.cat!==activeCat) return;
+    const matched=group.items.filter(it=>{
+      if(!q) return true;
+      return (it.zh+' '+it.en+' '+it.desc+' '+it.p).toLowerCase().includes(q);
+    });
+    if(!matched.length) return;
+    const head=document.createElement('div'); head.className='cat-head'; head.textContent=group.cat; list.appendChild(head);
+    const grid=document.createElement('div'); grid.className='grid';
+    matched.forEach(it=>{
+      n++;
+      const card=document.createElement('div'); card.className='style-card';
+      const rep=REP[it.en]||'';
+      card.innerHTML=
+        '<div class="sc-top"><div><div class="sc-name">'+esc(it.zh)+'</div>'+
+        '<div class="sc-en">'+esc(it.en)+'</div></div>'+
+        '<div class="sc-bpm">'+esc(it.bpm)+' BPM</div></div>'+
+        '<div class="sc-desc">'+esc(it.desc)+'</div>'+
+        (rep?'<div class="sc-rep">🎧 代表：<b>'+esc(rep)+'</b></div>':'')+
+        '<div class="sc-prompt">'+esc(it.p)+'</div>'+
+        '<div class="btn-row"><button class="play-btn">▶ YouTube 聽</button><button class="copy-btn">複製曲風</button></div>';
+      const cb=card.querySelector('.copy-btn'); cb.onclick=()=>copy(it.p,cb);
+      const pb=card.querySelector('.play-btn'); pb.onclick=()=>play(it.en,it.zh,rep);
+      grid.appendChild(card);
+    });
+    list.appendChild(grid);
+  });
+  if(!n) list.innerHTML='<div class="empty">找不到符合的曲風，換個關鍵字試試～</div>';
+  document.getElementById('count').textContent='共 '+countAll()+' 種曲風'+(q||activeCat!=='全部'?'，目前顯示 '+n+' 種':'');
+}
+function countAll(){return DATA.reduce((s,g)=>s+g.items.length,0);}
+function copy(txt,btn){
+  navigator.clipboard.writeText(txt).then(()=>{
+    const old=btn.textContent; btn.textContent='已複製 ✓'; btn.classList.add('done');
+    const t=document.getElementById('toast'); t.classList.add('show');
+    setTimeout(()=>{btn.textContent=old;btn.classList.remove('done');},1600);
+    setTimeout(()=>t.classList.remove('show'),1600);
+  }).catch(()=>{btn.textContent='複製失敗';});
+}
+
+/* ---------- 試聽：跳 YouTube 聽該曲風代表作 ---------- */
+const REP = {
+ "Mainstream Pop":"Taylor Swift - Shake It Off",
+ "Electropop":"Dua Lipa - Don't Start Now",
+ "Dream Pop":"Beach House - Space Song",
+ "Bedroom Pop":"Soccer Mommy - up the walls",
+ "Synth Pop":"The Weeknd - Blinding Lights",
+ "Japanese City Pop":"竹内まりや Mariya Takeuchi - Plastic Love",
+ "J-Pop":"YOASOBI - アイドル (Idol)",
+ "K-Pop":"BTS - Dynamite",
+ "Mandopop":"周杰倫 Jay Chou - 晴天",
+ "Chinese Style / Guofeng":"周杰倫 Jay Chou - 青花瓷",
+ "Cantopop":"陳奕迅 Eason Chan - 富士山下",
+ "Taiwanese Hokkien":"茄子蛋 EggPlantEgg - 浪流連",
+ "Power Ballad":"Celine Dion - My Heart Will Go On",
+ "Piano Ballad":"Adele - Someone Like You",
+ "R&B Ballad":"Boyz II Men - End of the Road",
+ "Hip-hop / Rap":"Eminem - Lose Yourself",
+ "Trap":"Travis Scott - SICKO MODE",
+ "Lo-fi Hip-hop":"Lofi Girl - lofi hip hop mix (Part 1)",
+ "R&B / Neo-Soul":"D'Angelo - Brown Sugar",
+ "Chill R&B":"SZA - The Weekend",
+ "Drill":"Pop Smoke - Dior",
+ "House":"Daft Punk - One More Time",
+ "Deep House":"Disclosure - Latch",
+ "Future House":"Oliver Heldens - Gecko",
+ "Techno":"Charlotte de Witte techno set",
+ "Trance":"Armin van Buuren - In and Out of Love",
+ "Drum & Bass":"Pendulum - Watercolour",
+ "Dubstep":"Skrillex - Scary Monsters and Nice Sprites",
+ "Synthwave / Retrowave":"Kavinsky - Nightcall",
+ "Ambient":"Brian Eno - An Ending Ascent",
+ "Chillout / Downtempo":"Bonobo - Kong",
+ "Pop Rock":"Coldplay - Viva la Vida",
+ "Indie Rock":"Arctic Monkeys - Do I Wanna Know",
+ "Alternative Rock":"Radiohead - Creep",
+ "Punk / Pop-Punk":"Green Day - American Idiot",
+ "Hard Rock":"AC/DC - Back in Black",
+ "Emo":"My Chemical Romance - Welcome to the Black Parade",
+ "Shoegaze":"Slowdive - Sugar for the Pill",
+ "Jazz":"Miles Davis - So What",
+ "Bossa Nova":"Stan Getz Joao Gilberto - The Girl from Ipanema",
+ "Swing / Big Band":"Glenn Miller - In the Mood",
+ "Blues":"B.B. King - The Thrill Is Gone",
+ "Soul":"Aretha Franklin - Respect",
+ "Funk":"James Brown - Get Up I Feel Like Being a Sex Machine",
+ "Disco":"Bee Gees - Stayin' Alive",
+ "Acoustic Folk":"Bob Dylan - Blowin' in the Wind",
+ "Indie Folk":"Mumford & Sons - Little Lion Man",
+ "Country":"Johnny Cash - Ring of Fire",
+ "Singer-Songwriter":"Ed Sheeran - The A Team",
+ "Lullaby":"Brahms Lullaby",
+ "Epic Orchestral":"Hans Zimmer - Time (Inception)",
+ "Film Score":"Ludovico Einaudi - Nuvole Bianche",
+ "Classical Piano":"Beethoven - Moonlight Sonata",
+ "Trailer Music":"Two Steps From Hell - Victory",
+ "Latin Pop":"Shakira - Hips Don't Lie",
+ "Reggaeton":"Daddy Yankee - Gasolina",
+ "Reggae":"Bob Marley - Three Little Birds",
+ "Afrobeats":"Burna Boy - Last Last",
+ "Gospel":"Kirk Franklin - Stomp",
+ "Christmas / Holiday":"Mariah Carey - All I Want for Christmas Is You",
+};
+const VIDEO = {
+ "Mainstream Pop":"nfWlot6h_JM","Electropop":"Q6HY7SGz9qs","Dream Pop":"RBtlPT23PTM","Bedroom Pop":"zmSLmpzE6dk","Synth Pop":"4NRXx6U8ABQ",
+ "Japanese City Pop":"T_lC2O1oIew","J-Pop":"P_2xL5CJDIs","K-Pop":"gdZLi9oWNZg","Mandopop":"DYptgVvkVLQ","Chinese Style / Guofeng":"Z8Mqw0b9ADs","Cantopop":"ghnT1uOwfrY","Taiwanese Hokkien":"3Y0Ut5ozaKs",
+ "Power Ballad":"CUmOFqQRkco","Piano Ballad":"hLQl3WQQoQ0","R&B Ballad":"zDKO6XYXioc",
+ "Hip-hop / Rap":"7YuAzR2XVAM","Trap":"6ONRf7h3Mdk","Lo-fi Hip-hop":"CFGLoQIhmow","R&B / Neo-Soul":"H_WzjiTzZBA","Chill R&B":"cMD63TwzB1o","Drill":"oorVWW9ywG0",
+ "House":"FGBhQbmPwH8","Deep House":"cjRO1phXsg8","Future House":"kcZMCMI24gs","Techno":"0YVvcTIGy40","Trance":"TxvpctgU_s8","Drum & Bass":"tEPB7uzKuh4","Dubstep":"WSeNSzJ2-Jw","Synthwave / Retrowave":"ZVS6Q_lbKQ0","Ambient":"OlaTeXX3uH8","Chillout / Downtempo":"KMKeBpySf78",
+ "Pop Rock":"dvgZkm1xWPE","Indie Rock":"bpOSxM0rNPM","Alternative Rock":"4jRqVa9TgMM","Punk / Pop-Punk":"Ee_uujKuJMI","Hard Rock":"pAgnJDJN4VA","Emo":"RRKJiM9Njr8","Shoegaze":"BxwAPBxc0lU",
+ "Jazz":"ylXk1LBvIqU","Bossa Nova":"v5DZ5clg-bg","Swing / Big Band":"_CI-0E_jses","Blues":"oica5jG7FpU","Soul":"JzqGZjFnYnA","Funk":"rawBFEYqY1k","Disco":"I_izvAbhExY",
+ "Acoustic Folk":"KJBbX0jzM2c","Indie Folk":"X7bHe--mp1g","Country":"5WyLhwYFgmk","Singer-Songwriter":"UAWcs5H-qgQ","Lullaby":"t894eGoymio",
+ "Epic Orchestral":"c56t7upa8Bk","Film Score":"CQ8zglIXZi8","Classical Piano":"4Tr0otuiQuU","Trailer Music":"hKRUPYrAQoE",
+ "Latin Pop":"DUT5rEU6pqM","Reggaeton":"CCF1_jI8Prk","Reggae":"HNBCVM4KbUM","Afrobeats":"421w1j87fEM","Gospel":"woxU-wfQFWw","Christmas / Holiday":"yXQViqx6GMY"
+};
+function openYT(q){window.open('https://www.youtube.com/results?search_query='+encodeURIComponent(q),'_blank');}
+function play(key,zh,rep){
+  const id=VIDEO[key];
+  if(!id){openYT(rep||key);return;}
+  document.getElementById('pframe').src='https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0';
+  document.getElementById('plabel').textContent=zh+(rep?'　·　'+rep:'');
+  document.getElementById('pyt').href='https://www.youtube.com/watch?v='+id;
+  document.getElementById('player').classList.add('show');
+}
+function closePlayer(){document.getElementById('pframe').src='';document.getElementById('player').classList.remove('show');}
+
+render();
+</script>
+</body>
+</html>
