@@ -3,202 +3,166 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>後院四季景觀樹花圃規劃</title>
+<title>詠夏 Villa 後院四季景觀樹花圃規劃｜海洋漸層版</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg: #1a1715;
-  --bg2: #242019;
-  --bg3: #2e2a24;
-  --paper: #f5f0e8;
-  --warm: #c8a96e;
-  --warm2: #e8c88a;
-  --warm-dim: #8a7a5e;
-  --text: #e8e0d0;
-  --text2: #b8a890;
-  --text3: #887a68;
-  --accent: #d4845a;
-  --green: #7aaa6a;
-  --red: #c85a4a;
-  --border: #3a3530;
+:root{
+  --ink:#dff1ee; --ink2:#a9cfca; --ink3:#7fa39e;
+  --aqua:#5fcabf; --aqua-bright:#7fe6d8; --aqua-dim:#3f8b83;
+  --coral:#ff9e7a;
+  --glass:rgba(4,28,44,.55);
+  --glass-line:rgba(127,216,207,.18);
+  --panel:rgba(2,18,30,.66);
 }
-*{ box-sizing:border-box; margin:0; padding:0; }
-html { scroll-behavior:smooth; }
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'Noto Sans TC', system-ui, sans-serif;
-  font-weight: 300;
-  line-height: 1.8;
-  padding: 0;
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  color:var(--ink);
+  font-family:'Noto Sans TC',system-ui,sans-serif;
+  font-weight:300;line-height:1.85;
+  position:relative;min-height:100vh;
 }
-.wrap {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 3rem 2.5rem 5rem;
+/* 深海漸層底 */
+body::before{
+  content:'';position:fixed;inset:0;z-index:-3;
+  background:linear-gradient(180deg,#021a2c 0%,#053349 38%,#0a5560 72%,#11796d 100%);
 }
-h1 {
-  font-family: 'Noto Serif TC', serif;
-  font-weight: 700;
-  font-size: 2rem;
-  color: var(--warm2);
-  letter-spacing: 0.08em;
-  margin-bottom: 0.5rem;
-  padding-bottom: 1rem;
-  border-bottom: 2px solid var(--warm-dim);
+/* 海面透下的光束 */
+.ocean-rays{
+  position:fixed;inset:0;z-index:-2;pointer-events:none;overflow:hidden;
+  background:
+    linear-gradient(102deg,transparent 0 14%,rgba(170,238,232,.09) 16% 18%,transparent 20% 100%),
+    linear-gradient(96deg,transparent 0 40%,rgba(150,230,225,.07) 43% 45%,transparent 48% 100%),
+    linear-gradient(110deg,transparent 0 64%,rgba(180,240,235,.08) 67% 70%,transparent 73% 100%),
+    radial-gradient(120% 60% at 50% -10%,rgba(190,245,240,.18),transparent 60%);
 }
-h2 {
-  font-family: 'Noto Serif TC', serif;
-  font-weight: 700;
-  font-size: 1.35rem;
-  color: var(--warm);
-  margin: 3rem 0 1rem;
-  padding: 0.6rem 0;
-  border-bottom: 1px solid var(--border);
-  letter-spacing: 0.06em;
+/* 上浮氣泡 */
+.ocean-bubbles{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.ocean-bubbles span{
+  position:absolute;bottom:-40px;border-radius:50%;
+  background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.5),rgba(180,240,235,.12) 60%,transparent 72%);
+  border:1px solid rgba(200,248,243,.18);
+  animation:rise linear infinite;
 }
-h3 {
-  font-family: 'Noto Sans TC', sans-serif;
-  font-weight: 500;
-  font-size: 1.05rem;
-  color: var(--text);
-  margin: 1.8rem 0 0.6rem;
+.ocean-bubbles span:nth-child(1){left:6%;width:10px;height:10px;animation-duration:19s;animation-delay:-2s}
+.ocean-bubbles span:nth-child(2){left:14%;width:6px;height:6px;animation-duration:24s;animation-delay:-8s}
+.ocean-bubbles span:nth-child(3){left:22%;width:14px;height:14px;animation-duration:16s;animation-delay:-5s}
+.ocean-bubbles span:nth-child(4){left:31%;width:5px;height:5px;animation-duration:27s;animation-delay:-12s}
+.ocean-bubbles span:nth-child(5){left:39%;width:9px;height:9px;animation-duration:21s;animation-delay:-1s}
+.ocean-bubbles span:nth-child(6){left:47%;width:7px;height:7px;animation-duration:25s;animation-delay:-15s}
+.ocean-bubbles span:nth-child(7){left:55%;width:12px;height:12px;animation-duration:18s;animation-delay:-7s}
+.ocean-bubbles span:nth-child(8){left:62%;width:5px;height:5px;animation-duration:29s;animation-delay:-3s}
+.ocean-bubbles span:nth-child(9){left:70%;width:11px;height:11px;animation-duration:20s;animation-delay:-10s}
+.ocean-bubbles span:nth-child(10){left:78%;width:7px;height:7px;animation-duration:23s;animation-delay:-6s}
+.ocean-bubbles span:nth-child(11){left:85%;width:15px;height:15px;animation-duration:17s;animation-delay:-13s}
+.ocean-bubbles span:nth-child(12){left:91%;width:6px;height:6px;animation-duration:26s;animation-delay:-4s}
+.ocean-bubbles span:nth-child(13){left:96%;width:9px;height:9px;animation-duration:22s;animation-delay:-9s}
+.ocean-bubbles span:nth-child(14){left:2%;width:7px;height:7px;animation-duration:28s;animation-delay:-11s}
+@keyframes rise{
+  0%{transform:translateY(0) translateX(0);opacity:0}
+  10%{opacity:.8}
+  90%{opacity:.6}
+  100%{transform:translateY(-105vh) translateX(18px);opacity:0}
 }
-p { margin: 0.6rem 0; color: var(--text2); }
-strong { color: var(--text); font-weight: 500; }
-em { color: var(--text3); font-style: normal; }
-code {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.85em;
-  background: var(--bg3);
-  color: var(--warm2);
-  padding: 0.15em 0.4em;
-  border-radius: 3px;
+@media (prefers-reduced-motion:reduce){.ocean-bubbles span{animation:none;opacity:.25}}
+
+/* 內容玻璃柱 */
+.wrap{
+  max-width:920px;margin:3.2rem auto;padding:3rem 2.8rem 4.5rem;
+  background:var(--glass);
+  backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+  border:1px solid var(--glass-line);
+  border-radius:18px;
+  box-shadow:0 24px 70px rgba(0,8,16,.45),inset 0 1px 0 rgba(255,255,255,.05);
 }
-pre {
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 1.2rem 1.5rem;
-  overflow-x: auto;
-  margin: 1rem 0;
-  line-height: 1.5;
+h1{
+  font-family:'Noto Serif TC',serif;font-weight:700;font-size:2.05rem;
+  color:#eafffb;letter-spacing:.06em;margin-bottom:.6rem;padding-bottom:1rem;
+  border-bottom:2px solid;
+  border-image:linear-gradient(90deg,var(--aqua-bright),var(--aqua-dim),transparent) 1;
+  text-shadow:0 2px 18px rgba(95,202,191,.3);
 }
-pre code {
-  background: none;
-  padding: 0;
-  font-size: 0.82rem;
-  color: var(--text2);
+h2{
+  font-family:'Noto Serif TC',serif;font-weight:700;font-size:1.4rem;
+  color:var(--aqua-bright);margin:3rem 0 1rem;padding:.55rem 0 .55rem 1rem;
+  letter-spacing:.05em;position:relative;
+  border-bottom:1px solid var(--glass-line);
 }
-a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; }
-a:hover { border-bottom-color: var(--accent); }
-hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
-blockquote {
-  border-left: 3px solid var(--warm-dim);
-  padding: 0.6rem 1.2rem;
-  margin: 1rem 0;
-  color: var(--text3);
-  background: var(--bg2);
-  border-radius: 0 4px 4px 0;
-  font-size: 0.92rem;
+h2::before{
+  content:'';position:absolute;left:0;top:.7rem;bottom:.7rem;width:4px;border-radius:3px;
+  background:linear-gradient(180deg,var(--aqua-bright),var(--aqua-dim));
+  box-shadow:0 0 10px rgba(127,230,216,.6);
 }
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 1rem 0;
-  font-size: 0.9rem;
+h3{font-family:'Noto Sans TC',sans-serif;font-weight:500;font-size:1.08rem;color:#d3efea;margin:1.9rem 0 .6rem}
+p{margin:.6rem 0;color:var(--ink2)}
+strong{color:#eafffb;font-weight:500}
+em{color:var(--ink3);font-style:normal}
+a{color:var(--coral);text-decoration:none;border-bottom:1px solid transparent}
+a:hover{border-bottom-color:var(--coral)}
+hr{border:none;border-top:1px solid var(--glass-line);margin:2.6rem 0}
+code{font-family:'JetBrains Mono',monospace;font-size:.85em;background:rgba(2,18,30,.7);color:var(--aqua-bright);padding:.15em .4em;border-radius:3px}
+pre{background:var(--panel);border:1px solid var(--glass-line);border-radius:8px;padding:1.2rem 1.5rem;overflow-x:auto;margin:1rem 0;line-height:1.55}
+pre code{background:none;padding:0;font-size:.82rem;color:#bfe0db}
+blockquote{
+  border-left:3px solid var(--aqua);padding:.6rem 1.2rem;margin:1rem 0;
+  color:#bfe0db;background:rgba(127,216,207,.07);border-radius:0 6px 6px 0;font-size:.93rem;
 }
-thead { background: var(--bg3); }
-th {
-  text-align: left;
-  padding: 0.6rem 0.8rem;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: var(--warm);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  border-bottom: 2px solid var(--warm-dim);
+table{width:100%;border-collapse:collapse;margin:1.1rem 0;font-size:.9rem;
+  background:rgba(2,18,30,.34);border-radius:8px;overflow:hidden}
+thead{background:rgba(95,202,191,.14)}
+th{text-align:left;padding:.62rem .85rem;font-family:'JetBrains Mono',monospace;font-size:.76rem;
+  font-weight:700;color:var(--aqua-bright);letter-spacing:.07em;text-transform:uppercase;
+  border-bottom:2px solid var(--aqua-dim)}
+td{padding:.52rem .85rem;border-bottom:1px solid rgba(127,216,207,.12);color:var(--ink2);vertical-align:top}
+tr:hover td{background:rgba(127,216,207,.06)}
+td:first-child{color:#eafffb;font-weight:400}
+ul{padding-left:1.5rem;margin:.5rem 0}
+li{margin:.3rem 0;color:var(--ink2)}
+li::marker{color:var(--aqua)}
+ul.checklist{list-style:none;padding-left:.5rem}
+ul.checklist li{display:flex;align-items:baseline;gap:.5rem}
+ul.checklist input{accent-color:var(--aqua);transform:scale(1.1)}
+
+/* 目次（漂浮玻璃） */
+.toc{
+  position:fixed;top:2rem;right:2rem;width:222px;
+  background:rgba(3,26,40,.78);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  border:1px solid var(--glass-line);border-radius:10px;padding:1rem 1.2rem;font-size:.78rem;
+  max-height:calc(100vh - 4rem);overflow-y:auto;
+  box-shadow:0 14px 40px rgba(0,8,16,.4);
 }
-td {
-  padding: 0.5rem 0.8rem;
-  border-bottom: 1px solid var(--border);
-  color: var(--text2);
-}
-tr:hover td { background: var(--bg2); }
-td:first-child { color: var(--text); font-weight: 400; }
-ul { padding-left: 1.5rem; margin: 0.5rem 0; }
-li { margin: 0.3rem 0; color: var(--text2); }
-li::marker { color: var(--warm-dim); }
-ul.checklist { list-style: none; padding-left: 0.5rem; }
-ul.checklist li { display: flex; align-items: baseline; gap: 0.5rem; }
-ul.checklist input { accent-color: var(--green); transform: scale(1.1); }
-.toc {
-  position: fixed;
-  top: 2rem;
-  right: 2rem;
-  width: 220px;
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 1rem 1.2rem;
-  font-size: 0.78rem;
-  max-height: calc(100vh - 4rem);
-  overflow-y: auto;
-}
-.toc h3 {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.7rem;
-  color: var(--warm-dim);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  margin: 0 0 0.6rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid var(--border);
-}
-.toc a {
-  display: block;
-  padding: 0.25rem 0;
-  color: var(--text3);
-  font-size: 0.78rem;
-  line-height: 1.5;
-}
-.toc a:hover { color: var(--warm); }
-img.zoom {
-  max-width: 100%;
-  max-height: 320px;
-  border-radius: 6px;
-  border: 1px solid var(--border);
-  cursor: zoom-in;
-  display: block;
-  margin: 0.4rem auto;
-}
-td img.zoom { width: 100%; max-height: 240px; object-fit: cover; }
-#lightbox {
-  position: fixed; inset: 0;
-  background: rgba(10,8,6,.94);
-  display: none; align-items: center; justify-content: center;
-  z-index: 999; cursor: zoom-out; padding: 24px;
-}
-#lightbox img { max-width: 95vw; max-height: 92vh; border-radius: 8px; box-shadow: 0 12px 60px rgba(0,0,0,.7); }
-#lightbox .lbcap { position: fixed; bottom: 16px; left: 0; right: 0; text-align: center; color: #b8aa97; font-size: 13px; letter-spacing: 1px; }
-@media (max-width: 1200px) {
-  .toc { display: none; }
-}
-@media print {
-  body { background: #fff; color: #1a1a1a; }
-  .toc { display: none; }
-  h1 { color: #2a2010; }
-  h2 { color: #4a3a20; }
-  th { color: #4a3a20; }
-  td, p, li { color: #333; }
-  blockquote { background: #f5f0e8; }
-  pre { background: #f8f6f0; }
+.toc h3{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--aqua);letter-spacing:.2em;
+  text-transform:uppercase;margin:0 0 .6rem;padding-bottom:.5rem;border-bottom:1px solid var(--glass-line)}
+.toc a{display:block;padding:.25rem 0;color:var(--ink3);font-size:.78rem;line-height:1.5;border:none}
+.toc a:hover{color:var(--aqua-bright)}
+.toc::-webkit-scrollbar{width:6px}
+.toc::-webkit-scrollbar-thumb{background:var(--aqua-dim);border-radius:3px}
+
+img.zoom{max-width:100%;max-height:320px;border-radius:8px;border:1px solid var(--glass-line);
+  cursor:zoom-in;display:block;margin:.4rem auto;box-shadow:0 6px 20px rgba(0,8,16,.4)}
+td img.zoom{width:100%;max-height:240px;object-fit:cover}
+#lightbox{position:fixed;inset:0;background:rgba(1,12,20,.95);display:none;align-items:center;
+  justify-content:center;z-index:999;cursor:zoom-out;padding:24px}
+#lightbox img{max-width:95vw;max-height:92vh;border-radius:8px;box-shadow:0 12px 60px rgba(0,0,0,.7)}
+#lightbox .lbcap{position:fixed;bottom:16px;left:0;right:0;text-align:center;color:#9ec9c2;font-size:13px;letter-spacing:1px}
+
+@media (max-width:1200px){.toc{display:none}}
+@media (max-width:680px){.wrap{margin:1rem;padding:2rem 1.3rem 3rem}}
+@media print{
+  body::before,.ocean-rays,.ocean-bubbles{display:none}
+  body{background:#fff;color:#16302e}
+  .wrap{background:#fff;border:none;box-shadow:none;backdrop-filter:none}
+  .toc{display:none}
+  h1,h2{color:#0a5a52}h2::before{display:none}
+  h3{color:#1a3a36}th{color:#0a5a52}td,p,li{color:#2a3a38}
+  blockquote{background:#eef7f5}pre{background:#f3f8f7}
 }
 </style>
 </head>
 <body>
+<div class="ocean-rays" aria-hidden="true"></div><div class="ocean-bubbles" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
 <nav class="toc"><h3>目次</h3><a href="#s0">1. 30 秒摘要</a><a href="#s1">2. 基地與版面規劃</a><a href="#s2">3. 第四排・高大開花喬木（6m+）</a><a href="#s3">4. 第三排・中等高度開花樹（3–6m）</a><a href="#s4">5. 第二排・低矮樹/大型開花灌木（1.5–3m）</a><a href="#s5">6. 第一排・花圃草花/地被（<1m）</a><a href="#s6">7. 12 個月開花月曆總表</a><a href="#s7">8. 高度漸層總覽表（由高到矮）</a><a href="#s8">9. 宜蘭氣候對策（排水／颱風／東北季風／土壤改良）</a><a href="#s9">10. 種植時程與第一年養護月曆</a><a href="#s10">11. 預算級距概念（苗木規格）</a><a href="#s11">12. 與詠夏 Villa 體驗連動——花期行銷月曆</a><a href="#s12">13. 最終建議配置總結</a></nav>
 <div class="wrap">
 <h1>詠夏 Villa 後院四季景觀樹花圃規劃</h1>
