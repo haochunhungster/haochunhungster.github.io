@@ -3,167 +3,203 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>詠夏 Villa 後院四季景觀樹花圃規劃｜海洋漸層版</title>
+<title>後院四季景觀樹花圃規劃</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root{
-  --ink:#dff1ee; --ink2:#a9cfca; --ink3:#7fa39e;
-  --aqua:#5fcabf; --aqua-bright:#7fe6d8; --aqua-dim:#3f8b83;
-  --coral:#ff9e7a;
-  --glass:rgba(4,28,44,.55);
-  --glass-line:rgba(127,216,207,.18);
-  --panel:rgba(2,18,30,.66);
+:root {
+  --bg: #1a1715;
+  --bg2: #242019;
+  --bg3: #2e2a24;
+  --paper: #f5f0e8;
+  --warm: #c8a96e;
+  --warm2: #e8c88a;
+  --warm-dim: #8a7a5e;
+  --text: #e8e0d0;
+  --text2: #b8a890;
+  --text3: #887a68;
+  --accent: #d4845a;
+  --green: #7aaa6a;
+  --red: #c85a4a;
+  --border: #3a3530;
 }
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{
-  color:var(--ink);
-  font-family:'Noto Sans TC',system-ui,sans-serif;
-  font-weight:300;line-height:1.85;
-  position:relative;min-height:100vh;
+*{ box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Sans TC', system-ui, sans-serif;
+  font-weight: 300;
+  line-height: 1.8;
+  padding: 0;
 }
-/* 深海漸層底 */
-body::before{
-  content:'';position:fixed;inset:0;z-index:-3;
-  background:linear-gradient(180deg,#021a2c 0%,#053349 38%,#0a5560 72%,#11796d 100%);
+.wrap {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 3rem 2.5rem 5rem;
 }
-/* 海面透下的光束 */
-.ocean-rays{
-  position:fixed;inset:0;z-index:-2;pointer-events:none;overflow:hidden;
-  background:
-    linear-gradient(102deg,transparent 0 14%,rgba(170,238,232,.09) 16% 18%,transparent 20% 100%),
-    linear-gradient(96deg,transparent 0 40%,rgba(150,230,225,.07) 43% 45%,transparent 48% 100%),
-    linear-gradient(110deg,transparent 0 64%,rgba(180,240,235,.08) 67% 70%,transparent 73% 100%),
-    radial-gradient(120% 60% at 50% -10%,rgba(190,245,240,.18),transparent 60%);
+h1 {
+  font-family: 'Noto Serif TC', serif;
+  font-weight: 700;
+  font-size: 2rem;
+  color: var(--warm2);
+  letter-spacing: 0.08em;
+  margin-bottom: 0.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--warm-dim);
 }
-/* 上浮氣泡 */
-.ocean-bubbles{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
-.ocean-bubbles span{
-  position:absolute;bottom:-40px;border-radius:50%;
-  background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.5),rgba(180,240,235,.12) 60%,transparent 72%);
-  border:1px solid rgba(200,248,243,.18);
-  animation:rise linear infinite;
+h2 {
+  font-family: 'Noto Serif TC', serif;
+  font-weight: 700;
+  font-size: 1.35rem;
+  color: var(--warm);
+  margin: 3rem 0 1rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.06em;
 }
-.ocean-bubbles span:nth-child(1){left:6%;width:10px;height:10px;animation-duration:19s;animation-delay:-2s}
-.ocean-bubbles span:nth-child(2){left:14%;width:6px;height:6px;animation-duration:24s;animation-delay:-8s}
-.ocean-bubbles span:nth-child(3){left:22%;width:14px;height:14px;animation-duration:16s;animation-delay:-5s}
-.ocean-bubbles span:nth-child(4){left:31%;width:5px;height:5px;animation-duration:27s;animation-delay:-12s}
-.ocean-bubbles span:nth-child(5){left:39%;width:9px;height:9px;animation-duration:21s;animation-delay:-1s}
-.ocean-bubbles span:nth-child(6){left:47%;width:7px;height:7px;animation-duration:25s;animation-delay:-15s}
-.ocean-bubbles span:nth-child(7){left:55%;width:12px;height:12px;animation-duration:18s;animation-delay:-7s}
-.ocean-bubbles span:nth-child(8){left:62%;width:5px;height:5px;animation-duration:29s;animation-delay:-3s}
-.ocean-bubbles span:nth-child(9){left:70%;width:11px;height:11px;animation-duration:20s;animation-delay:-10s}
-.ocean-bubbles span:nth-child(10){left:78%;width:7px;height:7px;animation-duration:23s;animation-delay:-6s}
-.ocean-bubbles span:nth-child(11){left:85%;width:15px;height:15px;animation-duration:17s;animation-delay:-13s}
-.ocean-bubbles span:nth-child(12){left:91%;width:6px;height:6px;animation-duration:26s;animation-delay:-4s}
-.ocean-bubbles span:nth-child(13){left:96%;width:9px;height:9px;animation-duration:22s;animation-delay:-9s}
-.ocean-bubbles span:nth-child(14){left:2%;width:7px;height:7px;animation-duration:28s;animation-delay:-11s}
-@keyframes rise{
-  0%{transform:translateY(0) translateX(0);opacity:0}
-  10%{opacity:.8}
-  90%{opacity:.6}
-  100%{transform:translateY(-105vh) translateX(18px);opacity:0}
+h3 {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-weight: 500;
+  font-size: 1.05rem;
+  color: var(--text);
+  margin: 1.8rem 0 0.6rem;
 }
-@media (prefers-reduced-motion:reduce){.ocean-bubbles span{animation:none;opacity:.25}}
-
-/* 內容玻璃柱 */
-.wrap{
-  max-width:920px;margin:3.2rem auto;padding:3rem 2.8rem 4.5rem;
-  background:var(--glass);
-  backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
-  border:1px solid var(--glass-line);
-  border-radius:18px;
-  box-shadow:0 24px 70px rgba(0,8,16,.45),inset 0 1px 0 rgba(255,255,255,.05);
+p { margin: 0.6rem 0; color: var(--text2); }
+strong { color: var(--text); font-weight: 500; }
+em { color: var(--text3); font-style: normal; }
+code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85em;
+  background: var(--bg3);
+  color: var(--warm2);
+  padding: 0.15em 0.4em;
+  border-radius: 3px;
 }
-h1{
-  font-family:'Noto Serif TC',serif;font-weight:700;font-size:2.05rem;
-  color:#eafffb;letter-spacing:.06em;margin-bottom:.6rem;padding-bottom:1rem;
-  border-bottom:2px solid;
-  border-image:linear-gradient(90deg,var(--aqua-bright),var(--aqua-dim),transparent) 1;
-  text-shadow:0 2px 18px rgba(95,202,191,.3);
+pre {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1.2rem 1.5rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+  line-height: 1.5;
 }
-h2{
-  font-family:'Noto Serif TC',serif;font-weight:700;font-size:1.4rem;
-  color:var(--aqua-bright);margin:3rem 0 1rem;padding:.55rem 0 .55rem 1rem;
-  letter-spacing:.05em;position:relative;
-  border-bottom:1px solid var(--glass-line);
+pre code {
+  background: none;
+  padding: 0;
+  font-size: 0.82rem;
+  color: var(--text2);
 }
-h2::before{
-  content:'';position:absolute;left:0;top:.7rem;bottom:.7rem;width:4px;border-radius:3px;
-  background:linear-gradient(180deg,var(--aqua-bright),var(--aqua-dim));
-  box-shadow:0 0 10px rgba(127,230,216,.6);
+a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; }
+a:hover { border-bottom-color: var(--accent); }
+hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+blockquote {
+  border-left: 3px solid var(--warm-dim);
+  padding: 0.6rem 1.2rem;
+  margin: 1rem 0;
+  color: var(--text3);
+  background: var(--bg2);
+  border-radius: 0 4px 4px 0;
+  font-size: 0.92rem;
 }
-h3{font-family:'Noto Sans TC',sans-serif;font-weight:500;font-size:1.08rem;color:#d3efea;margin:1.9rem 0 .6rem}
-p{margin:.6rem 0;color:var(--ink2)}
-strong{color:#eafffb;font-weight:500}
-em{color:var(--ink3);font-style:normal}
-a{color:var(--coral);text-decoration:none;border-bottom:1px solid transparent}
-a:hover{border-bottom-color:var(--coral)}
-hr{border:none;border-top:1px solid var(--glass-line);margin:2.6rem 0}
-code{font-family:'JetBrains Mono',monospace;font-size:.85em;background:rgba(2,18,30,.7);color:var(--aqua-bright);padding:.15em .4em;border-radius:3px}
-pre{background:var(--panel);border:1px solid var(--glass-line);border-radius:8px;padding:1.2rem 1.5rem;overflow-x:auto;margin:1rem 0;line-height:1.55}
-pre code{background:none;padding:0;font-size:.82rem;color:#bfe0db}
-blockquote{
-  border-left:3px solid var(--aqua);padding:.6rem 1.2rem;margin:1rem 0;
-  color:#bfe0db;background:rgba(127,216,207,.07);border-radius:0 6px 6px 0;font-size:.93rem;
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.9rem;
 }
-table{width:100%;border-collapse:collapse;margin:1.1rem 0;font-size:.9rem;
-  background:rgba(2,18,30,.34);border-radius:8px;overflow:hidden}
-thead{background:rgba(95,202,191,.14)}
-th{text-align:left;padding:.62rem .85rem;font-family:'JetBrains Mono',monospace;font-size:.76rem;
-  font-weight:700;color:var(--aqua-bright);letter-spacing:.07em;text-transform:uppercase;
-  border-bottom:2px solid var(--aqua-dim)}
-td{padding:.52rem .85rem;border-bottom:1px solid rgba(127,216,207,.12);color:var(--ink2);vertical-align:top}
-tr:hover td{background:rgba(127,216,207,.06)}
-td:first-child{color:#eafffb;font-weight:400}
-ul{padding-left:1.5rem;margin:.5rem 0}
-li{margin:.3rem 0;color:var(--ink2)}
-li::marker{color:var(--aqua)}
-ul.checklist{list-style:none;padding-left:.5rem}
-ul.checklist li{display:flex;align-items:baseline;gap:.5rem}
-ul.checklist input{accent-color:var(--aqua);transform:scale(1.1)}
-
-/* 目次（漂浮玻璃） */
-.toc{
-  position:fixed;top:2rem;right:2rem;width:222px;
-  background:rgba(3,26,40,.78);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
-  border:1px solid var(--glass-line);border-radius:10px;padding:1rem 1.2rem;font-size:.78rem;
-  max-height:calc(100vh - 4rem);overflow-y:auto;
-  box-shadow:0 14px 40px rgba(0,8,16,.4);
+thead { background: var(--bg3); }
+th {
+  text-align: left;
+  padding: 0.6rem 0.8rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--warm);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-bottom: 2px solid var(--warm-dim);
 }
-.toc h3{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--aqua);letter-spacing:.2em;
-  text-transform:uppercase;margin:0 0 .6rem;padding-bottom:.5rem;border-bottom:1px solid var(--glass-line)}
-.toc a{display:block;padding:.25rem 0;color:var(--ink3);font-size:.78rem;line-height:1.5;border:none}
-.toc a:hover{color:var(--aqua-bright)}
-.toc::-webkit-scrollbar{width:6px}
-.toc::-webkit-scrollbar-thumb{background:var(--aqua-dim);border-radius:3px}
-
-img.zoom{max-width:100%;max-height:320px;border-radius:8px;border:1px solid var(--glass-line);
-  cursor:zoom-in;display:block;margin:.4rem auto;box-shadow:0 6px 20px rgba(0,8,16,.4)}
-td img.zoom{width:100%;max-height:240px;object-fit:cover}
-#lightbox{position:fixed;inset:0;background:rgba(1,12,20,.95);display:none;align-items:center;
-  justify-content:center;z-index:999;cursor:zoom-out;padding:24px}
-#lightbox img{max-width:95vw;max-height:92vh;border-radius:8px;box-shadow:0 12px 60px rgba(0,0,0,.7)}
-#lightbox .lbcap{position:fixed;bottom:16px;left:0;right:0;text-align:center;color:#9ec9c2;font-size:13px;letter-spacing:1px}
-
-@media (max-width:1200px){.toc{display:none}}
-@media (max-width:680px){.wrap{margin:1rem;padding:2rem 1.3rem 3rem}}
-@media print{
-  body::before,.ocean-rays,.ocean-bubbles{display:none}
-  body{background:#fff;color:#16302e}
-  .wrap{background:#fff;border:none;box-shadow:none;backdrop-filter:none}
-  .toc{display:none}
-  h1,h2{color:#0a5a52}h2::before{display:none}
-  h3{color:#1a3a36}th{color:#0a5a52}td,p,li{color:#2a3a38}
-  blockquote{background:#eef7f5}pre{background:#f3f8f7}
+td {
+  padding: 0.5rem 0.8rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text2);
+}
+tr:hover td { background: var(--bg2); }
+td:first-child { color: var(--text); font-weight: 400; }
+ul { padding-left: 1.5rem; margin: 0.5rem 0; }
+li { margin: 0.3rem 0; color: var(--text2); }
+li::marker { color: var(--warm-dim); }
+ul.checklist { list-style: none; padding-left: 0.5rem; }
+ul.checklist li { display: flex; align-items: baseline; gap: 0.5rem; }
+ul.checklist input { accent-color: var(--green); transform: scale(1.1); }
+.toc {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  width: 220px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1rem 1.2rem;
+  font-size: 0.78rem;
+  max-height: calc(100vh - 4rem);
+  overflow-y: auto;
+}
+.toc h3 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--warm-dim);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin: 0 0 0.6rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.toc a {
+  display: block;
+  padding: 0.25rem 0;
+  color: var(--text3);
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+.toc a:hover { color: var(--warm); }
+img.zoom {
+  max-width: 100%;
+  max-height: 320px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  cursor: zoom-in;
+  display: block;
+  margin: 0.4rem auto;
+}
+td img.zoom { width: 100%; max-height: 240px; object-fit: cover; }
+#lightbox {
+  position: fixed; inset: 0;
+  background: rgba(10,8,6,.94);
+  display: none; align-items: center; justify-content: center;
+  z-index: 999; cursor: zoom-out; padding: 24px;
+}
+#lightbox img { max-width: 95vw; max-height: 92vh; border-radius: 8px; box-shadow: 0 12px 60px rgba(0,0,0,.7); }
+#lightbox .lbcap { position: fixed; bottom: 16px; left: 0; right: 0; text-align: center; color: #b8aa97; font-size: 13px; letter-spacing: 1px; }
+@media (max-width: 1200px) {
+  .toc { display: none; }
+}
+@media print {
+  body { background: #fff; color: #1a1a1a; }
+  .toc { display: none; }
+  h1 { color: #2a2010; }
+  h2 { color: #4a3a20; }
+  th { color: #4a3a20; }
+  td, p, li { color: #333; }
+  blockquote { background: #f5f0e8; }
+  pre { background: #f8f6f0; }
 }
 </style>
 </head>
 <body>
-<div class="ocean-rays" aria-hidden="true"></div><div class="ocean-bubbles" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-<nav class="toc"><h3>目次</h3><a href="#s0">1. 30 秒摘要</a><a href="#s1">2. 基地與版面規劃</a><a href="#s2">3. 第四排・高大開花喬木（6m+）</a><a href="#s3">4. 第三排・中等高度開花樹（3–6m）</a><a href="#s4">5. 第二排・低矮樹/大型開花灌木（1.5–3m）</a><a href="#s5">6. 第一排・花圃草花/地被（<1m）</a><a href="#s6">7. 12 個月開花月曆總表</a><a href="#s7">8. 高度漸層總覽表（由高到矮）</a><a href="#s8">9. 宜蘭氣候對策（排水／颱風／東北季風／土壤改良）</a><a href="#s9">10. 種植時程與第一年養護月曆</a><a href="#s10">11. 預算級距概念（苗木規格）</a><a href="#s11">12. 與詠夏 Villa 體驗連動——花期行銷月曆</a><a href="#s12">13. 最終建議配置總結</a></nav>
+<nav class="toc"><h3>目次</h3><a href="#s0">1. 30 秒摘要</a><a href="#s1">2. 基地與版面規劃</a><a href="#s2">3. 第四排・高大開花喬木（6m+）</a><a href="#s3">4. 第三排・中等高度開花樹（3–6m）</a><a href="#s4">5. 第二排・低矮樹/大型開花灌木（1.5–3m）</a><a href="#s5">6. 第一排・花圃草花/地被（<1m）</a><a href="#s6">7. 12 個月開花月曆總表</a><a href="#s7">8. 高度漸層總覽表（由高到矮）</a><a href="#s8">9. 宜蘭氣候對策（排水／颱風／東北季風／土壤改良）</a><a href="#s9">10. 種植時程與第一年養護月曆</a><a href="#s10">11. 預算級距概念（苗木規格）</a><a href="#s11">12. 與詠夏 Villa 體驗連動——花期行銷月曆</a><a href="#s12">13. 最終建議配置總結</a><a href="#s13">14. 四季模擬圖（12 個月・AI 示意）</a><a href="#s14">15. 現實校準（這份模擬有多貼近現實）</a><a href="#s15">16. 坪數比較與推估預算（100／150／200 坪）</a></nav>
 <div class="wrap">
 <h1>詠夏 Villa 後院四季景觀樹花圃規劃</h1>
 <blockquote>宜蘭礁溪瑪僯路 66 號・後方農地約 100 坪（約 330 m²）</blockquote>
@@ -570,6 +606,159 @@ td img.zoom{width:100%;max-height:240px;object-fit:cover}
 <h2 id="s12">13. 最終建議配置總結</h2>
 <table><thead><tr><th>排位</th><th>管家首選</th><th>配角</th><th>條件型點綴（量力而為）</th><th>不種</th></tr></thead><tbody><tr><td>第四排 6m+</td><td><strong>台灣欒樹 3＋大花紫薇 3</strong></td><td>—</td><td>黃花/洋紅風鈴木 1–2 株（需高架排水床）；美人樹（需隔離尖刺）</td><td>苦楝（親子毒果風險，除非遠離動線）</td></tr><tr><td>第三排 3–6m</td><td><strong>山櫻花 4＋紫薇 3</strong></td><td>桂花 1、黃槐 1–2</td><td>流蘇（最高燥點）、八重櫻少量</td><td>一般梅花（平地不開花）</td></tr><tr><td>第二排 1.5–3m</td><td><strong>朱槿 10＋平戶杜鵑 12</strong></td><td>藍蝴蝶 3、立鶴花 3、樹蘭 2、仙丹花籬</td><td>—</td><td>山馬茶（有毒）、馬纓丹（入侵種＋有毒）</td></tr><tr><td>第一排 <1m</td><td><strong>四季秋海棠＋翠蘆莉 Katie</strong>（常駐骨幹）</td><td>輪作：波斯菊/孔雀草/三色堇（秋冬春）、日日春（夏）</td><td>繡球花（東側涼爽牆角）、矮牽牛（限屋簷下盆植）</td><td>薰衣草（露地必敗）</td></tr></tbody></table>
 <p><strong>成功三前提</strong>：① 2026 年底前完成墊高＋暗管排水工程；② 2027 年 2–3 月黃金期定植＋三柱式支架；③ 第一、二個冬季東北側防風網到位。做到這三件事，這份四排配置在礁溪的存活率與全年花曆都有把握。</p>
+<hr>
+<h2 id="s13">14. 四季模擬圖（12 個月・AI 示意）</h2>
+<blockquote>依本規劃「管家首選」配置，以 GPT Image 2 生成的同一塊地、同鏡位 12 個月模擬（先生結構母片、再以 image-to-image 逐月衍生以維持一致性）。<strong>屬成熟態示意、非實景照</strong>；開花密度經 AI 理想化，實際花量請打約 6–7 折看（校準見第 15 章）。點圖可放大。</blockquote>
+<table><thead><tr><th>月份</th><th>模擬畫面</th><th>當月開花重點</th></tr></thead><tbody><tr><td>1 月</td><td><img class="zoom" src="images/sim_01.png" alt="1月模擬" loading="lazy"></td><td>冬季骨架×前排冷季花海；高喬木裸枝、山櫻月底初綻，色彩由波斯菊・三色堇・孔雀草・四季秋海棠撐起，灌木常綠不光禿。</td></tr><tr><td>2 月</td><td><img class="zoom" src="images/sim_02.png" alt="2月模擬" loading="lazy"></td><td>山櫻花滿開緋紅（高峰）；高喬木仍裸枝，平戶杜鵑初綻。</td></tr><tr><td>3 月</td><td><img class="zoom" src="images/sim_03.png" alt="3月模擬" loading="lazy"></td><td>平戶杜鵑花海高峰×早春嫩綠；朱槿、仙丹début。</td></tr><tr><td>4 月</td><td><img class="zoom" src="images/sim_04.png" alt="4月模擬" loading="lazy"></td><td>仲春多彩×繡球初開；翠蘆莉紫藍début、黃槐黃花起。</td></tr><tr><td>5 月</td><td><img class="zoom" src="images/sim_05.png" alt="5月模擬" loading="lazy"></td><td>初夏×繡球花球牆×紫薇系桃紫；藍蝴蝶藍紫亮點。</td></tr><tr><td>6 月</td><td><img class="zoom" src="images/sim_06.png" alt="6月模擬" loading="lazy"></td><td>初夏×大花紫薇桃紫樹冠盛開。</td></tr><tr><td>7 月</td><td><img class="zoom" src="images/sim_07.png" alt="7月模擬" loading="lazy"></td><td>盛夏濃綠×紫薇＋朱槿＋藍蝴蝶。</td></tr><tr><td>8 月</td><td><img class="zoom" src="images/sim_08.png" alt="8月模擬" loading="lazy"></td><td>盛夏×紫薇持續×灌木花色。</td></tr><tr><td>9 月</td><td><img class="zoom" src="images/sim_09.png" alt="9月模擬" loading="lazy"></td><td>夏末轉秋×台灣欒樹金黃花序début。</td></tr><tr><td>10 月</td><td><img class="zoom" src="images/sim_10.png" alt="10月模擬" loading="lazy"></td><td>秋季高峰×欒樹金紅蒴果×波斯菊海（註：此圖欒樹偏紅葉，正確招牌見 §15.5 修正版）。</td></tr><tr><td>11 月</td><td><img class="zoom" src="images/sim_11.png" alt="11月模擬" loading="lazy"></td><td>晚秋×波斯菊花海盛；欒樹殘果落葉。</td></tr><tr><td>12 月</td><td><img class="zoom" src="images/sim_12.png" alt="12月模擬" loading="lazy"></td><td>隆冬×裸枝骨架×前排撐色，不光禿不荒涼。</td></tr></tbody></table>
+<hr>
+<h2 id="s14">15. 現實校準（這份模擬有多貼近現實）</h2>
+<blockquote><strong>直球結論：上章模擬屬「概念／氛圍級」，不是「衡量級」。</strong> 能傳達色調、季節氛圍、高矮漸層概念與礁溪環境感；但要拿來做投資/可行性判斷，請務必搭配本章校正，不能直接信圖。</blockquote>
+<h3>15.1 四個失真點（務必知道）</h3>
+<table><thead><tr><th>面向</th><th>AI 失真</th><th>真相</th></tr></thead><tbody><tr><td>時間</td><td>畫的是成熟態</td><td>2027 開幕種的是 2–4m 苗，第 1–2 年遠比圖中稀疏（見 §15.4）</td></tr><tr><td>密度</td><td>全月曆同時滿開</td><td>真實覆蓋率更低、會有裸土與參差，整片爆開僅維持 2–3 週</td></tr><tr><td>物種</td><td>台灣欒樹被畫成楓葉紅</td><td>真實為鮮黃花序＋粉紅赭紅紙質蒴果（見 §15.3、§15.5）</td></tr><tr><td>比例</td><td>棵數株距不可信</td><td>寫實照片非按比例，量空間請改用 §15.2</td></tr></tbody></table>
+<h3>15.2 按比例尺寸圖（唯一可量工具）</h3>
+<p>數據全部出自本報告 §2、§8：平面 30×11m 四帶寬＋各排棵數株距；立面把「成熟態（實心）vs 開幕第1年小苗（虛線）」的真實落差畫出來，可直接拿給苗圃對規格。</p>
+<p><img class="zoom" src="images/real_scale.png" alt="按比例尺寸配置圖" loading="lazy"></p>
+<h3>15.3 AI 模擬 vs 真實照片對照</h3>
+<p>每列＝[AI 模擬局部] vs [真實花況照] vs [真實成株照]（後兩者為 Wikimedia CC 實照），逐物種標準確度。</p>
+<p><img class="zoom" src="images/real_calib.png" alt="AI 模擬 vs 真實照片校準" loading="lazy"></p>
+<blockquote>✗ 台灣欒樹（招牌畫錯）｜△ 大花紫薇、山櫻花（偏理想化）｜✓ 平戶杜鵑、朱槿（最貼近真實）。</blockquote>
+<h3>15.4 成長時間軸（同一塊地・早夏・第 1／3／5 年）</h3>
+<p>刻意不美化：開幕第 1 年其實稀疏、滿地護根與支架細苗；約需 <strong>5 年</strong>才接近成景。這直接影響苗木規格決策。</p>
+<table><thead><tr><th>第 1 年・開幕當下</th><th>第 3 年・成形中</th><th>第 5 年・成熟</th></tr></thead><tbody><tr><td><img class="zoom" src="images/real_y1.png" alt="第1年開幕" loading="lazy"></td><td><img class="zoom" src="images/real_y3.png" alt="第3年成形" loading="lazy"></td><td><img class="zoom" src="images/real_y5.png" alt="第5年成熟" loading="lazy"></td></tr></tbody></table>
+<h3>15.5 修正失真版（欒樹改回真實招牌）</h3>
+<p>把台灣欒樹從「楓葉紅」修正為真實的「黃花→粉紅赭紅紙質蒴果」，並把開花密度調真（露出護根、灌木參差、可見滴灌線）。</p>
+<p><img class="zoom" src="images/real_fixed_autumn.png" alt="修正版秋景・欒樹正確" loading="lazy"></p>
+<h3>15.6 怎麼用這套來衡量</h3>
+<ul>
+<li><strong>量空間／買幾棵</strong> → 用 §15.2 尺寸圖：喬灌木 6＋8＋約 30 株，株距 5／3.5／0.9m，可直接對苗圃。</li>
+<li><strong>估真實長相</strong> → AI 圖花量打約 6–7 折看；欒樹秋景以真實照為準。</li>
+<li><strong>決定規格／預期</strong> → 接受「前 2–3 年稀疏、第 5 年才成景」再選苗木大小（想快成景＝買大規格苗，成本高很多）。</li>
+<li><strong>行銷視覺</strong> → 第 5 年成熟版／四季模擬可當官網想像圖，但須標「示意・成熟後預期」，不要當實景照。</li>
+</ul>
+<hr>
+<h2 id="s15">16. 坪數比較與推估預算（100／150／200 坪）</h2>
+<blockquote>宜蘭礁溪瑪僯路 66 號｜包棟精品民宿｜2027 Q1 開幕｜玻璃屋恆溫泳池・親子＋團體客</blockquote>
+<blockquote>報告型態：決策導向三尺寸合併比較（決策卡 → 三欄規格表 → 邊際得失帳本 → 線性／次線性成本解剖）</blockquote>
+<p><strong>核心假設（全程鎖定，不變更）：</strong> 四排植栽結構與帶寬（深度 11m＝3.0＋2.5＋2.0＋2.0＋1.5m）固定不動，三尺寸<strong>只延長長邊</strong>（30m → 45m → 60m），株數<strong>依長度等比放大</strong>（×1.0／×1.5／×2.0）。換言之，這不是「重新設計三座庭園」，而是「同一條四排骨架被拉長」。凡與坪數無關的內容（物種、照護、十二月花曆、宜蘭氣候對策、AI 四季模擬、現實校準原則）三尺寸<strong>完全相同</strong>，本報告一律以「三尺寸共用，詳見主報告對應章節」帶過，不重複貼整段。</p>
+<hr>
+<h3>§0 封面｜一句話結論決策卡（10 秒看完）</h3>
+<table><thead><tr><th></th><th>**100 坪**</th><th>**★ 150 坪（主推）**</th><th>**200 坪**</th></tr></thead><tbody><tr><td>足跡（長×深）</td><td>30 × 11 m</td><td><strong>45 × 11 m</strong></td><td>60 × 11 m</td></tr><tr><td>基地面積</td><td>331 m²</td><td><strong>496 m²</strong></td><td>661 m²</td></tr><tr><td>相對倍率</td><td>×1.0</td><td><strong>×1.5</strong></td><td>×2.0</td></tr><tr><td>喬灌木合計</td><td>44 株</td><td><strong>64 株</strong></td><td>88 株</td></tr><tr><td>第一排花圃</td><td>60 m²</td><td><strong>90 m²</strong></td><td>120 m²</td></tr><tr><td>一句話定位</td><td>保底基準</td><td><strong>甜蜜點主力</strong></td><td>旗艦升級</td></tr></tbody></table>
+<blockquote><strong>傾向性建議：本報告主推 150 坪。</strong> 它在「合照取景餘裕、空拍花海成立、單位成本效率最高、維護仍可控」四項上同時達標，最契合詠夏 28 人包棟＋親子團體＋泳池旺季的綜合需求。</blockquote>
+<hr>
+<h3>§1 怎麼讀這份報告（30 秒導覽）</h3>
+<ul>
+<li><strong>只想要結論：</strong> 看 §0 決策卡 ＋ §3 三欄規格表，一橫列比完三尺寸即可拍板。</li>
+<li><strong>想懂為什麼選 150：</strong> 看 §5–§6「邊際得失帳本」——每多加 50 坪，多得到什麼、多付出什麼、值不值。</li>
+<li><strong>要發包施工：</strong> 看 §7（成本結構）、§8（隨長度新增工程）、§11（報價避坑清單）。</li>
+</ul>
+<p><strong>兩條硬規則（全程遵守）：</strong></p>
+<p>1. 所有數量一律以 FACTS 表為準（彙整於 §3 表與 §12 附錄），不自行重算。</p>
+<p>2. 價格一律「<strong>依苗圃報價</strong>」，本報告<strong>不出現任何新台幣絕對金額</strong>，只談相對倍率與成本的線性／次線性結構。</p>
+<hr>
+<h3>§2 三尺寸共用前提＋不重貼索引（鎖定不變的骨架）</h3>
+<p><strong>三項全程前提：</strong></p>
+<p>1. <strong>四排結構＋帶寬 11m 固定</strong> —— 第四排 3.0m＋第三排 2.5m＋第二排 2.0m＋（走道）2.0m＋第一排 1.5m，三尺寸皆同。</p>
+<p>2. <strong>只延長長邊</strong> —— 30m → 45m → 60m，橫向深度永遠 11m。</p>
+<p>3. <strong>株數依長度等比放大</strong> —— ×1.0／×1.5／×2.0。</p>
+<p><strong>共用內容索引表（與坪數無關，三尺寸完全相同，不重貼）：</strong></p>
+<table><thead><tr><th>共用區塊</th><th>主報告章節</th><th>說明</th></tr></thead><tbody><tr><td>物種清單（喬木／灌木／草花）</td><td>§3–§6</td><td>三尺寸同一份物種組合，只放大數量</td></tr><tr><td>十二月花曆</td><td>§7</td><td>全年不斷花的開花序，與坪數無關</td></tr><tr><td>高度漸層原理</td><td>§8</td><td>四排由高至低的天際線邏輯，三尺寸相同</td></tr><tr><td>宜蘭氣候對策</td><td>§9</td><td>季風／颱風／多雨原則，三尺寸相同</td></tr><tr><td>時程養護 SOP</td><td>§10</td><td>種植時程與逐項養護法，與坪數無關</td></tr><tr><td>AI 四季模擬畫面</td><td>§14</td><td>視覺示意，三尺寸構圖邏輯相同</td></tr><tr><td>現實校準原則</td><td>§15</td><td>開幕稀疏、5 年成景等校準，與坪數無關</td></tr></tbody></table>
+<blockquote>主報告路徑：<code>D:\claude\做好的資料\詠夏Villa\後院景觀\後院四季景觀樹花圃規劃.md</code></blockquote>
+<blockquote>（另有同名 <code>.html</code> 與公開版 <code>D:\claude\做好的資料\公開\後院景觀\後院四季景觀樹花圃規劃.html</code>）</blockquote>
+<hr>
+<h3>§3 主對照表 A｜規格與數量（核心三欄表・本報告比較主場）</h3>
+<table><thead><tr><th>項目</th><th>100 坪</th><th>**★ 150 坪（推薦）**</th><th>200 坪</th><th>放大型態</th></tr></thead><tbody><tr><td>基地面積</td><td>331 m²</td><td><strong>496 m²</strong></td><td>661 m²</td><td>線性</td></tr><tr><td>配置尺寸（長×深）</td><td>30 × 11 m</td><td><strong>45 × 11 m</strong></td><td>60 × 11 m</td><td>長邊線性／深度固定</td></tr><tr><td>放大倍率</td><td>×1.0</td><td><strong>×1.5</strong></td><td>×2.0</td><td>—</td></tr><tr><td>第四排 高喬木</td><td>6 株</td><td><strong>8 株</strong></td><td>12 株</td><td>線性</td></tr><tr><td>第三排 中喬木</td><td>8 株</td><td><strong>12 株</strong></td><td>16 株</td><td>線性</td></tr><tr><td>第二排 灌木花牆</td><td>30 株</td><td><strong>44 株</strong></td><td>60 株</td><td>線性</td></tr><tr><td><strong>喬灌木合計</strong></td><td><strong>44 株</strong></td><td><strong>64 株</strong></td><td><strong>88 株</strong></td><td>線性</td></tr><tr><td>第一排 花圃面積</td><td>60 m²</td><td><strong>90 m²</strong></td><td>120 m²</td><td>線性</td></tr><tr><td>第一排 每季穴盤苗量</td><td>基準</td><td>×1.5</td><td>×2.0</td><td>線性（依長度）</td></tr><tr><td>帶寬（深度剖面）</td><td>11 m</td><td>11 m</td><td>11 m</td><td><strong>固定</strong></td></tr></tbody></table>
+<blockquote>數字一律照 FACTS 填，不自行重算。連續花牆長度（第二排）即「長邊－兩端收頭」，三尺寸約對應 18m → 27m → 36m。</blockquote>
+<p>></p>
+<blockquote>註：長邊／面積／花圃為精確 ×1.5／×2.0；喬灌木株數因「整數株」四捨五入呈<strong>近似</strong>等比（150 坪實為 <strong>64 株</strong>、非剛好 66；第四排 6→8、第二排 30→44 亦非整 ×1.5）。</blockquote>
+<hr>
+<h3>§4 視覺核心｜坪數比較圖解讀</h3>
+<p><img class="zoom" src="images/坪數比較圖.png" alt="坪數比較圖" loading="lazy"></p>
+<p><strong>三句導讀：</strong></p>
+<ul>
+<li><strong>足跡只長不寬</strong> —— 三尺寸都是 11m 深，只有長邊在拉長。</li>
+<li><strong>株數隨長度線性</strong> —— 44 → 64 → 88 株，與長邊倍率同步。</li>
+<li><strong>花圃面積隨長度線性</strong> —— 60 → 90 → 120 m²。</li>
+</ul>
+<p><strong>最易誤判的一點（務必看清）：</strong> 縱深 11m 三尺寸<strong>完全相同</strong>，代表照片的四層構圖「前景花圃 → 灌木花牆 → 中喬木 → 高喬木天際線」三尺寸<strong>一樣好</strong>。加坪數只加「寬度」、<strong>不加「層次」</strong>。不要以為坪數越大背景越有層次——背景的層次由 11m 縱深決定，三尺寸毫無差別；坪數只改變「同一層次能拍多寬」。</p>
+<hr>
+<h3>§5 邊際得失帳本一｜100 → 150 坪：值不值</h3>
+<table><thead><tr><th>多得到（＋）</th><th>多付出（－）</th></tr></thead><tbody><tr><td>連續花牆 18m → 27m，<strong>合照取景自由度躍升</strong>（可避開支架、未成景區、滴灌線）</td><td>最外排須分「<strong>迎風段（東北端 1/3）</strong>＋背風段（2/3）」兩種規格，不能再當均質帶</td></tr><tr><td><strong>空拍花海敘事成立</strong>（面積足以做私人花田空拍素材）</td><td>中央段距兩端遮蔽物最遠，須加<strong>過渡支撐</strong>（中段支撐樁留設時間更長、首年臨時防風網）</td></tr><tr><td>長軸透視拉長，<strong>儀式性長景氣勢</strong>（精品 villa 感、婚宴拍照點）</td><td><strong>灌溉分區由「可選」變「必要」</strong>：45m 單迴路頭尾水壓不均，須分 2–3 區</td></tr><tr><td><strong>單位坪成本效率最高</strong>：固定費被攤薄，株數僅 +50%</td><td>端部收頭株、節奏錨點株屬<strong>額外配置</strong>，不在等比公式內，須另計</td></tr></tbody></table>
+<blockquote><strong>結論：150 坪是第一個值得談分期施工的尺寸（45m 天然可切 3 段 15m 單元），且單位成本效率最高——固定成本攤薄、株數只多 50%，這一段放大最划算。</strong></blockquote>
+<hr>
+<h3>§6 邊際得失帳本二｜150 → 200 坪：值不值</h3>
+<table><thead><tr><th>多得到（＋）</th><th>多付出（－）</th></tr></thead><tbody><tr><td><strong>私人花田氣勢最強</strong>，空拍敘事推到最強（對標派對泳池 villa 的差異化王牌）</td><td><strong>近純線性追加</strong>：固定費已在 100→150 攤完，CP 值下降</td></tr><tr><td>連續花牆 36m，<strong>可同時開兩個互不穿幫的拍照點</strong></td><td>第一排輪作面積 90 → 120 m²，<strong>每季多一倍人力</strong>（拔除、整地、補植）</td></tr><tr><td>「包棟獨佔一整片花田」的高價敘事最完整</td><td><strong>開幕稀疏感與草花撐場成本同步放大</strong>（裸土、支架、未成景花牆更長更明顯）</td></tr><tr><td></td><td>60m 單向走道單調、有風隧道效應，<strong>須設節點</strong>改善動線</td></tr><tr><td></td><td>防風網沿長邊<strong>線性倍增</strong>，颱風前後收放／補強人力同步放大</td></tr></tbody></table>
+<blockquote><strong>結論：合照邊際收益遞減（36m 花牆鏡頭一次框不滿，對「單張團體照」幫助有限），且為純線性追加。200 坪僅在「土地確定有餘＋要做戶外草坪／派對腹地＋行銷溢價算得回」時上。</strong></blockquote>
+<hr>
+<h3>§7 主對照表 B｜成本結構解剖：線性 vs 次線性（全程依苗圃報價・零絕對金額）</h3>
+<table><thead><tr><th>隨長度線性（×倍率，100→150 約 ×1.5、100→200 約 ×2.0）</th><th>次線性／近固定（成長幅度小於倍率）</th></tr></thead><tbody><tr><td>喬灌木株數（44／64／88）</td><td>設計規劃與放樣費（一次性，布局相同只延長）</td></tr><tr><td>第二排花牆延米</td><td>土壤檢測</td></tr><tr><td>第一排草花輪作苗量</td><td>灌溉控制中樞／水源／泵浦等<strong>頭端設備</strong>（同一套可供更長）</td></tr><tr><td>滴灌主管延米</td><td>機具進場與動員出車（同一台、同一趟做完）</td></tr><tr><td>東北側防風網<strong>長邊段</strong></td><td>苗圃比價差旅</td></tr><tr><td>墊高客土方量</td><td>行銷攝影母片製作</td></tr><tr><td>沿線修剪／除草／換季工時</td><td>三尺寸共用知識內容（花曆／氣候／校準等）</td></tr><tr><td></td><td>短邊兩端（仍 11m）收頭，屬固定項</td></tr></tbody></table>
+<blockquote><strong>核心賣點句：工時與耗材偏線性、設備與動員偏次線性。故 100→150 單位成本最划算（固定費攤薄＋株數僅 +50%），150→200 近純線性追加（固定費已攤完）。</strong></blockquote>
+<p>></p>
+<blockquote><strong>議價提醒：</strong> 要求供應商<strong>拆項報價</strong>，區分線性與次線性。若整包報「×1.5」或「×2.0」即有議價空間（設計費、灌溉控制中樞、機具動員、放樣本就不該等比上升）。</blockquote>
+<hr>
+<h3>§8 主對照表 C｜隨長度才浮現的工程升級（100 坪用不到、150 起須處理）</h3>
+<table><thead><tr><th>工程項</th><th>100 坪（30m）</th><th>150 坪（45m）</th><th>200 坪（60m）</th></tr></thead><tbody><tr><td><strong>① 迎風分段</strong></td><td>可當單一均質帶處理</td><td>須分迎風 1/3＋背風 2/3：迎風段加密株距、選更耐風種、降首年修剪高度先紮根</td><td>沿長邊每段（可對齊節點）設<strong>加強立柱／斜撐</strong>，避免連續籬「一倒全倒」</td></tr><tr><td><strong>② 灌溉分區 hydro-zoning</strong></td><td>單迴路尚可勉強均勻</td><td><strong>必須</strong>分 2–3 區＋壓力補償滴灌管／分區電磁閥</td><td>頭尾壓差最大，須分區；且排水<strong>順長軸導出</strong>避免末端積水爛根</td></tr><tr><td><strong>③ 長軸動線節點</strong></td><td>30m 夠短，無需</td><td>設 1–2 個<strong>節奏錨點</strong>（放大株／微內凹觀景點）破除中段單調</td><td>60m 單向走道，於約 20m／40m 設<strong>點狀焦點</strong>（喬木／拱門／格柵）切成三段心理行程</td></tr></tbody></table>
+<blockquote><strong>此三項皆屬「骨架零更動」的微調</strong> —— 四排結構與 11m 深度完全不變，只在走道局部放寬、加強立柱、灌溉／防風分段。</blockquote>
+<blockquote><strong>硬性提醒：</strong> 節點分隔只能用<strong>點狀焦點物</strong>，<strong>嚴禁橫向實牆／實體隔斷</strong>，否則會切斷四排連續性，違反「一模一樣四排布局、只延長長邊」的前提。</blockquote>
+<hr>
+<h3>§9 維護人力與開幕成景對照（反直覺重點）</h3>
+<p><strong>維護人力（隨株數近似線性，但已壓到最低）</strong></p>
+<table><thead><tr><th></th><th>100 坪</th><th>150 坪</th><th>200 坪</th></tr></thead><tbody><tr><td>勞力密集帶</td><td>第一排草花季度輪作（60 m²）＋第二排灌木修剪</td><td>同左（90 m²）</td><td>同左（120 m²）</td></tr><tr><td>高喬木維護</td><td>低（首選物種全 ★4–5 耐操、靠雨水、成株免常澆）</td><td>同左</td><td>同左</td></tr><tr><td>建議</td><td>—</td><td>輪作量仍可控</td><td><strong>建議調低第一排輪作比例</strong>，多用翠蘆莉／秋海棠常駐蓋面，以人力換面積</td></tr></tbody></table>
+<blockquote>差異主要落在「第一排草花<strong>每季重來</strong>的輪作」與「第二排灌木修剪」兩個勞力密集帶，<strong>不在高喬木</strong>。200 坪每季多一倍整地補植工，對少數維護人手的民宿是真實負擔。</blockquote>
+<p><strong>開幕成景（與坪數無關，三尺寸共同最大風險）</strong></p>
+<ul>
+<li>成景速度與坪數<strong>無關</strong>，約需 <strong>5 年</strong>；2027 開幕種的是 <strong>2–4m 苗</strong>，開幕當下遠比模擬稀疏。</li>
+<li><strong>坪數越大、開幕期稀疏感越明顯</strong>（更多裸土、支架、更長的未成景花牆），且草花撐場成本同步線性放大。</li>
+<li>對策：靠第一排草花花海（2026 秋預先播種）在開幕期撐場。</li>
+<li><strong>買大規格苗快成景僅限第四排視覺主樹 2–4 株</strong>（詳見主報告 §11／§15.4），切勿在 200 坪放大成「多排都買大苗」的成本陷阱。</li>
+</ul>
+<hr>
+<h3>§10 三尺寸決策矩陣（你是哪種人，選哪個）</h3>
+<table><thead><tr><th></th><th>**100 坪｜保底基準**</th><th>**★ 150 坪｜甜蜜點主力（最推薦）**</th><th>**200 坪｜旗艦升級**</th></tr></thead><tbody><tr><td>適合</td><td>預算優先、維護人手最精簡、先做起來日後再擴</td><td>28 人包棟＋親子團體＋泳池旺季綜合最佳、取景有餘裕、單位成本效率最高、維護可控</td><td>土地確定有餘＋要戶外草坪／派對腹地＋私人花田空拍王牌＋行銷溢價算得回</td></tr><tr><td><strong>選它的代價（誠實提醒）</strong></td><td>合照與空拍氣勢僅「及格」，開幕期稀疏靠草花撐場</td><td>仍須處理迎風分段與灌溉分區（已是值得付的成本）</td><td>純線性追加、第一排輪作與開幕稀疏感同步放大、合照邊際收益遞減</td></tr></tbody></table>
+<p><strong>對詠夏的傾向建議：</strong> 庭園在詠夏定位中是「<strong>泳池與包棟氣勢的背景放大器</strong>」，不是主角。它要服務的是兩個獨家鏡頭——「<strong>5–10 月花牆當泳池背景</strong>」與「<strong>冬天 28°C 恆溫泳池看櫻花</strong>」。<strong>150 坪即足以把這兩個鏡頭做到位</strong>：連續花牆 27m 容得下 28 人分組／全員橫幅大合照，空拍花海敘事成立，且單位成本效率最高。<strong>不必盲目衝 200 坪</strong>——除非土地有餘且要另闢戶外派對腹地。（行銷連動詳見主報告 §12，三尺寸共用不重貼。）</p>
+<hr>
+<h3>§11 採購與報價避坑清單（給發包用・gotchas 集中區）</h3>
+<ul>
+<li><strong>要求拆項報價</strong>，明確區分線性／次線性；<strong>不可整包 ×倍率</strong>——整包報 ×1.5／×2.0 即有議價空間。</li>
+<li><strong>等比公式只適用「沿線重複株」</strong>；端部收頭株、節奏錨點株、迎風加密株<strong>不在公式內，須另計</strong>，否則施工圖會少料。</li>
+<li><strong>迎風段不可套用 100 坪均質帶</strong>的株距與首年修剪規格；照搬會讓東北端首冬受損、成景落後，造成長帶頭尾不齊。</li>
+<li><strong>灌溉初次埋管即分區</strong>；事後刨開已成景地被補管代價高、會破壞地被。</li>
+<li><strong>分期以「排」為單位、一次種完整排</strong>，不要「以段」分期——避免同一帶出現不同樹齡／高度落差，開幕時新舊段明顯。</li>
+<li><strong>防風網倍增僅長邊段</strong>；短邊 11m 兩端不隨尺寸變，屬固定項，勿誤算成全周長翻倍。</li>
+<li><strong>所有金額一律依苗圃報價</strong>；本報告任何敘述<strong>不可用來反推金額</strong>，數量一律回主報告 FACTS 為準。</li>
+</ul>
+<hr>
+<h3>§12 附錄｜FACTS 原表照登＋檔案路徑＋版本聲明</h3>
+<p><strong>FACTS 原表（坪數／尺寸／各排株數／花圃面積／倍率）</strong></p>
+<table><thead><tr><th>項目</th><th>100 坪</th><th>150 坪</th><th>200 坪</th></tr></thead><tbody><tr><td>放大倍率</td><td>×1.0</td><td>×1.5</td><td>×2.0</td></tr><tr><td>配置尺寸（長×深）</td><td>30 × 11 m</td><td>45 × 11 m</td><td>60 × 11 m</td></tr><tr><td>基地面積</td><td>331 m²</td><td>496 m²</td><td>661 m²</td></tr><tr><td>帶寬剖面（深度 11m）</td><td>3.0＋2.5＋2.0＋2.0＋1.5 m</td><td>同左（固定）</td><td>同左（固定）</td></tr><tr><td>第四排 高喬木</td><td>6 株</td><td>8 株</td><td>12 株</td></tr><tr><td>第三排 中喬木</td><td>8 株</td><td>12 株</td><td>16 株</td></tr><tr><td>第二排 灌木花牆</td><td>30 株</td><td>44 株</td><td>60 株</td></tr><tr><td>喬灌木合計</td><td>44 株</td><td>64 株</td><td>88 株</td></tr><tr><td>第一排 花圃面積</td><td>60 m²</td><td>90 m²</td><td>120 m²</td></tr></tbody></table>
+<p><strong>檔案路徑</strong></p>
+<ul>
+<li>主報告：<code>D:\claude\做好的資料\詠夏Villa\後院景觀\後院四季景觀樹花圃規劃.md</code>（含同名 <code>.html</code>）</li>
+<li>公開版：<code>D:\claude\做好的資料\公開\後院景觀\後院四季景觀樹花圃規劃.html</code></li>
+</ul>
+<p><strong>三項前提聲明</strong></p>
+<p>1. 四排結構＋帶寬 11m 固定不動。</p>
+<p>2. 三尺寸只延長長邊（30 → 45 → 60m）。</p>
+<p>3. 株數依長度等比放大（×1.0／×1.5／×2.0）。</p>
+<hr>
+<h3>推估預算（100／150／200 坪）</h3>
+<blockquote>⚠️ <strong>此為基於公開行情的粗略推估，僅供量級判斷與比價基準，非正式報價。</strong> 單價一律「推估區間・新台幣・未稅・連工帶料」，實際依苗圃與工程實際報價；金額已統一以「萬元」呈現並保留區間，請勿當單一定值。</blockquote>
+<p><strong>推估方法</strong>：以已算死的株數（見上表）× 撈回的台灣真實行情單價區間（來源見文末），逐項相乘加總；低標＝全部取下緣、高標＝全部取上緣，故實際落點通常在區間中段。</p>
+<p>#### 三尺寸總預算比較（萬元・區間）</p>
+<table><thead><tr><th>分項</th><th>100 坪</th><th>150 坪</th><th>200 坪</th></tr></thead><tbody><tr><td>A 植栽連工帶料（苗木+種植+支架）</td><td>7.7–16.2</td><td>11.2–23.6</td><td>15.4–32.4</td></tr><tr><td>B 排水土方工程</td><td>21.0–62.0</td><td>32.5–94.2</td><td>45.9–130.7</td></tr><tr><td>C 東北側防風網</td><td>0.8–2.1</td><td>1.1–3.1</td><td>1.5–4.2</td></tr><tr><td>小計（A+B+C）</td><td>29.4–80.3</td><td>44.8–120.9</td><td>62.7–167.3</td></tr><tr><td>D 設計監造（5–12%）</td><td>1.5–9.6</td><td>2.2–14.5</td><td>3.1–20.1</td></tr><tr><td><strong>推估總計</strong></td><td><strong>30.9–89.9 萬</strong></td><td><strong>47.0–135.4 萬</strong></td><td><strong>65.8–187.4 萬</strong></td></tr><tr><td>每坪單價（萬/坪）</td><td>0.31–0.90</td><td>0.31–0.90</td><td>0.33–0.94</td></tr></tbody></table>
+<blockquote><strong>誠實註記：本推估的每坪單價三尺寸大致持平（甚至 200 坪略高）</strong>，因為這個量級模型幾乎全是線性項（株數、暗管、客土、整地、明溝、防風網皆隨長度／面積放大），設計監造又以純比例計。比較報告所述「150 坪單位成本效率最高」來自<strong>固定費攤薄</strong>（設計規劃 base、機具進場動員、灌溉控制中樞、放樣、比價差旅、攝影母片）——這些在本量級推估中未細拆為固定項，故未顯現。<strong>實務上計入固定費後，150／200 坪每坪會略低於 100 坪</strong>；本表僅供量級判斷，單位成本優勢請以比較報告的成本結構分析為準。</blockquote>
+<p>#### A 植栽連工帶料明細（萬元・區間）</p>
+<table><thead><tr><th>項目</th><th>規格／數量邏輯</th><th>100 坪</th><th>150 坪</th><th>200 坪</th></tr></thead><tbody><tr><td>第四排大規格主樹</td><td>米徑10cm+・2／3／4 株</td><td>1.8–3.6</td><td>2.7–5.4</td><td>3.6–7.2</td></tr><tr><td>中規格喬木</td><td>米徑5–8cm・第四排其餘+第三排</td><td>4.2–8.4</td><td>6.0–11.9</td><td>8.4–16.8</td></tr><tr><td>第二排灌木</td><td>1m軟盆・30／44／60 株</td><td>0.2–0.6</td><td>0.3–0.9</td><td>0.4–1.2</td></tr><tr><td>第一排草花</td><td>按面積60／90／120㎡</td><td>1.5–3.6</td><td>2.2–5.4</td><td>3.0–7.2</td></tr></tbody></table>
+<p>#### B 排水土方明細（萬元・區間）</p>
+<table><thead><tr><th>項目</th><th>量</th><th>100 坪</th><th>150 坪</th><th>200 坪</th></tr></thead><tbody><tr><td>暗管排水</td><td>總長(m) 60–90／135–180／240–300</td><td>3.6–12.6</td><td>8.1–25.2</td><td>14.4–42.0</td></tr><tr><td>植床墊高客土</td><td>86m³／128m³／171m³</td><td>4.3–9.5</td><td>6.4–14.1</td><td>8.6–18.8</td></tr><tr><td>全區深耕整地</td><td>坪數計</td><td>0.8–3.0</td><td>1.2–4.5</td><td>1.6–6.0</td></tr><tr><td>周邊明溝(RC)</td><td>周長(m) 82／112／142</td><td>12.3–36.9</td><td>16.8–50.4</td><td>21.3–63.9</td></tr></tbody></table>
+<blockquote><strong>B 的最大擺動項是「周邊 RC 明溝」</strong>（1,500–4,500/m）。若改用較簡易的土溝／草溝排洪，這項可大幅下降——是壓低總價的第一個議價點。暗管條數隨長度增加，亦為線性放大項。</blockquote>
+<p>#### 假設與來源</p>
+<p><strong>幾何假設</strong>：植床有效深 9.5m（11m 扣走道 1.5m）、平均墊高 0.3m；暗管沿長邊每條約等於長邊長、條數 2–3／3–4／4–5；防風網僅東北側長邊；明溝為四周周長。</p>
+<p><strong>單價區間來源（連工帶料・新台幣）</strong>：</p>
+<table><thead><tr><th>項目</th><th>區間</th><th>來源／信心</th></tr></thead><tbody><tr><td>喬木大規格(米徑10cm+)</td><td>9,000–18,000/株</td><td>PRO360 樹木移植均7,750・最高15,000＋吊卡車5,000–8,000/日；國瑞錨點按米徑放大（粗估）</td></tr><tr><td>喬木中規格(米徑5–8cm)</td><td>3,500–7,000/株</td><td>宜蘭國瑞園藝 米徑3cm 連工帶料 2,000–3,000/株 按規格放大（有來源）</td></tr><tr><td>1m軟盆灌木</td><td>60–200/株</td><td>宜蘭國瑞 灌木(高30cm) 25–50/株、1m 株放大（有來源）</td></tr><tr><td>草花按面積</td><td>250–600/㎡</td><td>田尾穴盤苗3–10/株＋種植工攤計（粗估低信心）</td></tr><tr><td>暗管排水</td><td>600–1,400/m</td><td>波紋管ø100–150約80–200/m＋碎石不織布＋開挖回填（成本拆解推估）</td></tr><tr><td>植床客土</td><td>500–1,100/m³</td><td>國瑞 坋砂土方300、粗砂800/m³＋怪手7,000/日＋技工攤計（有來源）</td></tr><tr><td>全區深耕整地</td><td>80–300/坪</td><td>PRO360 整地怪手7,000–10,000/日、人工3,000–4,000/日換算（粗估）</td></tr><tr><td>周邊RC明溝</td><td>1,500–4,500/m</td><td>新竹市113年度工程參考單價・新設排水明溝（含蓋）（有來源）</td></tr><tr><td>東北防風網含立柱</td><td>250–700/m</td><td>農地圍籬網布120–300/m＋錏管立柱（有來源）</td></tr><tr><td>設計監造</td><td>工程造價 5–12%</td><td>工地人生景觀佔比約5%、公共工程比例法（有來源）</td></tr></tbody></table>
+<blockquote><strong>未含</strong>：苗木保活養護金（業界為植栽工程款 30–40% 保留款，保活期 6–12 個月後退還，非淨成本）；後續養護 150–200/株·月（自行養護可省）；水電泵浦頭端設備、照明、鋪面、土地整理外之雜項。</blockquote>
+<blockquote><strong>議價三點</strong>：① 周邊 RC 明溝改土溝可大降；② 設計監造費勿隨坪數等比（布局相同只延長，應接近固定）；③ 大規格主樹數量是 A 的最大變數，少 1 株省一截，建議僅第四排放 2–4 株。</blockquote>
+<hr>
+<blockquote><strong>校準聲明：本比較基於「四排布局不變、只延長長邊、株數等比放大」之假設推導。實際放樣以基地實測為準，並依現場日照、排水出口、東北季風迎風面與既有步道／泳池平台交點調整；所有金額一律依苗圃實際報價。</strong></blockquote>
 <hr>
 <p><em>資料來源：研究員查證之各物種台灣公開資料（農業知識入口網、林業及自然保育署、農傳媒、台北植物園、宜蘭大學等）；工程對策依全國種樹諮詢中心、宜蘭縣樹木修剪及移植作業規範、臺北市颱風災損樹木處理原則等公開來源。所有照片均為 Wikimedia Commons CC 授權，經驗證後已下載至本報告 images/ 資料夾（每物種含花況特寫＋成株全身照各一張，離線可看）；價格項目未查證者一律標示「依苗圃報價」。</em></p>
 </div>
