@@ -1,0 +1,28 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>08 Lookbook</title><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@500;600;700&family=Spectral:wght@400;500;600&display=swap" rel="stylesheet"><style>*{margin:0;padding:0;box-sizing:border-box}body{display:flex;justify-content:center;align-items:center;min-height:100vh;background:#2a2823;font-family:'Inter',Helvetica,Arial,sans-serif}.slide{width:1280px;height:720px;position:relative;overflow:hidden}
+.slide{background:#0c0b09}
+.grid{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr}
+.cell{position:relative;overflow:hidden}.cell img{width:100%;height:100%;object-fit:cover}
+.cell::after{content:"";position:absolute;inset:0;background:rgba(10,9,7,.32)}
+.cap{position:absolute;z-index:3;color:#f4ecd9;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:600}
+.c1{top:20px;left:24px}.c2{top:20px;right:24px;text-align:right}.c3{bottom:130px;left:24px}.c4{bottom:130px;right:24px;text-align:right}
+.plate{position:absolute;z-index:5;top:50%;left:50%;transform:translate(-50%,-58%);text-align:center;color:#fff;width:560px}
+.plate .k{font-size:12px;letter-spacing:5px;color:#d8c489;text-transform:uppercase;font-weight:600}
+.plate h1{font-family:'Cormorant Garamond',serif;font-size:60px;font-weight:700;line-height:1.02;margin:10px 0;text-shadow:0 3px 26px rgba(0,0,0,.6)}
+.plate .t{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:20px;color:#ece2cb}
+.bar{position:absolute;bottom:0;left:0;width:100%;height:108px;z-index:6;background:linear-gradient(180deg,transparent,#0c0b09 38%);display:grid;grid-template-columns:repeat(3,1fr);align-items:center;padding:0 40px 14px;gap:30px}
+.b .l{font-size:10px;letter-spacing:2px;color:#d8c489;text-transform:uppercase;font-weight:700}
+.b h3{font-family:'Cormorant Garamond',serif;font-size:19px;color:#fff;font-weight:600;margin:1px 0 2px}
+.b p{font-size:11.5px;color:#bdb3a0;line-height:1.4}
+</style></head><body><div class="slide">
+<div class="grid">
+ <div class="cell"><img src="img/golf.jpg"></div><div class="cell"><img src="img/dish.jpg"></div>
+ <div class="cell"><img src="img/auction.jpg"></div><div class="cell"><img src="img/scent.jpg"></div>
+</div>
+<div class="cap c1">Indoor Golf</div><div class="cap c2">Haute Cuisine</div><div class="cap c3">Art Auction</div><div class="cap c4">Fine Fragrance</div>
+<div class="plate"><div class="k">HJ Development Program</div><h1>An Education in<br>the Art of Belonging</h1><div class="t">A two-day immersive seminar · for 31 advisors</div></div>
+<div class="bar">
+ <div class="b"><div class="l">Purpose</div><h3>Fluency in Luxury</h3><p>Advisors who converse as peers, not as staff.</p></div>
+ <div class="b"><div class="l">Method</div><h3>A Curated Immersion</h3><p>Golf, auction, scent &amp; dining — then quiet strategy.</p></div>
+ <div class="b"><div class="l">Outcome</div><h3>Relationships, Refined</h3><p>Presence, talking points &amp; a 2H plan per advisor.</p></div>
+</div>
+</div></body></html>
