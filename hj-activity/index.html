@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>活動內容建議 · HJ Development Program</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--emerald:#123e34;--gold:#b6924c;--ink:#23241f;--mut:#6c6a62;--ivory:#f6f3ec;--line:#e2dccd}
+body{background:#ece7da;font-family:'Inter',Helvetica,Arial,sans-serif;color:var(--ink);line-height:1.55}
+.wrap{max-width:1180px;margin:0 auto;padding:0 0 70px}
+header{background:linear-gradient(120deg,#0f3329,#1c5446);color:#f3eee1;padding:46px 56px 40px;position:relative}
+header::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:6px;background:linear-gradient(90deg,var(--gold),transparent)}
+header .kick{letter-spacing:4px;font-size:12px;color:var(--gold);text-transform:uppercase;font-weight:600}
+header h1{font-family:'Playfair Display',serif;font-size:38px;font-weight:800;margin:8px 0 6px;line-height:1.08}
+header p{font-size:15px;color:#d6cfbe;max-width:760px}
+.sec{padding:34px 56px 0}
+.sec h2{font-family:'Playfair Display',serif;font-size:23px;color:var(--emerald);margin-bottom:4px}
+.sec .sub{font-size:13px;color:var(--mut);margin-bottom:18px}
+/* recommendation */
+.rec{background:#fff;border:2px solid var(--gold);border-radius:14px;padding:26px 30px;margin:30px 56px 0;
+      box-shadow:0 10px 30px rgba(40,30,10,.08)}
+.rec .lab{display:inline-block;background:var(--gold);color:#fff;font-size:11px;letter-spacing:2px;font-weight:700;
+          padding:5px 13px;border-radius:20px;text-transform:uppercase}
+.rec h2{font-family:'Playfair Display',serif;font-size:25px;color:var(--emerald);margin:12px 0 8px}
+.rec p{font-size:14.5px;color:#3c3a32}
+.rec .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px}
+.rec .step{background:var(--ivory);border-radius:10px;padding:14px 16px;border-top:3px solid var(--emerald)}
+.rec .step b{display:block;font-family:'Playfair Display',serif;color:var(--emerald);font-size:15px;margin-bottom:3px}
+.rec .step span{font-size:12.5px;color:#555}
+.rec .alt{margin-top:16px;font-size:13.5px;color:var(--mut)}
+.rec .alt b{color:var(--emerald)}
+/* matrix */
+table{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden;
+       box-shadow:0 6px 20px rgba(40,30,10,.06);font-size:13px}
+th,td{padding:11px 9px;text-align:center;border-bottom:1px solid var(--line)}
+thead th{background:var(--emerald);color:#f1ecdf;font-size:11px;letter-spacing:.5px;font-weight:600}
+thead th:first-child{text-align:left;padding-left:18px}
+.mname{text-align:left!important;padding-left:18px;font-weight:600;white-space:nowrap;font-size:12.5px}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:7px;vertical-align:middle}
+.on{color:var(--gold);letter-spacing:1px} .off{color:#dcd6c8;letter-spacing:1px}
+tr.hi{background:#faf6ea}
+tr.hi .mname{color:var(--emerald)}
+.fit b{font-family:'Playfair Display',serif;font-size:16px;color:var(--emerald)}
+.legend{font-size:11.5px;color:var(--mut);margin-top:9px}
+/* cards */
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
+.card{background:#fff;border-radius:12px;padding:20px 22px;border-left:5px solid var(--ac);
+       box-shadow:0 5px 16px rgba(40,30,10,.05)}
+.cardhead{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.cn{font-family:'Playfair Display',serif;font-size:24px;font-weight:800;color:var(--ac)}
+.cardhead h3{font-family:'Playfair Display',serif;font-size:18px;color:var(--emerald)}
+.cfacts{font-size:11.5px;color:var(--mut)}
+.view{margin-left:auto;font-size:12px;color:var(--ac);text-decoration:none;font-weight:600;white-space:nowrap}
+.view:hover{text-decoration:underline}
+.cfit{background:var(--emerald);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px}
+.csig{font-size:13px;color:#46443c;font-style:italic;margin:11px 0 13px}
+.pc{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.pc h4{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px}
+.pros h4{color:#2f6d5b} .cons h4{color:#a8762a}
+.pc ul{list-style:none}
+.pc li{font-size:12.5px;line-height:1.5;padding-left:17px;position:relative;margin-bottom:5px;color:#43413a}
+.pros li::before{content:"✓";position:absolute;left:0;color:#2f6d5b;font-weight:700}
+.cons li::before{content:"–";position:absolute;left:0;color:#a8762a;font-weight:700}
+footer{padding:26px 56px 0;font-size:12px;color:var(--mut);line-height:1.6}
+footer b{color:var(--emerald)}
+@media print{body{background:#fff} .card,table,.rec{box-shadow:none}}
+</style></head><body><div class="wrap">
+<header>
+  <div class="kick">HJ Development Program · 2-Day Immersive Seminar</div>
+  <h1>活動內容建議<span style='font-family:Inter;font-weight:400;font-size:18px;display:block;margin-top:6px;color:#cda85a;letter-spacing:1px'>10 Ways to Execute · Comparison &amp; Recommendation</span></h1>
+  <p>Same goal, same learning outcomes — ten different ways to run it. Scored on what management weighs most: approval-ease, event-readiness and cost-efficiency. For 31 Sales Associates, ahead of the HK Golf Tournament &amp; HJ Caravan.</p>
+</header>
+
+<div class="rec">
+  <span class="lab">★ Best Solution</span>
+  <h2>A phased hybrid — not one option, but the smartest sequence of four</h2>
+  <p>No single option wins every dimension. The optimal design combines the highest-scoring methods into one approval-ready, event-timed path that maximises readiness and cost-efficiency while keeping real immersion.</p>
+  <div class="steps">
+    <div class="step"><b>1 · Front-load</b><span>Digital pre-work (Opt 05) — golf / art / scent e-learning before anyone meets.</span></div>
+    <div class="step"><b>2 · Pilot</b><span>Leaders-First 1-Day Intensive (Opt 04 + 02) — de-risk &amp; create internal coaches.</span></div>
+    <div class="step"><b>3 · Cascade</b><span>Roll the 1-Day Intensive out to all SAs in store cohorts.</span></div>
+    <div class="step"><b>4 · Rehearse</b><span>Caravan Rehearsal Bootcamp (Opt 10) timed just before the two key events.</span></div>
+  </div>
+  <p class="alt"><b>If management wants one simple slide to approve:</b> go with <b>Option 02 — One-Day Intensive</b> (highest stand-alone cost-to-impact), and add the Leaders-First pilot only if budget sign-off needs de-risking.</p>
+</div>
+
+<div class="sec">
+  <h2>Scorecard</h2>
+  <div class="sub">Each dimension rated ●●●●● (5 = strongest). <b>Fit Score</b> = weighted total, with Event-Readiness, Approval-Ease and Cost-Efficiency weighted highest. Top-3 highlighted.</div>
+  <table><thead><tr><th>Execution Method</th><th>Immersion</th><th>Cost-Eff.</th><th>Floor-Friendly</th><th>Scalability</th><th>Event-Ready</th><th>Approval-Ease</th><th>Retention</th><th>Fit</th></tr></thead><tbody><tr><td class="mname"><span class="dot" style="background:#123e34"></span>01 · Two-Day Signature Immersion</td><td><span class="on">●●●●●</span><span class="off"></span></td><td><span class="on">●●</span><span class="off">●●●</span></td><td><span class="on">●</span><span class="off">●●●●</span></td><td><span class="on">●●</span><span class="off">●●●</span></td><td><span class="on">●●●●</span><span class="off">●</span></td><td><span class="on">●●</span><span class="off">●●●</span></td><td><span class="on">●●●</span><span class="off">●●</span></td><td class="fit"><b>55</b></td></tr><tr><td class="mname"><span class="dot" style="background:#9a7327"></span>02 · One-Day Intensive</td><td><span class="on">●●●●</span><span class="off">●</span></td><td><span class="on">●●●●</span><span class="off">●</span></td><td><span class="on">●●●</span><span class="off">●●</span></td><td><span class="on">●●●</span><span class="off">●●</span></td><td><span class="on">●●●●</span><span class="off">●</span></td><td><span class="on">●●●●</span><span class="off">●</span></td><td><span class="on">●●●</span><span class="off">●●</span></td><td class="fit"><b>74</b></td></tr><tr><td class="mname"><span class="dot" style="background:#2f6d5b"></span>03 · Modular Quarter Series</td><td><span class="on">●●●</span><span class="off">●●</span></td><td><span class="on">●●●●</span><span class="off">●</span></td><td><span class="on">●●●●</span><span class="off">●</span></td><td><span class="on">●●●●</span><span class="off">●</span></td><td><span class="on">●●●</span><span class="off">●●</span></td><td><span class="on">●●●●</span><span class="off">●</span></td><td><span class="on">●●●●●</span><span class="off"></span></td><td class="fit"><b>76</b></td></tr><tr class="hi"><td class="mname"><span class="dot" style="background:#5b4a82"></span>04 · Leaders-First Pilot &amp; Cascade</td><td><span class="on">●●●●</span><span class="off">●</span></td><td><span class="on">●●●●</span><span class="off">●</span></td><td><span class="on">●●●●</span><span class="off">●</span></td><td><span class="on">●●●●●</span><span class="off"></span></td><td><span class="on">●●●</span><span class="off">●●</span></td><td><span class="on">●●●●●</span><span class="off"></span></td><td><span class="on">●●●●</span><span class="off">●</span></td><td class="fit"><b>82</b></td></tr><tr class="hi"><td class="mname"><span class="dot" style="background:#2c5f7a"></span>05 · Hybrid: Pre-work + Live Day</td><td><span class="on">●●●</span><span class="off">●●</span></td><td><span class="on">●●●●●</span><span class="off"></span></td><td><span class="on">●●●●</span><span class="off">●</span></td><td><span class="on">●●●●●</span><span class="off"></span></td><td><span class="on">●●●</span><span class="off">●●</span></td><td><span class="on">●●●●</span><span class="off">●</span></td><td><span class="on">●●●●</span><span class="off">●</span></td><td class="fit"><b>79</b></td></tr><tr><td class="mname"><span class="dot" style="background:#8a5a2b"></span>06 · In-Store Regional Roadshow</td><td><span class="on">●●●</span><span class="off">●●</span></td><td><span class="on">●●●</span><span class="off">●●</span></td><td><span class="on">●●●●●</span><span class="off"></span></td><td><span class="on">●●●●</span><span class="off">●</span></td><td><span class="on">●●●</span><span class="off">●●</span></td><td><span class="on">●●●</span><span class="off">●●</span></td><td><span class="on">●●●</span><span class="off">●●</span></td><td class="fit"><b>66</b></td></tr><tr><td class="mname"><span class="dot" style="background:#7a2f3a"></span>07 · Live VIC Event Embed</td><td><span class="on">●●●●●</span><span class="off"></span></td><td><span class="on">●●●</span><span class="off">●●</span></td><td><span class="on">●●●</span><span class="off">●●</span></td><td><span class="on">●●</span><span class="off">●●●</span></td><td><span class="on">●●●●●</span><span class="off"></span></td><td><span class="on">●●</span><span class="off">●●●</span></td><td><span class="on">●●●●</span><span class="off">●</span></td><td class="fit"><b>68</b></td></tr><tr><td class="mname"><span class="dot" style="background:#3f6b3a"></span>08 · Recurring Lifestyle Salon</td><td><span class="on">●●●</span><span class="off">●●</span></td><td><span class="on">●●●●</span><span class="off">●</span></td><td><span class="on">●●●●</span><span class="off">●</span></td><td><span class="on">●●●●</span><span class="off">●</span></td><td><span class="on">●●</span><span class="off">●●●</span></td><td><span class="on">●●●</span><span class="off">●●</span></td><td><span class="on">●●●●●</span><span class="off"></span></td><td class="fit"><b>67</b></td></tr><tr><td class="mname"><span class="dot" style="background:#b06a1f"></span>09 · Gamified Cohort Challenge</td><td><span class="on">●●●●</span><span class="off">●</span></td><td><span class="on">●●●</span><span class="off">●●</span></td><td><span class="on">●●●</span><span class="off">●●</span></td><td><span class="on">●●●</span><span class="off">●●</span></td><td><span class="on">●●●</span><span class="off">●●</span></td><td><span class="on">●●●</span><span class="off">●●</span></td><td><span class="on">●●●●</span><span class="off">●</span></td><td class="fit"><b>64</b></td></tr><tr class="hi"><td class="mname"><span class="dot" style="background:#14463b"></span>10 · Caravan Rehearsal Bootcamp</td><td><span class="on">●●●●</span><span class="off">●</span></td><td><span class="on">●●●●</span><span class="off">●</span></td><td><span class="on">●●●●</span><span class="off">●</span></td><td><span class="on">●●●</span><span class="off">●●</span></td><td><span class="on">●●●●●</span><span class="off"></span></td><td><span class="on">●●●●</span><span class="off">●</span></td><td><span class="on">●●●</span><span class="off">●●</span></td><td class="fit"><b>80</b></td></tr></tbody></table>
+  <div class="legend">Scores are qualitative planning estimates, not measured data. "Investment" is relative (High / Moderate / Lean) — no monetary figures are included because the source proposal did not provide pricing.</div>
+</div>
+
+<div class="sec">
+  <h2>The Ten Methods — Pros &amp; Cons</h2>
+  <div class="sub">👑 marks the single highest Fit Score. Click "View slide" to open each one-pager.</div>
+  <div class="cards"><div class="card" style="--ac:#123e34">
+      <div class="cardhead"><span class="cn">01</span>
+        <div><h3>Two-Day Signature Immersion</h3><div class="cfacts">2 Days · Overnight OKU Hotel · Full Suite Experiences · High Investment</div></div>
+        <a class="view" href="HJ_01_Flagship.html" target="_blank">View slide ↗</a>
+        <span class="cfit">Fit 55</span></div>
+      <p class="csig">Maximum immersion &amp; team bonding — the full signature experience.</p>
+      <div class="pc"><div class="pros"><h4>Pros</h4><ul><li>Deepest immersion &amp; authority-building</li><li>Strongest team cohesion</li><li>Premium, memorable brand signal</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>Highest cost</li><li>All 31 off-floor for 2 days</li><li>One-off — learning can fade</li></ul></div></div>
+    </div><div class="card" style="--ac:#9a7327">
+      <div class="cardhead"><span class="cn">02</span>
+        <div><h3>One-Day Intensive</h3><div class="cfacts">1 Day · No Overnight · 2 Hooks + Workshop · Moderate Investment</div></div>
+        <a class="view" href="HJ_02_Intensive.html" target="_blank">View slide ↗</a>
+        <span class="cfit">Fit 74</span></div>
+      <p class="csig">Best cost-to-impact — the full learning core with minimal time off-floor.</p>
+      <div class="pc"><div class="pros"><h4>Pros</h4><ul><li>Strong impact at ~half the cost</li><li>Only one day off-floor</li><li>Easy to approve &amp; schedule</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>Less bonding than an overnight</li><li>Compressed agenda</li><li>No fine-dining centrepiece</li></ul></div></div>
+    </div><div class="card" style="--ac:#2f6d5b">
+      <div class="cardhead"><span class="cn">03</span>
+        <div><h3>Modular Quarter Series</h3><div class="cfacts">3–4 Sessions · In-City Venue · Per Quarter Cadence · Lean Investment</div></div>
+        <a class="view" href="HJ_03_Modular.html" target="_blank">View slide ↗</a>
+        <span class="cfit">Fit 76</span></div>
+      <p class="csig">Lowest disruption — learning reinforced over time and easy to scale.</p>
+      <div class="pc"><div class="pros"><h4>Pros</h4><ul><li>Spaced repetition aids retention</li><li>Minimal floor disruption</li><li>Budget spread over time</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>Slower to full readiness</li><li>Lower immersion 'wow'</li><li>Needs sustained coordination</li></ul></div></div>
+    </div><div class="card" style="--ac:#5b4a82">
+      <div class="cardhead"><span class="cn">04</span>
+        <div><h3>Leaders-First Pilot &amp; Cascade 👑</h3><div class="cfacts">2 Waves · Train-the Trainer · Phased Rollout · Moderate Investment</div></div>
+        <a class="view" href="HJ_04_LeadersFirst.html" target="_blank">View slide ↗</a>
+        <span class="cfit">Fit 82</span></div>
+      <p class="csig">De-risked &amp; scalable — leaders learn first, then coach their own teams.</p>
+      <div class="pc"><div class="pros"><h4>Pros</h4><ul><li>De-risks before full spend</li><li>Builds lasting internal coaching capacity</li><li>Easiest sign-off (small pilot first)</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>Longer total timeline</li><li>Quality depends on the leaders</li><li>Two rounds to coordinate</li></ul></div></div>
+    </div><div class="card" style="--ac:#2c5f7a">
+      <div class="cardhead"><span class="cn">05</span>
+        <div><h3>Hybrid: Pre-work + Live Day</h3><div class="cfacts">1 Live Day · + E- Learning · Blended Mode · Lean Investment</div></div>
+        <a class="view" href="HJ_05_Hybrid.html" target="_blank">View slide ↗</a>
+        <span class="cfit">Fit 79</span></div>
+      <p class="csig">Knowledge front-loaded online — live time spent purely on practice.</p>
+      <div class="pc"><div class="pros"><h4>Pros</h4><ul><li>Most cost-efficient</li><li>Live time maximised for practice</li><li>Reusable content asset for new hires</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>Relies on self-paced completion</li><li>Less in-person immersion</li><li>Needs content production upfront</li></ul></div></div>
+    </div><div class="card" style="--ac:#8a5a2b">
+      <div class="cardhead"><span class="cn">06</span>
+        <div><h3>In-Store Regional Roadshow</h3><div class="cfacts">5 Stops · On-Site Delivery · Rotational Schedule · Moderate Investment</div></div>
+        <a class="view" href="HJ_06_Roadshow.html" target="_blank">View slide ↗</a>
+        <span class="cfit">Fit 66</span></div>
+      <p class="csig">Bring the experience to them — near-zero floor downtime, region by region.</p>
+      <div class="pc"><div class="pros"><h4>Pros</h4><ul><li>Minimal travel &amp; downtime</li><li>Fair access across all regions</li><li>Flexible scheduling</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>Diluted 'offsite' magic</li><li>Repeated setup logistics</li><li>Harder team-wide bonding</li></ul></div></div>
+    </div><div class="card" style="--ac:#7a2f3a">
+      <div class="cardhead"><span class="cn">07</span>
+        <div><h3>Live VIC Event Embed</h3><div class="cfacts">1 Live Event · Real Clients · On-the Floor · High Investment</div></div>
+        <a class="view" href="HJ_07_LiveEvent.html" target="_blank">View slide ↗</a>
+        <span class="cfit">Fit 68</span></div>
+      <p class="csig">Highest real-world transfer — train on the floor at a real client event.</p>
+      <div class="pc"><div class="pros"><h4>Pros</h4><ul><li>Direct real-world skill transfer</li><li>Doubles as a sales / relationship event</li><li>Immediate ROI signal</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>High execution risk in front of clients</li><li>Hard to control the learning</li><li>Costly &amp; high-stakes</li></ul></div></div>
+    </div><div class="card" style="--ac:#3f6b3a">
+      <div class="cardhead"><span class="cn">08</span>
+        <div><h3>Recurring Lifestyle Salon</h3><div class="cfacts">Ongoing Programme · Monthly– Quarterly · In-City Venue · Lean Investment</div></div>
+        <a class="view" href="HJ_08_Salon.html" target="_blank">View slide ↗</a>
+        <span class="cfit">Fit 67</span></div>
+      <p class="csig">Capability as culture — a permanent learning rhythm, not a one-off.</p>
+      <div class="pc"><div class="pros"><h4>Pros</h4><ul><li>Best long-term retention &amp; culture</li><li>Steady, predictable budget</li><li>Evolves with trends</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>Slowest to event-readiness</li><li>Requires lasting commitment</li><li>Lower urgency per session</li></ul></div></div>
+    </div><div class="card" style="--ac:#b06a1f">
+      <div class="cardhead"><span class="cn">09</span>
+        <div><h3>Gamified Cohort Challenge</h3><div class="cfacts">1–2 Days · Competition Format · Cohorts Teams · Moderate Investment</div></div>
+        <a class="view" href="HJ_09_Gamified.html" target="_blank">View slide ↗</a>
+        <span class="cfit">Fit 64</span></div>
+      <p class="csig">Energy &amp; measurability — teams compete across the experiences.</p>
+      <div class="pc"><div class="pros"><h4>Pros</h4><ul><li>High engagement &amp; motivation</li><li>Naturally measurable outcomes</li><li>Strong peer learning</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>Competition can overshadow learning</li><li>Needs careful scoring design</li><li>Risk of uneven cohorts</li></ul></div></div>
+    </div><div class="card" style="--ac:#14463b">
+      <div class="cardhead"><span class="cn">10</span>
+        <div><h3>Caravan Rehearsal Bootcamp</h3><div class="cfacts">1 Day · Scenario Based · Pre-Event Timing · Moderate Investment</div></div>
+        <a class="view" href="HJ_10_Rehearsal.html" target="_blank">View slide ↗</a>
+        <span class="cfit">Fit 80</span></div>
+      <p class="csig">Event-ready — a focused dress rehearsal for the Tournament &amp; Caravan.</p>
+      <div class="pc"><div class="pros"><h4>Pros</h4><ul><li>Tightest link to the two key events</li><li>Fast, targeted readiness</li><li>Practical, low fluff</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>Narrow, event-specific scope</li><li>Less broad lifestyle depth</li><li>Perishable after the events</li></ul></div></div>
+    </div></div>
+</div>
+
+<footer>
+  <b>How to use this:</b> take the recommended phased path to upper management as the plan, with the Scorecard as your rationale and the ten one-pagers as the option menu. &nbsp;|&nbsp;
+  <b>Honesty note:</b> no budget numbers are stated (source PDF had none); Fit Scores are planning judgements to structure the decision, not benchmarked metrics.
+</footer>
+</div></body></html>
