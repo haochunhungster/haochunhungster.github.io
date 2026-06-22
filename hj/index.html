@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-Hant"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HJ Development Program · 提案資料總入口</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Noto+Serif+TC:wght@600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--emerald:#123e34;--gold:#b6924c;--ink:#26241d;--mut:#6c6a62;--ivory:#f6f3ec;--line:#e2dccd}
+body{background:#ece7da;font-family:'Noto Sans TC','Inter',sans-serif;color:var(--ink);min-height:100vh}
+.wrap{max-width:1140px;margin:0 auto;padding:0 24px 64px}
+header{background:linear-gradient(120deg,#0f3329,#1c5446);color:#f3eee1;border-radius:0 0 18px 18px;padding:48px 52px 42px;position:relative;overflow:hidden}
+header::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:6px;background:linear-gradient(90deg,var(--gold),transparent)}
+.kk{font-size:12px;letter-spacing:4px;color:var(--gold);font-weight:700;text-transform:uppercase}
+header h1{font-family:'Playfair Display',serif;font-size:40px;font-weight:800;margin:9px 0 4px;line-height:1.05}
+header .zh{font-family:'Noto Serif TC',serif;font-size:20px;color:#e7dcc1;font-weight:600}
+header p{font-size:13.5px;color:#cfc7b5;max-width:720px;margin-top:14px;line-height:1.7}
+.meta{display:flex;gap:26px;margin-top:18px;flex-wrap:wrap}
+.meta div b{font-family:'Playfair Display',serif;font-size:19px;color:#fff;display:block;line-height:1}
+.meta div span{font-size:10.5px;letter-spacing:1.5px;color:var(--gold);text-transform:uppercase}
+.lead{text-align:center;margin:38px 0 22px}
+.lead .l{font-size:12px;letter-spacing:3px;color:var(--gold);font-weight:700;text-transform:uppercase}
+.lead h2{font-family:'Noto Serif TC',serif;font-size:23px;color:var(--emerald);margin-top:5px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.card{background:#fff;border-radius:14px;overflow:hidden;text-decoration:none;color:inherit;
+      box-shadow:0 10px 28px rgba(40,30,10,.1);display:flex;flex-direction:column;transition:transform .14s,box-shadow .14s}
+.card:hover{transform:translateY(-5px);box-shadow:0 18px 40px rgba(40,30,10,.18)}
+.thumb{height:150px;position:relative;overflow:hidden}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,20,16,.12),rgba(8,20,16,.45))}
+.num{position:absolute;top:12px;left:14px;z-index:2;font-family:'Playfair Display',serif;font-size:30px;font-weight:800;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.5)}
+.cb{padding:18px 20px 20px;display:flex;flex-direction:column;flex:1}
+.cl{font-size:11px;letter-spacing:2px;color:var(--gold);font-weight:700;text-transform:uppercase}
+.ct{font-family:'Noto Serif TC',serif;font-size:19px;color:var(--emerald);font-weight:700;margin:4px 0 8px}
+.cx{font-size:13px;line-height:1.6;color:#4f4c44;flex:1}
+.go{margin-top:14px;font-size:12.5px;font-weight:700;color:var(--emerald);letter-spacing:.5px}
+.go span{color:var(--gold)}
+footer{text-align:center;margin-top:34px;font-size:12px;color:var(--mut);line-height:1.7}
+footer b{color:var(--emerald)}
+@media(max-width:880px){.cards{grid-template-columns:1fr}header h1{font-size:30px}}
+</style></head><body>
+<header>
+  <div class="kk">HJ Development Program · 2-Day Immersive Seminar</div>
+  <h1>Proposal Hub</h1>
+  <div class="zh">提案資料總入口</div>
+  <p>同一場「2 天沉浸式研討會」的完整提案資料，一頁集中。目的：將 31 位 Sales Associate 從「奢華服務」升級為「關係經營（Clienteling）」，迎戰 HK Golf Tournament 與 HJ Caravan。</p>
+  <div class="meta">
+    <div><b>31</b><span>Participants</span></div>
+    <div><b>2</b><span>Days · Taichung</span></div>
+    <div><b>3</b><span>Documents</span></div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="lead"><div class="l">Contents</div><h2>三份資料，點卡片開啟</h2></div>
+  <div class="cards">
+    <a class="card" href="/hj-activity/">
+      <div class="thumb"><span class="num">01</span><img src="/hj-styles/img/hotel.jpg" alt=""></div>
+      <div class="cb"><div class="cl">Recommendation</div><div class="ct">活動內容建議</div>
+        <div class="cx">十種不同的活動執行方式比較，含七維評分矩陣與「最佳解」推薦——給上級選一個方向核准。</div>
+        <div class="go">開啟比較與建議 <span>→</span></div></div>
+    </a>
+    <a class="card" href="/hj-styles/">
+      <div class="thumb"><span class="num">02</span><img src="/hj-styles/img/dish.jpg" alt=""></div>
+      <div class="cb"><div class="cl">One-Pager · 10 Styles</div><div class="ct">一頁簡報 · 10 種風格</div>
+        <div class="cx">活動內容相同，10 種不同的視覺風格與文案口吻（Executive／Editorial／Cinematic…）。挑一張上場。</div>
+        <div class="go">瀏覽 10 種風格 <span>→</span></div></div>
+    </a>
+    <a class="card" href="/hj-checklist/">
+      <div class="thumb"><span class="num">03</span><img src="/hj-styles/img/venue.jpg" alt=""></div>
+      <div class="cb"><div class="cl">Checklist</div><div class="ct">提案待釐清清單</div>
+        <div class="cx">送審前要對齊的矛盾、暫定與缺漏共 18 項（含日期、預算等上級必問），逐項勾選確認。</div>
+        <div class="go">查看待釐清清單 <span>→</span></div></div>
+    </a>
+  </div>
+  <footer><b>HJ Development Program</b> · 內部提案資料 &nbsp;|&nbsp; 三份頁面皆可獨立分享，亦可由本入口頁一站瀏覽。</footer>
+</div>
+</body></html>
