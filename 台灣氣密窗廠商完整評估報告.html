@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>台灣氣密窗廠商完整評估報告</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #1a1715;
+  --bg2: #242019;
+  --bg3: #2e2a24;
+  --paper: #f5f0e8;
+  --warm: #c8a96e;
+  --warm2: #e8c88a;
+  --warm-dim: #8a7a5e;
+  --text: #e8e0d0;
+  --text2: #b8a890;
+  --text3: #887a68;
+  --accent: #d4845a;
+  --green: #7aaa6a;
+  --red: #c85a4a;
+  --border: #3a3530;
+}
+*{ box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Sans TC', system-ui, sans-serif;
+  font-weight: 300;
+  line-height: 1.8;
+  padding: 0;
+}
+.wrap {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 3rem 2.5rem 5rem;
+}
+h1 {
+  font-family: 'Noto Serif TC', serif;
+  font-weight: 700;
+  font-size: 2rem;
+  color: var(--warm2);
+  letter-spacing: 0.08em;
+  margin-bottom: 0.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--warm-dim);
+}
+h2 {
+  font-family: 'Noto Serif TC', serif;
+  font-weight: 700;
+  font-size: 1.35rem;
+  color: var(--warm);
+  margin: 3rem 0 1rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.06em;
+}
+h3 {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-weight: 500;
+  font-size: 1.05rem;
+  color: var(--text);
+  margin: 1.8rem 0 0.6rem;
+}
+p { margin: 0.6rem 0; color: var(--text2); }
+strong { color: var(--text); font-weight: 500; }
+em { color: var(--text3); font-style: normal; }
+code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85em;
+  background: var(--bg3);
+  color: var(--warm2);
+  padding: 0.15em 0.4em;
+  border-radius: 3px;
+}
+pre {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1.2rem 1.5rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+  line-height: 1.5;
+}
+pre code {
+  background: none;
+  padding: 0;
+  font-size: 0.82rem;
+  color: var(--text2);
+}
+a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; }
+a:hover { border-bottom-color: var(--accent); }
+hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+blockquote {
+  border-left: 3px solid var(--warm-dim);
+  padding: 0.6rem 1.2rem;
+  margin: 1rem 0;
+  color: var(--text3);
+  background: var(--bg2);
+  border-radius: 0 4px 4px 0;
+  font-size: 0.92rem;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+}
+thead { background: var(--bg3); }
+th {
+  text-align: left;
+  padding: 0.6rem 0.8rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--warm);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-bottom: 2px solid var(--warm-dim);
+}
+td {
+  padding: 0.5rem 0.8rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text2);
+}
+tr:hover td { background: var(--bg2); }
+td:first-child { color: var(--text); font-weight: 400; }
+ul { padding-left: 1.5rem; margin: 0.5rem 0; }
+li { margin: 0.3rem 0; color: var(--text2); }
+li::marker { color: var(--warm-dim); }
+ul.checklist { list-style: none; padding-left: 0.5rem; }
+ul.checklist li { display: flex; align-items: baseline; gap: 0.5rem; }
+ul.checklist input { accent-color: var(--green); transform: scale(1.1); }
+.toc {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  width: 220px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1rem 1.2rem;
+  font-size: 0.78rem;
+  max-height: calc(100vh - 4rem);
+  overflow-y: auto;
+}
+.toc h3 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--warm-dim);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin: 0 0 0.6rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.toc a {
+  display: block;
+  padding: 0.25rem 0;
+  color: var(--text3);
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+.toc a:hover { color: var(--warm); }
+img.zoom {
+  max-width: 100%;
+  max-height: 320px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  cursor: zoom-in;
+  display: block;
+  margin: 0.4rem auto;
+}
+td img.zoom { width: 100%; max-height: 240px; object-fit: cover; }
+#lightbox {
+  position: fixed; inset: 0;
+  background: rgba(10,8,6,.94);
+  display: none; align-items: center; justify-content: center;
+  z-index: 999; cursor: zoom-out; padding: 24px;
+}
+#lightbox img { max-width: 95vw; max-height: 92vh; border-radius: 8px; box-shadow: 0 12px 60px rgba(0,0,0,.7); }
+#lightbox .lbcap { position: fixed; bottom: 16px; left: 0; right: 0; text-align: center; color: #b8aa97; font-size: 13px; letter-spacing: 1px; }
+@media (max-width: 1200px) {
+  .toc { display: none; }
+}
+@media print {
+  body { background: #fff; color: #1a1a1a; }
+  .toc { display: none; }
+  h1 { color: #2a2010; }
+  h2 { color: #4a3a20; }
+  th { color: #4a3a20; }
+  td, p, li { color: #333; }
+  blockquote { background: #f5f0e8; }
+  pre { background: #f8f6f0; }
+}
+</style>
+</head>
+<body>
+<nav class="toc"><h3>目次</h3><a href="#s0">1. 摘要與選購結論（TL;DR）</a><a href="#s1">2. 評判標準科普（看完這段你就內行）</a><a href="#s2">3. 各品牌詳述</a><a href="#s3">4. 平台口碑彙整</a><a href="#s4">5. 各家差評總整理（依類型分類）</a><a href="#s5">6. 價格比較表</a><a href="#s6">7. 綜合比較表</a><a href="#s7">8. 給使用者的行動建議</a><a href="#s8">9. 資料來源清單與限制聲明</a></nav>
+<div class="wrap">
+<h1>台灣氣密窗廠商完整評估報告</h1>
+<blockquote>報告日期：2026-06-23</blockquote>
+<p>></p>
+<blockquote>對象品牌：YKK AP、錦鋐（使用者所稱「錦宏」實為「錦鋐」之誤植）、鵝牌、安固麗科技門窗，並含其他主流品牌橫向比較。</blockquote>
+<p>></p>
+<blockquote>本報告整合公開資料、設計平台、Mobile01／PTT／Threads／Facebook／媒體部落格網友評論，並經事實稽查。<strong>凡查證未果或單一來源者，皆明確標示「(未經證實)」。</strong> 安固麗公開消費評論稀少，本報告誠實寫出此一限制，不以業配內容硬湊口碑。</blockquote>
+<hr>
+<h2 id="s0">1. 摘要與選購結論（TL;DR）</h2>
+<p><strong>先給結論——你該選誰？</strong></p>
+<table><thead><tr><th>需求情境</th><th>推薦</th><th>理由</th></tr></thead><tbody><tr><td><strong>預算充足、迎風高樓／海邊／豪宅、要最頂規格</strong></td><td><strong>YKK AP（YRB-A 系列）</strong></td><td>水密 1500Pa、耐風壓 3600Pa、隔音 35 級為市場頂規；但散戶常買不到、只供建案，且每才 1,200–2,600+ 是國產 2–6 倍</td></tr><tr><td><strong>要防盜＋隔音二合一、低樓層、重隱私（CP 值高端）</strong></td><td><strong>鵝牌（複層防盜格子窗 SW1316/SW1366）</strong></td><td>招牌「玻璃中夾不鏽鋼穿梭管」免外掛鐵窗；隔音實效受肯定；價格比 YKK 親民</td></tr><tr><td><strong>預算中段、要老牌數據齊全、好維修配件</strong></td><td><strong>錦鋐（CH1260/CH1360 系列）</strong></td><td>MIT 垂直整合一貫廠、市佔高、CNS 數據完整、零件好取得；屬國產中段價</td></tr><tr><td><strong>平價、CP 值優先、統包／設計師常用</strong></td><td><strong>正新、大同</strong></td><td>正新 5+5 膠合口碑佳但須查驗原廠防仿冒；大同式樣最齊全、據點廣</td></tr><tr><td><strong>桃園在地、要得獎設計（一秒鎖上／隱藏勾鎖）、不在意價高</strong></td><td><strong>安固麗科技門窗（SP1069/SK1369 系列）</strong></td><td>真品牌真老牌、2026 台灣精品獎屬實、代理 TOSTEM；但價格偏高、公開口碑樣本極少、售後料件供應要先問清楚</td></tr></tbody></table>
+<p><strong>三句話總結市場真相（所有平台共識）：</strong></p>
+<p>1. <strong>「氣密窗 ≠ 隔音窗」</strong>——氣密好只代表不漏風；要隔音要看 CNS 8466 隔音等級 + 玻璃配置（5+5 膠合起跳）。</p>
+<p>2. <strong>「師傅佔八成」</strong>——同一個品牌，施工不確實照樣漏水、漏風、隔音差。選對施工團隊比選對品牌更關鍵。</p>
+<p>3. <strong>「高價 ≠ 不漏水」</strong>——連 YKK 都有颱風天滲水的真實客訴；最大地雷是「品牌→下游加工→工程行」多層轉包後，出問題互踢皮球。</p>
+<p><strong>CP 值 / 高端 / 平價各推誰：</strong></p>
+<ul>
+<li><strong>高端首選</strong>：YKK AP（規格與品牌力最強，貴）</li>
+<li><strong>高 CP 值高端</strong>：鵝牌（防盜隔音二合一，比 YKK 划算）／錦鋐（數據齊、配件好找）</li>
+<li><strong>平價 CP 值</strong>：正新、大同、力霸</li>
+</ul>
+<hr>
+<h2 id="s1">2. 評判標準科普（看完這段你就內行）</h2>
+<p>「氣密窗」在台灣<strong>不是行銷話術，而是有國家標準（CNS）的產品</strong>。合格氣密窗須同時通過四項 CNS 性能試驗並取得「風雨實驗測試報告」。挑窗的本質是「依你家環境與痛點選對等級組合」，不是一味追求最貴。</p>
+<h3>2-1. 四大 CNS 等級（看懂報告數據）</h3>
+<table><thead><tr><th>性能</th><th>CNS 標準</th><th>分級（由低到高）</th><th>數字方向</th><th>白話</th></tr></thead><tbody><tr><td><strong>氣密性</strong></td><td>CNS 11527</td><td>120 / 30 / 8 / <strong>2</strong></td><td><strong>越小越好</strong>（通氣量 m³/hr·m²）</td><td>2 級＝每㎡每小時只漏 2m³ 空氣，最高級；稱氣密窗門檻通常要達 2 級</td></tr><tr><td><strong>水密性</strong></td><td>CNS 11528</td><td>10 / 15 / 25 / 35 / <strong>50</strong></td><td><strong>越大越好</strong>（kgf/m²）</td><td>模擬風壓下擋水能力；合格常要求 50（最高）。迎風面看這項</td></tr><tr><td><strong>抗風壓性</strong></td><td>CNS 11526</td><td>80…200 / 280 / <strong>360</strong></td><td><strong>越大越好</strong>（kgf/m²）</td><td>能承受的瞬間風壓；最高 360＝防颱規格</td></tr><tr><td><strong>隔音性</strong></td><td>CNS 8466</td><td>25 / 30 / 35 / <strong>40</strong></td><td><strong>越大越好</strong>（dB / Rw）</td><td>一般住宅 30、臨大馬路建議 35 以上</td></tr></tbody></table>
+<blockquote><strong>重點</strong>：任何只報「一才多少錢」而不附這四項等級的報價，<strong>都無法比較</strong>。</blockquote>
+<h3>2-2. 玻璃（隔音與安全的關鍵，比鋁框更影響體感）</h3>
+<table><thead><tr><th>類型</th><th>構造</th><th>主打</th><th>隔音表現</th></tr></thead><tbody><tr><td><strong>膠合玻璃（如 5+5）</strong></td><td>兩片玻璃中夾 PVB 樹脂膜壓合</td><td>隔音 + 防墜 + 防盜（破了不落下）</td><td><strong>中低頻（車流／人聲）最有效</strong>，5+5 可達 35dB+；溝槽需 16mm</td></tr><tr><td><strong>複層（中空）玻璃</strong></td><td>兩片玻璃封空氣／惰性氣體</td><td>隔熱節能、防結露</td><td>隔中高頻為主，<strong>低頻隔音不如膠合</strong></td></tr><tr><td><strong>Low-E 玻璃</strong></td><td>中空內側鍍低輻射膜</td><td>阻隔紅外線/UV 熱能、省空調</td><td>隔熱為主</td></tr><tr><td><strong>頂規：膠合複層中空</strong></td><td>膠合＋中空＋膠合</td><td>隔音＋隔熱＋安全全要</td><td>最高，預算足且需求全面時首選</td></tr></tbody></table>
+<blockquote><strong>破解三大迷思</strong>：① 玻璃越厚越隔音？❌ 單純加厚對低頻幫助有限，5+5 膠合的 PVB 阻尼才有效。② 複層中空隔音最好？❌ 中空主打隔熱，低頻隔音輸膠合。③ 抗風壓 360 就防颱無虞？❌ 漏水更常出在水密性與施工填縫，迎風面要同時看水密 50 + 抗風壓 360。</blockquote>
+<h3>2-3. 鋁料與表面處理</h3>
+<ul>
+<li><strong>鋁料</strong>：原生鋁（一次鋁，純度高、結構穩）優於再生鋁（回收料、易脆化變形）。主結構壁厚建議 <strong>1.4mm 以上</strong>（高樓迎風面更厚），不要只看截面大小。</li>
+<li><strong>表面處理三選一</strong>：</li>
+<li><strong>粉體烤漆</strong>：顏色多、便宜，但技術差會脫漆褪色（西曬／海邊尤甚）。</li>
+<li><strong>陽極處理</strong>：不掉漆、耐候佳，但顏色少、易批次色差、較貴。</li>
+<li><strong>氟碳烤漆</strong>：最耐候抗 UV（膜厚 25μ+），適海邊／超高樓，但小量難指定。</li>
+<li><strong>提醒</strong>：陽極不一定比烤漆高級，海邊其實氟碳烤漆耐候更強，依環境選。</li>
+</ul>
+<h3>2-4. 五金與膠條</h3>
+<ul>
+<li>連動把手、鎖點、排水設計、不鏽鋼軸承輪、限開器（兒童防護）是品質指標。</li>
+<li><strong>膠條材質是隱形地雷</strong>：優質 <strong>EPDM／TPV</strong>（耐 -40～120°C、壽命 20 年+）vs 便宜 <strong>PVC</strong>（3–5 年硬化龜裂就漏風）。</li>
+</ul>
+<h3>2-5. 保固怎麼看</h3>
+<p>業界常態：<strong>窗框結構與表面處理保固較長（5–10 年），五金/膠條屬耗材通常較短（1–3 年）</strong>，三者年限往往不同。務必白紙黑字寫清「保固範圍、年限、是否含工料、後續維修收費方式」。</p>
+<h3>2-6. 報價怎麼算（看懂報價單）</h3>
+<ul>
+<li>計價單位：<strong>1 才 = 1 平方台尺 ≈ 30×30cm</strong>。才數＝寬(cm)×高(cm)÷900（業界另有以 ×10.89 換算者）。</li>
+<li>行情參考（2025–2026，連工帶料）：一般氣密窗約 <strong>NT$300–500/才</strong>；隔音氣密窗約 <strong>NT$500–1,000/才</strong>；窗框主體 500–2,000/才、玻璃另計 70–1,000/才。</li>
+<li>加成項：推射窗比橫拉窗每才多 400–700；隔音窗止風塊等配件每才多 200–300。</li>
+<li><strong>常見低消陷阱</strong>：單窗未滿 15 才以 15 才計。</li>
+</ul>
+<h3>2-7. 驗收清單（拿去現場用）</h3>
+<ul class="checklist">
+<li><input type="checkbox"  disabled> 索取<strong>該窗型的 CNS 風雨試驗報告影本</strong></li>
+<li><input type="checkbox"  disabled> 報價單逐項列出：四項 CNS 等級、鋁料種類、料厚(mm)、玻璃規格、膠條材質</li>
+<li><input type="checkbox"  disabled> 確認窗框<strong>水平垂直確實固定</strong>、膨脹螺栓間距 ≤60cm（高樓加密至 40cm）</li>
+<li><input type="checkbox"  disabled> 周邊防水填縫（矽利康／防水砂漿）到位、外側收邊完整</li>
+<li><input type="checkbox"  disabled> 排水孔加防蟲網且傾斜 >5 度</li>
+<li><input type="checkbox"  disabled> 玻璃無刮傷、邊框無突兀凸出與割手尖角</li>
+<li><input type="checkbox"  disabled> 取得書面<strong>保固卡</strong>，保留報價單與合約</li>
+</ul>
+<h3>2-8. 選購七大陷阱</h3>
+<p>1. 報價只寫「每才 X 元」不標 CNS 等級／鋁料／玻璃——無法比較。</p>
+<p>2. 窗框＋基本玻璃＋基本安裝合併報低價，再把高階玻璃、拆舊、高樓作業、清運<strong>另列追加</strong>。</p>
+<p>3. 用再生鋁／減薄料厚降成本（外觀看不出，靠規格書抓）。</p>
+<p>4. 膠條以便宜 PVC 取代 EPDM/TPV（初期沒差，3–5 年漏風）。</p>
+<p>5. 玻璃溝槽偷做不足（5+5 需 16mm），導致氣密不足。</p>
+<p>6. 施工偷工——窗框未確實固定、防水填縫草率（日後漏水主因）。</p>
+<p>7. 口頭說「保固」卻無書面，後續維修要再收費。</p>
+<hr>
+<h2 id="s2">3. 各品牌詳述</h2>
+<h3>3-1. YKK AP（台灣華可貴建材／日商 YKK AP 集團）</h3>
+<table><thead><tr><th>項目</th><th>內容</th></tr></thead><tbody><tr><td><strong>定位</strong></td><td>頂級／豪宅標配日系鋁窗。台灣豪宅市占逾 7 成。自我定位為建築立面的「F1」。</td></tr><tr><td><strong>背景</strong></td><td>日本 YKK 集團（拉鏈起家、91 年歷史）旗下建材事業；台灣 1989 年進入、1992 年桃園楊梅設廠，採在地化「自產自銷／一貫式生產」。2024 台灣營收約 NT$33 億。</td></tr><tr><td><strong>主力產品</strong></td><td><strong>YRB-A 超高水密窗（旗艦）</strong>：水密中央值 1000Pa／180 分鐘、可達 1500Pa／10 分鐘；耐風壓最高 3600Pa（耐 16 級風）；氣密 CNS 最高第 2 等級；隔音 30 或 35 級（搭 6+6mm 以上膠合可達 35 級）。另有無障礙平軌式、換氣框、防火鋁窗、玻璃帷幕牆。</td></tr><tr><td><strong>價位</strong></td><td><strong>每才約 NT$1,200–2,500（含基本安裝/5+5 膠合）</strong>，部分屋主回報換算達 2,600+/才；是國產 2–6 倍。3 米挑高整戶曾報約 NT$32 萬。</td></tr><tr><td><strong>優點</strong></td><td>規格頂規（水密/抗風壓/隔音）；原廠一貫式生產、零件不斷貨、交期機動；隔音受肯定；品牌專業背書強（政大連 13 年第一）；日系工藝細緻、安全細節完整（限開器/兒童鎖/防脫落紗網）；五金耐用度常 20 年+。</td></tr><tr><td><strong>缺點</strong></td><td><strong>價格高昂</strong>；CP 值長期被質疑（網友：日本只是平價窗、真正高階是歐美系統窗）；綁協力廠商、彈性低；<strong>舊屋難改裝</strong>；高氣密副作用（易結露/空氣品質差，需加換氣框）；效果高度依賴施工；EXIMA 等海外系列在台<strong>資訊不透明（查無公開明細）</strong>。</td></tr><tr><td><strong>真實差評</strong></td><td>① Mobile01「YKK AP 氣密窗施工服務堪憂」(t=6770444)：屋主指施工「暴力拆除」、敲蓋板、玻璃被刮傷——關鍵是 <strong>YKK 本身不養施工班、安裝外包協力廠</strong>。② Threads 屋主「半年前花 25 萬裝某知名氣密窗」迎風面仍漏水（高互動代表案）。③ 設計師文章自承常見客訴：「付了 YKK 頂級預算，下雨窗框卻滲水、公車經過依然吵」。</td></tr><tr><td><strong>保固售後</strong></td><td>設原廠維修團隊與專線（0800-21-55-66）；經銷揭露常見「門片 10 年／五金 3 年」（個別經銷另有「保固一年」之說，(未經證實是否為原廠統一標準)）。口碑兩極：龍寶建設讚其品質、Google 有屋主稱施工細心；但亦有施工堪憂與滲水客訴，<strong>因經銷/施工團隊而異</strong>。</td></tr><tr><td><strong>口碑總結</strong></td><td>公認台灣頂級豪宅標配，規格與品牌力最強，但貴、CP 值受質疑、效果高度依賴施工，市面仍有颱風天滲水與施工服務不佳的真實客訴。<strong>2022 前後一度「不接散客只供建案」</strong>，散戶取得門檻高。</td></tr></tbody></table>
+<hr>
+<h3>3-2. 錦鋐（錦鋐企業／Chin Hong；使用者所稱「錦宏」之正名）</h3>
+<blockquote><strong>正名說明</strong>：台灣門窗業並無與描述相符的知名「錦宏」氣密窗，官方品牌名為「<strong>錦鋐</strong>」(chinhong.com.tw)，本報告以此為對象。此判斷經稽查確認正確。</blockquote>
+<table><thead><tr><th>項目</th><th>內容</th></tr></thead><tbody><tr><td><strong>定位</strong></td><td>台灣本土（MIT）國產龍頭級，市佔極高，價格定位國產中段、低於日系 YKK。</td></tr><tr><td><strong>背景</strong></td><td>1978 年創立，<strong>垂直整合一貫廠</strong>（自有鋁擠型＋玻璃＋鋁窗組裝，非代理非白牌拼裝）。桃園大園新廠約 2018 啟用、總投資約 NT$35 億；2022 年台壽以約 NT$63 億買下其桃園廠辦（售後租回）。通過 ISO 9001 與 CNS。<strong>以上年份/金額經多家媒體佐證、數字吻合。</strong></td></tr><tr><td><strong>主力產品</strong></td><td>隔音氣密窗 CH1260B/D、CH1360ATD（STC 25–45 分級，CH1260 標稱 STC 35、10mm 版 STC 40）；複層防盜格子窗 CH1360；近年主打「奈米隔音氣密窗」。標稱水密 100kg/m² 以上、氣密漏氣量 2 以下（加強版 1 以下）、抗風壓最高 360。</td></tr><tr><td><strong>價位</strong></td><td>國產中段，每才約 NT$350–600（一般氣密）、600–2,000（隔音）。網友普遍反映「近年漲不少」。</td></tr><tr><td><strong>優點</strong></td><td>本土自製垂直整合、品管一致；逾 40 年市佔高、<strong>零件好取得不易斷料</strong>；產品線完整、CNS/ISO 數據齊全；水密與抗風壓標稱優於 CNS，適迎風面/海邊/高樓；窗體滑順、部分用戶稱可直接找原廠客服。</td></tr><tr><td><strong>缺點</strong></td><td><strong>氣密≠隔音</strong>，隔音上限約 45dB 且 8 成靠玻璃，薄玻璃改善有限；隔音/品質高度依賴施工；曾有安裝糾紛（框凸出、切邊不平）；粉體塗裝表層較易脫漆（非錦鋐獨有）；近年漲價 CP 值被質疑；檔次在 YKK/鵝牌之後。</td></tr><tr><td><strong>真實差評</strong></td><td>① Mobile01「第一次裝氣密窗就吐血～錦鋐氣密窗安裝糾紛」(t=3515865)：玻璃框凸出過多、轉角接口差、軌道與窗框落差大、現場手持砂輪修改未磨平<strong>導致割手</strong>；安裝人員以「現在都這樣做」回應。串中業界指出多為<strong>施工商（安裝鋁業）責任</strong>而非原廠模具，網友意見分歧。② FB 花蓮社團：紗門卡死無法密合，<strong>錦鋐花蓮無設點找不到原廠維修</strong>（外縣市售後據點不足）。③ Mobile01：風大雨大時水被吹過窗框（個別用戶詬病水密/窗框設計）。</td></tr><tr><td><strong>保固售後</strong></td><td>客服專線 (03)381-5588 #2159、官方 LINE@、全省安裝。<strong>具體保固年限官網查無明確標示（查無）</strong>，達瑞克導購表標「1 年保固」(屬導購來源，未經原廠證實)，建議書面確認。售後偏正面但兩極，負評多在施工/收尾。維修約 NT$3,500–4,500（換門齒排）、工期約一週（網友個案，年份不明）。</td></tr><tr><td><strong>口碑總結</strong></td><td>市佔極高、產品線完整、數據齊全的老牌龍頭，整體口碑中上偏正面；多數負評不在窗體而在隔音期待落差與施工/收尾品質。挑對玻璃等級＋慎選施工是關鍵。</td></tr></tbody></table>
+<hr>
+<h3>3-3. 鵝牌（SWAN／O-PAI；鵝牌興業）</h3>
+<table><thead><tr><th>項目</th><th>內容</th></tr></thead><tbody><tr><td><strong>定位</strong></td><td>台灣本土高階「防盜＋隔音＋複層玻璃」窗，國產（準）一線高價牌。</td></tr><tr><td><strong>背景</strong></td><td><strong>成品窗品牌（自有原廠窗），非單純鋁擠型料件供應商</strong>——從鋁擠型進廠到組裝皆自家一貫化/標準化生產（此定性經稽查確認正確），再透過全台加盟/經銷銷售安裝。主攻家庭住宅，大型建商案場較少見。宣稱 200+ 專利與 ISO 認證。(營收與工廠地址細節查無)</td></tr><tr><td><strong>主力產品</strong></td><td>招牌<strong>複層玻璃防盜格子窗</strong>（兩片玻璃中夾不鏽鋼穿梭管，防盜＋隔音二合一、免外掛鐵窗）：13cm 系列旗艦 SW1366/SW1316（抗風強）、9cm 系列 SW956/SW951（輕量、適公寓）。型號末碼 6=複層、1=單層。</td></tr><tr><td><strong>價位</strong></td><td>本土中高價，每才約 <strong>NT$800–1,300</strong>（含 5+5 膠合，設計平台價）；經銷另報固定窗 700/才起、隔音橫拉 850/才起、格子防盜 1,300/才起。<strong>同性能不同系列價差可達 50%</strong>（9cm 1,300 vs 13cm 2,100/才，PTT 2013/2014 報價）。</td></tr><tr><td><strong>優點</strong></td><td>自有原廠窗、品質一致（較不會被叫料自組的 898 白牌魚目混珠）；招牌防盜格子窗防盜隔音二合一、外觀整齊適低樓層；隔音實測有感（裝後室內約降到 40dB）；抗風結構用心（雙空心抗扭曲）；<strong>原廠總公司客服反應佳</strong>（經銷擺爛時越級打總公司多能推動）；品牌信任度高。</td></tr><tr><td><strong>缺點</strong></td><td><strong>價格偏高</strong>（網友普遍嫌「高貴」）；<strong>經銷/工班品質落差大</strong>（產品好壞很大程度看找到哪家經銷）；施工瑕疵客訴多集中在安裝面；售後依經銷而定；建商案場少見、二手維修參考案例少；窗框顏色被反映較難搭。</td></tr><tr><td><strong>真實差評</strong></td><td>① Mobile01「鵝牌氣密窗服務有夠爛」(t=5033493)：安裝後出問題，地方經銷擺爛、甚至要求換整面窗，致電總公司後才轉好。② Mobile01「你要裝鵝牌氣密窗嗎？在考慮一下吧」(t=3863970)：未做木地板/家具保護致刮傷、窗框固定螺絲不足（左右各 2、上下未鎖）。③ 規格短少：氣密條應 26 條只裝 22 條、找不到原廠識別標籤（疑非全原廠料）；原廠應用黑膠條卻被經銷改打矽利康。④ FB：營造商指定「不用鵝牌就不接」(業界黏著度高，但反映偏貴)。</td></tr><tr><td><strong>保固售後</strong></td><td>普遍標示<strong>本體 3 年、五金耗材 1 年</strong>，設原廠客服窗口。原廠客服反應佳，但<strong>第一線高度依賴地方加盟經銷</strong>，部分拖延擺爛需越級投訴。</td></tr><tr><td><strong>口碑總結</strong></td><td>產品（尤其複層防盜隔音窗）口碑與隔音實效偏正面，屬本土高階指標。兩極評價集中在「價格高＋售後與安裝品質高度看經銷工班、客訴幾乎都出在安裝面」。<strong>買前務必慎選經銷、把規格（型號/玻璃厚度/氣密條條數/用黑膠條/做保護）寫進合約，並索取原廠出廠證明。</strong></td></tr></tbody></table>
+<hr>
+<h3>3-4. 安固麗科技門窗（STP）——獨立加重評估</h3>
+<blockquote><strong>先講最重要的兩件事（誠實聲明）：</strong></blockquote>
+<blockquote>1. <strong>安固麗是真實存在的桃園龜山老牌台製門窗原廠，非空殼、非詐騙</strong>。2026 台灣精品獎屬實（有獨立新聞報導）、代理日本 TOSTEM(LIXIL) 屬實、具 MIT 微笑標章。這些都經稽查獨立驗證。</blockquote>
+<blockquote>2. <strong>但安固麗的「公開消費評論極度稀少」</strong>。Threads 上幾乎沒有任何素人開箱（搜尋「安固麗」大量命中同音的「安麗 Amway」雜訊）；PTT 幾乎沒有第一手使用心得；Mobile01 討論量也偏低。<strong>因此本報告對安固麗的口碑判斷信心度低於其他三家，以下凡單一來源或無法佐證者一律標註。</strong></blockquote>
+<table><thead><tr><th>項目</th><th>內容</th></tr></thead><tbody><tr><td><strong>定位</strong></td><td>頂級／精品氣密窗高端路線（與鵝牌、進口品牌同級或更貴）。</td></tr><tr><td><strong>背景</strong></td><td>桃園龜山老牌台製原廠、自有工廠。發跡公司「安固麗企業」，現主要營運主體為「<strong>安固麗科技門窗股份有限公司</strong>」（統編 50919498，代表人陳長勳，2019/04/29 設立）。研判為老牌於 2019 年另立新公司承接品牌。<strong>設 200 坪實品展示中心。</strong> 官方年資說法不一（新聞稿用 47 年、其他頁用 35 年），<strong>統一寫「官方說法不一，約 35–47 年，老品牌無誤」。</strong></td></tr><tr><td><strong>公司治理（已修正稽查發現的錯誤）</strong></td><td><strong>資本額以公司登記為準（公開登記為 NT$500 萬等級；坊間流傳之 1,100 萬／2,500 萬數字與政府登記不符，已剔除）。</strong> 董監事名單依公司登記為準，本報告<strong>不列具體人名</strong>（先前研究稿曾出現未經查證的人名清單，經稽查與公開登記不符，已刪除）。屬中小型原廠，非大型連鎖。</td></tr><tr><td><strong>主力產品</strong></td><td>智能氣密橫拉窗 SP1069/SP1369（主打「一秒鎖上」、2025 台灣精品獎）；隔音氣密橫拉窗 SN1069；無障礙落地窗 SK1369-U；氣密/隔音橫拉窗 <strong>SK1369 系列</strong>（PTT 實際報價型號）；代理 TOSTEM PRO-SE；防盜門窗、造型窗。技術主打全方位包覆塗裝、<strong>氟碳粉體烤漆</strong>、隱藏式勾鎖、3D 視野窗。</td></tr><tr><td><strong>價位</strong></td><td>偏高/頂級。<strong>PTT Interior(2017)實例：SK1369、玻璃 5+8、約 2.1×2.1m 二拉窗報 NT$49,600</strong>（同規格鵝牌 SW-1301-D 報 44,000，安固麗貴約 5,600）。Mobile01：約 2×2m 落地窗報「要 8 萬」令人卻步；5+8 真空隔音窗約 140×135cm 一扇報 NT$21,500。PTT 2025：5+5 膠合約 NT$31,000，為該串最貴之一。<strong>官網/DM 不公開報價，須現場估價，比價透明度低。</strong></td></tr><tr><td><strong>優點</strong></td><td>老字號自有工廠台製；連獲台灣精品獎（2025/2026），設計有亮點（一秒鎖上/隱藏勾鎖）；多位實際用戶回饋隔音/防颱/氣密效果好（颱風天「家裡超安靜、無漏風滲水」）；氟碳粉體烤漆耐候抗污（有用戶 5 年仍滿意）；產品線完整、代理 TOSTEM 補強高階；有 200 坪實品展示中心可體驗。</td></tr><tr><td><strong>缺點</strong></td><td><strong>價格偏高</strong>（落地窗報 8 萬、同規格比鵝牌貴）CP 值不被所有人認同；<strong>後續維修零件供應有疑慮（見下方差評，未經證實）</strong>；透過各地經銷施工、一致性難確認；<strong>公開第三方評論數量偏少、獨立口碑樣本不足</strong>；公司 2019 年換殼為新公司、規模不算大；官網不公開價格。</td></tr><tr><td><strong>真實差評</strong></td><td>① <strong>「未到 15 年就說沒材料維修」</strong>（Mobile01「氣密窗品牌推薦」串第 2 頁一則）：指控售後零件停產、拿舊防水膠條到店想買碰壁。<strong>(未經證實／單一來源)</strong>——此貼文 WebSearch 無法獨立重現（Mobile01 反爬蟲），且「安固麗」搜尋大量被同音「安麗(Amway)」與另一品牌「<strong>銨麗</strong>」污染，<strong>可能真實但無法佐證，也可能是品牌混淆，請特別留意。</strong> ② Mobile01 SK1369 颱風漏水＋售後互踢皮球(t=1608276 p6)：屋主裝後颱風仍有水被風吹進、室內窗台濕，打安裝廠商與原廠互推。<strong>(僅憑標題摘要，全文遭 403 反爬，未能查證細節)</strong> ③ 「安固麗優墅氣密隔音窗價位在哪?」(t=4733604)：原廠說技術人員不夠要客戶自找經銷、經銷又回「原廠認定結構有問題無法安裝」、業務不給明確交代——<strong>接單流程混亂、連價位都問不到。</strong> ④ 報價偏高（8 萬落地窗）打消念頭——屬價格爭議非糾紛。</td></tr><tr><td><strong>重要混淆警告</strong></td><td><strong>「安固麗」(正牌、35–47 年、TOSTEM 夥伴) ≠「銨麗」(另一獨立品牌，網路上有品質/施工/業務晃點客訴)。</strong> Mobile01 另有一篇「氣密窗踩雷文」點名的是「銨麗」而非「安固麗」，兩者極易混淆，本報告<strong>未將該差評歸給安固麗以免誤植</strong>。比價/查評論時請務必認明「安固麗 STP」。</td></tr><tr><td><strong>保固售後</strong></td><td>官方主打「誠信的保固」「全省服務團隊、售後零時差」，<strong>但官網未明列具體保固年限（年數不透明）</strong>。坊間流傳「真空隔音窗、保固 15 年不起霧」<strong>(未經證實，官方公開頁未明列，網友轉述)</strong>。有用戶用 5 年仍滿意；但也有「未到 15 年即被告知無維修料件」之說(未經證實)。<strong>建議簽約前白紙黑字確認：保固年限、範圍（含膠條/五金/玻璃）、是否原廠到府、料件供應年限。</strong></td></tr><tr><td><strong>口碑總結</strong></td><td>真實存在的桃園龜山老牌台製頂級氣密窗原廠，<strong>產品力（隔音/防颱/烤漆/得獎設計）口碑普遍正面</strong>，但<strong>價格偏高、公開評論稀少、且有售後料件供應的疑慮（未經證實）</strong>。整體屬「產品不錯但貴、售後料件要先問清楚、自己比價空間小」的品牌。<strong>因樣本太少，強烈建議實地到展示中心體驗、要求看 CNS 報告、並把售後料件供應年限寫進合約。</strong></td></tr></tbody></table>
+<hr>
+<h3>3-5. 其他主流品牌（比價基準）</h3>
+<p>台灣門窗市場大致分四層：<strong>(1) 日系四大</strong>（YKK AP、TOSTEM 托斯鈿、三協立山、新日輕）→ <strong>(2) 國產一線原廠</strong>（鵝牌、錦鋐、正新、大同）→ <strong>(3) 國產中價主流</strong>（力霸、九州、信元、永欣、安固麗、大和賞）→ <strong>(4) 協力廠/白牌窗</strong>。</p>
+<table><thead><tr><th>品牌</th><th>定位/特色</th><th>價位</th><th>優點</th><th>缺點/差評</th></tr></thead><tbody><tr><td><strong>TOSTEM（LIXIL）</strong></td><td>日系四大、雙滾輪滑順度受好評</td><td>每才約 NT$2,000–3,500+（台廠 2–3 倍）</td><td>工藝細膩、滑順手感佳</td><td>最貴、維修零件貴</td></tr><tr><td><strong>正新</strong></td><td>國產 CP 值代表、統包/設計師愛用</td><td>每才約 NT$600–900</td><td>5+5 膠合隔音口碑佳、好取得</td><td><strong>市場仿冒品多</strong>（Mobile01 有人裝到仿冒經原廠證實非原廠），須查驗原廠出廠證明；施工品質不一</td></tr><tr><td><strong>大同</strong></td><td>式樣最齊全、據點廣</td><td>896 型 5mm 約 NT$1.7 萬/樘</td><td>選擇多、售後據點廣、價格品質中上</td><td>有來源指部分型號水密僅約 35，強風大雨較易滲水(courcasa 討論)</td></tr><tr><td><strong>力霸 REBAR</strong></td><td>建商常配、平價~中價</td><td>每才約 NT$450–800</td><td>近年外觀技術進步、價格親民</td><td>「力霸 40 級比正新 35 級好」屬<strong>業者說法(未證實)</strong></td></tr><tr><td><strong>大和賞（YAMATOSHO）</strong></td><td>主打日本工藝感、中高端</td><td>10cm 隔音窗約 NT$1.45 萬/樘</td><td>TAF 認證齊全、質感佳</td><td>知名度較窄</td></tr><tr><td><strong>永逢 Forves／安和／和億／新光鋼／聯邦</strong></td><td>—</td><td>—</td><td>—</td><td><strong>網路消費者實測評價與報價資料稀少、部分查無</strong>，透明度低不易比價</td></tr></tbody></table>
+<hr>
+<h2 id="s3">4. 平台口碑彙整</h2>
+<blockquote><strong>業配辨識通則</strong>：發文者若為門窗/設計/裝修帳號且附報價 LINE → 多屬業配。高互動的吐槽文、求救文才是真實民意。新聞稿/品牌官網/精品獎報導 → 視為公關稿。</blockquote>
+<h3>4-1. Mobile01（討論密度最高、最理性比價）</h3>
+<ul>
+<li><strong>氛圍</strong>：理性比價＋技術辯論。共識「氣密窗≠隔音窗」「玻璃 5+5＋施工 > 品牌」。</li>
+<li><strong>YKK</strong>：頂級但被嫌貴到 CP 值低（「一堂 YKK 可買 3 堂鵝牌」）。</li>
+<li><strong>鵝牌</strong>：國產隔音王但價高，<strong>售後客訴明顯</strong>（t=5033493「服務有夠爛」）。</li>
+<li><strong>錦鋐</strong>：老牌耐用正評多，但有安裝糾紛吐血文(t=3515865)。</li>
+<li><strong>安固麗</strong>：<strong>討論量偏少</strong>、評價兩極；差評含 SK1369 漏水(t=1608276)與優墅串接單擺爛(t=4733604)；少數正評稱颱風安靜、有質感；常與「錦鋐」混淆。</li>
+<li><strong>業配風險</strong>：中低（多為素人實戰）。Mobile01 與 FB 頁面均被抓取工具封鎖，本報告部分內容取自搜尋摘要。</li>
+</ul>
+<h3>4-2. PTT（home-sale / Interior 為主）</h3>
+<ul>
+<li><strong>YKK 聲量最高最受推崇</strong>（「自住就是 YKK」「沒有之一」），但 2022 前後「不接散客只供建案」成痛點；被旭格(Schüco)派酸「不是沒有之一」。</li>
+<li><strong>鵝牌</strong>＝國產隔音天花板但貴；<strong>正新 5+5</strong>＝高 CP 代表（裝前 65–68dB→裝後約 30dB）。</li>
+<li><strong>安固麗</strong>：討論度低於 YKK/鵝牌，<strong>幾乎沒有第一手使用心得</strong>；報價在串中偏最貴（5+5 報 3.1 萬、SK1369 報 4.96 萬），引來「骨架黃金做的？」質疑；Gossiping 隔音排名「ykk > 鵝牌 >= 安固麗」把三牌列第一梯隊。</li>
+<li><strong>最大地雷</strong>（不指向特定品牌）：「品牌→下游加工→工程行」多層轉包，出問題互踢皮球；聲音主觀難舉證求償。</li>
+<li><strong>業配風險</strong>：低。</li>
+</ul>
+<h3>4-3. Threads（脆）</h3>
+<ul>
+<li><strong>特徵一</strong>：真實高互動內容幾乎都是負評與糾紛——「花 25 萬裝某知名氣密窗迎風面仍漏水」（讚 1,333）、「要氣密窗卻被換成泡泡鋁窗住 3 年才知」、「同規格報價 13.5 萬～19 萬離譜價差」。</li>
+<li><strong>特徵二</strong>：品牌正評多帶業配/經銷色彩。YKK 風評最好（師傅一面倒推，但散戶叫不到、有全熱交換器業務話術）；鵝牌＝隔音強但貴；正新＝CP 高但施工不一；錦鋐多為官方宣傳且不做散戶。</li>
+<li><strong>安固麗</strong>：<strong>脆上「沒有」任何素人開箱或客訴</strong>，搜尋幾乎全是同音「安麗(Amway)」雜訊；唯一可見的是官方帳號 @stpwindow5988 單向行銷（互動低落，官方還自嘲「不是安麗喔」）。</li>
+<li><strong>業配風險</strong>：高（品牌/經銷帳號多）。</li>
+</ul>
+<h3>4-4. Facebook（求推薦＋在地師傅＋品牌粉專）</h3>
+<ul>
+<li><strong>YKK／鵝牌</strong>＝一致歸為「頂級窗」；鵝牌另有「貴但不見得頂尖」保留聲音、業界黏著度高（營造指定）。</li>
+<li><strong>錦宏/錦鋐</strong>＝CP 值佳中段選擇，但外縣市售後據點不足、單層隔音有上限。</li>
+<li><strong>安固麗</strong>：<strong>以桃園龜山為主場，社團多為在地正面口碑</strong>（13cm 框＋5+5 玻璃「與世隔絕」、服務親切熱忱），粉專 @stp.wd 主打台灣精品獎/隱藏式窗勾/超大 3 米窗；<strong>FB 上未見明確針對安固麗的差評貼文</strong>。</li>
+<li><strong>差評集中在「未具名小廠/自薦師傅」</strong>：催訂金、收近 20 萬鬼打牆拖延不施工、超收款項、業務話術。</li>
+<li><strong>業配風險</strong>：中高（大量品牌粉專）。</li>
+</ul>
+<h3>4-5. 新聞媒體與部落格</h3>
+<ul>
+<li><strong>明顯兩極化</strong>：新聞/品牌官網/精品獎報導與經銷粉專多為業配公關稿（須警覺）；真正客觀差評集中在 Mobile01 與 PTT。</li>
+<li><strong>YKK</strong>：有施工糾紛差評（暴力拆除、玻璃刮傷、安裝外包導致落差）。</li>
+<li><strong>鵝牌</strong>：有勸退文質疑隔音與經銷售後、漏水壁癌風險。</li>
+<li><strong>錦鋐</strong>：2013 安裝糾紛吐血文＋「保固僅 1 年」之中性偏負評(屬導購來源)。</li>
+<li><strong>安固麗</strong>：討論度偏低，正面心得與業配案例為主（Yahoo 新聞精品獎為公關稿、痞客邦案例為門窗行業配），未見明確施工糾紛；但價格偏高、需「確定要做才到現場估價」。<strong>再次提醒：踩雷文點名的是「銨麗」非「安固麗」，勿混淆。</strong></li>
+<li><strong>業配風險</strong>：極高。</li>
+</ul>
+<hr>
+<h2 id="s4">5. 各家差評總整理（依類型分類）</h2>
+<table><thead><tr><th>品牌</th><th>施工糾紛</th><th>報價爭議</th><th>隔音不如預期</th><th>漏水/滲水</th><th>售後/保固</th></tr></thead><tbody><tr><td><strong>YKK AP</strong></td><td>暴力拆除、敲蓋板、玻璃刮傷(t=6770444)；不養施工班、外包協力廠</td><td>一才 2,600+ 被批「拉高豪宅成本」(t=3286058)；散戶叫不到貨</td><td>公車經過依然吵（選錯系列/玻璃）</td><td>颱風天窗框滲水（25 萬案、saintmtco 行銷點名）</td><td>施工服務堪憂、口碑因經銷而異</td></tr><tr><td><strong>錦鋐</strong></td><td>框凸出、切邊不平、砂輪修改割手(t=3515865)；歸屬施工商責任</td><td>「近年漲不少」；CH1360 一才 1200 被質疑(2010 舊文)</td><td>薄玻璃對車聲效果普通</td><td>風大雨大水被吹過窗框</td><td><strong>花蓮無設點找不到原廠維修</strong>；保固年限查無</td></tr><tr><td><strong>鵝牌</strong></td><td>未做地板/家具保護致刮傷、固定螺絲不足、氣密條短少(22/26)、改打矽利康(t=3863970)</td><td>報價「高貴」、同性能價差達 50%</td><td>用 5+8 機車噪音仍偏大（勸退文）</td><td>擔心封水沒做好漏水壁癌</td><td><strong>經銷擺爛叫不動、要求換整面窗、越級才處理</strong>(t=5033493)</td></tr><tr><td><strong>安固麗</strong></td><td>接單流程混亂、原廠與經銷互踢(t=4733604)</td><td>落地窗報 8 萬、5+5 報 3.1 萬被酸「骨架黃金做的」；不公開報價</td><td>（未見明確隔音差評，多為正評）</td><td>SK1369 颱風水被吹進、室內窗台濕(t=1608276，<strong>未能查證細節</strong>)</td><td><strong>「未到 15 年無維修料件」(未經證實/單一來源/注意與銨麗混淆)</strong>；保固年限不透明</td></tr><tr><td><strong>正新</strong></td><td>施工品質不一</td><td>—</td><td>少數稱 5+5 效果不好</td><td>—</td><td><strong>市場仿冒品多</strong>，須查驗原廠</td></tr><tr><td><strong>大同</strong></td><td>一堆鋁窗行從大同批料自裝、品質不一</td><td>—</td><td>—</td><td>部分型號水密僅約 35，強風大雨較易進水</td><td>—</td></tr><tr><td><strong>中華鋁門窗</strong></td><td>膠條鬆脫叫修三次才好、看到洞就打矽利康、3cm 縫說「正常」</td><td>—</td><td>—</td><td>—</td><td>售後敷衍</td></tr><tr><td><strong>通案（跨品牌）</strong></td><td>上下框間隙大到手掌穿過、軌道突出割手(t=5987785)</td><td>同規格報價差近 6 萬（Threads）</td><td>只升級氣密沒升級玻璃</td><td>窗框與牆體防水填縫沒做確實</td><td>多層轉包互踢皮球、原廠不派人</td></tr></tbody></table>
+<hr>
+<h2 id="s5">6. 價格比較表</h2>
+<blockquote><strong>資料年份與來源已標明；無資料寫「查無」。</strong> 設計平台分級表（ygdesign、da-rank）屬 SEO 導購來源，價格帶可參考但<strong>非交易實價</strong>，已降權標註。Mobile01/PTT 為網友自報個案。</blockquote>
+<h3>6-1. 每才單價（含基本安裝/玻璃）</h3>
+<table><thead><tr><th>品牌</th><th>每才價（NT$）</th><th>含玻璃規格</th><th>資料年份</th><th>來源（性質）</th></tr></thead><tbody><tr><td>TOSTEM</td><td>2,000–3,500+</td><td>TS40</td><td>2026</td><td>da-rank（導購）</td></tr><tr><td>YKK AP</td><td>1,200–2,500+（個案達 2,600+）</td><td>5+5 膠合</td><td>2024；個案 2014</td><td>ygdesign（導購）；mobile01 t=3286058</td></tr><tr><td>鵝牌</td><td>800–1,300（另報 1,200–2,000+）</td><td>5+5 膠合</td><td>2024</td><td>ygdesign（導購）；da-rank（導購）</td></tr><tr><td>鵝牌（個案）</td><td>1,660／才</td><td>—</td><td>Mobile01 t=4392391（年份未標）</td><td>網友個案</td></tr><tr><td>安固麗</td><td>偏高帶（官網不公開，須現場估）</td><td>—</td><td>—</td><td>查無公開牌價</td></tr><tr><td>錦鋐</td><td>350–600（隔音 600–2,000）</td><td>視玻璃</td><td>2025–2026 行情</td><td>ykal/業界</td></tr><tr><td>正新</td><td>600–900</td><td>5+5 膠合</td><td>2024</td><td>ygdesign（導購）</td></tr><tr><td>力霸</td><td>450–800</td><td>—</td><td>2026</td><td>da-rank（導購）</td></tr><tr><td>一般氣密窗（通用行情）</td><td>300–500（連工帶料）</td><td>基本</td><td>2025–2026</td><td>業界</td></tr><tr><td>隔音氣密窗（通用行情）</td><td>500–1,000（連工帶料）</td><td>膠合</td><td>2025–2026</td><td>業界</td></tr></tbody></table>
+<h3>6-2. 整樘/個案報價（含安固麗關鍵比價）</h3>
+<table><thead><tr><th>品牌/型號</th><th>規格</th><th>報價（NT$）</th><th>資料年份</th><th>來源</th></tr></thead><tbody><tr><td><strong>安固麗 SK1369</strong></td><td>5+8、約 2.1×2.1m 二拉</td><td><strong>49,600</strong></td><td>2017</td><td>PTT Interior M.1513739028</td></tr><tr><td><strong>鵝牌 SW-1301-D</strong></td><td>5+5、約 2.1×2.1m</td><td><strong>44,000</strong></td><td>2017</td><td>同上（與安固麗同串直接對比）</td></tr><tr><td>安固麗 5+5 膠合</td><td>—</td><td>31,000</td><td>2025</td><td>PTT home-sale</td></tr><tr><td>安固麗 5+8 真空隔音</td><td>約 140×135cm/扇</td><td>21,500（標 15 年不起霧，未經證實）</td><td>—</td><td>Mobile01 t=6697529</td></tr><tr><td>安固麗 落地窗</td><td>約 2×2m</td><td>約 80,000（屋主因貴放棄）</td><td>—</td><td>Mobile01</td></tr><tr><td>錦鋐 CH1360 複層格子</td><td>6+6 牙白</td><td>1,200/才</td><td>約 2010 舊行情</td><td>Mobile01 t=1506707</td></tr><tr><td>錦鋐 CH1260</td><td>單層 5mm 強化</td><td>530/才</td><td>約 2010 舊行情</td><td>Mobile01 t=1506707</td></tr><tr><td>錦鋐 陽台窗</td><td>288×166cm、5+5、10cm 框</td><td>約 24,000/樘</td><td>年份不明（個案）</td><td>Mobile01</td></tr><tr><td>大同 896</td><td>5mm 清玻</td><td>17,000/樘</td><td>2025</td><td>PTT home-sale</td></tr><tr><td>正新</td><td>8mm</td><td>25,000/樘</td><td>2025</td><td>PTT home-sale</td></tr><tr><td>國田</td><td>5+5</td><td>約 18,000/樘</td><td>2025</td><td>PTT home-sale</td></tr><tr><td>大和賞 10cm 隔音</td><td>134×207cm</td><td>14,500/樘</td><td>—</td><td>Mobile01 t=3811573</td></tr><tr><td>YKK AP</td><td>3 米挑高整戶（門+落地窗+各房窗）</td><td>約 320,000</td><td>2014</td><td>Mobile01 t=3286058</td></tr><tr><td>安固麗維修料件</td><td>—</td><td>查無（且有「無料件」客訴，未經證實）</td><td>—</td><td>—</td></tr></tbody></table>
+<hr>
+<h2 id="s6">7. 綜合比較表</h2>
+<table><thead><tr><th>品牌</th><th>定位</th><th>價位（每才）</th><th>口碑</th><th>保固</th><th>最適合客群</th></tr></thead><tbody><tr><td><strong>YKK AP</strong></td><td>頂級日系/豪宅標配</td><td>1,200–2,500+（最貴）</td><td>規格與品牌力最強，CP 值受質疑、有滲水/施工客訴</td><td>門片 10 年/五金 3 年（經銷揭露，部分稱 1 年）</td><td>預算足、迎風高樓/海邊/豪宅、要最頂規格</td></tr><tr><td><strong>鵝牌</strong></td><td>本土高階防盜隔音</td><td>800–1,300</td><td>防盜格子窗實效佳，售後/安裝看經銷、客訴多在安裝面</td><td>本體 3 年/五金 1 年</td><td>要防盜＋隔音二合一、低樓層、重隱私</td></tr><tr><td><strong>錦鋐</strong></td><td>國產龍頭中段</td><td>350–600（隔音更高）</td><td>數據齊、配件好找、口碑中上，負評在施工/外縣市售後</td><td>查無明確（導購標 1 年）</td><td>預算中段、要老牌數據齊、好維修</td></tr><tr><td><strong>安固麗</strong></td><td>桃園在地頂級/精品</td><td>偏高（不公開牌價）</td><td>產品力正面但<strong>公開評論極少</strong>、料件供應有疑慮(未證實)、價高</td><td><strong>年限不透明</strong>（傳 15 年不起霧，未證實）</td><td>桃園在地、要得獎設計、不在意價高、願實地體驗</td></tr><tr><td><strong>正新</strong></td><td>國產 CP 值</td><td>600–900</td><td>5+5 口碑佳但須防仿冒、施工不一</td><td>導購標 3 年</td><td>平價、統包/設計師案</td></tr><tr><td><strong>大同</strong></td><td>式樣最齊全</td><td>中價</td><td>中上、據點廣，部分型號水密弱</td><td>—</td><td>選擇多、要據點廣</td></tr><tr><td><strong>力霸</strong></td><td>平價中價</td><td>450–800</td><td>近年進步、CP 親民</td><td>導購標 3 年</td><td>預算有限</td></tr></tbody></table>
+<hr>
+<h2 id="s7">8. 給使用者的行動建議</h2>
+<h3>8-1. 怎麼比價（避免被話術）</h3>
+<p>1. <strong>同規格才能比</strong>：要求每家報價單都列出「四項 CNS 等級 + 鋁料種類 + 料厚(mm) + 玻璃規格(如 5+5 膠合) + 膠條材質(EPDM/PVC)」。Threads 上同規格報價差近 6 萬，差距全藏在這些看不到的細節。</p>
+<p>2. <strong>至少報 3 家</strong>，且把「拆舊費、高樓吊掛/吊車費、舊窗清運費」要求<strong>全部列進報價單</strong>，別讓對方事後追加。</p>
+<p>3. <strong>安固麗務必認明「STP / 安固麗科技門窗」</strong>，比評論時排除「安麗(Amway)」「銨麗」雜訊；因公開評論少，<strong>強烈建議親自到龜山 200 坪展示中心實地體驗</strong>。</p>
+<h3>8-2. 要問的關鍵問題</h3>
+<ul>
+<li>「這一樘的 CNS 風雨試驗報告可以給我影本嗎？」（拿不出來就要小心）</li>
+<li>「鋁料是原生鋁還是再生鋁？主結構料厚幾 mm？」</li>
+<li>「膠條是 EPDM 還是 PVC？」</li>
+<li>「玻璃溝槽做幾 mm？」（5+5 需 16mm）</li>
+<li>「<strong>施工是原廠師傅還是外包協力廠？</strong>」（YKK/鵝牌/安固麗都常外包，這決定售後與品質）</li>
+<li>「<strong>保固分窗框/玻璃/五金各幾年？料件供應到幾年？</strong>」（安固麗務必書面確認料件年限，因有「無料件」疑慮）</li>
+<li>「膨脹螺栓間距幾 cm？」（高樓要 ≤40cm）</li>
+</ul>
+<h3>8-3. 要看的數據</h3>
+<ul>
+<li><strong>迎風面/高樓</strong>：水密 ≥50（kgf/m²）+ 抗風壓 360。</li>
+<li><strong>臨大馬路</strong>：隔音 ≥35 級 + <strong>5+5 膠合玻璃起跳</strong>（不是只看複層中空）。</li>
+<li><strong>氣密</strong>：達 CNS 第 2 等級。</li>
+</ul>
+<h3>8-4. 簽約注意事項</h3>
+<p>1. <strong>白紙黑字寫進合約</strong>：型號、玻璃厚度/種類、膠條材質、氣密條條數、四項 CNS 等級、保固範圍與年限、料件供應年限、施工標準（窗框水平垂直固定、用黑膠條而非矽利康、做地板/家具保護）。</p>
+<p>2. <strong>付款綁進度</strong>：好師傅常「測量不收訂、施工完先用 1–2 週沒問題再付款」；對「催訂金說材料要漲」「收近 20 萬鬼打牆」的廠商高度警戒（FB 多起此類重大糾紛）。</p>
+<p>3. <strong>索取原廠出廠證明</strong>（尤其鵝牌、正新，防白牌/仿冒）與<strong>保固卡</strong>，保留報價單與合約作為爭議依據。</p>
+<p>4. <strong>記住維權現實</strong>：聲音主觀難舉證求償，若隔音是重點，要求對方在合約寫明「降至幾分貝」。</p>
+<hr>
+<h2 id="s8">9. 資料來源清單與限制聲明</h2>
+<h3>9-1. 主要來源類型</h3>
+<ul>
+<li><strong>官方/公司登記</strong>：ykkap.com.tw、chinhong.com.tw、swans.com.tw、stp.com.tw、台灣精品官網、政府公司登記（twincn/datagovtw，統編 50919498）。</li>
+<li><strong>媒體</strong>：天下城市學、forgemind、工商時報/經濟日報（台壽 63 億買錦鋐廠辦）、Yahoo 新聞/焦點時報（安固麗精品獎）。</li>
+<li><strong>網友社群</strong>：Mobile01（f=360/335/400/474 多串）、PTT（home-sale/Interior/Gossiping）、Threads、Facebook 多個裝潢/在地社團、Dcard。</li>
+<li><strong>設計/導購平台</strong>（已降權標註）：ygdesign、da-rank、courcasa、sinyang-smart、100 室內設計。</li>
+</ul>
+<h3>9-2. 限制聲明（誠實揭露）</h3>
+<p>1. <strong>Mobile01 與 Facebook 個別貼文頁面被抓取工具封鎖（反爬蟲 403）</strong>，部分內容取自搜尋結果摘要，無法逐則展開留言；涉及之差評（如 YKK t=6770444、安固麗 SK1369 t=1608276）細節<strong>未能完整查證</strong>，已標註。</p>
+<p>2. <strong>安固麗公開消費評論極度稀少</strong>：Threads 幾乎無素人內容（被「安麗 Amway」同音污染）、PTT 無第一手心得、Mobile01 討論量低。本報告對安固麗口碑的信心度低於其他三家，<strong>所有單一來源/無法佐證者皆標「(未經證實)」</strong>。</p>
+<p>3. <strong>品牌混淆風險</strong>：「安固麗(STP)」≠「銨麗」≠「安麗(Amway)」。Mobile01「氣密窗踩雷文」點名的是「銨麗」，本報告未誤植給安固麗。</p>
+<p>4. <strong>已修正的研究錯誤（經稽查）</strong>：安固麗董監事具體人名（與公司登記不符，已刪除不列）、資本額數字（坊間 1,100 萬/2,500 萬與登記不符，以登記 NT$500 萬等級為準）、PTT 報價玻璃規格（正確為 5+8，非 5+5）。</p>
+<p>5. <strong>導購來源價格非交易實價</strong>：ygdesign、da-rank 等分級表/十大推薦屬 SEO 導購長文，價格帶僅供參考。</p>
+<p>6. <strong>報價時效</strong>：部分 Mobile01 報價為 2010–2014 舊文（已標註），實際成交價受玻璃、窗型、乾濕式工法、吊車、地區與當年鋁價影響極大，請以<strong>現場估價為準</strong>。</p>
+<p>7. <strong>業配辨識</strong>：新聞稿、品牌官網、精品獎報導、附報價 LINE 的設計/門窗帳號內容多屬業配，本報告已盡量區隔，但平台原生業配仍可能影響整體口碑觀感。</p>
+<hr>
+<p><em>本報告為協助屋主決策之獨立彙整，非任何品牌之委託或業配。最終選擇請以現場實地體驗、書面報價單、CNS 試驗報告與合約為準。</em></p>
+</div>
+<div id="lightbox" onclick="this.style.display='none'"><img id="lbimg" src="" alt=""><div class="lbcap" id="lbcap">點任意處或按 Esc 關閉</div></div>
+<script>
+document.querySelectorAll('img.zoom').forEach(im=>im.addEventListener('click',()=>{
+  const lb=document.getElementById('lightbox');
+  document.getElementById('lbimg').src=im.src;
+  document.getElementById('lbcap').textContent=(im.alt?im.alt+'　—　':'')+'點任意處或按 Esc 關閉';
+  lb.style.display='flex';
+}));
+document.addEventListener('keydown',e=>{if(e.key==='Escape')document.getElementById('lightbox').style.display='none';});
+</script>
+</body>
+</html>
