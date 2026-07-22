@@ -1,8 +1,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HJ 生活藝術體驗學習營｜邀請函 × 5 版本</title>
+<title>HJ 生活藝術體驗學習營｜邀請函 × 6 版本</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=Cinzel:wght@400;500;600&family=Poiret+One&family=Noto+Serif+TC:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=Cinzel:wght@400;500;600&family=Poiret+One&family=Noto+Serif+TC:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&family=Great+Vibes&display=swap" rel="stylesheet">
 <style>
 :root{
   --tiffany:#0ABAB5;
@@ -22,7 +22,7 @@ body{font-family:'Noto Serif TC',serif;background:#F2F0EB;color:var(--ink)}
 .nav{position:sticky;top:0;z-index:99;background:rgba(250,247,240,.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(10,186,181,.25);display:flex;justify-content:center;gap:.5rem;padding:.7rem 1rem;flex-wrap:wrap}
 .nav a{text-decoration:none;color:var(--ink);font-family:'Noto Sans TC',sans-serif;font-size:.82rem;letter-spacing:.12em;padding:.35rem 1rem;border:1px solid transparent;border-radius:999px;transition:.25s}
 .nav a:hover{border-color:var(--tiffany);color:var(--tiffany-deep)}
-.section{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:4rem 1.5rem;position:relative;overflow:hidden}
+.section{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:4rem 1.5rem;position:relative;overflow:hidden;scroll-margin-top:3.1rem}
 .ver-tag{position:absolute;top:1.4rem;left:1.8rem;font-family:'Noto Sans TC',sans-serif;font-size:.72rem;letter-spacing:.3em;opacity:.55;z-index:5}
 
 /* ════════ 版本一：經典藍盒緞帶 ════════ */
@@ -142,6 +142,26 @@ body{font-family:'Noto Serif TC',serif;background:#F2F0EB;color:var(--ink)}
 .deco-corner.bl{bottom:26px;left:26px;border-right:0;border-top:0}
 .deco-corner.br{bottom:26px;right:26px;border-left:0;border-top:0}
 
+/* ════════ 版本六：靛夜之鑽 ════════ */
+#v6{background:radial-gradient(120% 110% at 72% 18%,#17365E 0%,#112A48 48%,#0B1C33 100%);align-items:stretch;padding:0}
+.navy{position:relative;width:100%;min-height:100vh;overflow:hidden;color:#EDF1F7;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(2.5rem,6vw,5rem) clamp(1.8rem,7vw,6rem)}
+.navy .necklace{position:absolute;top:-2%;right:-4%;width:min(68vw,760px);height:auto;pointer-events:none;opacity:.95}
+.navy .flare{position:absolute;top:34%;left:8%;width:340px;height:340px;background:radial-gradient(circle,rgba(255,255,255,.14),rgba(180,205,235,.05) 40%,transparent 65%);pointer-events:none}
+.navy .dia{position:absolute;border-radius:50%;background:radial-gradient(circle at 38% 32%,#FFFFFF 0%,#DCE8F5 35%,#8FA6C4 70%,#5E7699 100%);box-shadow:0 0 10px rgba(220,235,255,.7),0 0 26px rgba(180,205,240,.35);animation:diaTwinkle 5s ease-in-out infinite}
+@keyframes diaTwinkle{0%,100%{box-shadow:0 0 8px rgba(220,235,255,.5)}50%{box-shadow:0 0 16px rgba(255,255,255,.95),0 0 34px rgba(180,205,240,.5)}}
+.navy .ny-top{position:relative;z-index:2}
+.navy .ny-invite{font-family:'Noto Serif TC',serif;font-weight:400;font-size:clamp(1.5rem,3.6vw,2.3rem);letter-spacing:.3em;color:#F2F5FA}
+.navy .ny-script{margin-top:1.4rem;font-family:'Cormorant Garamond',serif;font-size:1.05rem;letter-spacing:.2em;color:rgba(237,241,247,.85)}
+.navy .ny-script b{font-family:'Great Vibes',cursive;font-weight:400;font-size:2.6rem;letter-spacing:.02em;color:#FFF;margin-right:.9rem}
+.navy .ny-mid{position:relative;z-index:2;max-width:34em}
+.navy .ny-mid p{font-family:'Noto Serif TC',serif;font-weight:400;font-size:clamp(.98rem,2.1vw,1.22rem);line-height:2.15;letter-spacing:.1em}
+.navy .ny-mid p b{font-weight:500;letter-spacing:.06em}
+.navy .ny-when{margin-top:2.6rem;font-family:'Cormorant Garamond',serif;font-size:clamp(1.15rem,2.4vw,1.5rem);letter-spacing:.08em;line-height:1.9}
+.navy .ny-when .zh{font-family:'Noto Serif TC',serif;font-size:clamp(.95rem,2vw,1.15rem);letter-spacing:.12em}
+.navy .ny-bottom{position:relative;z-index:2;margin-top:3rem}
+.navy .ny-logo{font-family:'Cinzel',serif;font-weight:600;font-size:clamp(1.5rem,4vw,2.5rem);letter-spacing:.06em;color:#B79B62;line-height:1.15}
+.navy .ny-logo small{display:block;font-family:'Noto Sans TC',sans-serif;font-weight:300;font-size:.72rem;letter-spacing:.55em;color:rgba(183,155,98,.85);margin-top:.7rem}
+
 /* 進場動畫 */
 .rise{animation:rise 1s cubic-bezier(.2,.7,.3,1) both}
 @keyframes rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
@@ -158,7 +178,7 @@ body{font-family:'Noto Serif TC',serif;background:#F2F0EB;color:var(--ink)}
 </style>
 
 <nav class="nav">
-  <a href="#v1">壹・經典藍盒</a><a href="#v2">貳・象牙信箋</a><a href="#v3">參・午夜珠寶</a><a href="#v4">肆・雜誌編輯</a><a href="#v5">伍・Art Deco</a>
+  <a href="#v1">壹・經典藍盒</a><a href="#v2">貳・象牙信箋</a><a href="#v3">參・午夜珠寶</a><a href="#v4">肆・雜誌編輯</a><a href="#v5">伍・Art Deco</a><a href="#v6">陸・靛夜之鑽</a>
 </nav>
 
 <!-- 版本一：經典藍盒緞帶 -->
@@ -283,5 +303,49 @@ body{font-family:'Noto Serif TC',serif;background:#F2F0EB;color:var(--ink)}
     </div>
     <div class="deco-div"><i></i></div>
     <div class="quote">豐富的生活體驗是情感連結的橋樑<br>關係長久經營才能創造更多的成果</div>
+  </div>
+</section>
+
+<!-- 版本六：靛夜之鑽 -->
+<section class="section" id="v6">
+  <div class="navy">
+    <div class="ver-tag" style="color:rgba(237,241,247,.5)">VERSION 06 — MIDNIGHT NAVY</div>
+    <svg class="necklace" viewBox="0 0 760 420" fill="none" aria-hidden="true">
+      <defs>
+        <filter id="nglow" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="1.6" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      <g filter="url(#nglow)">
+        <path d="M -20 40 C 180 260 420 300 780 120" stroke="#EAF1FA" stroke-width="7" stroke-linecap="round" stroke-dasharray="0.1 24" opacity=".95"/>
+        <path d="M -20 62 C 180 288 424 326 780 148" stroke="#C9D8EC" stroke-width="4.5" stroke-linecap="round" stroke-dasharray="0.1 15" opacity=".8"/>
+        <circle cx="376" cy="292" r="7.5" fill="#F4F8FE"/>
+        <circle cx="380" cy="316" r="5" fill="#DCE8F5"/>
+      </g>
+    </svg>
+    <div class="flare"></div>
+    <span class="dia" style="width:12px;height:12px;top:56%;right:14%;animation-delay:.4s"></span>
+    <span class="dia" style="width:8px;height:8px;top:66%;right:22%;animation-delay:1.8s"></span>
+    <span class="dia" style="width:15px;height:15px;top:78%;right:10%;animation-delay:3s"></span>
+    <span class="dia" style="width:6px;height:6px;top:42%;right:30%;animation-delay:2.2s"></span>
+    <span class="dia" style="width:9px;height:9px;top:88%;right:26%;animation-delay:1s"></span>
+    <div class="ny-top rise">
+      <div class="ny-invite">誠摯邀請您蒞臨</div>
+      <div class="ny-script"><b>HJ</b>invites you</div>
+    </div>
+    <div class="ny-mid rise">
+      <p><b>HJ Development Program 生活藝術體驗學習營</b><br>
+      見證生活藝術與顧客關係經營的璀璨交織<br>
+      高爾夫・藝術拍賣・奢華香氛・米其林餐飲<br>
+      近距離感受高級珠寶待客之道的非凡魅力</p>
+      <div class="ny-when">
+        2026.8.26 (三) – 8.27 (四)<br>
+        <span class="zh">臺中 Taichung・兩天生活藝術之旅</span>
+      </div>
+    </div>
+    <div class="ny-bottom rise">
+      <div class="ny-logo">HJ DEVELOPMENT PROGRAM<small>生活藝術體驗學習營</small></div>
+    </div>
   </div>
 </section>
