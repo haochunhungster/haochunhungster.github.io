@@ -1,0 +1,118 @@
+{
+  "reviewDate": "2026-09-27",
+  "baseline": "r8",
+  "entries": [
+    {
+      "id": "L1",
+      "file": "D:\\CODEX\\AshenKeep\\game\\client\\src\\livingActor.ts",
+      "sha256": "69ff3adc2f024927657c8df0c5cbccda631dcc84df19ece1fe74f3df37fca9d9",
+      "start": 12,
+      "end": 37,
+      "excerpt": "12: /** One shared WebGL atlas preserves Phaser depth sorting and avoids a context per actor. */\n13: class ActorAtlas{\n14:  readonly renderer:T.WebGLRenderer;readonly stage=createStage();readonly tile:number;readonly texture:Phaser.Textures.Texture;readonly actors=new Map<number,LivingActor>();\n15:  readonly origin=new T.Vector3(0,0,0);private dead=false;private disposeLight:()=>void;\n16:  constructor(private scene:Phaser.Scene){\n17:   this.tile=settings.quality==='low'?256:512;\n18:   this.renderer=new T.WebGLRenderer({alpha:true,antialias:true,preserveDrawingBuffer:true,premultipliedAlpha:true,powerPreference:'high-performance'});\n19:   this.renderer.setSize(this.tile*2,this.tile*2);this.renderer.setClearColor(0,0);this.renderer.toneMapping=T.ACESFilmicToneMapping;this.renderer.autoClear=false;\n20:   this.disposeLight=lightStage(this.renderer,this.stage.scene);\n21:   this.texture=scene.textures.addImage(RIG_TEXTURE,this.renderer.domElement as unknown as HTMLImageElement)!;\n22:   for(let i=0;i<4;i++)this.texture.add(String(i),0,(i%2)*this.tile,Math.floor(i/2)*this.tile,this.tile,this.tile);\n23:   this.origin.project(this.stage.camera);\n24:   scene.events.on('postupdate',this.draw,this);scene.events.once('shutdown',this.destroy,this);\n25:  }\n26:  add(actor:LivingActor){let i=0;while(this.actors.has(i))i++;if(i>=4)throw Error('Character atlas capacity exceeded');this.actors.set(i,actor);this.stage.scene.add(actor.body.group);return i;}\n27:  draw(){\n28:   if(this.dead)return;const r=this.renderer;r.setScissorTest(true);\n29:   for(const a of this.actors.values())a.body.group.visible=false;\n30:   for(const [i,a] of this.actors){\n31:    const x=(i%2)*this.tile,y=(1-Math.floor(i/2))*this.tile;r.setViewport(x,y,this.tile,this.tile);r.setScissor(x,y,this.tile,this.tile);r.clear(true,true,true);\n32:    if(a.root.visible){a.body.group.visible=true;r.render(this.stage.scene,this.stage.camera);a.body.group.visible=false;}\n33:   }\n34:   this.texture.source[0].update();\n35:  }\n36:  remove(slot:number){const a=this.actors.get(slot);if(a)this.stage.scene.remove(a.body.group);this.actors.delete(slot);}\n37:  destroy(){if(this.dead)return;this.dead=true;this.scene.events.off('postupdate',this.draw,this);for(const a of this.actors.values())a.body.dispose();this.actors.clear();this.disposeLight();this.renderer.dispose();this.renderer.forceContextLoss();this.scene.textures.remove(RIG_TEXTURE);atlases.delete(this.scene);}"
+    },
+    {
+      "id": "L2",
+      "file": "D:\\CODEX\\AshenKeep\\game\\client\\src\\skeletalActor.ts",
+      "sha256": "a85050aeb46cd8fde0d5fdc32f6abc6c8936d58319ca93b12ba15a60a51a0e5e",
+      "start": 129,
+      "end": 140,
+      "excerpt": "129:  const scene=new T.Scene();scene.add(new T.HemisphereLight(0xbad7f5,0x30292c,2.2));\n130:  const key=new T.DirectionalLight(0xffe0b5,3.5);key.position.set(-3,5,4);scene.add(key);\n131:  const rim=new T.DirectionalLight(0x8ec6ff,2.5);rim.position.set(3,2,-3);scene.add(rim);\n132:  const camera=new T.OrthographicCamera(-2.2,2.2,2.8,-1.6,.1,30);camera.position.set(0,.8+VIEW_RISE,VIEW_DEPTH);camera.lookAt(0,.8,0);camera.updateMatrixWorld();return{scene,camera};\n133: }\n134: \n135: /** Static studio reflections give steel a readable surface at gameplay scale. */\n136: export function lightStage(renderer:T.WebGLRenderer,scene:T.Scene):()=>void{\n137:  const pmrem=new T.PMREMGenerator(renderer),room=new RoomEnvironment();\n138:  const environment=pmrem.fromScene(room,.05);scene.environment=environment.texture;scene.environmentIntensity=.28;\n139:  room.dispose();pmrem.dispose();return()=>{scene.environment=null;environment.dispose();};\n140: }"
+    },
+    {
+      "id": "L3",
+      "file": "D:\\CODEX\\AshenKeep\\game\\client\\src\\keepScene.ts",
+      "sha256": "29e5b7ad7e271a1c927b6e7373ac3723a99366e96bd3ca344f34e0057d624757",
+      "start": 505,
+      "end": 528,
+      "excerpt": "505:       const nx = this.predict.value(v.m, \"x\");\n506:       const ny = this.predict.value(v.m, \"y\");\n507:       const dx = nx - v.x;\n508:       const dy = ny - v.y;\n509:       v.x = nx;\n510:       v.y = ny;\n511:       // Hysteresis avoids left/right flicker from network interpolation at rest.\n512:       if(Math.abs(dx)>.12)v.img.setFlipX(dx<0);\n513:       const moving=dx*dx+dy*dy>.001;\n514:       const flash=(this.mobFlash.get(v.m)??0)>this.time.now;\n515:       const size=MOB_SIZE[v.m.kind];\n516:       const casting=v.m.kind===M.Caster&&v.m.st===1;\n517:       // Hit reactions keep the current gait pose; switching to an unrelated\n518:       // painted hurt frame used to jerk both arms on every impact.\n519:       const action=casting?'attack':moving?'walk':'idle';\n520:       if(moving)v.walkMs+=mobCycles(dx,dy,v.m.kind)*MOB_CYCLE_MS[v.m.kind];\n521:       animateArt(v.img,MOB_ART[v.m.kind]+'-'+action,moving?v.walkMs:time,size);\n522:       const reaction=this.mobReactions.get(v.m),r=reaction?reactionEnvelope(time-reaction.at,reaction.heavy?260:190):0;\n523:       const weight=v.m.kind===M.Brute?.55:1;\n524:       const away=reaction?Math.cos(reaction.angle):0;\n525:       const gait=moving&&!settings.reducedMotion?Math.sin(v.walkMs/MOB_CYCLE_MS[v.m.kind]*Math.PI*2):0;\n526:       const displacement=r*(reaction?.heavy?9:5)*weight;\n527:       v.img.setPosition(nx+away*displacement,ny+(reaction?Math.sin(reaction.angle)*displacement*.4:0)-Math.abs(gait)*(v.m.kind===M.Brute?1:1.5))\n528:         .setRotation(r*away*.13*weight+gait*.008*weight).setDepth(5+ny*.001);"
+    },
+    {
+      "id": "L4",
+      "file": "D:\\CODEX\\AshenKeep\\game\\art-source\\tools\\visual-r8\\build_mobs.py",
+      "sha256": "0478da817875a4b5b1c6181e9e1cf98ce7b969cea124060a9659277686562f23",
+      "start": 54,
+      "end": 94,
+      "excerpt": "54: for k,kind in enumerate(['imp','beetle','brute']):\n55:  a,b=load(kind+'-1'),load(kind+'-2');pa,pb=[np.array(p+border,np.float32) for p in LANDMARKS[kind]]\n56:  tri=Delaunay(pa).simplices\n57:  def areas(p):\n58:   v=p[tri];a=v[:,1]-v[:,0];b=v[:,2]-v[:,0];return a[:,0]*b[:,1]-a[:,1]*b[:,0]\n59:  # Preserve triangle orientation and at least 35% of each joint patch area.\n60:  # The key poses are drawn separately, so extreme correspondence is unsafe.\n61:  if kind=='brute':\n62:   pb=pa.copy()\n63:   for i,d in {2:(-1,0),3:(-2,1),4:(-2,3),5:(1,0),6:(2,1),7:(3,2),14:(-3,-5),15:(-4,-7),16:(-6,-9),17:(2,4),18:(4,8)}.items():pb[i]+=d\n64:  delta=pb-pa;amount=.70;basearea=areas(pa)\n65:  while np.min(areas(pa+delta*amount)/basearea)<.35:amount*=.9\n66:  delta*=amount\n67:  other=-delta*.45\n68:  if kind=='imp':\n69:   for i in [10,11,12]:other[i]=[0,0]\n70:   for i,d in {13:(0,0),14:(-4,-4),15:(-9,-8),16:(-12,-11)}.items():other[i]=d\n71:  if kind=='brute':\n72:   for i in [14,15,16]:other[i]=[0,0]\n73:   for i,d in {10:(-2,-3),11:(-3,-5),12:(-4,-6)}.items():other[i]=d\n74:  second=1.\n75:  while np.min(areas(pa+other*second)/basearea)<.35:second*=.9\n76:  other*=second;back=None;images=[]\n77:  for i in range(32):\n78:   swing=np.sin(i/32*np.pi*2)\n79:   target=pa+delta*max(0,swing)**2+other*max(0,-swing)**2\n80:   im=tween(a,b,(pa,target,tri),back,1);images.append(im);name=f'{kind}-flow-r8-{i:02}'\n81:   n=k*32+i;x=(n%8)*256;y=(n//8)*256;atlas.paste(im,(x,y))\n82:   frames[name]={'frame':{'x':x,'y':y,'w':256,'h':256},'rotated':False,'trimmed':False,'spriteSourceSize':{'x':0,'y':0,'w':256,'h':256},'sourceSize':{'w':256,'h':256}}\n83:   data['sprites']=[s for s in data['sprites'] if s['id']!=name]\n84:   data['sprites'].append({'id':name,'atlas':atlas_key,'frame':name,'origin':{'x':.5,'y':.90625}})\n85:  data['clips'][kind+'-walk']={'loop':True,'duration':1024,'frames':[{'frame':f'{kind}-flow-r8-{i:02}','duration':32} for i in range(32)]}\n86:  strip=Image.new('RGBA',(1024,512),(20,26,31,255))\n87:  for j,i in enumerate([0,4,8,12,16,20,24,28]):strip.alpha_composite(images[i],((j%4)*256,(j//4)*256))\n88:  strip.convert('RGB').save(qa/f'{kind}-motion-contact.png')\n89:  images[0].save(qa/f'{kind}-motion.gif',save_all=True,append_images=images[1:],duration=40,loop=0,disposal=2)\n90:  prem=[np.array(i).astype(float)/255 for i in images]\n91:  for im in prem:im[:,:,:3]*=im[:,:,3:4]\n92:  changes=[float(np.abs(prem[(i+1)%32]-prem[i]).mean()) for i in range(32)]\n93:  measure.append({'kind':kind,'frames':32,'maxAdjacentPixelChange':max(changes),'seamPixelChange':changes[-1],'firstSupportAmplitude':amount,'secondSupportAmplitude':second,'minimumTriangleAreaRatio':float(min(np.min(areas(pa+delta)/basearea),np.min(areas(pa+other)/basearea)))})\n94: atlas.save(out/(atlas_key+'.png'),optimize=True)"
+    },
+    {
+      "id": "L5",
+      "file": "D:\\CODEX\\AshenKeep\\game\\client\\src\\skeletalActor.ts",
+      "sha256": "a85050aeb46cd8fde0d5fdc32f6abc6c8936d58319ca93b12ba15a60a51a0e5e",
+      "start": 54,
+      "end": 69,
+      "excerpt": "54: }\n55: const clamp=(v:number)=>T.MathUtils.clamp(v,0,1);\n56: export function selectClip(s:MotionSample):{name:string;time:number}{\n57:  const p=clamp(s.phase);let name='Idle_Loop',time=0;\n58:  if(s.action==='walk'){name=s.gait==='walk'?'Walk_Loop':'Jog_Fwd_Loop';time=((s.phase%1+1)%1)*clips.get(name)!.duration;}\n59:  else if(s.action==='attack'){\n60:   name=s.hammer?'Sword_Attack':s.variant==='reverse'?'Strike_B':s.variant==='overhead'?'Sword_Regular_C':s.variant==='thrust'?'Sword_Dash':'Strike_A';\n61:   // Match the authored contact pose to the server's windup boundary (phase .5).\n62:   const contact:Record<string,number>={Strike_A:.24,Strike_B:.25,Sword_Regular_C:.62,Sword_Dash:.30,Sword_Attack:.40};const c=contact[name],duration=clips.get(name)!.duration;\n63:   time=p<.5?p*2*c:c+(p-.5)*2*(duration-c);\n64:  }else if(s.action==='dodge'){name='Roll';time=p*clips.get(name)!.duration;}\n65:  else if((s.action==='guard'||s.action==='charge')&&s.locomotionPhase!==undefined){name=s.action==='guard'?'Guard_Walk':'Charge_Walk';time=((s.locomotionPhase%1+1)%1)*clips.get(name)!.duration;}\n66:  else if(s.action==='guard'){name='Sword_Block';time=.33;}\n67:  else if(s.action==='charge'){name='Sword_Attack';time=.08+p*.32;}\n68:  else if(s.action==='hurt'){name='Hit_Chest';time=p*clips.get(name)!.duration;}\n69:  else{name='Idle_Loop';time=(s.clock*.001)%clips.get(name)!.duration;}"
+    },
+    {
+      "id": "L6a",
+      "file": "D:\\CODEX\\AshenKeep\\game\\client\\src\\actorScale.ts",
+      "sha256": "8773d5195340d293ff5dcb89c1b76529b0b0de35e552b55050c47dd291302f32",
+      "start": 1,
+      "end": 30,
+      "excerpt": "1: /** World-space sizes, not the transparent square size of a painted frame. */\n2: export const ACTOR_HEIGHT={hero:104,commander:154} as const;\n3: export const MODEL_HEIGHT=1.82;\n4: export const ACTOR_VIEW_SPAN=4.4;\n5: export const VIEW_RISE=4.9,VIEW_DEPTH=7;\n6: export const GROUND_PROJECTION=VIEW_RISE/Math.hypot(VIEW_RISE,VIEW_DEPTH);\n7: export const MOB_SIZE=[106,118,174,126] as const;\n8: /** One full left/right cycle in projected world pixels. Each species keeps its\n9:  * own stride; slowing or stopping movement also slows or stops the feet. */\n10: export const MOB_STRIDE=[53,45,67,52] as const;\n11: export const MOB_CYCLE_MS=[1024,1024,1024,768] as const;\n12: export function mobCycles(dx:number,dy:number,kind:number):number{\n13:  return Math.hypot(dx,dy/GROUND_PROJECTION)/MOB_STRIDE[kind];\n14: }\n15: /** Painted frame dimensions. Tall structures grow upward from the same cell;\n16:  * footprint/pathfinding stays on the 40px grid. Ground traps remain flat. */\n17: export const BUILD_VISUAL:Record<number,{width:number;height:number;ground:number;muzzle:number}>={\n18:  1:{width:92,height:128,ground:9,muzzle:0},\n19:  2:{width:110,height:132,ground:9,muzzle:72},\n20:  3:{width:112,height:186,ground:9,muzzle:133},\n21:  4:{width:72,height:72,ground:9,muzzle:0},\n22:  5:{width:72,height:72,ground:9,muzzle:0},\n23:  9:{width:184,height:238,ground:0,muzzle:0},\n24: };\n25: export type Gait='walk'|'jog';\n26: // Measured from retargeted ball joints during their planted interval.\n27: // One cycle contains both footfalls. See qa/visual-r7/gait-calibration.json.\n28: export const STRIDE_METRES={walk:1.36,jog:5.70} as const;\n29: export function groundYaw(face:number):number{return Math.atan2(Math.cos(face),Math.sin(face)/GROUND_PROJECTION);}\n30: export function strideCycles(dx:number,dy:number,height:number,gait:Gait):number{"
+    },
+    {
+      "id": "L6b",
+      "file": "D:\\CODEX\\AshenKeep\\game\\shared\\keep_config.ts",
+      "sha256": "021912cbcb9f9d57267b7894f95d6e6276e6a065e2eade391b4c0779f09f6c6b",
+      "start": 1,
+      "end": 12,
+      "excerpt": "1: // 守城試煉的食譜卡：建材、符文、結界、怪物、波次。調平衡只改這裡。\n2: // 單位：格（TILE 像素一格）、秒。\n3: \n4: export const MAX_KEEP_PLAYERS = 2;\n5: export const KEEP_TICK = 30; // 守城不需要魂系那麼細的判定，每秒 30 步\n6: export const KEEP_DT = 1 / KEEP_TICK;\n7: export const TILE = 40;\n8: export const GRID_W = 44;\n9: export const GRID_H = 30;\n10: export const CORE = { tx: 22, ty: 15, size: 2, maxHp: 1200 }; // 核心佔 2×2 格（左上角 tx,ty）\n11: \n12: export enum B {"
+    },
+    {
+      "id": "L7a",
+      "file": "D:\\CODEX\\AshenKeep\\game\\shared\\siege_config.ts",
+      "sha256": "cb30a0967838cd7e743f36d3c8beed05e52faf98b6b66a4daa8939ddb3697b8f",
+      "start": 7,
+      "end": 15,
+      "excerpt": "7: import { GRID_H, GRID_W, M, TILE } from \"./keep_config.ts\";\n8: \n9: export const MAX_SIEGE_PLAYERS = 2;\n10: export const MAP_W = GRID_W * TILE;\n11: export const MAP_H = GRID_H * TILE;\n12: /** 角色能走的範圍＝整張地圖（前端預測與伺服器共用；角色可以跨過自己的牆和塔） */\n13: export const SIEGE_CLAMP = clampRect(MAP_W, MAP_H);\n14: \n15: export const SIEGE = {"
+    },
+    {
+      "id": "L7b",
+      "file": "D:\\CODEX\\AshenKeep\\game\\server\\siegeWorld.ts",
+      "sha256": "f296b58f94dad76795ac069cdb3a1671579dfbff7d99112fe542d2c6f8c4dcb2",
+      "start": 458,
+      "end": 478,
+      "excerpt": "458:   private addHit(rec: HitRecord): void {\n459:     this.hitLog.push(rec);\n460:     if (this.hitLog.length > 48) this.hitLog.splice(0, this.hitLog.length - 48);\n461:     for (const [id, p] of this.state.players) {\n462:       if (p.act === Act.Dead) continue;\n463:       this.pending.push({ rec, pid: id, due: rec.t + REPORT_GRACE_MS });\n464:     }\n465:   }\n466: \n467:   private consume(id: string, p: Player, cmd: Cmd): void {\n468:     if (cmd.ev&&this.state.phase!==\"won\") this.handleEvent(id, p, cmd);\n469:     const r = stepPlayer(p as unknown as PSim, cmd, DT, SIEGE_CLAMP);\n470:     if (r.guardBroken) {\n471:       const rec = this.hitLog.find((h) => h.atkId === cmd.ea && h.i === (cmd.ei & 7));\n472:       const hit = rec ? ELITE_MOVES[rec.type].hits[rec.i] : undefined;\n473:       if (hit) this.damage(id, p, Math.round(hit.dmg * PLAYER.guardBreakDmgMul));\n474:       this.fx.push({ k: \"break\", x: p.x, y: p.y, by: id });\n475:     }\n476:   }\n477: \n478:   /** 前端回報的判定：打中指揮官（跟決鬥一樣以自己畫面為準），或被指揮官／巨獸打到的結果 */"
+    },
+    {
+      "id": "L7c",
+      "file": "D:\\CODEX\\AshenKeep\\game\\client\\src\\siegeScene.ts",
+      "sha256": "944a1dd6b39f78402ad37c2d6e7fb823ac204c72fd4b4cbd9ee49ec31246b1a7",
+      "start": 115,
+      "end": 130,
+      "excerpt": "115:     if (bossName) bossName.textContent = \"攻城指揮官\";\n116:     this.exposeSiegeDebug();\n117:   }\n118: \n119:   private addPlayer(key: string, p: Player): void {\n120:     const isMe = key === this.room.sessionId;\n121:     this.fighters.add(key, p, isMe);\n122:     if (!isMe) return;\n123:     this.ctrl = this.predict.reconciler(p, {\n124:       input: this.act,\n125:       fields: SIM_FIELDS as unknown as (keyof Player & string)[],\n126:       step: (ctx, s, cmd) => {\n127:         stepPlayer(s as unknown as PSim, cmd as unknown as Cmd, ctx.dt, SIEGE_CLAMP);\n128:       },\n129:     }) as unknown as { state: unknown };\n130:     this.face = p.face;"
+    },
+    {
+      "id": "L8a",
+      "file": "D:\\CODEX\\AshenKeep\\game\\shared\\siege_config.ts",
+      "sha256": "cb30a0967838cd7e743f36d3c8beed05e52faf98b6b66a4daa8939ddb3697b8f",
+      "start": 1,
+      "end": 59,
+      "excerpt": "1: // 攻城（原型三）的食譜卡：兩個人在同一場攻城裡互相「傳球」。\n2: //   塔把怪傳給出戰的人：減速、標記、破甲 → 他打起來更痛\n3: //   出戰的人把怪傳回給塔：巨獸破勢倒地 → 塔打牠 ×2；打斷咒術師 → 塔打得進去\n4: // 地圖、建材、怪物、波次沿用守城（keep_config），這裡只放攻城多出來的規則。單位：秒、像素（格另外註明）。\n5: \n6: import { clampRect } from \"./combat.ts\";\n7: import { GRID_H, GRID_W, M, TILE } from \"./keep_config.ts\";\n8: \n9: export const MAX_SIEGE_PLAYERS = 2;\n10: export const MAP_W = GRID_W * TILE;\n11: export const MAP_H = GRID_H * TILE;\n12: /** 角色能走的範圍＝整張地圖（前端預測與伺服器共用；角色可以跨過自己的牆和塔） */\n13: export const SIEGE_CLAMP = clampRect(MAP_W, MAP_H);\n14: \n15: export const SIEGE = {\n16:   respawnSec: 8, // 出戰倒下後幾秒在核心旁歸隊（不會因此輸掉）\n17: \n18:   // ── 攻城指揮官（精簡版灰燼騎士）：第 2、4、6… 波之前在野外紮營 ──\n19:   cmdrEvery: 2,\n20:   cmdrHp: 800, // 第 2 波的血量；之後每一波 +6%（要打得完：準備 18 秒＋出怪 7 秒內，熟練的人約 20 秒）\n21:   cmdrHpPerWave: 0.06,\n22:   cmdrWake: 330, // 有人走進這個距離就醒\n23:   cmdrLeash: 760, // 所有人都離牠這麼遠、持續 cmdrLeashSec 秒 → 回營地補滿血\n24:   cmdrLeashSec: 4,\n25:   cmdrCampInset: 5, // 營地離出怪那一邊幾格\n26:   cmdrBuffHp: 1.5, // 牠還活著時，那一波出生的怪血量 ×1.5\n27:   cmdrRewardMana: 80,\n28:   cmdrRewardRunes: 1, // 擊敗牠＝帶回一枚符文：全隊符文上限 +1\n29:   towerVsCmdr: 0.5, // 把牠引進塔的射程：塔打牠的傷害倍率\n30: \n31:   // ── 攻城巨獸：有架勢，破勢就倒地 ──\n32:   brutePosMax: 100,\n33:   brutePosRegen: 6, // 每秒\n34:   brutePosRegenDelay: 1.5,\n35:   bruteDownSec: 4, // 倒地多久（這段時間不走、不拆牆）\n36:   bruteDownTowerMul: 2.5, // 倒地時塔打牠 ×2.5\n37:   bruteExecMul: 5, // 倒地後出戰的第一擊＝處決（×5、無視護甲；蓄滿的重槌處決約削掉一半血）\n38:   bruteSwipeReach: 105, // 有人在這個距離內就橫掃\n39:   bruteSwipeCd: 1.2, // 出戰的人貼著牠，牠就一直掃他（拖住巨獸＝牠沒空拆牆）\n40: \n41:   // ── 咒術師 ──\n42:   casterWalkSec: 3.5, // 走多久停下來詠唱\n43:   casterChannelSec: 2.5,\n44:   casterStunSec: 1.2, // 被打斷後愣住多久\n45:   casterShield: 60, // 唱完：附近每隻怪一層護盾（先吸收傷害）\n46:   casterShieldRadius: 3, // 格\n47:   casterChannelTowerMul: 0.15, // 詠唱中身上有屏障，塔幾乎打不動\n48: \n49:   // ── 出戰打怪 ──\n50:   fighterVsSlowMul: 1.5, // 被荊棘藤／冰霜減速的怪，出戰打牠 ×1.5\n51:   fighterVsSwarmMul: 1.8, // 小鬼、甲蟲（怪潮）：一刀掃過去清一片，不用逐隻拆招\n52:   hammerBreakSec: 4, // 重槌打中＝破甲（塔也跟著打全額）\n53:   swingSlack: 12, // 伺服器判定揮擊打到怪時多給的距離（怪的位置前端看到的比伺服器晚約 0.1 秒）\n54: };\n55: \n56: /** 攻城第 w 波的怪：守城的配方＋第 2 波起的咒術師 */\n57: export function siegeWaveMobs(w: number, base: [M, number][]): [M, number][] {\n58:   const out = base.map(([k, n]) => [k, n] as [M, number]);\n59:   if (w >= 2) out.push([M.Caster, Math.floor(w / 2)]);"
+    },
+    {
+      "id": "L8b",
+      "file": "D:\\CODEX\\AshenKeep\\game\\shared\\keep_config.ts",
+      "sha256": "021912cbcb9f9d57267b7894f95d6e6276e6a065e2eade391b4c0779f09f6c6b",
+      "start": 40,
+      "end": 73,
+      "excerpt": "40: };\n41: \n42: /** 手把 LB/RB 切換的順序 */\n43: export const BUILD_ORDER = [B.Wall, B.Crossbow, B.Lightning, B.SlowTrap, B.SpikeTrap];\n44: \n45: export enum Rune {\n46:   None = 0,\n47:   Frost = 1, // 冰霜：這座塔打中的會變慢\n48:   Burst = 2, // 爆裂：打中時周圍一格也吃一半傷害\n49:   Mark = 3, // 標記：打中的怪 3 秒內受到所有傷害 +35%\n50: }\n51: \n52: export const RUNE = {\n53:   cost: 40,\n54:   capacity: 4, // 每個人最多刻幾個（個人的流派配置，不是全隊科技）\n55:   names: [\"\", \"冰霜\", \"爆裂\", \"標記\"],\n56:   frostSlow: 0.45,\n57:   frostSec: 1.2,\n58:   burstRadius: 1.2,\n59:   burstMul: 0.5,\n60:   markMul: 1.35,\n61:   markSec: 3,\n62: };\n63: \n64: export const STATUS = {\n65:   slowTrapMul: 0.45, // 荊棘藤：速度剩 45%\n66:   slowTrapSec: 1.4,\n67:   armorBreakSec: 4, // 破甲持續\n68:   spikeVsSlowedMul: 2, // 尖刺打變慢的怪 ×2（陷阱流的配合）\n69: };\n70: \n71: /** 結界：你的關鍵指令。把魔力集中在一區，撐過最危險的那幾秒 */\n72: export const BARRIER = { cost: 90, radius: 3.5, sec: 8, cooldown: 28, fireRateMul: 1.6, wallInvuln: true };\n73: "
+    },
+    {
+      "id": "L9",
+      "file": "D:\\CODEX\\AshenKeep\\game\\client\\src\\main.ts",
+      "sha256": "8f86b96a4c00d37432a9e39ee46d54ff0818b1badb9e53881d5c9e10be31fcaa",
+      "start": 18,
+      "end": 27,
+      "excerpt": "18: type Mode = \"duel\" | \"keep\" | \"siege\";\n19: const MODES: Mode[] = [\"duel\", \"keep\", \"siege\"];\n20: const params = new URLSearchParams(location.search);\n21: const $ = (id: string) => document.getElementById(id)!;\n22: const input = new Input();\n23: const sfx = new Sfx();\n24: const shell = setupShell(input,sfx);\n25: const lane = params.get(\"lane\") === \"e2e\" ? \"e2e\" : \"live\";\n26: let selected: Mode = MODES.includes(params.get(\"mode\") as Mode) ? (params.get(\"mode\") as Mode) : \"duel\";\n27: let joining = false;"
+    },
+    {
+      "id": "L10",
+      "file": "D:\\CODEX\\AshenKeep\\game\\client\\src\\impactProfile.ts",
+      "sha256": "8aeca27317326a5f04f04c9d81ba18d36d108a47049e81af5fb42f84859cb42b",
+      "start": 1,
+      "end": 25,
+      "excerpt": "1: /** Cosmetic timing only. Simulation, input, damage and invulnerability never stop. */\n2: export type ImpactKind='light'|'heavy'|'block'|'parry'|'hurt'|'execute';\n3: export const IMPACT={\n4:   light:{hold:42,recoil:2,duration:140,shake:.0015,rumble:.14},\n5:   heavy:{hold:78,recoil:5,duration:210,shake:.0045,rumble:.5},\n6:   block:{hold:32,recoil:5,duration:190,shake:.002,rumble:.24},\n7:   parry:{hold:58,recoil:3,duration:170,shake:.003,rumble:.4},\n8:   hurt:{hold:30,recoil:5,duration:180,shake:.004,rumble:.45},\n9:   execute:{hold:108,recoil:7,duration:260,shake:.006,rumble:.7},\n10: } as const;\n11: export function reactionEnvelope(age:number,duration:number):number{\n12:   if(age<0||age>=duration)return 0;\n13:   const t=age/duration;return Math.sin(Math.min(1,t/.16)*Math.PI/2)*(1-t)**2;\n14: }\n15: export class PoseHold {\n16:   until=0; private last=-Infinity; private duration=0; count=0;\n17:   request(now:number,ms:number):boolean{\n18:     if(now-this.last<95){\n19:       if(ms<=this.duration)return false; // predicted hit + authoritative echo = one contact\n20:       this.duration=ms;this.until=Math.max(this.until,this.last+ms);return true; // execution upgrades the same hit\n21:     }\n22:     this.last=now;this.duration=ms;this.until=now+ms;this.count++;return true;\n23:   }\n24:   active(now:number,interrupt=false):boolean {if(interrupt)this.until=0;return now<this.until;}\n25: }"
+    }
+  ]
+}

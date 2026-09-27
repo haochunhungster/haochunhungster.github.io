@@ -1,0 +1,145 @@
+{
+  "researchDate": "2026-09-27",
+  "externalSources": [
+    {
+      "id": "S1",
+      "title": "Valve：Dota 2 Workshop — Character Art Guide",
+      "url": "https://help.steampowered.com/en/faqs/view/0688-7692-4D5A-1935",
+      "scope": "。支持俯視辨識、剪影、朝向與骨架相容；本次官方搜尋索引能讀到此段，直接頁面文字擷取有限，未擴張引用不可讀的段落。",
+      "accessed": "2026-09-27",
+      "type": "primary",
+      "verification": "official search-index excerpt; page extraction limited"
+    },
+    {
+      "id": "S2",
+      "title": "Riot：Clarity in League",
+      "url": "https://www.leagueoflegends.com/en-au/news/dev/clarity-in-league/",
+      "scope": "，2021-03-12。支持可讀性、視聽層級、雜訊控制與效果／命中範圍一致。",
+      "accessed": "2026-09-27",
+      "type": "primary",
+      "verification": "official source text reviewed"
+    },
+    {
+      "id": "S3",
+      "title": "Moon Studios：Introducing No Rest for the Wicked",
+      "url": "https://norestforthewicked.com/news/introducing-no-rest-for-the-wicked",
+      "scope": "，2023-12-08。支持其自述繪畫風方向。",
+      "accessed": "2026-09-27",
+      "type": "primary",
+      "verification": "official source text reviewed"
+    },
+    {
+      "id": "S4",
+      "title": "No Rest for the Wicked：官方 Steam 商店",
+      "url": "https://store.steampowered.com/app/1371980/No_Rest_for_the_Wicked/",
+      "scope": "。支持精準、有重量的戰鬥定位；未引用價格、銷量或評分。",
+      "accessed": "2026-09-27",
+      "type": "primary",
+      "verification": "official source text reviewed"
+    },
+    {
+      "id": "S5",
+      "title": "Sony Interactive Entertainment：Survive Nioh 2’s Opening Hours with 9 Gameplay Tips",
+      "url": "https://blog.playstation.com/2020/03/11/survive-nioh-2s-opening-hours-with-9-gameplay-tips/",
+      "scope": "，2020-03-11。支持殘心、架勢與不同武器用途。",
+      "accessed": "2026-09-27",
+      "type": "primary",
+      "verification": "official source text reviewed"
+    },
+    {
+      "id": "S6",
+      "title": "Team NINJA：Nioh 2 Beta Demo Survey Results",
+      "url": "https://www.gamecity.ne.jp/nioh2/trial-result-en.html",
+      "scope": "。支持依玩家回饋修改動作、命中、難度與關卡碰撞。",
+      "accessed": "2026-09-27",
+      "type": "primary",
+      "verification": "official source text reviewed"
+    },
+    {
+      "id": "S7",
+      "title": "Robot Entertainment：Solo and Multiplayer Balancing",
+      "url": "https://robotentertainment.com/news-archive/2024/8/27/6yndnw72net5asysm6nwsyli4os3lq",
+      "scope": "，2024-08-28。支持敵人到達間隔、波間準備與單雙人分別測試；沒有移植其數值。",
+      "accessed": "2026-09-27",
+      "type": "primary",
+      "verification": "official source text reviewed"
+    },
+    {
+      "id": "S8",
+      "title": "Thronefall：官方 Steam 商店",
+      "url": "https://store.steampowered.com/app/2239150/Thronefall/",
+      "scope": "。支持白天建設／夜間防守及精簡定位；沒有把它當合作遊戲。",
+      "accessed": "2026-09-27",
+      "type": "primary",
+      "verification": "official source text reviewed"
+    },
+    {
+      "id": "S9",
+      "title": "Unity 6：How Root Motion works",
+      "url": "https://docs.unity3d.com/6000.0/Documentation/Manual/RootMotion.html",
+      "scope": "。支持根位移、姿態與足部高度的技術概念；不構成引擎選型結論。",
+      "accessed": "2026-09-27",
+      "type": "primary",
+      "verification": "official source text reviewed"
+    }
+  ],
+  "images": [
+    {
+      "file": "evidence/monsters.png",
+      "original": "D:\\CODEX\\AshenKeep\\game\\qa\\visual-r8\\live\\monsters.png",
+      "sha256": "8f324b1df4d67d8cb08b810fc84ddfbdc2d682d9c70f4b4052f0a27072788efc",
+      "provenance": "Existing r8 automated QA screenshot; not a new human playtest; some scenes deliberately arranged by QA."
+    },
+    {
+      "file": "evidence/battlefield-brute.png",
+      "original": "D:\\CODEX\\AshenKeep\\game\\qa\\visual-r8\\live\\battlefield-brute.png",
+      "sha256": "6b8a50f84495a87e8ad623d788e0239afc2953b52ec4981e203c1f0922b56d83",
+      "provenance": "Existing r8 automated QA screenshot; not a new human playtest; some scenes deliberately arranged by QA."
+    },
+    {
+      "file": "evidence/real-wave.png",
+      "original": "D:\\CODEX\\AshenKeep\\game\\qa\\visual-r8\\live\\real-wave.png",
+      "sha256": "c55eac67e40ccbff3af5982f1e32722748077404f059179ae933d074f9a6aff7",
+      "provenance": "Existing r8 automated QA screenshot; not a new human playtest; some scenes deliberately arranged by QA."
+    },
+    {
+      "file": "evidence/architecture.png",
+      "original": "D:\\CODEX\\AshenKeep\\game\\qa\\visual-r8\\live\\architecture.png",
+      "sha256": "3337effb33533c13ccf2ddbbd7e0d0fba96a5ec85a650df0f6ce86a84d54f49a",
+      "provenance": "Existing r8 automated QA screenshot; not a new human playtest; some scenes deliberately arranged by QA."
+    }
+  ],
+  "verifiedLocalClaims": [
+    "3D-to-Phaser four-slot atlas",
+    "painted mobs and horizontal flip",
+    "32-frame landmark deformation for three mob species",
+    "hammer selects Sword_Attack",
+    "visual building dimensions separate from TILE=40",
+    "player own-building pass-through rule",
+    "existing synergy rules",
+    "existing impact presentation"
+  ],
+  "designJudgmentsNotMeasured": [
+    "perceived collage and detail overload",
+    "players may not notice synergy",
+    "proposed unified presentation is likely to improve cohesion"
+  ],
+  "proposalsNotResults": [
+    "fixed oblique stylized 3D direction",
+    "relative heights and 35-degree starting camera",
+    "10–15 minute North Gate slice",
+    "two defense layouts",
+    "1080p 24-mob 1-boss 12-defense performance workload",
+    "human playtest protocol"
+  ],
+  "limitations": [
+    "No new human playtest; no satisfaction or fun scores",
+    "No claim to have personally played all reference titles",
+    "Historical devlogs are not current patch guarantees",
+    "No renderer benchmark or migration implemented in this research turn",
+    "Screenshots are existing QA evidence, including staged and overview views"
+  ],
+  "changesThisTurn": [
+    "research documents and evidence copies only; no game source or release edits"
+  ]
+}
