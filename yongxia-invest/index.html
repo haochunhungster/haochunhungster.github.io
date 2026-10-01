@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>詠夏 Villa 投資評估</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap">
+<style>
+:root{
+  --bg:#F3F5F4; --surface:#FFFFFF; --sunk:#E9EDEB; --ink:#1B2321; --muted:#5A6A66; --line:#D6DDDA;
+  --accent:#1D6B67; --accent-soft:#D7ECEA; --good:#2E7A4E; --good-soft:#DDF0E3; --warn:#9A6415; --warn-soft:#F6EAD2;
+  --bad:#AE3D2B; --bad-soft:#F7DFD9;
+  --serif:"Noto Serif TC","Songti TC",serif; --sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  color-scheme:dark; --bg:#111716; --surface:#19201F; --sunk:#141A19; --ink:#E4EBE9; --muted:#97A7A3; --line:#2B3533;
+  --accent:#62B9B2; --accent-soft:#1C3533; --good:#6CC08E; --good-soft:#1B3325; --warn:#E0AE5C; --warn-soft:#3A2E17;
+  --bad:#EE8B78; --bad-soft:#3D211C;}}
+:root[data-theme="dark"]{
+  color-scheme:dark; --bg:#111716; --surface:#19201F; --sunk:#141A19; --ink:#E4EBE9; --muted:#97A7A3; --line:#2B3533;
+  --accent:#62B9B2; --accent-soft:#1C3533; --good:#6CC08E; --good-soft:#1B3325; --warn:#E0AE5C; --warn-soft:#3A2E17;
+  --bad:#EE8B78; --bad-soft:#3D211C;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.7;padding:0 16px}
+.wrap{max-width:1180px;margin:0 auto;padding-block:20px 60px}
+header.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px;padding-block:8px 16px;border-bottom:1px solid var(--line)}
+.brand small{display:block;color:var(--muted);font-size:12px;letter-spacing:.08em}
+.brand h1{font-family:var(--serif);font-size:26px;margin:0;line-height:1.3;text-wrap:balance}
+.tabs{display:flex;gap:4px;background:var(--sunk);padding:4px;border-radius:10px}
+.tabs button{border:0;background:transparent;color:var(--muted);font:inherit;font-weight:500;padding:6px 16px;border-radius:7px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgb(0 0 0/.08)}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+/* report */
+.report{max-width:760px;margin:0 auto;padding-top:24px}
+.report h2{font-family:var(--serif);font-size:21px;margin:40px 0 10px;text-wrap:balance}
+.report h3{font-size:16px;margin:22px 0 6px}
+.report p,.report li{color:var(--ink)}
+.report .lead{font-size:17px}
+.verdict{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;padding:16px 20px;margin-top:8px}
+.verdict ul{margin:6px 0 0;padding-left:20px}
+.tbl{overflow-x:auto;margin:10px 0}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{padding:7px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{color:var(--muted);font-weight:500;font-size:13px;background:var(--sunk)}
+td.n,th.n{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.pos{color:var(--good)} .neg{color:var(--bad)}
+.note{color:var(--muted);font-size:13px}
+.src a{color:var(--accent)}
+.checklist li{margin-bottom:4px}
+/* calculator */
+.calc{display:grid;grid-template-columns:minmax(0,420px) minmax(0,1fr);gap:24px;padding-top:20px;align-items:start}
+@media (max-width:900px){.calc{grid-template-columns:1fr}}
+.panel{display:flex;flex-direction:column;gap:10px}
+.presets{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.presets span{color:var(--muted);font-size:13px;margin-right:4px}
+.btn{border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:13px;padding:5px 12px;border-radius:7px;cursor:pointer}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--surface)}
+details.grp{background:var(--surface);border:1px solid var(--line);border-radius:10px}
+details.grp summary{cursor:pointer;padding:10px 14px;font-weight:700;display:flex;justify-content:space-between;align-items:center;list-style:none}
+details.grp summary::-webkit-details-marker{display:none}
+details.grp summary .sum{font-family:var(--mono);font-weight:400;font-size:13px;color:var(--muted)}
+details.grp[open] summary{border-bottom:1px solid var(--line)}
+.fields{padding:10px 14px 14px;display:grid;grid-template-columns:1fr 1fr;gap:10px 12px}
+.fields .sub{grid-column:1/-1;font-size:12px;color:var(--accent);letter-spacing:.06em;font-weight:700;margin-top:6px}
+.fields .hint{grid-column:1/-1;font-size:12px;color:var(--muted);margin-top:-4px}
+.f label{display:block;font-size:12.5px;color:var(--muted);line-height:1.4;margin-bottom:3px}
+.f .in{display:flex;align-items:center;border:1px solid var(--line);border-radius:7px;background:var(--bg);overflow:hidden}
+.f input,.f select{width:100%;min-width:0;border:0;background:transparent;color:var(--ink);font-family:var(--mono);font-size:14px;padding:6px 8px;font-variant-numeric:tabular-nums}
+.f select{font-family:var(--sans)}
+.f .u{padding:0 8px;font-size:12px;color:var(--muted);white-space:nowrap}
+.f.wide{grid-column:1/-1}
+.results{display:flex;flex-direction:column;gap:14px;position:sticky;top:calc(env(safe-area-inset-top,0px) + 12px)}
+@media (max-width:900px){.results{position:static}}
+.status{display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:10px;font-weight:700}
+.status.good{background:var(--good-soft);color:var(--good)} .status.warn{background:var(--warn-soft);color:var(--warn)} .status.bad{background:var(--bad-soft);color:var(--bad)}
+.status .dot{width:10px;height:10px;border-radius:50%;background:currentColor;flex:none}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+@media (max-width:640px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.kpi{background:var(--surface);padding:10px 12px}
+.kpi .k{font-size:12px;color:var(--muted);line-height:1.4}
+.kpi .v{font-family:var(--mono);font-size:19px;font-weight:500;font-variant-numeric:tabular-nums;white-space:nowrap}
+.kpi .s{font-size:11.5px;color:var(--muted)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.card h4{margin:0 0 6px;font-size:14px}
+.chart svg{width:100%;height:auto;display:block}
+.legend{display:flex;gap:16px;font-size:12px;color:var(--muted);flex-wrap:wrap}
+.legend i{display:inline-block;width:14px;height:3px;border-radius:2px;margin-right:6px;vertical-align:middle}
+.brk{display:grid;grid-template-columns:1fr auto;gap:2px 12px;font-size:13.5px}
+.brk .n{font-family:var(--mono);text-align:right;font-variant-numeric:tabular-nums}
+.brk .t{font-weight:700;border-top:1px solid var(--line);padding-top:4px;margin-top:2px}
+.yt table{font-size:12.5px} .yt td,.yt th{padding:5px 8px}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand"><small>礁溪瑪僯路 66 號 · 7 房包棟民宿</small><h1>詠夏 Villa 投資評估</h1></div>
+    <div class="tabs" role="tablist">
+      <button role="tab" id="tab-report" aria-selected="true" data-tab="report">評估報告</button>
+      <button role="tab" id="tab-calc" aria-selected="false" data-tab="calc">回本試算器</button>
+    </div>
+  </header>
+
+  <!-- ================= 報告 ================= -->
+  <section id="report" class="report" role="tabpanel">
+    <p class="note">整理日期 2026-09-28 · 資料來源：交通部觀光署營運報表、AirDNA／AirROI、Airbnb／Booking 日曆抽樣、各業者官網</p>
+
+    <h2>結論</h2>
+    <div class="verdict">
+      <p class="lead" style="margin:0"><b>這個案子能做，但利潤很薄。</b>要穩定賺錢，必須同時做到下面四件事：</p>
+      <ul>
+        <li><b>週末賣包棟，平日接企業包棟、拆房賣散客</b>，不要只賣包棟</li>
+        <li><b>裝潢控制在 1,500 萬左右</b></li>
+        <li><b>貸款拉長到 30 年</b></li>
+        <li><b>週六包棟價做到 6.5 萬以上</b></li>
+      </ul>
+      <p style="margin:8px 0 0">做到中性情境，一年大約淨賺 60 萬；要做到樂觀情境，一年才有 240 萬左右。只賣包棟、全年定價 10 萬的原始構想，每年會虧 200–300 萬。</p>
+    </div>
+
+    <h2>1. 礁溪的住房率：整體偏低，主因是供給太多</h2>
+    <div class="tbl"><table>
+      <tr><th>對象（2025）</th><th class="n">住房率</th><th class="n">平均房價</th></tr>
+      <tr><td>礁溪鄉民宿（官方）</td><td class="n">20.8%</td><td class="n">3,250</td></tr>
+      <tr><td>宜蘭縣民宿（官方）</td><td class="n">20.4%</td><td class="n">2,934</td></tr>
+      <tr><td>礁溪 Airbnb（AirDNA／AirROI）</td><td class="n">20–26%</td><td class="n">約 5,000</td></tr>
+      <tr><td>礁溪鄉一般旅館</td><td class="n">45.6%</td><td class="n">3,399</td></tr>
+      <tr><td>礁溪老爺</td><td class="n">76.5%</td><td class="n">8,978</td></tr>
+    </table></div>
+    <ul>
+      <li>2023 到 2025 年，礁溪民宿可以賣的房晚增加 18%，實際賣出的房晚卻減少 3%。宜蘭民宿的房間數從 2019 年到現在增加了 49%，縣府目前沒有總量管制。</li>
+      <li>淡旺季差距約 2 倍：7–8 月約 27–31%，3 月只有 13–16%。</li>
+      <li>礁溪 Airbnb 房源幾乎都沒有合法登記，所以 Airbnb 的數字只能當參考，不能直接拿來預估合法民宿。</li>
+    </ul>
+
+    <h2>2. 高端市場：一晚 8,000 元以上賣得動，但只有少數飯店做到</h2>
+    <ul>
+      <li>宜蘭的觀光旅館中，實際成交均價在 8,000 元以上的只有<b>礁溪老爺</b>和<b>蘭城晶英</b>兩家，它們靠品牌、一泊二食和通路。</li>
+      <li>長榮鳳凰、綠舞、凱渡都有大型設施，但實際成交價只有 4,700–6,400 元。</li>
+      <li>官方數據中，找不到每間房均價 8,000 元還賣得好的民宿。</li>
+    </ul>
+
+    <h2>3. 一晚 10 萬的包棟：台灣沒有前例</h2>
+    <div class="tbl"><table>
+      <tr><th>對照物件</th><th>規模</th><th class="n">假日價</th><th>實際銷售</th></tr>
+      <tr><td>嘉義 Terroir</td><td>7 房泳池</td><td class="n">68,000</td><td>Airbnb 一年約 36 晚</td></tr>
+      <tr><td>宜蘭霽月 Villa</td><td>7 房 22 人</td><td class="n">55,000–66,000</td><td>最高價只在春節、跨年</td></tr>
+      <tr><td>日光綠築 Herb Villa</td><td>7 房 18 人</td><td class="n">49,000–67,000</td><td>同上</td></tr>
+      <tr><td>宜蘭 Airbnb 實際成交</td><td>各種包棟</td><td class="n">≤ 約 35,000</td><td>沒有一間更高</td></tr>
+    </table></div>
+    <p>以 20 人計，10 萬等於每人每晚 5,000 元而且不含餐；礁溪老爺一泊二食也是每人約 5,000 元。建議改成分級定價：</p>
+    <ul>
+      <li>平日：3.8–4.5 萬</li>
+      <li>一般週六：5.5–6.8 萬</li>
+      <li>連假：7–8 萬</li>
+      <li>春節、跨年：9–10 萬</li>
+    </ul>
+
+    <h2>4. 週末通常只賺週六一晚</h2>
+    <p>抽樣宜蘭 39 間 4 房以上包棟、未來 12 週的 Airbnb 日曆：</p>
+    <div class="tbl"><table>
+      <tr><th>夜別</th><th class="n">成交率（估）</th><th class="n">價格（週二＝1）</th></tr>
+      <tr><td>週六</td><td class="n">85–95%</td><td class="n">約 2 倍</td></tr>
+      <tr><td>連假核心夜</td><td class="n">85–95%</td><td class="n">高</td></tr>
+      <tr><td>週五</td><td class="n">30–40%</td><td class="n">1.1–1.3 倍</td></tr>
+      <tr><td>週日</td><td class="n">20–35%</td><td class="n">約 1 倍</td></tr>
+      <tr><td>週一～四</td><td class="n">8–15%</td><td class="n">1 倍</td></tr>
+    </table></div>
+    <p>在週六有被訂走的週末裡，<b>48% 只訂週六一晚</b>。週日幾乎不會單獨被訂，大多是週六的客人續住。</p>
+
+    <h2>5. 平日怎麼填</h2>
+    <h3>拆房賣散客：可以補一些，但住房率大約只有 15–25%</h3>
+    <p>抽樣宜蘭 37 間每晚 4,000–9,000 元的單間房，平日被訂走的比例只有 8–13%。礁溪每個平日約有 180–190 家住宿可以訂，而且這還是在平日住宿補助期間。附近飯店的平日價：麒麟 2,642 元起、捷絲旅 3,700 元起、晶泉丰旅和長榮約 6,300 元。</p>
+    <h3>企業包棟：可以做，但要自己開發客戶</h3>
+    <p>主管共識營、部門旅遊可以做，以住宿包棟加上住客自己的活動為主。公開資料查不到宜蘭企業會議的案量，所以一年 18 晚是推估值。</p>
+    <h3>婚宴和對外活動：不列入規劃</h3>
+    <p>婚宴大多辦在假日和吉日，跟填平日的目標衝突；2025 年結婚對數是 10 年新低。另外，晚上 22:00 以後不能有喧鬧活動。所以平日只規劃住客包棟。</p>
+
+    <h2>6. 稅務重點</h2>
+    <ul>
+      <li><b>所得稅</b>：民宿盈餘併入個人綜所稅，最高稅率 40%，不是營所稅 20%。</li>
+      <li><b>營業稅</b>：每月銷售額 20 萬以上要開統一發票，營業稅 5%；房屋稅以營業用稅率計，最低 3%。</li>
+    </ul>
+
+    <h2>7. 財務試算（混合模式，貸款 30 年）</h2>
+    <p class="note">前提：週末賣包棟，平日接企業包棟、其餘拆房賣散客；農舍貸款 1,750 萬，再加上裝潢借款；利率 3%；前 2 年只付利息；所得稅率 40%；房地產每年增值 2%。</p>
+    <div class="tbl"><table>
+      <tr><th>裝潢</th><th>情境（平日散客住房率）</th><th class="n">年營收</th><th class="n">第 3 年起每年</th><th class="n">5 年累積</th><th class="n">20 年淨資產</th></tr>
+      <tr><td>1,500 萬</td><td>保守（15%）</td><td class="n">557</td><td class="n neg">−158</td><td class="n neg">−1,044</td><td class="n neg">−1,613</td></tr>
+      <tr><td>1,500 萬</td><td><b>中性（20%）</b></td><td class="n">775</td><td class="n pos">+63</td><td class="n neg">−63</td><td class="n pos">+2,110</td></tr>
+      <tr><td>1,500 萬</td><td>樂觀（25%）</td><td class="n">1,004</td><td class="n pos">+240</td><td class="n pos">+820</td><td class="n pos">+5,476</td></tr>
+      <tr><td>2,000 萬</td><td>保守（15%）</td><td class="n">557</td><td class="n neg">−191</td><td class="n neg">−1,200</td><td class="n neg">−2,517</td></tr>
+      <tr><td>2,000 萬</td><td><b>中性（20%）</b></td><td class="n">775</td><td class="n pos">+30</td><td class="n neg">−218</td><td class="n pos">+1,277</td></tr>
+      <tr><td>2,000 萬</td><td>樂觀（25%）</td><td class="n">1,004</td><td class="n pos">+236</td><td class="n pos">+780</td><td class="n pos">+4,900</td></tr>
+    </table></div>
+    <p class="note">單位：萬元。「20 年淨資產」＝房地產價值 − 貸款餘額 ＋ 20 年累積現金 − 自備款。</p>
+    <ul>
+      <li><b>準備金：抓 1,000–1,200 萬</b>，才撐得過保守情境前 5 年的缺口。</li>
+      <li>對照：只賣包棟、全年定價 10 萬、裝潢 2,500 萬，每年要虧 200–300 萬，20 年都回不了本。</li>
+      <li>建議裝潢分兩階段做：先花 1,500 萬做客房、衛浴、泳池和一樓公共區；開幕 12 個月後，如果營運數字達標，再追加 500 萬。</li>
+    </ul>
+
+    <h2>8. 付裝潢款之前要先做的事</h2>
+    <ol class="checklist">
+      <li>訪談 5–8 家企業的 HR，問共識營的預算，以及願不願意簽平日包棟年約。</li>
+      <li>以同業身分，問霽月、日光綠築、Terroir 的真實年訂單數和平日住房率。</li>
+      <li>用渲染圖開 IG／LINE 官方帳號，收「開幕優先預約」名單（不收訂金），看 3 個月內能累積多少人。</li>
+      <li>實際算過客房總樓地板面積。</li>
+      <li>向人力、洗滌、保險業者實際詢價，把結果填進試算器。</li>
+    </ol>
+
+    <h2>資料來源</h2>
+    <ul class="src note">
+      <li><a href="https://admin.taiwan.net.tw/BusinessInfo/Articles?a=9969">觀光署民宿營運報表</a>、<a href="https://admin.taiwan.net.tw/BusinessInfo/Articles?a=9711">旅館業營運報表</a>、<a href="https://admin.taiwan.net.tw/BusinessInfo/Articles?a=10425">觀光旅館營運月報</a></li>
+      <li><a href="https://www.airdna.co/vacation-rental-data/app/tw/default/jiaoxi-township/overview">AirDNA 礁溪</a>、<a href="https://www.airroi.com/airbnb-data/taiwan/yilan-county/jiaoxi-township">AirROI 礁溪</a></li>
+      <li>Airbnb／Booking 日曆抽樣：2026-09-28，宜蘭 39 間包棟、37 間單房，以及 Booking 上礁溪 26 家</li>
+    </ul>
+  </section>
+
+  <!-- ================= 試算器 ================= -->
+  <section id="calc" role="tabpanel" hidden>
+    <div class="calc">
+      <div class="panel">
+        <div class="presets"><span>情境</span>
+          <button class="btn" data-preset="cons">保守</button>
+          <button class="btn" data-preset="base">中性</button>
+          <button class="btn" data-preset="opt">樂觀</button>
+          <button class="btn" data-preset="orig">原構想（全包棟 10 萬）</button>
+          <button class="btn" id="reset">全部重設</button>
+        </div>
+        <p class="note" style="margin:0">所有欄位都可以改，結果即時更新，設定會記在這台裝置上。金額單位：大額用「萬元」，單價和薪資用「元」。</p>
+        <div id="groups"></div>
+      </div>
+
+      <div class="results" aria-live="polite">
+        <div id="status" class="status"></div>
+        <div class="kpis" id="kpis"></div>
+        <div class="card chart">
+          <h4>累積現金與淨資產（萬元）</h4>
+          <div id="chart"></div>
+          <div class="legend"><span><i style="background:var(--accent)"></i>累積淨現金流（含自備款投入）</span><span><i style="background:var(--warn)"></i>淨資產變化（含房地增值）</span></div>
+        </div>
+        <div class="card"><h4 id="brk-title">穩定年損益拆解（萬元）</h4><div class="brk" id="brk"></div></div>
+        <div class="card yt"><h4>逐年現金流（萬元）</h4><div class="tbl" id="ytable"></div></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+// ---------- 欄位定義 ----------
+const G = [
+ {g:"資金與貸款", f:[
+  ["sub","購屋"],
+  ["price","購屋總價",3500,"萬"],["ltvA","農舍貸款成數",50,"%"],
+  ["rateA","農舍貸款利率",3,"%",0.05],["termA","農舍貸款年期",30,"年"],["graceA","農舍貸款寬限期",2,"年"],
+  ["sub","裝潢"],
+  ["reno","裝潢預算",1500,"萬"],["loanB","其中借款金額",1500,"萬"],
+  ["rateB","裝潢借款利率",3,"%",0.05],["termB","裝潢借款年期",30,"年"],["graceB","裝潢借款寬限期",2,"年"],
+  ["typeB","裝潢借款還款方式","amort","sel",[["amort","本息攤還"],["bullet","只付息，到期一次還本"],["roll","只付息，持續續約"]]],
+  ["sub","開業前"],
+  ["build","裝修期（無營收）",9,"月"],["preopen","開辦費",100,"萬"],
+  ["hint","寬限期從開業第 1 年起算，寬限期結束後在剩餘年期內攤還。裝修期利息以農舍貸款全額加裝潢借款一半計。"]]},
+ {g:"營收：週末與連假包棟", f:[
+  ["nSat","一年一般週六晚數",43,"晚"],["nHol","一年連假核心夜",23,"晚"],["nFri","一年週五晚數",45,"晚"],["nWk","一年週日～四晚數",254,"晚"],
+  ["pSat","週六包棟價",65000,"元"],["oSat","週六成交率",88,"%"],
+  ["pHol","連假包棟價",80000,"元"],["oHol","連假成交率",90,"%"],
+  ["pFri","週五包棟價",45000,"元"],["oFri","週五成交率",35,"%"],
+  ["addon","包棟加購毛利（每晚）",10000,"元"],
+  ["hint","加購＝私廚、佈置、SPA 等只賣給住客的服務，這裡填扣掉成本後的毛利。"]]},
+ {g:"營收：平日（週日～四）", f:[
+  ["sub","企業包棟"],
+  ["nCorp","企業包棟晚數／年",18,"晚"],["pCorp","企業包棟價",55000,"元"],["mCorp","企業活動餐飲毛利（每晚）",20000,"元"],
+  ["sub","平日一般包棟"],
+  ["oWkB","其餘平日包棟成交率",0,"%"],["pWkB","平日包棟價",40000,"元"],
+  ["sub","拆房賣散客（剩下的平日）"],
+  ["nD","雙人房間數",4,"間"],["pD","雙人房價",5000,"元"],["nQ","四人房間數",3,"間"],["pQ","四人房價",7000,"元"],
+  ["oRoom","散客住房率",20,"%"],
+  ["hint","實測：礁溪同價位單間房平日約 15–25%。平日會先扣掉企業包棟、再扣平日包棟，剩下的晚數才拆房賣。"]]},
+ {g:"通路、稅與爬坡", f:[
+  ["otaB","包棟 OTA＋金流",8,"%"],["otaR","散客 OTA＋金流",15,"%"],["feeC","企業客金流手續費",2,"%"],
+  ["vat","營業稅（價格內含）",5,"%"],["tax","所得稅率（綜所稅）",40,"%"],
+  ["ramp1","開業第 1 年達成率",60,"%"],["ramp2","開業第 2 年達成率",85,"%"],
+  ["gP","房價年漲幅",0,"%"],["gC","成本年漲幅",0,"%"]]},
+ {g:"固定薪資", f:[
+  ["w1n","管家／店長 人數",1,"人"],["w1s","管家／店長 月薪",45000,"元"],
+  ["w2n","房務員 人數",1,"人"],["w2s","房務員 月薪",32000,"元"],
+  ["w3n","其他職位 人數",0,"人"],["w3s","其他職位 月薪",30000,"元"],
+  ["months","年薪月數（含年終）",13,"月"],["emp","雇主負擔（勞健保、勞退）",20,"%"],
+  ["hint","你自己兼管家的話，把管家人數改成 0。"]]},
+ {g:"浮動薪資", f:[
+  ["cleanB","包棟退房清潔工資（每晚）",3500,"元"],["cleanR","散客清潔工資（每間房每晚）",350,"元"],
+  ["eventL","企業活動臨時人力（每場）",3000,"元"],["bonus","業績獎金（占營收）",1,"%"]]},
+ {g:"固定支出（每年）", f:[
+  ["fUtil","水電瓦斯基本（含泳池恆溫）",55,"萬"],["fPool","泳池水質維護",24,"萬"],
+  ["fMaintP","維修保養（占裝潢）",1.5,"%",0.1],["fIns","保險",15,"萬"],
+  ["fSys","訂房系統／門鎖／網路",12,"萬"],["fMkt","行銷",60,"萬"],
+  ["fAcct","會計記帳",10,"萬"],["fHouse","房屋稅",15,"萬"],
+  ["fLand","地價稅",5,"萬"],["fOther","其他固定支出",0,"萬"]]},
+ {g:"浮動支出", f:[
+  ["sub","每賣一晚包棟"],
+  ["guests","包棟入住人數",20,"人"],["bf","早餐（每人）",250,"元"],
+  ["linB","布草洗滌（每晚）",2000,"元"],["amB","備品（每晚）",2500,"元"],["utB","變動水電（每晚）",500,"元"],
+  ["sub","每賣一間散客房"],
+  ["linR","布草洗滌（每間）",250,"元"],["amR","備品（每間）",300,"元"],["utR","變動水電（每間）",100,"元"],
+  ["hint","散客早餐人數：雙人房以 2 人、四人房以 4 人計。"],
+  ["sub","其他"],
+  ["ffe","設備更新準備（占營收）",3,"%"]]},
+ {g:"資產與期間", f:[
+  ["pv","房地價值（開業時）",3500,"萬"],["pg","房地年增值率",2,"%",0.1],
+  ["depY","裝潢折舊年限",10,"年"],["depBld","建物年折舊",20,"萬"],
+  ["years","試算年數",20,"年"],["bufM","準備金緩衝（固定支出月數）",6,"月"]]}
+];
+const PRESETS = {
+ cons:{pSat:55000,oSat:80,pHol:70000,oHol:80,pFri:42000,oFri:25,addon:5000,nCorp:8,pCorp:50000,mCorp:15000,oWkB:0,oRoom:15},
+ base:{pSat:65000,oSat:88,pHol:80000,oHol:90,pFri:45000,oFri:35,addon:10000,nCorp:18,pCorp:55000,mCorp:20000,oWkB:0,oRoom:20},
+ opt:{pSat:75000,oSat:92,pHol:90000,oHol:95,pFri:50000,oFri:45,addon:15000,nCorp:30,pCorp:60000,mCorp:30000,oWkB:0,oRoom:25},
+ orig:{pSat:100000,oSat:50,pHol:100000,oHol:80,pFri:60000,oFri:20,addon:0,nCorp:0,pCorp:55000,mCorp:0,oWkB:10,pWkB:45000,oRoom:0}
+};
+const DEF={}; G.forEach(g=>g.f.forEach(r=>{ if(r[0]!=="sub"&&r[0]!=="hint") DEF[r[0]]=r[2]; }));
+const KEY="yongxia-calc-v1";
+let V={...DEF};
+try{ const s=JSON.parse(localStorage.getItem(KEY)||"null"); if(s) V={...DEF,...s}; }catch(e){}
+
+// ---------- 產生表單 ----------
+const gw=document.getElementById("groups");
+G.forEach((g,gi)=>{
+  const d=document.createElement("details"); d.className="grp"; if(gi<3) d.open=true;
+  d.innerHTML=`<summary><span>${g.g}</span><span class="sum" id="sum-${gi}"></span></summary><div class="fields"></div>`;
+  const box=d.querySelector(".fields");
+  g.f.forEach(r=>{
+    if(r[0]==="sub"){ box.insertAdjacentHTML("beforeend",`<div class="sub">${r[1]}</div>`); return; }
+    if(r[0]==="hint"){ box.insertAdjacentHTML("beforeend",`<div class="hint">${r[1]}</div>`); return; }
+    const [id,label,,unit,extra]=r;
+    let ctl;
+    if(unit==="sel"){ ctl=`<select id="${id}">${extra.map(o=>`<option value="${o[0]}">${o[1]}</option>`).join("")}</select>`; }
+    else ctl=`<input id="${id}" type="number" inputmode="decimal" step="${extra||"any"}"><span class="u">${unit}</span>`;
+    box.insertAdjacentHTML("beforeend",`<div class="f${unit==="sel"?" wide":""}"><label for="${id}">${label}</label><div class="in">${ctl}</div></div>`);
+  });
+  gw.appendChild(d);
+});
+function fill(){ Object.keys(DEF).forEach(k=>{ const el=document.getElementById(k); if(el) el.value=V[k]; }); }
+fill();
+gw.addEventListener("input",e=>{ const el=e.target; if(!el.id) return; V[el.id]= el.tagName==="SELECT"?el.value:(el.value===""?0:parseFloat(el.value)); save(); calc(); });
+function save(){ try{ localStorage.setItem(KEY,JSON.stringify(V)); }catch(e){} }
+document.querySelectorAll("[data-preset]").forEach(b=>b.addEventListener("click",()=>{ Object.assign(V,PRESETS[b.dataset.preset]); fill(); save(); calc(); }));
+document.getElementById("reset").addEventListener("click",()=>{ V={...DEF}; fill(); save(); calc(); });
+
+// ---------- 計算 ----------
+const pct=x=>x/100;
+function loanSched(P,rate,term,grace,type,years){
+  const r=pct(rate), out=[]; let bal=P;
+  const n=Math.max(1,term-grace); const pmt= r>0? bal*r/(1-Math.pow(1+r,-n)) : bal/n;
+  for(let y=1;y<=years;y++){
+    const i=bal*r; let p=0;
+    if(type==="amort"){ if(y>grace && bal>0) p=Math.min(bal,pmt-i); }
+    else if(type==="bullet"){ if(y===term) p=bal; }
+    bal-=p; out.push({i,p,bal});
+  }
+  return out;
+}
+function model(v, scale=1){
+  const Y=Math.max(1,Math.min(40,Math.round(v.years)));
+  const loanA=v.price*pct(v.ltvA), loanB=Math.min(v.loanB,v.reno);
+  const equity=v.price-loanA+(v.reno-loanB)+v.preopen;
+  const LA=loanSched(loanA,v.rateA,v.termA,v.graceA,"amort",Y), LB=loanSched(loanB,v.rateB,v.termB,v.graceB,v.typeB,Y);
+  const buildInt=(loanA*pct(v.rateA)+loanB*0.5*pct(v.rateB))*v.build/12;
+  const wagesBase=(v.w1n*v.w1s+v.w2n*v.w2s+v.w3n*v.w3s)*v.months*(1+pct(v.emp))/1e4;
+  const fixedBase=v.fUtil+v.fPool+v.reno*pct(v.fMaintP)+v.fIns+v.fSys+v.fMkt+v.fAcct+v.fHouse+v.fLand+v.fOther;
+  const rows=[]; let cum=-equity-buildInt, cumOps=-buildInt, minOps=cumOps;
+  rows.push({y:0,rev:0,wages:0,fwage:0,fixed:0,varc:0,chan:0,ebitda:0,i:buildInt,p:0,tax:0,cf:-buildInt,cum,bal:loanA+loanB,nw:v.pv-(loanA+loanB)+cum});
+  for(let y=1;y<=Y;y++){
+    const f=(y===1?pct(v.ramp1):y===2?pct(v.ramp2):1)*scale, pm=Math.pow(1+pct(v.gP),y-1), cm=Math.pow(1+pct(v.gC),y-1);
+    const clamp=x=>Math.max(0,Math.min(1,x));
+    const bSat=v.nSat*clamp(pct(v.oSat)*f), bHol=v.nHol*clamp(pct(v.oHol)*f), bFri=v.nFri*clamp(pct(v.oFri)*f);
+    const corp=Math.min(v.nWk,v.nCorp*f);
+    const wkLeft=v.nWk-corp, bWk=wkLeft*clamp(pct(v.oWkB)*f), roomNights=wkLeft-bWk;
+    const occ=clamp(pct(v.oRoom)*f), rD=roomNights*occ*v.nD, rQ=roomNights*occ*v.nQ;
+    const revB=(bSat*v.pSat+bHol*v.pHol+bFri*v.pFri+bWk*v.pWkB)*pm/1e4;
+    const revC=corp*v.pCorp*pm/1e4, revR=(rD*v.pD+rQ*v.pQ)*pm/1e4;
+    const rev=revB+revC+revR, bNights=bSat+bHol+bFri+bWk+corp;
+    const netRev=rev/(1+pct(v.vat));
+    const chan=revB*pct(v.otaB)+revR*pct(v.otaR)+revC*pct(v.feeC);
+    const addons=(bNights*v.addon+corp*v.mCorp)*pm/1e4;
+    const wages=wagesBase*cm;
+    const fwage=(bNights*v.cleanB+(rD+rQ)*v.cleanR+corp*v.eventL)*cm/1e4+rev*pct(v.bonus);
+    const fixed=fixedBase*cm;
+    const perB=v.guests*v.bf+v.linB+v.amB+v.utB, perR=v.linR+v.amR+v.utR;
+    const varc=(bNights*perB+(rD+rQ)*perR+(rD*2+rQ*4)*v.bf)*cm/1e4+rev*pct(v.ffe);
+    const ebitda=netRev+addons-chan-wages-fwage-fixed-varc;
+    const i=LA[y-1].i+LB[y-1].i, p=LA[y-1].p+LB[y-1].p, bal=LA[y-1].bal+LB[y-1].bal;
+    const dep=(y<=v.depY? v.reno/Math.max(1,v.depY):0)+v.depBld;
+    const tax=Math.max(0,ebitda-i-dep)*pct(v.tax);
+    const cf=ebitda-i-p-tax;
+    cum+=cf; cumOps+=cf; minOps=Math.min(minOps,cumOps);
+    const nw=v.pv*Math.pow(1+pct(v.pg),y)-bal+cum;
+    rows.push({y,rev,revB,revC,revR,netRev,addons,chan,wages,fwage,fixed,varc,ebitda,i,p,tax,cf,cum,bal,nw,bNights,roomN:rD+rQ,corp});
+  }
+  return {rows,equity,loanA,loanB,buildInt,minOps,wagesBase,fixedBase,Y};
+}
+
+// ---------- 輸出 ----------
+const fmt=(x,d=0)=>{ if(!isFinite(x)) return "—"; const s=Math.abs(x).toLocaleString("zh-TW",{maximumFractionDigits:d,minimumFractionDigits:d}); return (x<-0.5?"−":"")+s; };
+const cls=x=>x<-0.5?"neg":x>0.5?"pos":"";
+function calc(){
+  const m=model(V), R=m.rows, Y=m.Y, s=R[Math.min(3,Y)];
+  const firstPos=R.find(r=>r.y>0&&r.cf>0), payback=R.find(r=>r.y>0&&r.cum>=0), last=R[Y];
+  const reserve=Math.max(0,-m.minOps)+(m.wagesBase+m.fixedBase)*V.bufM/12;
+  // 打平所需營收：以達成率倍數二分搜尋
+  const need=(target)=>{ let lo=0,hi=4; const test=k=>{const r=model(V,k).rows[Math.min(3,Y)]; return target(r);}; if(test(hi)<0) return null; for(let t=0;t<40;t++){ const mid=(lo+hi)/2; if(test(mid)>=0) hi=mid; else lo=mid; } return model(V,hi).rows[Math.min(3,Y)].rev; };
+  const needInt=need(r=>r.ebitda-r.i), needAll=need(r=>r.ebitda-r.i-r.p);
+  // status
+  const st=document.getElementById("status");
+  const svc=s.ebitda-s.i-s.p;
+  if(svc>=0){ st.className="status good"; st.innerHTML=`<span class="dot"></span>穩定年付得起本息，每年還多 ${fmt(svc)} 萬（稅前）`; }
+  else if(s.ebitda-s.i>=0){ st.className="status warn"; st.innerHTML=`<span class="dot"></span>付得起利息，但本金每年還差 ${fmt(-svc)} 萬`; }
+  else { st.className="status bad"; st.innerHTML=`<span class="dot"></span>營運連利息都不夠付，每年差 ${fmt(-(s.ebitda-s.i))} 萬`; }
+  const K=[
+    ["自備款投入",fmt(m.equity),`借款 ${fmt(m.loanA+m.loanB)} 萬`],
+    ["穩定年營收",fmt(s.rev),`包棟 ${fmt(s.bNights)} 晚・散客 ${fmt(s.roomN)} 間夜`],
+    ["穩定年 EBITDA",fmt(s.ebitda),"營運本身，未扣貸款",s.ebitda],
+    ["每年本息",fmt(s.i+s.p),`利息 ${fmt(s.i)}・本金 ${fmt(s.p)}`],
+    ["穩定年淨現金流",fmt(s.cf),"扣本息與所得稅後",s.cf],
+    ["建議準備金",fmt(reserve),`最深缺口＋${V.bufM} 個月固定開銷`],
+    ["首次正現金流",firstPos?`第 ${firstPos.y} 年`:"未出現",`試算 ${Y} 年內`],
+    ["現金回本",payback?`第 ${payback.y} 年`:`${Y} 年內未回本`,"累積現金流含自備款"],
+    [`第 ${Y} 年淨資產變化`,fmt(last.nw),"含房地增值、扣剩餘貸款",last.nw],
+    ["付得起利息需年營收",needInt==null?"—":fmt(needInt),"其他條件不變"],
+    ["付得起本息需年營收",needAll==null?"—":fmt(needAll),"其他條件不變"],
+    ["期末貸款餘額",fmt(last.bal),V.typeB==="roll"?"裝潢借款持續續約":`第 ${Y} 年底`]
+  ];
+  document.getElementById("kpis").innerHTML=K.map(k=>`<div class="kpi"><div class="k">${k[0]}</div><div class="v ${k[3]===undefined?"":cls(k[3])}">${k[1]}</div><div class="s">${k[2]}</div></div>`).join("");
+  // breakdown
+  document.getElementById("brk-title").textContent=`穩定年（第 ${Math.min(3,Y)} 年）損益拆解（萬元）`;
+  const B=[["營收（含稅）",s.rev],["　扣營業稅",-(s.rev-s.netRev)],["　加購與活動毛利",s.addons],["　通路佣金與金流",-s.chan],["　固定薪資",-s.wages],["　浮動薪資",-s.fwage],["　固定支出",-s.fixed],["　浮動支出（含設備準備）",-s.varc]];
+  document.getElementById("brk").innerHTML=B.map(b=>`<span>${b[0]}</span><span class="n ${cls(b[1])}">${fmt(b[1])}</span>`).join("")+
+   `<span class="t">EBITDA</span><span class="n t ${cls(s.ebitda)}">${fmt(s.ebitda)}</span><span>　利息</span><span class="n neg">${fmt(-s.i)}</span><span>　還本金</span><span class="n ${cls(-s.p)}">${fmt(-s.p)}</span><span>　所得稅</span><span class="n ${cls(-s.tax)}">${fmt(-s.tax)}</span><span class="t">淨現金流</span><span class="n t ${cls(s.cf)}">${fmt(s.cf)}</span>`;
+  // table
+  const H=["年","營收","EBITDA","利息","本金","所得稅","淨現金流","累積","貸款餘額","淨資產變化"];
+  document.getElementById("ytable").innerHTML=`<table><tr>${H.map((h,i)=>`<th class="${i?"n":""}">${h}</th>`).join("")}</tr>`+
+   R.map(r=>`<tr><td>${r.y===0?"裝修期":"Y"+r.y}</td><td class="n">${fmt(r.rev)}</td><td class="n ${cls(r.ebitda)}">${fmt(r.ebitda)}</td><td class="n">${fmt(-r.i)}</td><td class="n">${fmt(-r.p)}</td><td class="n">${fmt(-r.tax)}</td><td class="n ${cls(r.cf)}">${fmt(r.cf)}</td><td class="n ${cls(r.cum)}">${fmt(r.cum)}</td><td class="n">${fmt(r.bal)}</td><td class="n ${cls(r.nw)}">${fmt(r.nw)}</td></tr>`).join("")+`</table>`;
+  chart(R);
+  // group sums
+  const sums=[`借 ${fmt(m.loanA+m.loanB)} 萬`,`週六 ${fmt(V.pSat)}`,`散客 ${V.oRoom}%`,`OTA ${V.otaB}%`,`${fmt(m.wagesBase)} 萬/年`,`${fmt(s.fwage)} 萬/年`,`${fmt(m.fixedBase)} 萬/年`,`${fmt(s.varc)} 萬/年`,`${Y} 年`];
+  sums.forEach((t,i)=>{ const el=document.getElementById("sum-"+i); if(el) el.textContent=t; });
+}
+function chart(R){
+  const W=640,H=240,pl=56,pr=12,pt=12,pb=28;
+  const xs=R.map(r=>r.y), a=R.map(r=>r.cum), b=R.map(r=>r.nw);
+  let lo=Math.min(0,...a,...b), hi=Math.max(0,...a,...b); if(hi-lo<1){hi+=1;lo-=1;}
+  const step=niceStep((hi-lo)/4); lo=Math.floor(lo/step)*step; hi=Math.ceil(hi/step)*step;
+  const X=y=>pl+(W-pl-pr)*y/Math.max(1,xs[xs.length-1]), Yy=v=>pt+(H-pt-pb)*(hi-v)/(hi-lo);
+  let g=""; for(let v=lo; v<=hi+1e-6; v+=step){ g+=`<line x1="${pl}" x2="${W-pr}" y1="${Yy(v)}" y2="${Yy(v)}" stroke="var(--line)" stroke-width="${v===0?1.5:1}"/><text x="${pl-6}" y="${Yy(v)+4}" text-anchor="end" font-size="11" fill="var(--muted)" font-family="IBM Plex Mono,monospace">${fmt(v)}</text>`; }
+  const n=xs[xs.length-1], every=n>20?5:n>10?2:1;
+  xs.forEach(y=>{ if(y%every===0) g+=`<text x="${X(y)}" y="${H-8}" text-anchor="middle" font-size="11" fill="var(--muted)">${y===0?"裝修":"Y"+y}</text>`; });
+  const path=arr=>arr.map((v,i)=>`${i?"L":"M"}${X(xs[i]).toFixed(1)},${Yy(v).toFixed(1)}`).join("");
+  const area=`${path(a)}L${X(n)},${Yy(0)}L${X(0)},${Yy(0)}Z`;
+  document.getElementById("chart").innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="累積現金與淨資產">${g}
+   <path d="${area}" fill="var(--accent)" fill-opacity=".10"/>
+   <path d="${path(a)}" fill="none" stroke="var(--accent)" stroke-width="2.2"/>
+   <path d="${path(b)}" fill="none" stroke="var(--warn)" stroke-width="2" stroke-dasharray="5 4"/>
+   <circle cx="${X(n)}" cy="${Yy(a[a.length-1])}" r="3.5" fill="var(--accent)"/><circle cx="${X(n)}" cy="${Yy(b[b.length-1])}" r="3.5" fill="var(--warn)"/></svg>`;
+}
+function niceStep(x){ const p=Math.pow(10,Math.floor(Math.log10(Math.max(x,1e-9)))), m=x/p; return (m<=1?1:m<=2?2:m<=5?5:10)*p; }
+
+// ---------- 分頁 ----------
+function show(t){ document.querySelectorAll("[role=tab]").forEach(b=>b.setAttribute("aria-selected",b.dataset.tab===t)); document.getElementById("report").hidden=t!=="report"; document.getElementById("calc").hidden=t!=="calc"; try{localStorage.setItem(KEY+"-tab",t);}catch(e){} }
+document.querySelectorAll("[role=tab]").forEach(b=>b.addEventListener("click",()=>show(b.dataset.tab)));
+let t0="report"; if(location.hash==="#calc") t0="calc"; else { try{ t0=localStorage.getItem(KEY+"-tab")||"report"; }catch(e){} }
+show(t0); calc();
+</script>
+
+</body>
+</html>
