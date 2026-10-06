@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1020" viewBox="0 0 1400 1020" role="img" aria-labelledby="b01-title b01-desc">
+<title id="b01-title">B01 柱尺寸與連接示意</title>
+<desc id="b01-desc">依原 CAD 柱7、柱10輪廓和 B01 模型數據繪製。橋檯虛線為關閉投影，開口尺寸指橋檯抬起後。</desc>
+<defs><style>text{font-family:"Microsoft JhengHei","Noto Sans TC",sans-serif;fill:#29433b} .dim{stroke:#738279;stroke-width:1.2;fill:none}.small{font-size:17px;fill:#728076}.note{font-size:18px;fill:#66786d}</style><pattern id="finish-hatch" width="6" height="6" patternUnits="userSpaceOnUse"><path d="M-1 1L1-1M0 6L6 0M5 7L7 5" stroke="#b98857" stroke-width="1"/></pattern></defs>
+<rect width="1400" height="1020" fill="#f6f3ec"/>
+<text x="58" y="62" font-size="31" font-weight="700">柱尺寸與連接示意</text>
+<text x="58" y="95" class="small">B01 局部比例平面 · 北在上 · 橋檯虛線為關閉投影，開口尺寸指抬起後</text>
+<rect x="50" y="126" width="800" height="797" rx="4" fill="#fffefa" stroke="#d9dfd4"/>
+<polygon points="405.750,757.064 495.000,757.064 495.000,212.085 291.103,212.085 291.103,263.000 405.750,263.000" fill="#d9e2d5" stroke="#5c7b69" stroke-width="1.8" />
+<polygon points="211.500,584.825 279.750,584.825 279.750,385.325 211.500,385.325" fill="#e8e8df" stroke="#a4b0a3" stroke-width="1.4" />
+<polygon points="224.100,577.475 268.725,577.475 268.725,539.675 224.100,539.675" fill="#fcfbf7" stroke="#a4b0a3" stroke-width="1.4" />
+<polygon points="291.287,757.064 405.750,757.064 405.750,707.150 291.287,707.150" fill="#f5e7cf" stroke="#b78045" stroke-width="1.4" stroke-dasharray="7 5" fill-opacity=".5"/>
+<polygon points="290.762,754.964 293.492,754.964 293.492,709.250 290.762,709.250" fill="#9e7a50" stroke="#9e7a50" stroke-width="1.4" />
+<polygon points="291.795,710.835 291.812,757.035 214.112,757.064 214.095,710.864" fill="url(#finish-hatch)" stroke="#b78045" stroke-width="1" />
+<polygon points="289.696,712.936 289.711,754.936 216.211,754.963 216.196,712.963" fill="#526a5d" stroke="#385247" stroke-width="1" />
+<text x="252.95" y="733.95" fill="#ffffff" style="fill:#ffffff" font-size="18" text-anchor="middle" dominant-baseline="middle" font-weight="700">7</text>
+<text x="234.05" y="779.10" fill="#29433b" style="fill:#29433b" font-size="17" text-anchor="end" dominant-baseline="middle" font-weight="400">柱7｜CAD 70 × 40 cm</text>
+<polygon points="291.611,212.085 291.628,258.285 213.928,258.314 213.911,212.114" fill="url(#finish-hatch)" stroke="#b78045" stroke-width="1" />
+<polygon points="289.511,214.186 289.527,256.186 216.027,256.213 216.011,214.213" fill="#526a5d" stroke="#385247" stroke-width="1" />
+<text x="252.77" y="235.20" fill="#ffffff" style="fill:#ffffff" font-size="18" text-anchor="middle" dominant-baseline="middle" font-weight="700">10</text>
+<text x="233.87" y="190.05" fill="#29433b" style="fill:#29433b" font-size="17" text-anchor="end" dominant-baseline="middle" font-weight="400">柱10｜CAD 70 × 40 cm</text>
+<text x="450.38" y="465.65" fill="#29433b" style="fill:#29433b" font-size="23" text-anchor="middle" dominant-baseline="middle" font-weight="700">直吧</text>
+<text x="450.38" y="502.40" fill="#66786d" style="fill:#66786d" font-size="16" text-anchor="middle" dominant-baseline="middle" font-weight="400">主檯面</text>
+<text x="393.05" y="237.54" fill="#29433b" style="fill:#29433b" font-size="17" text-anchor="middle" dominant-baseline="middle" font-weight="400">北固定翼</text>
+<text x="348.52" y="727.91" fill="#9f6c35" style="fill:#9f6c35" font-size="15" text-anchor="middle" dominant-baseline="middle" font-weight="400">南可掀橋檯</text>
+<text x="348.52" y="746.81" fill="#9f6c35" style="fill:#9f6c35" font-size="12" text-anchor="middle" dominant-baseline="middle" font-weight="400">關閉投影</text>
+<text x="245.62" y="471.95" fill="#29433b" style="fill:#29433b" font-size="19" text-anchor="middle" dominant-baseline="middle" font-weight="400">中島</text>
+<text x="245.62" y="505.55" fill="#6a7d70" style="fill:#6a7d70" font-size="14" text-anchor="middle" dominant-baseline="middle" font-weight="400">原位</text>
+<line x1="279.75" y1="420.50" x2="405.75" y2="420.50" stroke="#728176" stroke-width="1.2"/>
+<line x1="279.75" y1="426.27" x2="279.75" y2="414.73" stroke="#728176" stroke-width="1.2"/>
+<line x1="405.75" y1="426.27" x2="405.75" y2="414.73" stroke="#728176" stroke-width="1.2"/>
+<text x="342.75" y="400.55" fill="#728176" style="fill:#728176" font-size="15" text-anchor="middle" dominant-baseline="middle" font-weight="400">檯面間距 1.20 m</text>
+<line x1="293.49" y1="803.75" x2="405.75" y2="803.75" stroke="#a16d36" stroke-width="1.2"/>
+<line x1="293.49" y1="809.53" x2="293.49" y2="797.98" stroke="#a16d36" stroke-width="1.2"/>
+<line x1="405.75" y1="809.53" x2="405.75" y2="797.98" stroke="#a16d36" stroke-width="1.2"/>
+<text x="349.62" y="833.15" fill="#a16d36" style="fill:#a16d36" font-size="15" text-anchor="middle" dominant-baseline="middle" font-weight="400">抬起後約 1.07 m＊</text>
+<line x1="140.10" y1="733.95" x2="140.10" y2="235.20" stroke="#76877b" stroke-width="1.2"/>
+<line x1="134.32" y1="733.95" x2="145.88" y2="733.95" stroke="#76877b" stroke-width="1.2"/>
+<line x1="134.32" y1="235.20" x2="145.88" y2="235.20" stroke="#76877b" stroke-width="1.2"/>
+<text x="124.35" y="484.57" transform="rotate(-90 124.35 484.57)" font-size="17" text-anchor="middle" fill="#728176">柱中心距 4.75 m</text>
+<line x1="140.10" y1="733.95" x2="213.05" y2="733.95" stroke="#9ca99d" stroke-width="1.2" stroke-dasharray="3 4"/>
+<line x1="140.10" y1="235.20" x2="212.87" y2="235.20" stroke="#9ca99d" stroke-width="1.2" stroke-dasharray="3 4"/>
+<line x1="544.35" y1="757.06" x2="544.35" y2="212.09" stroke="#76877b" stroke-width="1.2"/>
+<line x1="538.58" y1="757.06" x2="550.12" y2="757.06" stroke="#76877b" stroke-width="1.2"/>
+<line x1="538.58" y1="212.09" x2="550.12" y2="212.09" stroke="#76877b" stroke-width="1.2"/>
+<text x="528.60" y="484.57" transform="rotate(-90 528.60 484.57)" font-size="17" text-anchor="middle" fill="#728176">整合外包長 5.190 m</text>
+<line x1="495.00" y1="757.06" x2="552.75" y2="757.06" stroke="#9ca99d" stroke-width="1.2" stroke-dasharray="3 4"/>
+<line x1="495.00" y1="212.09" x2="552.75" y2="212.09" stroke="#9ca99d" stroke-width="1.2" stroke-dasharray="3 4"/>
+<text x="608.40" y="203.15" fill="#29433b" style="fill:#29433b" font-size="16" text-anchor="middle" dominant-baseline="middle" font-weight="400">北 N</text>
+<line x1="608.40" y1="267.20" x2="608.40" y2="219.95" stroke="#29433b" stroke-width="1.8"/>
+<polygon points="603.150,228.350 608.400,215.750 613.650,228.350" fill="#29433b" stroke="#29433b" stroke-width="1" />
+<line x1="529.65" y1="875.15" x2="634.65" y2="875.15" stroke="#29433b" stroke-width="3"/>
+<text x="582.15" y="899.30" fill="#728176" style="fill:#728176" font-size="15" text-anchor="middle" dominant-baseline="middle" font-weight="400">1 m</text>
+<text x="900" y="165" font-size="23" font-weight="700">柱截面放大</text>
+<text x="900" y="195" class="small">柱7／柱10 · 兩柱原輪廓皆 70 × 40 cm</text>
+<polygon points="1255.37,217.54 1255.43,402.34 944.63,402.46 944.57,217.66" fill="url(#finish-hatch)" stroke="#b78045" stroke-width="1.2"/>
+<polygon points="1246.97,225.95 1247.03,393.95 953.03,394.05 952.97,226.05" fill="#d7e0d3" stroke="#526a5d" stroke-width="1.2"/>
+<text x="1100" y="317" text-anchor="middle" font-size="22">CAD 70 × 40 cm</text>
+<text x="900" y="447" class="note">斜線：每側 2 cm 飾面預留候選</text>
+<text x="900" y="478" class="small">約 74 × 44 cm 外輪廓；工法與厚度待定。</text>
+<line x1="900" y1="511" x2="1340" y2="511" stroke="#d7ddd1"/>
+<text x="900" y="550" font-size="22" font-weight="700">連接尺寸</text>
+<text x="900" y="590" class="note">主櫃本體長</text><text x="1324" y="590" font-size="21" text-anchor="end">4.23 m</text>
+<text x="900" y="629" class="note">檯面高</text><text x="1324" y="629" font-size="21" text-anchor="end">1.05 m</text>
+<text x="900" y="668" class="note">柱間原輪廓距</text><text x="1324" y="668" font-size="21" text-anchor="end">4.35 m</text>
+<text x="900" y="707" class="note">加飾面後柱間約</text><text x="1324" y="707" font-size="21" text-anchor="end">4.31 m</text>
+<text x="900" y="792" class="small">＊橋檯抬起並扣既建承接條後，</text>
+<text x="900" y="820" class="small">模型局部水平開口約 1.069 m。</text>
+<text x="900" y="849" class="small">名義水平開口 1.085 m；其餘五金待選。</text>
+<text x="900" y="881" class="small">3.38 m 高度暫定；本版不上框。</text>
+<text x="58" y="960" font-size="17" fill="#718075">原 CAD 輪廓不保證等同現場裸 RC 或完成面；B01 為吧廚局部白模，非施工圖。</text>
+<text x="58" y="993" font-size="15" fill="#879187">來源：CAD_吧台兩端柱.json / B01_build_validation.json / objects_B01.json</text>
+</svg>

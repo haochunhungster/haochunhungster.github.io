@@ -1,0 +1,165 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="1810" viewBox="0 0 1180 1810" role="img" aria-labelledby="title desc">
+<title id="title">K01 吧廚設備與空間尺寸示意</title><desc id="desc">B02 現況等比例局部平面：柱間高吧4.31米、內側低檯約4.30米；4300毫米飲料吧功能分段、6550毫米熱廚功能長度預算。功能分段為候選，尚未落入白模。</desc>
+<style>text{font-family:"Microsoft JhengHei","Noto Sans TC",sans-serif}</style>
+<defs><marker id="arrow" markerWidth="7" markerHeight="7" refX="5.5" refY="3.5" orient="auto-start-reverse"><path d="M0 0L7 3.5L0 7" fill="#45695c"/></marker></defs>
+<rect x="0.00" y="0.00" width="1180.00" height="1810.00" rx="0" fill="#fffdf8" stroke="none"/>
+<text x="48.00" y="50.00" font-size="26" fill="#242725" text-anchor="start" font-weight="700" >01  B02 現況｜先看共用通道</text>
+<text x="48.00" y="79.00" font-size="16" fill="#676b65" text-anchor="start" font-weight="400" >局部等比例俯視 · 北向上 · 尺寸來源為模型，非現場丈量</text>
+<rect x="150.00" y="119.20" width="542.80" height="538.20" rx="0" fill="#f3f0ea" stroke="none"/>
+<rect x="150.00" y="220.40" width="15.18" height="414.00" rx="0" fill="#969c96" stroke="none"/>
+<rect x="150.00" y="119.20" width="15.18" height="18.40" rx="0" fill="#969c96" stroke="none"/>
+<line x1="145.40" y1="220.40" x2="170.24" y2="220.40" stroke="#59655e" stroke-width="2" />
+<line x1="145.40" y1="137.60" x2="170.24" y2="137.60" stroke="#59655e" stroke-width="2" />
+<text x="42.00" y="178.08" font-size="15" fill="#45695c" text-anchor="start" font-weight="400" >服務門</text>
+<text x="42.00" y="200.08" font-size="14" fill="#45695c" text-anchor="start" font-weight="400" >0.90 m</text>
+<line x1="102.00" y1="175.08" x2="140.80" y2="175.08" stroke="#45695c" stroke-width="1.4" />
+<rect x="205.20" y="528.60" width="76.73" height="69.00" rx="0" fill="#d6d1c7" stroke="#fffdf8"/>
+<text x="243.56" y="569.10" font-size="19" fill="#242725" text-anchor="middle" font-weight="700" >A</text>
+<rect x="205.20" y="468.80" width="76.73" height="59.80" rx="0" fill="#e3ded4" stroke="#fffdf8"/>
+<text x="243.56" y="504.70" font-size="19" fill="#242725" text-anchor="middle" font-weight="700" >B</text>
+<rect x="205.20" y="395.20" width="76.73" height="73.60" rx="0" fill="#d6d1c7" stroke="#fffdf8"/>
+<text x="243.56" y="438.00" font-size="19" fill="#242725" text-anchor="middle" font-weight="700" >C</text>
+<rect x="205.20" y="363.00" width="76.73" height="32.20" rx="0" fill="#e3ded4" stroke="#fffdf8"/>
+<text x="243.56" y="385.10" font-size="19" fill="#242725" text-anchor="middle" font-weight="700" >D</text>
+<rect x="205.20" y="307.80" width="76.73" height="55.20" rx="0" fill="#d6d1c7" stroke="#fffdf8"/>
+<text x="243.56" y="341.40" font-size="19" fill="#242725" text-anchor="middle" font-weight="700" >E</text>
+<rect x="205.20" y="225.00" width="76.73" height="82.80" rx="0" fill="#e3ded4" stroke="#fffdf8"/>
+<text x="243.56" y="272.40" font-size="19" fill="#242725" text-anchor="middle" font-weight="700" >F</text>
+<rect x="417.72" y="212.12" width="59.80" height="395.60" rx="0" fill="#b7b8ac" stroke="#fffdf8"/>
+<rect x="412.94" y="212.12" width="4.78" height="395.60" rx="0" fill="#7e847b" stroke="none"/>
+<rect x="474.12" y="211.66" width="68.26" height="396.52" rx="0" fill="#242725" stroke="none"/>
+<line x1="540.38" y1="211.66" x2="540.38" y2="608.18" stroke="#9a7655" stroke-width="3" />
+<rect x="474.28" y="608.20" width="68.08" height="40.48" rx="0" fill="#cdc3b4" stroke="#9a7655"/>
+<text x="508.32" y="633.44" font-size="16" fill="#242725" text-anchor="middle" font-weight="600" >柱</text>
+<rect x="474.12" y="171.20" width="68.08" height="40.48" rx="0" fill="#cdc3b4" stroke="#9a7655"/>
+<text x="508.16" y="196.44" font-size="16" fill="#242725" text-anchor="middle" font-weight="600" >柱</text>
+<circle cx="598.96" cy="575.52" r="20" fill="#faf7f1" stroke="#b7b0a5" stroke-width="2"/>
+<circle cx="598.96" cy="511.12" r="20" fill="#faf7f1" stroke="#b7b0a5" stroke-width="2"/>
+<circle cx="598.96" cy="446.72" r="20" fill="#faf7f1" stroke="#b7b0a5" stroke-width="2"/>
+<circle cx="598.96" cy="382.32" r="20" fill="#faf7f1" stroke="#b7b0a5" stroke-width="2"/>
+<circle cx="598.96" cy="317.92" r="20" fill="#faf7f1" stroke="#b7b0a5" stroke-width="2"/>
+<circle cx="598.96" cy="253.52" r="20" fill="#faf7f1" stroke="#b7b0a5" stroke-width="2"/>
+<text x="444.86" y="411.76" font-size="16" fill="#37453c" text-anchor="middle" font-weight="600" transform="rotate(-90 444.86 411.75999999999976)">低檯 · 高 0.90 m</text>
+<text x="506.96" y="413.60" font-size="16" fill="#fff8ed" text-anchor="middle" font-weight="600" transform="rotate(-90 506.96 413.6000000000001)">高吧 · 高 1.05 m</text>
+<line x1="281.93" y1="397.96" x2="412.94" y2="397.96" stroke="#9a7655" stroke-width="1.4" />
+<line x1="281.93" y1="390.96" x2="281.93" y2="404.96" stroke="#9a7655" stroke-width="1.4" />
+<line x1="412.94" y1="390.96" x2="412.94" y2="404.96" stroke="#9a7655" stroke-width="1.4" />
+<text x="347.43" y="384.96" font-size="16" fill="#9a7655" text-anchor="middle" font-weight="600" >1.424 m</text>
+<text x="347.43" y="423.96" font-size="13" fill="#676b65" text-anchor="middle" font-weight="400" >關門靜態距離</text>
+<line x1="121.00" y1="225.00" x2="121.00" y2="597.60" stroke="#9a7655" stroke-width="1.4" />
+<line x1="115.00" y1="225.00" x2="127.00" y2="225.00" stroke="#9a7655" stroke-width="1.4" />
+<line x1="115.00" y1="597.60" x2="127.00" y2="597.60" stroke="#9a7655" stroke-width="1.4" />
+<text x="109.00" y="411.30" font-size="16" fill="#9a7655" text-anchor="middle" font-weight="600" transform="rotate(-90 109 411.30000000000007)">西側舊設備排 4.05 m</text>
+<line x1="666.00" y1="211.66" x2="666.00" y2="608.18" stroke="#9a7655" stroke-width="1.4" />
+<line x1="660.00" y1="211.66" x2="672.00" y2="211.66" stroke="#9a7655" stroke-width="1.4" />
+<line x1="660.00" y1="608.18" x2="672.00" y2="608.18" stroke="#9a7655" stroke-width="1.4" />
+<text x="654.00" y="409.92" font-size="16" fill="#9a7655" text-anchor="middle" font-weight="600" transform="rotate(-90 654 409.91999999999996)">柱間高吧檯 4.31 m</text>
+<line x1="306.40" y1="148.64" x2="430.60" y2="148.64" stroke="#45695c" stroke-width="2.4" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+<line x1="306.40" y1="657.40" x2="430.60" y2="657.40" stroke="#45695c" stroke-width="2.4" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+<text x="311.00" y="133.64" font-size="14" fill="#45695c" text-anchor="start" font-weight="400" >北端通行</text>
+<text x="311.00" y="680.40" font-size="14" fill="#45695c" text-anchor="start" font-weight="400" >南端通行</text>
+<line x1="724.00" y1="173.00" x2="724.00" y2="118.00" stroke="#242725" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="724.00" y="103.00" font-size="15" fill="#242725" text-anchor="middle" font-weight="600" >N 北</text>
+<line x1="150.00" y1="702.00" x2="242.00" y2="702.00" stroke="#242725" stroke-width="3" />
+<line x1="150.00" y1="697.00" x2="150.00" y2="708.00" stroke="#242725" stroke-width="2" />
+<line x1="242.00" y1="697.00" x2="242.00" y2="708.00" stroke="#242725" stroke-width="2" />
+<text x="196.00" y="728.00" font-size="14" fill="#242725" text-anchor="middle" font-weight="400" >1 m</text>
+<text x="323.00" y="718.00" font-size="14" fill="#676b65" text-anchor="start" font-weight="400" >六席為家具符號，非本輪重新定位。</text>
+<rect x="786.00" y="115.00" width="346.00" height="390.00" rx="12" fill="#ece8df" stroke="none"/>
+<text x="810.00" y="148.00" font-size="21" fill="#242725" text-anchor="start" font-weight="700" >西側既有配置</text>
+<text x="810.00" y="190.00" font-size="17" fill="#242725" text-anchor="start" font-weight="400" >F  清洗</text>
+<text x="1106.00" y="190.00" font-size="17" fill="#676b65" text-anchor="end" font-weight="400" >900 mm</text>
+<text x="810.00" y="233.00" font-size="17" fill="#242725" text-anchor="start" font-weight="400" >E  洗碗</text>
+<text x="1106.00" y="233.00" font-size="17" fill="#676b65" text-anchor="end" font-weight="400" >600 mm</text>
+<text x="810.00" y="276.00" font-size="17" fill="#242725" text-anchor="start" font-weight="400" >D  落盤</text>
+<text x="1106.00" y="276.00" font-size="17" fill="#676b65" text-anchor="end" font-weight="400" >350 mm</text>
+<text x="810.00" y="319.00" font-size="17" fill="#242725" text-anchor="start" font-weight="400" >C  爐台</text>
+<text x="1106.00" y="319.00" font-size="17" fill="#676b65" text-anchor="end" font-weight="400" >800 mm</text>
+<text x="810.00" y="362.00" font-size="17" fill="#242725" text-anchor="start" font-weight="400" >B  烤箱塔</text>
+<text x="1106.00" y="362.00" font-size="17" fill="#676b65" text-anchor="end" font-weight="400" >650 mm</text>
+<text x="810.00" y="405.00" font-size="17" fill="#242725" text-anchor="start" font-weight="400" >A  冷藏</text>
+<text x="1106.00" y="405.00" font-size="17" fill="#676b65" text-anchor="end" font-weight="400" >750 mm</text>
+<text x="810.00" y="474.00" font-size="14" fill="#676b65" text-anchor="start" font-weight="400" >由圖面北側往南讀</text>
+<rect x="786.00" y="522.00" width="346.00" height="212.00" rx="12" fill="#f3e8dc" stroke="none"/>
+<text x="810.00" y="558.00" font-size="18" fill="#995943" text-anchor="start" font-weight="700" >這條通道，不能直接切成兩條。</text>
+<text x="810.00" y="594.00" font-size="16" fill="#676b65" text-anchor="start" font-weight="400" >1.424 m 是下櫃／把手之間水平距，</text>
+<text x="810.00" y="623.00" font-size="16" fill="#676b65" text-anchor="start" font-weight="400" >不是全高度完整淨寬，尚未扣除</text>
+<text x="810.00" y="652.00" font-size="16" fill="#676b65" text-anchor="start" font-weight="400" >冰箱、洗碗機、烤箱的開門範圍。</text>
+<text x="810.00" y="681.00" font-size="16" fill="#676b65" text-anchor="start" font-weight="400" >目前沒有新增玻璃隔間或熱廚定位。</text>
+<line x1="48.00" y1="773.00" x2="1132.00" y2="773.00" stroke="#d7d4cd" stroke-width="1.4" />
+<text x="48.00" y="821.00" font-size="26" fill="#242725" text-anchor="start" font-weight="700" >02  面客飲料吧｜約 4,300 mm 功能預留</text>
+<text x="48.00" y="852.00" font-size="16" fill="#676b65" text-anchor="start" font-weight="400" >從南端到北端：洗手 → 清洗 → 取冰 → 調飲 → 咖啡茶 → 出杯</text>
+<rect x="80.00" y="904.00" width="118.60" height="90.00" rx="0" fill="#d7d3ca" stroke="#fffdf8"/>
+<text x="139.30" y="944.00" font-size="25" fill="#242725" text-anchor="middle" font-weight="700" >1</text>
+<text x="139.30" y="973.00" font-size="14" fill="#242725" text-anchor="middle" font-weight="400" >500</text>
+<rect x="198.60" y="904.00" width="142.33" height="90.00" rx="0" fill="#bbbfb4" stroke="#fffdf8"/>
+<text x="269.77" y="944.00" font-size="25" fill="#242725" text-anchor="middle" font-weight="700" >2</text>
+<text x="269.77" y="973.00" font-size="14" fill="#242725" text-anchor="middle" font-weight="400" >600</text>
+<rect x="340.93" y="904.00" width="106.74" height="90.00" rx="0" fill="#b3c4bb" stroke="#fffdf8"/>
+<text x="394.30" y="944.00" font-size="25" fill="#242725" text-anchor="middle" font-weight="700" >3</text>
+<text x="394.30" y="973.00" font-size="14" fill="#242725" text-anchor="middle" font-weight="400" >450</text>
+<rect x="447.67" y="904.00" width="298.88" height="90.00" rx="0" fill="#45695c" stroke="#fffdf8"/>
+<text x="597.12" y="944.00" font-size="25" fill="#fffdf8" text-anchor="middle" font-weight="700" >4</text>
+<text x="597.12" y="973.00" font-size="14" fill="#fffdf8" text-anchor="middle" font-weight="400" >1260</text>
+<rect x="746.56" y="904.00" width="201.63" height="90.00" rx="0" fill="#302f2a" stroke="#fffdf8"/>
+<text x="847.37" y="944.00" font-size="25" fill="#fffdf8" text-anchor="middle" font-weight="700" >5</text>
+<text x="847.37" y="973.00" font-size="14" fill="#fffdf8" text-anchor="middle" font-weight="400" >850</text>
+<rect x="948.19" y="904.00" width="118.60" height="90.00" rx="0" fill="#aa8764" stroke="#fffdf8"/>
+<text x="1007.49" y="944.00" font-size="25" fill="#fffdf8" text-anchor="middle" font-weight="700" >6</text>
+<text x="1007.49" y="973.00" font-size="14" fill="#fffdf8" text-anchor="middle" font-weight="400" >500</text>
+<rect x="1066.79" y="904.00" width="33.21" height="90.00" rx="0" fill="#e5d9ca" stroke="#fffdf8"/>
+<text x="1083.40" y="944.00" font-size="25" fill="#242725" text-anchor="middle" font-weight="700" >7</text>
+<text x="1083.40" y="973.00" font-size="14" fill="#242725" text-anchor="middle" font-weight="400" >140</text>
+<text x="80.00" y="1022.00" font-size="14" fill="#676b65" text-anchor="start" font-weight="400" >南 S</text>
+<text x="1100.00" y="1022.00" font-size="14" fill="#676b65" text-anchor="end" font-weight="400" >北 N →</text>
+<text x="80.00" y="1064.00" font-size="16" fill="#242725" text-anchor="start" font-weight="600" >1  洗手 · 500</text>
+<text x="338.00" y="1064.00" font-size="16" fill="#242725" text-anchor="start" font-weight="600" >2  飲料器具清洗 · 600</text>
+<text x="596.00" y="1064.00" font-size="16" fill="#242725" text-anchor="start" font-weight="600" >3  冰槽 · 450</text>
+<text x="854.00" y="1064.00" font-size="16" fill="#242725" text-anchor="start" font-weight="600" >4  調飲＋冷藏 · 1260</text>
+<text x="80.00" y="1103.00" font-size="16" fill="#242725" text-anchor="start" font-weight="600" >5  咖啡茶飲 · 850</text>
+<text x="338.00" y="1103.00" font-size="16" fill="#242725" text-anchor="start" font-weight="600" >6  出杯 · 500</text>
+<text x="596.00" y="1103.00" font-size="16" fill="#242725" text-anchor="start" font-weight="600" >7  調整 · 140</text>
+<text x="854.00" y="1103.00" font-size="14" fill="#676b65" text-anchor="start" font-weight="400" >單位 mm</text>
+<rect x="80.00" y="1130.00" width="1020.00" height="112.00" rx="10" fill="#f1eee7" stroke="none"/>
+<text x="102.00" y="1163.00" font-size="16" fill="#676b65" text-anchor="start" font-weight="400" >功能分段不是水槽開孔或設備安裝圖；850 mm 咖啡區需再核機器、磨豆機與熱水設備。</text>
+<text x="102.00" y="1192.00" font-size="16" fill="#676b65" text-anchor="start" font-weight="400" >1,200 × 600 × 800 mm 工作台冰箱僅為參考：須核散熱、90 cm 檯高與獨立石板支撐。</text>
+<text x="102.00" y="1221.00" font-size="16" fill="#676b65" text-anchor="start" font-weight="400" >製冰機另找位置；吧台冰箱放牛奶、已洗水果與配料，生鮮食材另設冷藏／冷凍。</text>
+<line x1="48.00" y1="1280.00" x2="1132.00" y2="1280.00" stroke="#d7d4cd" stroke-width="1.4" />
+<text x="48.00" y="1325.00" font-size="26" fill="#242725" text-anchor="start" font-weight="700" >03  熱廚設備｜先做功能長度預算</text>
+<text x="48.00" y="1356.00" font-size="16" fill="#676b65" text-anchor="start" font-weight="400" >以下三條是分散模組清單，尚未配置為直線或 L 型；不是最小廚房面積。</text>
+<text x="80.00" y="1415.00" font-size="17" fill="#242725" text-anchor="start" font-weight="600" >熱作＋淨備料</text>
+<rect x="260.00" y="1392.00" width="229.50" height="65.00" rx="0" fill="#645b4e" stroke="#fffdf8"/>
+<text x="374.75" y="1419.00" font-size="14" fill="#fffdf8" text-anchor="middle" font-weight="600" >炭烤候選包絡</text>
+<text x="374.75" y="1443.00" font-size="15" fill="#fffdf8" text-anchor="middle" font-weight="400" >900</text>
+<rect x="489.50" y="1392.00" width="114.75" height="65.00" rx="0" fill="#645b4e" stroke="#fffdf8"/>
+<text x="546.88" y="1419.00" font-size="14" fill="#fffdf8" text-anchor="middle" font-weight="600" >落盤</text>
+<text x="546.88" y="1443.00" font-size="15" fill="#fffdf8" text-anchor="middle" font-weight="400" >450</text>
+<rect x="604.25" y="1392.00" width="204.00" height="65.00" rx="0" fill="#645b4e" stroke="#fffdf8"/>
+<text x="706.25" y="1419.00" font-size="14" fill="#fffdf8" text-anchor="middle" font-weight="600" >瓦斯四口／爐下烤箱</text>
+<text x="706.25" y="1443.00" font-size="15" fill="#fffdf8" text-anchor="middle" font-weight="400" >800</text>
+<rect x="808.25" y="1392.00" width="229.50" height="65.00" rx="0" fill="#645b4e" stroke="#fffdf8"/>
+<text x="923.00" y="1419.00" font-size="14" fill="#fffdf8" text-anchor="middle" font-weight="600" >乾淨備料</text>
+<text x="923.00" y="1443.00" font-size="15" fill="#fffdf8" text-anchor="middle" font-weight="400" >900</text>
+<text x="1052.75" y="1434.00" font-size="17" fill="#676b65" text-anchor="start" font-weight="400" >3,050 mm</text>
+<text x="80.00" y="1514.00" font-size="17" fill="#242725" text-anchor="start" font-weight="600" >洗滌</text>
+<rect x="260.00" y="1491.00" width="153.00" height="65.00" rx="0" fill="#8a9286" stroke="#fffdf8"/>
+<text x="336.50" y="1518.00" font-size="14" fill="#fffdf8" text-anchor="middle" font-weight="600" >髒餐具落檯</text>
+<text x="336.50" y="1542.00" font-size="15" fill="#fffdf8" text-anchor="middle" font-weight="400" >600</text>
+<rect x="413.00" y="1491.00" width="229.50" height="65.00" rx="0" fill="#8a9286" stroke="#fffdf8"/>
+<text x="527.75" y="1518.00" font-size="14" fill="#fffdf8" text-anchor="middle" font-weight="600" >清洗</text>
+<text x="527.75" y="1542.00" font-size="15" fill="#fffdf8" text-anchor="middle" font-weight="400" >900</text>
+<rect x="642.50" y="1491.00" width="153.00" height="65.00" rx="0" fill="#8a9286" stroke="#fffdf8"/>
+<text x="719.00" y="1518.00" font-size="14" fill="#fffdf8" text-anchor="middle" font-weight="600" >洗碗</text>
+<text x="719.00" y="1542.00" font-size="15" fill="#fffdf8" text-anchor="middle" font-weight="400" >600</text>
+<text x="810.50" y="1533.00" font-size="17" fill="#676b65" text-anchor="start" font-weight="400" >2,100 mm</text>
+<text x="80.00" y="1613.00" font-size="17" fill="#242725" text-anchor="start" font-weight="600" >食材冷藏冷凍</text>
+<rect x="260.00" y="1590.00" width="178.50" height="65.00" rx="0" fill="#b39c80" stroke="#fffdf8"/>
+<text x="349.25" y="1617.00" font-size="14" fill="#fffdf8" text-anchor="middle" font-weight="600" >食材冷藏</text>
+<text x="349.25" y="1641.00" font-size="15" fill="#fffdf8" text-anchor="middle" font-weight="400" >700</text>
+<rect x="438.50" y="1590.00" width="178.50" height="65.00" rx="0" fill="#b39c80" stroke="#fffdf8"/>
+<text x="527.75" y="1617.00" font-size="14" fill="#fffdf8" text-anchor="middle" font-weight="600" >冷凍</text>
+<text x="527.75" y="1641.00" font-size="15" fill="#fffdf8" text-anchor="middle" font-weight="400" >700</text>
+<text x="632.00" y="1632.00" font-size="17" fill="#676b65" text-anchor="start" font-weight="400" >1,400 mm</text>
+<text x="80.00" y="1728.00" font-size="21" fill="#995943" text-anchor="start" font-weight="700" >合計 6,550 mm：只是功能長度預算，不能據此宣告放得下。</text>
+<text x="80.00" y="1764.00" font-size="16" fill="#676b65" text-anchor="start" font-weight="400" >未含安裝／防火距離、管線、清潔工具、炭儲存、灰桶與製冰機；需再做實際平面與開門檢核。</text>
+</svg>

@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1050" viewBox="0 0 1440 1050" role="img" aria-labelledby="compare-title compare-desc">
+<title id="compare-title">B01 前推與 B02 柱間直吧，同尺度比例比較</title>
+<desc id="compare-desc">依兩版模型數據及原 CAD 柱輪廓製圖。座席以模型外包表示；公共侧退讓量為同一排座席的水平差，並非新增樓板或全區最窄通道。</desc>
+<defs><style>text{font-family:"Microsoft JhengHei","Noto Sans TC",sans-serif;fill:#2d453c}.muted{fill:#758077}.small{font-size:16px}.dim{font-size:16px;fill:#526c5e}</style><pattern id="finish" width="5" height="5" patternUnits="userSpaceOnUse"><path d="M0 5L5 0" stroke="#788673" stroke-width="1"/></pattern><marker id="arrow" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto-start-reverse"><path d="M0 0L7 3.5L0 7" fill="#55745f"/></marker></defs>
+<rect width="1440" height="1050" fill="#f6f3ec"/>
+<text x="54" y="57" font-size="31" font-weight="700">檯面收進柱間，座席一起退回。</text>
+<text x="54" y="91" class="small muted">B01／B02 同尺度平面 · 北在上 · 柱位相同 · 檯面為實際多邊形，座席為模型外包</text>
+<rect x="54" y="122" width="650" height="680" fill="#fffefa" stroke="#d6ded2"/>
+<text x="76" y="158" font-size="22" font-weight="700">B01  前推＋端翼</text>
+<line x1="76" y1="177" x2="682" y2="177" stroke="#e0e5da"/>
+<line x1="160.69" y1="620.04" x2="160.69" y2="300.24" stroke="#b1baaa" stroke-width="2" />
+<text x="148.39" y="451.94" font-size="14" text-anchor="middle" dominant-baseline="middle" style="fill:#889080" transform="rotate(-90 148.39 451.94)">西廚設備外包參考</text>
+<polygon points="330.100,531.070 339.940,531.070 339.940,375.270 330.100,375.270" fill="#dde4d6" stroke="#9aa992" stroke-width="1.4" />
+<polygon points="374.790,531.070 383.400,531.070 383.400,375.270 374.790,375.270" fill="#dde4d6" stroke="#9aa992" stroke-width="1.4" />
+<polygon points="339.940,531.070 374.790,531.070 374.790,525.330 339.940,525.330" fill="#dde4d6" stroke="#9aa992" stroke-width="1.4" />
+<polygon points="339.940,495.810 374.790,495.810 374.790,375.270 339.940,375.270" fill="#dde4d6" stroke="#9aa992" stroke-width="1.4" />
+<polygon points="339.940,525.330 374.790,525.330 374.790,495.810 339.940,495.810" fill="#f7faf2" stroke="#a8b7a1" stroke-width="1.4" />
+<polygon points="481.800,665.581 551.500,665.581 551.500,239.978 392.266,239.978 392.266,279.740 481.800,279.740" fill="#ecdbc6" stroke="#b28960" stroke-width="1.8" />
+<polygon points="392.410,665.581 481.800,665.581 481.800,626.600 392.410,626.600" fill="#f1e4d2" stroke="#b28960" stroke-width="1.4" stroke-dasharray="6 4"/>
+<text x="516.24" y="439.64" font-size="17" text-anchor="middle" dominant-baseline="middle" style="fill:#956d47" transform="rotate(-90 516.24 439.64)">前推高吧</text>
+<text x="356.34" y="406.02" font-size="15" text-anchor="middle" dominant-baseline="middle" style="fill:#536d5e">中島</text>
+<polygon points="392.807,629.478 392.820,665.558 332.140,665.581 332.127,629.501" fill="url(#finish)" stroke="#627762" stroke-width="1.4" />
+<polygon points="391.167,631.119 391.179,663.919 333.779,663.940 333.767,631.140" fill="#465f4f" stroke="#334b3d" stroke-width="1.4" />
+<text x="362.47" y="647.53" font-size="14" text-anchor="middle" dominant-baseline="middle" style="fill:#fffdf5">柱7</text>
+<polygon points="392.663,239.978 392.676,276.058 331.996,276.081 331.983,240.001" fill="url(#finish)" stroke="#627762" stroke-width="1.4" />
+<polygon points="391.023,241.619 391.035,274.419 333.635,274.440 333.623,241.640" fill="#465f4f" stroke="#334b3d" stroke-width="1.4" />
+<text x="362.33" y="258.03" font-size="14" text-anchor="middle" dominant-baseline="middle" style="fill:#fffdf5">柱10</text>
+<polygon points="553.960,615.940 594.960,615.940 594.960,578.220 553.960,578.220" fill="#f1e6d8" stroke="#b28960" stroke-width="1.4" />
+<polygon points="553.960,562.640 594.960,562.640 594.960,524.920 553.960,524.920" fill="#f1e6d8" stroke="#b28960" stroke-width="1.4" />
+<polygon points="553.960,509.340 594.960,509.340 594.960,471.620 553.960,471.620" fill="#f1e6d8" stroke="#b28960" stroke-width="1.4" />
+<polygon points="553.960,456.040 594.960,456.040 594.960,418.320 553.960,418.320" fill="#f1e6d8" stroke="#b28960" stroke-width="1.4" />
+<polygon points="553.960,402.740 594.960,402.740 594.960,365.020 553.960,365.020" fill="#f1e6d8" stroke="#b28960" stroke-width="1.4" />
+<polygon points="553.960,349.440 594.960,349.440 594.960,311.720 553.960,311.720" fill="#f1e6d8" stroke="#b28960" stroke-width="1.4" />
+<line x1="594.96" y1="646.28" x2="594.96" y2="300.24" stroke="#b28960" stroke-width="1.3" />
+<text x="606.44" y="452.76" font-size="14" text-anchor="middle" dominant-baseline="middle" style="fill:#b28960" transform="rotate(-90 606.44 452.76)">座席外包東緣</text>
+<text x="362.49" y="218.24" font-size="14" text-anchor="middle" dominant-baseline="middle" style="fill:#758077">原 CAD 柱 70 × 40 cm；飾面每側 2 cm 暫定</text>
+<text x="359.62" y="706.14" font-size="14" text-anchor="middle" dominant-baseline="middle" style="fill:#a28361">南橋檯：關閉投影</text>
+<line x1="122.64" y1="722.54" x2="204.64" y2="722.54" stroke="#4b6753" stroke-width="3" />
+<text x="163.64" y="743.04" font-size="13" text-anchor="middle" dominant-baseline="middle" style="fill:#536d5e">1 m</text>
+<text x="621.20" y="226.44" font-size="13" text-anchor="middle" dominant-baseline="middle" style="fill:#536d5e">北 N</text>
+<line x1="621.20" y1="263.34" x2="621.20" y2="239.56" stroke="#4b6753" stroke-width="1.6" marker-end="url(#arrow)"/>
+<text x="76" y="776" class="small muted">端翼、掀檯為 B01；中島維持當時位置。</text>
+<rect x="734" y="122" width="650" height="680" fill="#fffefa" stroke="#d6ded2"/>
+<text x="756" y="158" font-size="22" font-weight="700">B02  高吧在兩柱內側之間</text>
+<line x1="756" y1="177" x2="1362" y2="177" stroke="#e0e5da"/>
+<line x1="840.69" y1="620.04" x2="840.69" y2="300.24" stroke="#b1baaa" stroke-width="2" />
+<text x="828.39" y="451.94" font-size="14" text-anchor="middle" dominant-baseline="middle" style="fill:#889080" transform="rotate(-90 828.39 451.94)">西廚設備外包參考</text>
+<polygon points="961.720,531.070 971.560,531.070 971.560,375.270 961.720,375.270" fill="#dde4d6" stroke="#9aa992" stroke-width="1.4" />
+<polygon points="1006.410,531.070 1015.020,531.070 1015.020,375.270 1006.410,375.270" fill="#dde4d6" stroke="#9aa992" stroke-width="1.4" />
+<polygon points="971.560,531.070 1006.410,531.070 1006.410,525.330 971.560,525.330" fill="#dde4d6" stroke="#9aa992" stroke-width="1.4" />
+<polygon points="971.560,495.810 1006.410,495.810 1006.410,375.270 971.560,375.270" fill="#dde4d6" stroke="#9aa992" stroke-width="1.4" />
+<polygon points="971.560,525.330 1006.410,525.330 1006.410,495.810 971.560,495.810" fill="#f7faf2" stroke="#a8b7a1" stroke-width="1.4" />
+<polygon points="961.720,375.270 1015.020,375.270 1015.020,276.490 961.720,276.490" fill="#dde4d6" stroke="#9aa992" stroke-width="1.4" />
+<polygon points="961.720,629.068 1015.020,629.068 1015.020,531.070 961.720,531.070" fill="#dde4d6" stroke="#9aa992" stroke-width="1.4" />
+<polygon points="1012.127,629.501 1072.807,629.478 1072.676,276.058 1011.996,276.081" fill="#aac3b0" stroke="#5c7d68" stroke-width="1.8" />
+<text x="1042.90" y="442.10" font-size="17" text-anchor="middle" dominant-baseline="middle" style="fill:#29473a" transform="rotate(-90 1042.90 442.10)">柱間高吧</text>
+<text x="987.14" y="438.00" font-size="14" text-anchor="middle" dominant-baseline="middle" style="fill:#617354" transform="rotate(-90 987.14 438.00)">備料低檯</text>
+<line x1="840.69" y1="371.58" x2="957.46" y2="371.58" stroke="#849083" stroke-width="1.1" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+<line x1="840.69" y1="377.32" x2="840.69" y2="365.84" stroke="#849083" stroke-width="1.1" />
+<line x1="957.46" y1="377.32" x2="957.46" y2="365.84" stroke="#849083" stroke-width="1.1" />
+<text x="899.07" y="353.54" font-size="15" text-anchor="middle" dominant-baseline="middle" style="fill:#536d5e">靜態 1.424 m</text>
+<polygon points="1233.960,615.940 1274.960,615.940 1274.960,578.220 1233.960,578.220" fill="none" stroke="#c0a78b" stroke-width="1.4" stroke-dasharray="5 5"/>
+<polygon points="1233.960,562.640 1274.960,562.640 1274.960,524.920 1233.960,524.920" fill="none" stroke="#c0a78b" stroke-width="1.4" stroke-dasharray="5 5"/>
+<polygon points="1233.960,509.340 1274.960,509.340 1274.960,471.620 1233.960,471.620" fill="none" stroke="#c0a78b" stroke-width="1.4" stroke-dasharray="5 5"/>
+<polygon points="1233.960,456.040 1274.960,456.040 1274.960,418.320 1233.960,418.320" fill="none" stroke="#c0a78b" stroke-width="1.4" stroke-dasharray="5 5"/>
+<polygon points="1233.960,402.740 1274.960,402.740 1274.960,365.020 1233.960,365.020" fill="none" stroke="#c0a78b" stroke-width="1.4" stroke-dasharray="5 5"/>
+<polygon points="1233.960,349.440 1274.960,349.440 1274.960,311.720 1233.960,311.720" fill="none" stroke="#c0a78b" stroke-width="1.4" stroke-dasharray="5 5"/>
+<line x1="1274.96" y1="646.28" x2="1274.96" y2="300.24" stroke="#c0a78b" stroke-width="1.2" stroke-dasharray="4 5"/>
+<polygon points="1072.807,629.478 1072.820,665.558 1012.140,665.581 1012.127,629.501" fill="url(#finish)" stroke="#627762" stroke-width="1.4" />
+<polygon points="1071.167,631.119 1071.179,663.919 1013.779,663.940 1013.767,631.140" fill="#465f4f" stroke="#334b3d" stroke-width="1.4" />
+<text x="1042.47" y="647.53" font-size="14" text-anchor="middle" dominant-baseline="middle" style="fill:#fffdf5">柱7</text>
+<polygon points="1072.663,239.978 1072.676,276.058 1011.996,276.081 1011.983,240.001" fill="url(#finish)" stroke="#627762" stroke-width="1.4" />
+<polygon points="1071.023,241.619 1071.035,274.419 1013.635,274.440 1013.623,241.640" fill="#465f4f" stroke="#334b3d" stroke-width="1.4" />
+<text x="1042.33" y="258.03" font-size="14" text-anchor="middle" dominant-baseline="middle" style="fill:#fffdf5">柱10</text>
+<polygon points="1075.255,615.940 1116.255,615.940 1116.255,578.220 1075.255,578.220" fill="#d4e2d5" stroke="#5c7d68" stroke-width="1.4" />
+<polygon points="1075.235,562.640 1116.235,562.640 1116.235,524.920 1075.235,524.920" fill="#d4e2d5" stroke="#5c7d68" stroke-width="1.4" />
+<polygon points="1075.215,509.340 1116.215,509.340 1116.215,471.620 1075.215,471.620" fill="#d4e2d5" stroke="#5c7d68" stroke-width="1.4" />
+<polygon points="1075.196,456.040 1116.196,456.040 1116.196,418.320 1075.196,418.320" fill="#d4e2d5" stroke="#5c7d68" stroke-width="1.4" />
+<polygon points="1075.176,402.740 1116.176,402.740 1116.176,365.020 1075.176,365.020" fill="#d4e2d5" stroke="#5c7d68" stroke-width="1.4" />
+<polygon points="1075.156,349.440 1116.156,349.440 1116.156,311.720 1075.156,311.720" fill="#d4e2d5" stroke="#5c7d68" stroke-width="1.4" />
+<line x1="1116.25" y1="646.28" x2="1116.16" y2="300.24" stroke="#5c7d68" stroke-width="1.3" />
+<text x="1127.69" y="452.76" font-size="14" text-anchor="middle" dominant-baseline="middle" style="fill:#5c7d68" transform="rotate(-90 1127.69 452.76)">座席外包東緣</text>
+<text x="1042.49" y="218.24" font-size="14" text-anchor="middle" dominant-baseline="middle" style="fill:#758077">原 CAD 柱 70 × 40 cm；飾面每側 2 cm 暫定</text>
+<line x1="1116.21" y1="690.56" x2="1274.96" y2="690.56" stroke="#849083" stroke-width="1.1" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+<line x1="1116.21" y1="696.30" x2="1116.21" y2="684.82" stroke="#849083" stroke-width="1.1" />
+<line x1="1274.96" y1="696.30" x2="1274.96" y2="684.82" stroke="#849083" stroke-width="1.1" />
+<text x="1195.58" y="710.24" font-size="15" text-anchor="middle" dominant-baseline="middle" style="fill:#536d5e">向西退約 1.936 m</text>
+<line x1="1142.94" y1="629.49" x2="1142.94" y2="276.07" stroke="#93aa94" stroke-width="1.1" stroke-dasharray="3 3"/>
+<line x1="1073.24" y1="629.49" x2="1148.68" y2="629.49" stroke="#93aa94" stroke-width="1.1" stroke-dasharray="3 3"/>
+<line x1="1073.24" y1="276.07" x2="1148.68" y2="276.07" stroke="#93aa94" stroke-width="1.1" stroke-dasharray="3 3"/>
+<text x="1160.16" y="452.78" font-size="15" text-anchor="middle" dominant-baseline="middle" style="fill:#55745f" transform="rotate(-90 1160.16 452.78)">柱間檯面長 4.31 m</text>
+<text x="895.30" y="681.54" font-size="15" text-anchor="middle" dominant-baseline="middle" style="fill:#536d5e">中島西移 0.59 m</text>
+<line x1="802.64" y1="722.54" x2="884.64" y2="722.54" stroke="#4b6753" stroke-width="3" />
+<text x="843.64" y="743.04" font-size="13" text-anchor="middle" dominant-baseline="middle" style="fill:#536d5e">1 m</text>
+<text x="1301.20" y="226.44" font-size="13" text-anchor="middle" dominant-baseline="middle" style="fill:#536d5e">北 N</text>
+<line x1="1301.20" y1="263.34" x2="1301.20" y2="239.56" stroke="#4b6753" stroke-width="1.6" marker-end="url(#arrow)"/>
+<text x="756" y="776" class="small muted">高吧前緣齊柱飾面；淺虛線為 B01 座席外包。</text>
+<line x1="54" y1="837" x2="1384" y2="837" stroke="#d2dbce"/>
+<text x="54" y="873" class="small muted">B02 高吧</text><text x="54" y="915" font-size="30" font-weight="700">0.74 × 4.31 m</text><text x="54" y="948" font-size="15" class="muted">H 1.05 m；沿原 CAD 微旋轉</text>
+<text x="504" y="873" class="small muted">廚房側低檯</text><text x="504" y="915" font-size="30" font-weight="700">H 0.90 m</text><text x="504" y="948" font-size="15" class="muted">原中島組西移 0.59 m，兩端接低檯</text>
+<text x="954" y="873" class="small muted">公共側外包西退</text><text x="954" y="915" font-size="30" font-weight="700">約 1.936 m</text><text x="954" y="948" font-size="15" class="muted">同排座席東緣的水平差；不是新增樓板</text>
+<text x="54" y="988" font-size="14" class="muted">1.424 m 為下櫃／把手到備料檯把手之靜態水平間距，未扣設備門開；上方罩高 1.94 m 處局部突出，非全高度淨寬。</text>
+<text x="54" y="1009" font-size="13" class="muted">柱尺寸為原圖參考，非現場裸 RC／完成面保證。</text>
+<text x="54" y="1031" font-size="12" class="muted">來源：B02_build_validation.json、objects_B02.json；B01 模型資料與 CAD 柱輪廓。吧廚局部候選，非施工圖。</text></svg>
